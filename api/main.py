@@ -7,15 +7,21 @@ from pydantic import BaseModel
 from typing import Optional, Dict
 
 # Ensure Python can locate settings.py
-sys.path.append("/root/t1-brain/config")
+sys.path.append("/root/projects/t1-brain/config")
 from settings import PG_HOST, PG_DATABASE, PG_USER, PG_PASSWORD
 
 # Ensure Python can locate session_memory.py
-sys.path.append("/root/t1-brain/memory")
+sys.path.append("/root/projects/t1-brain/memory")
 from memory.session_memory import PersistentSessionMemory
 
-# Setup Logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+# Setup Logging (with updated path)
+LOG_DIR = "/root/projects/t1-brain/logs"
+os.makedirs(LOG_DIR, exist_ok=True)
+logging.basicConfig(
+    filename=f"{LOG_DIR}/session_memory.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 # Initialize FastAPI
 app = FastAPI()

@@ -9,20 +9,23 @@ import logging
 from datetime import datetime
 from fastapi import HTTPException
 
-# Ensure Python can locate settings.py
-sys.path.append("/root/t1-brain/config")
+# ✅ Ensure Python can locate settings.py
+sys.path.append("/root/projects/t1-brain/config")
 
-# Import configurations from settings.py
+# ✅ Import configurations from settings.py
 from settings import OPENAI_API_KEY, PG_HOST, PG_DATABASE, PG_USER, PG_PASSWORD
 
-# Configure Logging
+# ✅ Configure Logging with corrected path
+LOG_DIR = "/root/projects/t1-brain/logs"
+os.makedirs(LOG_DIR, exist_ok=True)
+
 logging.basicConfig(
-    filename="/root/t1-brain/logs/session_memory.log",
+    filename=os.path.join(LOG_DIR, "session_memory.log"),
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Set OpenAI API key
+# ✅ Set OpenAI API key
 openai.api_key = OPENAI_API_KEY
 
 

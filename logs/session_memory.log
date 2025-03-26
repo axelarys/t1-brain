@@ -1,0 +1,20 @@
+2025-03-26 21:19:03,211 - INFO - ✅ Redis connection established.
+2025-03-26 21:19:03,227 - INFO - ✅ PostgreSQL connection established.
+2025-03-26 21:19:03,243 - INFO - ✅ PostgreSQL connection established.
+2025-03-26 21:19:03,244 - INFO - ✅ Persistent session created: test001
+2025-03-26 21:19:03,469 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 401 Unauthorized"
+2025-03-26 21:19:03,471 - ERROR - ❌ Error generating embedding: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope***-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-03-26 21:19:03,475 - ERROR - ❌ PostgreSQL Insertion Error: permission denied for table embeddings
+
+2025-03-26 21:20:10,230 - INFO - ✅ Redis connection established.
+2025-03-26 21:20:10,245 - INFO - ✅ PostgreSQL connection established.
+2025-03-26 21:20:10,263 - INFO - ✅ PostgreSQL connection established.
+2025-03-26 21:20:10,527 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 401 Unauthorized"
+2025-03-26 21:20:10,529 - ERROR - ❌ Error generating embedding: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope***-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-03-26 21:20:10,533 - ERROR - ❌ PostgreSQL Insertion Error: permission denied for sequence embeddings_id_seq
+
+2025-03-26 21:22:08,965 - INFO - ✅ Redis connection established.
+2025-03-26 21:22:08,980 - INFO - ✅ PostgreSQL connection established.
+2025-03-26 21:22:08,997 - INFO - ✅ PostgreSQL connection established.
+2025-03-26 21:22:09,279 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 401 Unauthorized"
+2025-03-26 21:22:09,280 - ERROR - ❌ Error generating embedding: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope***-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}

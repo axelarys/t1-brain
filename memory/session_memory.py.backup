@@ -1,0 +1,177 @@
+import sys
+import os
+import redis
+import psycopg2
+import json
+import time
+import openai
+import logging
+from datetime import datetime
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from typing import Optional, Dict, List
+
+# Ensure Python can locate settings.py and session_memory.py
+sys.path.append("/root/t1-brain/config")
+sys.path.append("/root/t1-brain/memory")
+
+# Import configurations from settings.py
+from settings import OPENAI_API_KEY, PG_HOST, PG_DATABASE, PG_USER, PG_PASSWORD
+
+# Configure Logging
+logging.basicConfig(
+    filename="/root/t1-brain/logs/session_memory.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+# Set OpenAI API key
+openai.api_key = OPENAI_API_KEY
+
+# FastAPI App
+app = FastAPI()
+
+class MemoryRequest(BaseModel):
+    session_id: str
+    query: str
+    response: Optional[str] = None
+    memory_type: Optional[str] = "semantic"
+    sentiment: Optional[str] = "neutral"
+
+class MemoryRetrieveRequest(BaseModel):
+    session_id: str
+    query: str
+    filters: Optional[Dict] = {}
+
+class MemoryDeleteRequest(BaseModel):
+    session_id: str
+    query: str
+
+class HybridSessionMemory:
+    def __init__(self, redis_host="localhost", redis_port=6379, redis_db=0, ttl=1800):
+        """Initialize Redis, PostgreSQL connections, and set session TTL."""
+        try:
+            self.redis_client = redis.StrictRedis(host=redis_host, port=redis_port, db=redis_db, decode_responses=True)
+            self.redis_client.ping()
+            logging.info("✅ Redis connection established.")
+        except redis.ConnectionError:
+            logging.error("❌ Redis connection failed.")
+            self.redis_client = None
+
+        self.connect_to_db()
+        self.ttl = ttl
+
+    def connect_to_db(self):
+        """Ensure PostgreSQL connection is active."""
+        try:
+            self.pg_conn = psycopg2.connect(
+                host=PG_HOST,
+                database=PG_DATABASE,
+                user=PG_USER,
+                password=PG_PASSWORD
+            )
+            self.pg_cursor = self.pg_conn.cursor()
+            logging.info("✅ PostgreSQL connection established.")
+        except psycopg2.OperationalError as e:
+            logging.error(f"❌ PostgreSQL Connection Error: {e}")
+            self.pg_conn = None
+
+    def generate_embedding(self, query):
+        """Generate embedding using OpenAI API."""
+        try:
+            response = openai.embeddings.create(
+                model="text-embedding-ada-002",
+                input=[query]
+            )
+            return response.data[0].embedding
+        except Exception as e:
+            logging.error(f"❌ Error generating embedding: {e}")
+            return None
+
+    def store_memory(self, session_id, query, response, memory_type="semantic", sentiment="neutral"):
+        """Store memory in Redis & PostgreSQL with sentiment tracking."""
+        self.connect_to_db()
+
+        # ✅ Ensure session exists before storing memory
+        if not self.redis_client.exists(f"session:{session_id}"):
+            logging.warning(f"⚠ Session {session_id} missing. Creating in Redis.")
+            self.redis_client.setex(f"session:{session_id}", self.ttl, json.dumps({"session_id": session_id}))
+
+        # ✅ Store memory in Redis
+        data = json.dumps({
+            "query": query, "response": response, "timestamp": time.time(),
+            "memory_type": memory_type, "sentiment": sentiment
+        })
+        self.redis_client.rpush(f"memory:{session_id}", data)
+        self.redis_client.expire(f"memory:{session_id}", self.ttl)
+        logging.info(f"✅ Memory stored in Redis [Session: {session_id}]")
+
+        # ✅ Store in PostgreSQL (fallback)
+        embedding = self.generate_embedding(query)
+        if embedding and self.pg_conn:
+            embedding_str = "[" + ",".join(map(str, embedding)) + "]"
+            try:
+                self.pg_cursor.execute(
+                    """
+                    INSERT INTO embeddings (session_id, query, response, embedding, memory_type, sentiment, created_at) 
+                    VALUES (%s, %s, %s, %s, %s, %s, NOW())
+                    """,
+                    (session_id, query, response, embedding_str, memory_type, sentiment)
+                )
+                self.pg_conn.commit()
+                return {"status": "stored", "message": "Memory successfully stored."}
+            except Exception as e:
+                logging.error(f"❌ PostgreSQL Insertion Error: {e}")
+                return {"status": "error", "message": "Database error occurred."}
+
+    def retrieve_memory(self, session_id, query, filters={}):
+        """Retrieve memory using sentiment-aware AI recall."""
+        self.connect_to_db()
+
+        # ✅ Generate AI embedding for the query
+        embedding = self.generate_embedding(query)
+        if not embedding:
+            return {"status": "error", "message": "Embedding generation failed."}
+
+        embedding_str = "[" + ",".join(map(str, embedding)) + "]"
+
+        # ✅ Check Redis for fast recall
+        redis_memories = self.redis_client.lrange(f"memory:{session_id}", 0, -1)
+        if redis_memories:
+            retrieved_memories = [json.loads(mem) for mem in redis_memories]
+            logging.info(f"✅ Fast recall from Redis for session {session_id}")
+            return {"status": "retrieved", "memory": retrieved_memories}
+
+        # ✅ Check PostgreSQL for similarity recall with sentiment ranking
+        try:
+            self.pg_cursor.execute(
+                """
+                SELECT query, response, memory_type, sentiment, 1 - (embedding <=> %s) AS similarity
+                FROM embeddings
+                WHERE session_id = %s
+                ORDER BY similarity DESC, 
+                         CASE 
+                            WHEN sentiment = 'positive' THEN 1
+                            WHEN sentiment = 'neutral' THEN 2
+                            WHEN sentiment = 'negative' THEN 3
+                            ELSE 4
+                         END
+                LIMIT 3;
+                """, (embedding_str, session_id)
+            )
+            rows = self.pg_cursor.fetchall()
+            return [{"query": row[0], "response": row[1], "memory_type": row[2], "sentiment": row[3], "similarity": row[4]} for row in rows] if rows else []
+        except Exception as e:
+            logging.error(f"❌ PostgreSQL Retrieval Error: {e}")
+            return {"status": "error", "message": "Database error occurred."}
+
+# ✅ API Endpoint to monitor active Redis sessions.
+@app.get("/monitor/sessions")
+def monitor_sessions():
+    """Monitor active Redis sessions."""
+    try:
+        redis_sessions = HybridSessionMemory().redis_client.keys("session:*")
+        return {"active_sessions": redis_sessions}
+    except Exception as e:
+        logging.error(f"❌ Error retrieving active sessions: {e}")
+        return {"error": "Could not retrieve session data"}

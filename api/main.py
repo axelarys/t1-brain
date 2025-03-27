@@ -1,20 +1,20 @@
 import sys
+import os
 import logging
 import redis
-import psycopg2
 from fastapi import FastAPI, Depends, HTTPException, Request
 from pydantic import BaseModel
-from typing import Optional, Dict
+from typing import Optional
 
-# Ensure Python can locate settings.py
+# ✅ Corrected path for settings.py
 sys.path.append("/root/projects/t1-brain/config")
 from settings import PG_HOST, PG_DATABASE, PG_USER, PG_PASSWORD
 
-# Ensure Python can locate session_memory.py
+# ✅ Corrected path for session_memory
 sys.path.append("/root/projects/t1-brain/memory")
-from memory.session_memory import PersistentSessionMemory
+from session_memory import PersistentSessionMemory
 
-# Setup Logging (with updated path)
+# ✅ Logging setup with fallback
 LOG_DIR = "/root/projects/t1-brain/logs"
 os.makedirs(LOG_DIR, exist_ok=True)
 logging.basicConfig(
@@ -23,28 +23,29 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Initialize FastAPI
+# ✅ Initialize FastAPI
 app = FastAPI()
 
-# Initialize Memory Handler
+# ✅ Initialize memory handler
 memory_handler = PersistentSessionMemory()
 
-# Initialize Redis
+# ✅ Redis connection
 try:
     redis_client = redis.StrictRedis(host="localhost", port=6379, decode_responses=True)
+    redis_client.ping()
     logging.info("✅ Redis connection established.")
 except Exception as e:
     logging.error(f"❌ Redis connection failed: {str(e)}")
     raise
 
-# API Key Validation
+# ✅ API Key dependency
 def verify_api_key(request: Request):
     api_key = request.headers.get("X-API-KEY")
     if not api_key:
         raise HTTPException(status_code=401, detail="API Key missing")
     return api_key
 
-# API Endpoints
+# ✅ Pydantic models
 class MemoryRequest(BaseModel):
     session_id: str
     query: str
@@ -56,13 +57,19 @@ class MemoryDeleteRequest(BaseModel):
     session_id: str
     query: str
 
+# ✅ Endpoints
 @app.post("/memory/store")
 async def api_store_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
-    return memory_handler.store_memory(request.session_id, request.query, request.response, request.memory_type, request.sentiment)
+    return memory_handler.store_memory(
+        request.session_id, request.query, request.response, request.memory_type, request.sentiment
+    )
 
 @app.post("/memory/retrieve")
 async def api_retrieve_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
-    return {"status": "retrieved", "memory": memory_handler.retrieve_memory(request.session_id, request.query)}
+    return {
+        "status": "retrieved",
+        "memory": memory_handler.retrieve_memory(request.session_id, request.query)
+    }
 
 @app.delete("/memory/delete")
 async def api_delete_memory(request: MemoryDeleteRequest, api_key: str = Depends(verify_api_key)):
@@ -70,9 +77,12 @@ async def api_delete_memory(request: MemoryDeleteRequest, api_key: str = Depends
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy", "database": "connected" if redis_client.ping() else "disconnected"}
+    return {
+        "status": "healthy",
+        "redis": "connected" if redis_client.ping() else "disconnected"
+    }
 
-# Run FastAPI
+# ✅ Entry point
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

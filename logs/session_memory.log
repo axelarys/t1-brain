@@ -18,3 +18,53 @@
 2025-03-26 21:22:08,997 - INFO - ✅ PostgreSQL connection established.
 2025-03-26 21:22:09,279 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 401 Unauthorized"
 2025-03-26 21:22:09,280 - ERROR - ❌ Error generating embedding: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope***-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-03-27 10:38:22,472 - INFO - ✅ Redis connection established.
+2025-03-27 10:38:22,487 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 10:38:22,488 - INFO - ✅ Redis connection established.
+2025-03-27 10:40:08,260 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 10:40:08,261 - INFO - ✅ Persistent session created: demo123
+2025-03-27 10:40:08,608 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 401 Unauthorized"
+2025-03-27 10:40:08,612 - ERROR - ❌ Error generating embedding: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope***-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-03-27 10:43:23,038 - INFO - ✅ Redis connection established.
+2025-03-27 10:43:23,052 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 10:43:23,052 - INFO - ✅ Redis connection established.
+2025-03-27 10:50:28,170 - INFO - ✅ Redis connection established.
+2025-03-27 10:50:28,183 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 10:50:28,184 - INFO - ✅ Redis connection established.
+2025-03-27 12:01:15,447 - INFO - ✅ Redis connection established.
+2025-03-27 12:01:15,460 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 12:01:15,460 - INFO - ✅ Connected to Neo4j.
+2025-03-27 12:01:15,476 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 12:01:15,476 - INFO - ✅ Persistent session created: graph-test-01
+2025-03-27 12:01:15,727 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 401 Unauthorized"
+2025-03-27 12:01:15,731 - ERROR - ❌ Error generating embedding: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope***-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-03-27 12:01:15,886 - ERROR - ❌ Graph DB Insertion Error: Session.run() got multiple values for argument 'query'
+2025-03-27 12:12:27,129 - INFO - ✅ Redis connection established.
+2025-03-27 12:12:27,144 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 12:12:27,145 - INFO - ✅ Connected to Neo4j.
+2025-03-27 12:12:27,156 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 12:12:27,476 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 401 Unauthorized"
+2025-03-27 12:12:27,479 - ERROR - ❌ Error generating embedding: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope***-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-03-27 12:12:27,766 - ERROR - ❌ Graph DB Insertion Error: Session.run() got multiple values for argument 'query'
+2025-03-27 12:19:05,691 - INFO - ✅ Redis connection established.
+2025-03-27 12:19:05,705 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 12:19:05,705 - INFO - ✅ Connected to Neo4j.
+2025-03-27 12:19:05,717 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 12:19:06,027 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 401 Unauthorized"
+2025-03-27 12:19:06,030 - ERROR - ❌ Error generating embedding: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope***-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-03-27 12:19:06,136 - ERROR - ❌ Graph DB Insertion Error: Session.run() got multiple values for argument 'query'
+2025-03-27 12:20:22,619 - INFO - ✅ Redis connection established.
+2025-03-27 12:20:22,633 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 12:20:22,634 - INFO - ✅ Connected to Neo4j.
+2025-03-27 12:20:22,646 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 12:20:22,964 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 401 Unauthorized"
+2025-03-27 12:20:22,967 - ERROR - ❌ Error generating embedding: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope***-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-03-27 12:20:22,982 - ERROR - ❌ Graph DB Insertion Error: Session.run() got multiple values for argument 'query'
+2025-03-27 12:29:16,277 - INFO - ✅ Connected to Neo4j.
+2025-03-27 12:29:16,279 - INFO - ✅ Redis connection established.
+2025-03-27 12:29:16,294 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 12:29:16,306 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 12:29:16,306 - INFO - ✅ New session key: graph-test-002
+2025-03-27 12:29:16,590 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 401 Unauthorized"
+2025-03-27 12:29:16,593 - ERROR - ❌ Embedding error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope***-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-03-27 12:29:16,617 - ERROR - ❌ Error storing to graph DB: TransactionBase.run() got multiple values for argument 'query'

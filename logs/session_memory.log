@@ -520,3 +520,230 @@ A detailed migration guide is available here: https://github.com/openai/openai-p
 2025-03-27 21:55:51,945 - INFO - ✅ Redis connection established.
 2025-03-27 21:55:51,960 - INFO - ✅ PostgreSQL connection established.
 2025-03-27 21:55:51,961 - INFO - ✅ Redis connection established.
+2025-03-27 22:05:21,078 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:05:21,829 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 22:05:24,786 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:05:24,790 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "task_inquiry",
+  "emotion": "neutral",
+  "topic": "daily_tasks",
+  "priority": "high",
+  "lifespan": "short_term",
+  "storage_target": "vector"
+}
+2025-03-27 22:05:24,815 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:05:24,816 - INFO - ✅ New session key: example-session-001
+2025-03-27 22:05:25,700 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 22:05:25,711 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-03-27 22:05:25,826 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-03-27 22:05:30,325 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:13:41,824 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 22:13:41,824 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:13:41,826 - INFO - ✅ Redis connection established.
+2025-03-27 22:13:41,836 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:13:41,876 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:13:41,887 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:13:42,816 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:13:42,816 - INFO - ✅ Redis connection established.
+2025-03-27 22:13:42,832 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:13:42,874 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:13:42,880 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:13:42,964 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:13:42,964 - INFO - ✅ Redis connection established.
+2025-03-27 22:13:42,979 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:13:42,980 - INFO - ✅ Redis connection established.
+2025-03-27 22:15:37,924 - INFO - 🟢 Received input: session_id=sample-session-001, query=Summarize recent updates related to inventory management from our internal knowledge base.
+2025-03-27 22:15:40,057 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:15:40,719 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 22:15:43,865 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:15:43,868 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "Requesting Updates",
+  "emotion": "Neutral",
+  "topic": "Inventory Management",
+  "priority": "High",
+  "lifespan": "Short Term",
+  "storage_target": "update_logic"
+}
+2025-03-27 22:15:46,168 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:15:46,173 - INFO - ✅ Agent responded: {'status': 'success', 'response': "{'input': '[sample-session-001] Summarize recent updates related to inventory management from our internal knowledge base.', 'output': 'I have triggered the memory update functionality to gather recent updates related to inventory management from our internal knowledge base. Please wait a moment while I fetch the information for you.'}"}
+2025-03-27 22:27:34,621 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 22:27:34,621 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:27:34,623 - INFO - ✅ Redis connection established.
+2025-03-27 22:27:34,633 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:27:34,677 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:27:34,683 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:27:35,593 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:27:35,594 - INFO - ✅ Redis connection established.
+2025-03-27 22:27:35,609 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:27:35,651 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:27:35,658 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:27:35,742 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:27:35,742 - INFO - ✅ Redis connection established.
+2025-03-27 22:27:35,757 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:27:35,758 - INFO - ✅ Redis connection established.
+2025-03-27 22:34:55,160 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 22:34:55,160 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:34:55,161 - INFO - ✅ Redis connection established.
+2025-03-27 22:34:55,171 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:34:55,224 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:34:55,231 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:34:56,149 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:34:56,150 - INFO - ✅ Redis connection established.
+2025-03-27 22:34:56,165 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:34:56,209 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:34:56,215 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:34:56,296 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:34:56,296 - INFO - ✅ Redis connection established.
+2025-03-27 22:34:56,311 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:34:56,312 - INFO - ✅ Redis connection established.
+2025-03-27 22:39:42,047 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 22:39:42,047 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:39:42,048 - INFO - ✅ Redis connection established.
+2025-03-27 22:39:42,058 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:39:42,101 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:39:42,107 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:39:43,013 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:39:43,014 - INFO - ✅ Redis connection established.
+2025-03-27 22:39:43,029 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:39:43,071 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:39:43,077 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:39:43,159 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:39:43,160 - INFO - ✅ Redis connection established.
+2025-03-27 22:39:43,174 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:39:43,175 - INFO - ✅ Redis connection established.
+2025-03-27 22:42:59,461 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 22:42:59,461 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:42:59,463 - INFO - ✅ Redis connection established.
+2025-03-27 22:42:59,472 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:42:59,519 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:42:59,524 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:43:00,444 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:43:00,445 - INFO - ✅ Redis connection established.
+2025-03-27 22:43:00,460 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:43:00,502 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:43:00,508 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:43:00,590 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:43:00,591 - INFO - ✅ Redis connection established.
+2025-03-27 22:43:00,605 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:43:00,606 - INFO - ✅ Redis connection established.
+2025-03-27 22:43:06,461 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 22:43:06,461 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:43:06,463 - INFO - ✅ Redis connection established.
+2025-03-27 22:43:06,473 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:43:06,517 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:43:06,524 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:43:07,433 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:43:07,434 - INFO - ✅ Redis connection established.
+2025-03-27 22:43:07,450 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:43:07,491 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:43:07,498 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:43:07,578 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:43:07,579 - INFO - ✅ Redis connection established.
+2025-03-27 22:43:07,593 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:43:07,594 - INFO - ✅ Redis connection established.
+2025-03-27 22:43:24,670 - INFO - 🟢 Received input: session_id=u-debug, query=Did I say anything about roadmap updates?
+2025-03-27 22:43:28,646 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:43:29,338 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 22:43:33,144 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:43:33,146 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "information_request",
+  "emotion": "neutral",
+  "topic": "roadmap_updates",
+  "priority": "normal",
+  "lifespan": "current",
+  "storage_target": "update_logic"
+}
+2025-03-27 22:43:35,547 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:43:35,551 - INFO - ✅ Agent responded: {'status': 'success', 'response': "{'input': '[u-debug] Did I say anything about roadmap updates?', 'output': 'Yes, you have mentioned roadmap updates before. Can you please specify what exactly you want to know about them?'}"}
+2025-03-27 22:44:05,395 - INFO - 🟢 Received input: session_id=u-debug, query=Did I say anything about roadmap updates?
+2025-03-27 22:44:07,218 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:44:07,870 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 22:44:12,527 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:44:12,531 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "acquiring_information",
+  "emotion": "neutral",
+  "topic": "roadmap_updates",
+  "priority": "medium",
+  "lifespan": "permanent",
+  "storage_target": "update_logic"
+}
+2025-03-27 22:44:14,486 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:44:14,493 - INFO - ✅ Agent responded: {'status': 'success', 'response': "{'input': '[u-debug] Did I say anything about roadmap updates?', 'output': 'Yes, you have mentioned roadmap updates before. Would you like to know more about a specific update or discuss new ones?'}"}
+2025-03-27 22:54:47,977 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 22:54:47,977 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:54:47,978 - INFO - ✅ Redis connection established.
+2025-03-27 22:54:47,990 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:54:48,035 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:54:48,041 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:54:48,955 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:54:48,955 - INFO - ✅ Redis connection established.
+2025-03-27 22:54:48,969 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:54:49,011 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:54:49,018 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:54:49,100 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:54:49,101 - INFO - ✅ Redis connection established.
+2025-03-27 22:54:49,116 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:54:49,117 - INFO - ✅ Redis connection established.
+2025-03-27 22:54:59,212 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 22:54:59,212 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:54:59,213 - INFO - ✅ Redis connection established.
+2025-03-27 22:54:59,224 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:54:59,267 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:54:59,274 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:55:00,175 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:55:00,176 - INFO - ✅ Redis connection established.
+2025-03-27 22:55:00,191 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:55:00,235 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:55:00,241 - INFO - ✅ Neo4j connection established.
+2025-03-27 22:55:00,322 - INFO - ✅ Connected to Neo4j.
+2025-03-27 22:55:00,322 - INFO - ✅ Redis connection established.
+2025-03-27 22:55:00,337 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:55:00,338 - INFO - ✅ Redis connection established.
+2025-03-27 22:55:09,840 - INFO - 🟢 Received input: session_id=log-test-001, query=Did I talk about deadlines?
+2025-03-27 22:55:11,769 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:55:12,202 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 22:55:15,254 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:55:15,262 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "Retrieve Information",
+  "emotion": "Neutral",
+  "topic": "Deadlines",
+  "priority": "Normal",
+  "lifespan": "Single-use",
+  "storage_target": "graph"
+}
+2025-03-27 22:55:15,286 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:55:15,287 - INFO - ✅ New session key: log-test-001
+2025-03-27 22:55:15,553 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 22:55:15,565 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-03-27 22:55:15,629 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-03-27 22:55:17,066 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 22:55:17,075 - INFO - ✅ Agent responded: {'status': 'success', 'response': "{'input': '[log-test-001] Did I talk about deadlines?', 'output': 'Yes, you have mentioned deadlines in our previous conversations. How can I assist you further regarding this topic?'}"}
+2025-03-27 22:59:22,580 - INFO - ✅ Redis connection established.
+2025-03-27 22:59:22,594 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:59:24,620 - INFO - ✅ Redis connection established.
+2025-03-27 22:59:24,632 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 22:59:24,974 - INFO - ✅ Redis connection established.
+2025-03-27 22:59:24,986 - INFO - ✅ PostgreSQL connection established.

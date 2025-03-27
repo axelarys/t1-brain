@@ -1,0 +1,2 @@
+2025-03-27 22:55:09,840 - INFO - 🟢 Received input: session_id=log-test-001, query=Did I talk about deadlines?
+2025-03-27 22:55:17,075 - INFO - ✅ Agent responded: {'status': 'success', 'response': "{'input': '[log-test-001] Did I talk about deadlines?', 'output': 'Yes, you have mentioned deadlines in our previous conversations. How can I assist you further regarding this topic?'}"}

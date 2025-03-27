@@ -16,15 +16,24 @@ sys.path.append("/root/projects/t1-brain/memory")
 from settings import OPENAI_API_KEY, PG_HOST, PG_DATABASE, PG_USER, PG_PASSWORD
 from graph_memory import GraphMemory
 
-# Logging setup
+# ✅ Named logger setup
 LOG_DIR = "/root/projects/t1-brain/logs"
 os.makedirs(LOG_DIR, exist_ok=True)
-logging.basicConfig(
-    filename=os.path.join(LOG_DIR, "session_memory.log"),
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
+log_file = os.path.join(LOG_DIR, "session_memory.log")
 
+session_logger = logging.getLogger("session_memory_logger")
+session_logger.setLevel(logging.INFO)
+
+if not session_logger.handlers:
+    file_handler = logging.FileHandler(log_file)
+    file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+    session_logger.addHandler(file_handler)
+
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+    session_logger.addHandler(stream_handler)
+
+# ✅ OpenAI Key
 openai.api_key = OPENAI_API_KEY
 
 class PersistentSessionMemory:
@@ -37,9 +46,9 @@ class PersistentSessionMemory:
                 host=redis_host, port=redis_port, db=redis_db, decode_responses=True
             )
             self.redis_client.ping()
-            logging.info("✅ Redis connection established.")
+            session_logger.info("✅ Redis connection established.")
         except redis.ConnectionError:
-            logging.error("❌ Redis connection failed.")
+            session_logger.error("❌ Redis connection failed.")
             self.redis_client = None
 
         self.connect_to_db()
@@ -50,9 +59,9 @@ class PersistentSessionMemory:
                 host=PG_HOST, database=PG_DATABASE, user=PG_USER, password=PG_PASSWORD
             )
             self.pg_cursor = self.pg_conn.cursor()
-            logging.info("✅ PostgreSQL connection established.")
+            session_logger.info("✅ PostgreSQL connection established.")
         except psycopg2.OperationalError as e:
-            logging.error(f"❌ PostgreSQL Connection Error: {e}")
+            session_logger.error(f"❌ PostgreSQL Connection Error: {e}")
             self.pg_conn = None
 
     def generate_embedding(self, query):
@@ -65,7 +74,7 @@ class PersistentSessionMemory:
                 raise ValueError("Embedding dimension mismatch.")
             return embedding
         except Exception as e:
-            logging.error(f"❌ Embedding error: {e}")
+            session_logger.error(f"❌ Embedding error: {e}")
             return [0.0] * 1536
 
     def store_memory(self, session_id, query, response, memory_type="semantic", sentiment="neutral"):
@@ -75,7 +84,7 @@ class PersistentSessionMemory:
             session_key = f"session:{session_id}"
             if not self.redis_client.exists(session_key):
                 self.redis_client.setex(session_key, self.ttl, json.dumps({"session_id": session_id}))
-                logging.info(f"✅ New session key: {session_id}")
+                session_logger.info(f"✅ New session key: {session_id}")
 
             memory_data = json.dumps({
                 "query": query, "response": response, "timestamp": time.time(),
@@ -84,7 +93,7 @@ class PersistentSessionMemory:
             self.redis_client.rpush(f"memory:{session_id}", memory_data)
             self.redis_client.expire(f"memory:{session_id}", self.ttl)
         except Exception as e:
-            logging.error(f"❌ Redis error: {e}")
+            session_logger.error(f"❌ Redis error: {e}")
 
         try:
             embedding = self.generate_embedding(query)
@@ -98,13 +107,13 @@ class PersistentSessionMemory:
             )
             self.pg_conn.commit()
         except Exception as e:
-            logging.error(f"❌ PostgreSQL error: {e}")
+            session_logger.error(f"❌ PostgreSQL error: {e}")
             return {"status": "error", "message": "PostgreSQL insert failed"}
 
         try:
             self.graph_memory.store_graph_memory(session_id, query, response, memory_type, sentiment)
         except Exception as e:
-            logging.error(f"❌ GraphMemory error: {e}")
+            session_logger.error(f"❌ GraphMemory error: {e}")
 
         return {"status": "stored", "message": "Memory stored in Redis, Postgres and Graph"}
 
@@ -112,7 +121,7 @@ class PersistentSessionMemory:
         try:
             key = f"memory:{session_id}"
             if not self.redis_client.exists(key):
-                logging.info(f"ℹ️ No session found: {session_id}")
+                session_logger.info(f"ℹ️ No session found: {session_id}")
                 return []
 
             entries = self.redis_client.lrange(key, 0, -1)
@@ -120,7 +129,7 @@ class PersistentSessionMemory:
 
             return [p for p in parsed if p["query"] == query] if query else parsed
         except Exception as e:
-            logging.error(f"❌ Retrieval error: {e}")
+            session_logger.error(f"❌ Retrieval error: {e}")
             return []
 
     def delete_memory(self, session_id, query):
@@ -134,7 +143,7 @@ class PersistentSessionMemory:
             self.redis_client.delete(f"memory:{session_id}")
             return {"status": "deleted", "message": "Deleted from Redis and Postgres"}
         except Exception as e:
-            logging.error(f"❌ Delete error: {e}")
+            session_logger.error(f"❌ Delete error: {e}")
             return {"status": "error", "message": "Delete failed"}
 
     def find_similar_queries(self, input_query, min_similarity=0.8):
@@ -157,5 +166,5 @@ class PersistentSessionMemory:
             rows = self.pg_cursor.fetchall()
             return [{"session_id": r[0], "query": r[1], "response": r[2], "similarity": 1 - r[3]} for r in rows]
         except Exception as e:
-            logging.error(f"❌ Similarity search error: {e}")
+            session_logger.error(f"❌ Similarity search error: {e}")
             return []

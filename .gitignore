@@ -1,2 +1,3 @@
 config/settings.py
-config/settings.py
+config/__pycache__/
+*.pyc

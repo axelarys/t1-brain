@@ -1,15 +1,14 @@
 # test_graph_memory.py
 
+import sys
+sys.path.append("/root/projects/t1-brain/memory")
+
 from memory.graph_memory import GraphMemory
 
 graph = GraphMemory()
+query = "future of artificial intelligence"
+results = graph.retrieve_graph_memory(query)
 
-graph.store_graph_memory(
-    session_id="graph-test-003",
-    query_param="What is the future of AI?",
-    response="AI will continue to evolve toward more human-like behavior.",
-    memory_type="semantic",
-    sentiment="optimistic"
-)
+for item in results:
+    print(item)
 
-print("✅ Graph memory insertion attempted.")

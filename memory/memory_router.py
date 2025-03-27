@@ -8,7 +8,7 @@ from openai import OpenAI
 from memory.session_memory import PersistentSessionMemory
 
 # Setup logging
-log_dir = "/root/t1-brain/logs/"
+log_dir = "/root/projects/t1-brain/logs/"
 os.makedirs(log_dir, exist_ok=True)
 log_file = os.path.join(log_dir, "memory_router.log")
 logging.basicConfig(
@@ -59,8 +59,9 @@ class MemoryRouter:
         prompt = (
             "You are an AI that analyzes queries and returns a structured JSON with: "
             "intent, emotion, topic, priority, lifespan, and storage_target "
-            "(choose one of: 'graph', 'vector', 'update_logic', 'delete_logic')."
+            "(choose from: 'graph', 'vector', 'update_logic', 'delete_logic')."
         )
+
         try:
             response = self.client.chat.completions.create(
                 model="gpt-4",
@@ -114,50 +115,61 @@ class MemoryRouter:
             "storage_target": route
         }
 
-    def execute_action(self, session_id: str, user_input: str, classification: dict):
-        route = classification.get("storage_target")
-        intent = classification.get("intent", "")
-        response_text = ""
+    def execute_action(self, session_id: str, user_input: str, enriched: dict) -> dict:
+        """Perform memory action based on route."""
+        route = enriched.get("storage_target", "unknown")
+        intent = enriched.get("intent", "unknown")
 
-        if route == "vector":
-            matches = self.memory.find_similar_queries(user_input)
-            response_text = f"🔎 Retrieved {len(matches)} similar memory entries from vector DB."
+        try:
+            if route == "graph":
+                self.memory.store_memory(session_id, user_input, response="graph: stored", memory_type="graph")
+                return {
+                    "status": "stored",
+                    "route": "graph",
+                    "message": "Memory stored in Graph DB (Neo4j).",
+                    "meta": enriched
+                }
+
+            elif route == "vector":
+                self.memory.store_memory(session_id, user_input, response="vector: stored", memory_type="vector")
+                return {
+                    "status": "stored",
+                    "route": "vector",
+                    "message": "Memory stored in Vector DB (PostgreSQL).",
+                    "meta": enriched
+                }
+
+            elif route == "update_logic":
+                return {
+                    "status": "update_pending",
+                    "route": "update_logic",
+                    "message": "Memory update functionality triggered (placeholder).",
+                    "meta": enriched
+                }
+
+            elif route == "delete_logic":
+                self.memory.delete_memory(session_id, user_input)
+                return {
+                    "status": "deleted",
+                    "route": "delete_logic",
+                    "message": "Memory deleted from Redis and PostgreSQL.",
+                    "meta": enriched
+                }
+
+            else:
+                return {
+                    "status": "error",
+                    "route": "unknown",
+                    "message": "Unable to determine appropriate memory route.",
+                    "meta": enriched
+                }
+
+        except Exception as e:
             return {
-                "status": "retrieved",
+                "status": "error",
                 "route": route,
-                "matches": matches,
-                "message": response_text
-            }
-
-        elif route == "graph":
-            self.memory.store_memory(session_id, user_input, response="Stored via graph logic",
-                                     memory_type="semantic", sentiment=classification.get("emotion", "neutral"))
-            return {
-                "status": "stored",
-                "route": route,
-                "message": "Memory stored in Graph DB (Neo4j)."
-            }
-
-        elif route == "update_logic":
-            return {
-                "status": "update_pending",
-                "route": route,
-                "message": "Memory update functionality triggered (placeholder)."
-            }
-
-        elif route == "delete_logic":
-            self.memory.delete_memory(session_id, user_input)
-            return {
-                "status": "deleted",
-                "route": route,
-                "message": "Memory deleted from Redis and PostgreSQL."
-            }
-
-        else:
-            return {
-                "status": "fallback",
-                "route": "vector",
-                "message": "Fallback route executed. Treated as vector query."
+                "message": f"Memory execution failed: {str(e)}",
+                "meta": enriched
             }
 
     def close_connections(self):

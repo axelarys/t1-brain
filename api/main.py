@@ -12,7 +12,8 @@ sys.path.append("/root/projects/t1-brain")
 # ✅ Correct imports from project root
 from config.settings import PG_HOST, PG_DATABASE, PG_USER, PG_PASSWORD
 from memory.session_memory import PersistentSessionMemory
-from api.routes import memory  # router for /memory/route
+from api.routes import memory   # /memory/route
+from api.routes import agent    # /agent/run
 
 # 📂 Logging setup
 LOG_DIR = "/root/projects/t1-brain/logs"
@@ -82,5 +83,6 @@ async def health_check():
         "redis": "connected" if redis_client.ping() else "disconnected"
     }
 
-# 🧩 Include /memory/route router
+# 🧩 Register Routers
 app.include_router(memory.router)
+app.include_router(agent.router)

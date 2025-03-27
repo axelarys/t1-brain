@@ -393,3 +393,101 @@ Alternatively, you can pin your installation to the old version, e.g. `pip insta
 A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
 
 2025-03-27 19:08:44,309 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-03-27 19:36:18,165 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 19:36:18,165 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:36:18,166 - INFO - ✅ Redis connection established.
+2025-03-27 19:36:18,177 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:36:18,222 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:36:18,235 - INFO - ✅ Neo4j connection established.
+2025-03-27 19:36:19,524 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:36:19,524 - INFO - ✅ Redis connection established.
+2025-03-27 19:36:19,536 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:36:19,536 - INFO - ✅ Redis connection established.
+2025-03-27 19:36:22,186 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 19:36:22,186 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:36:22,187 - INFO - ✅ Redis connection established.
+2025-03-27 19:36:22,197 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:36:22,235 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:36:22,240 - INFO - ✅ Neo4j connection established.
+2025-03-27 19:36:24,268 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:36:24,269 - INFO - ✅ Redis connection established.
+2025-03-27 19:36:24,280 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:36:24,281 - INFO - ✅ Redis connection established.
+2025-03-27 19:36:34,342 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 19:36:34,343 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:36:34,345 - INFO - ✅ Redis connection established.
+2025-03-27 19:36:34,359 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:36:34,464 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:36:34,469 - INFO - ✅ Neo4j connection established.
+2025-03-27 19:36:36,642 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:36:36,643 - INFO - ✅ Redis connection established.
+2025-03-27 19:36:36,655 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:36:36,656 - INFO - ✅ Redis connection established.
+2025-03-27 19:36:55,715 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 19:42:33,481 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 19:42:33,481 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:42:33,483 - INFO - ✅ Redis connection established.
+2025-03-27 19:42:33,498 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:42:33,604 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:42:33,609 - INFO - ✅ Neo4j connection established.
+2025-03-27 19:42:35,798 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:42:35,799 - INFO - ✅ Redis connection established.
+2025-03-27 19:42:35,811 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:42:35,812 - INFO - ✅ Redis connection established.
+2025-03-27 19:49:24,516 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 19:49:24,516 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:49:24,518 - INFO - ✅ Redis connection established.
+2025-03-27 19:49:24,528 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:49:24,590 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:49:24,595 - INFO - ✅ Neo4j connection established.
+2025-03-27 19:49:26,204 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:49:26,205 - INFO - ✅ Redis connection established.
+2025-03-27 19:49:26,216 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:49:26,301 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:49:26,306 - INFO - ✅ Neo4j connection established.
+2025-03-27 19:49:26,536 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:49:26,537 - INFO - ✅ Redis connection established.
+2025-03-27 19:49:26,548 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:49:26,549 - INFO - ✅ Redis connection established.
+2025-03-27 19:50:23,023 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 19:50:23,024 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:50:23,026 - INFO - ✅ Redis connection established.
+2025-03-27 19:50:23,040 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:50:23,145 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:50:23,151 - INFO - ✅ Neo4j connection established.
+2025-03-27 19:50:24,909 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:50:24,910 - INFO - ✅ Redis connection established.
+2025-03-27 19:50:24,922 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:50:25,007 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:50:25,012 - INFO - ✅ Neo4j connection established.
+2025-03-27 19:50:25,258 - INFO - ✅ Connected to Neo4j.
+2025-03-27 19:50:25,259 - INFO - ✅ Redis connection established.
+2025-03-27 19:50:25,271 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:50:25,272 - INFO - ✅ Redis connection established.
+2025-03-27 19:50:42,514 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 19:50:43,470 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 19:50:45,681 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 19:50:45,682 - INFO - 🧠 Enrichment Output:
+{
+"intent": "Analysis",
+"emotion": "Stress",
+"topic": "Product Launch",
+"priority": "High",
+"lifespan": "Short Term",
+"storage_target": "graph"
+}
+2025-03-27 19:50:45,694 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:50:45,695 - INFO - ✅ New session key: u007
+2025-03-27 19:50:46,243 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 19:50:46,248 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-03-27 19:50:46,329 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-03-27 19:50:49,207 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"

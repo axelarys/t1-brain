@@ -6,30 +6,30 @@ from fastapi import FastAPI, Depends, HTTPException, Request
 from pydantic import BaseModel
 from typing import Optional
 
-# ✅ Corrected path for settings.py
-sys.path.append("/root/projects/t1-brain/config")
-from settings import PG_HOST, PG_DATABASE, PG_USER, PG_PASSWORD
+# 🔧 Force project root into path
+sys.path.append("/root/projects/t1-brain")
 
-# ✅ Corrected path for session_memory
-sys.path.append("/root/projects/t1-brain/memory")
-from session_memory import PersistentSessionMemory
+# ✅ Correct imports from project root
+from config.settings import PG_HOST, PG_DATABASE, PG_USER, PG_PASSWORD
+from memory.session_memory import PersistentSessionMemory
+from api.routes import memory  # router for /memory/route
 
-# ✅ Logging setup with fallback
+# 📂 Logging setup
 LOG_DIR = "/root/projects/t1-brain/logs"
 os.makedirs(LOG_DIR, exist_ok=True)
 logging.basicConfig(
-    filename=f"{LOG_DIR}/session_memory.log",
+    filename=os.path.join(LOG_DIR, "session_memory.log"),
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# ✅ Initialize FastAPI
+# 🚀 FastAPI App Init
 app = FastAPI()
 
-# ✅ Initialize memory handler
+# 🧠 Memory Handler
 memory_handler = PersistentSessionMemory()
 
-# ✅ Redis connection
+# 🔗 Redis Connection
 try:
     redis_client = redis.StrictRedis(host="localhost", port=6379, decode_responses=True)
     redis_client.ping()
@@ -38,14 +38,14 @@ except Exception as e:
     logging.error(f"❌ Redis connection failed: {str(e)}")
     raise
 
-# ✅ API Key dependency
+# 🔐 API Key Dependency
 def verify_api_key(request: Request):
     api_key = request.headers.get("X-API-KEY")
     if not api_key:
         raise HTTPException(status_code=401, detail="API Key missing")
     return api_key
 
-# ✅ Pydantic models
+# 📦 Pydantic Models
 class MemoryRequest(BaseModel):
     session_id: str
     query: str
@@ -57,7 +57,7 @@ class MemoryDeleteRequest(BaseModel):
     session_id: str
     query: str
 
-# ✅ Endpoints
+# 🧠 Core Endpoints
 @app.post("/memory/store")
 async def api_store_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
     return memory_handler.store_memory(
@@ -82,7 +82,5 @@ async def health_check():
         "redis": "connected" if redis_client.ping() else "disconnected"
     }
 
-# ✅ Entry point
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+# 🧩 Include /memory/route router
+app.include_router(memory.router)

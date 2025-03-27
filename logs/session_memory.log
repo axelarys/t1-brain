@@ -68,3 +68,328 @@
 2025-03-27 12:29:16,590 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 401 Unauthorized"
 2025-03-27 12:29:16,593 - ERROR - ❌ Embedding error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your-ope***-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
 2025-03-27 12:29:16,617 - ERROR - ❌ Error storing to graph DB: TransactionBase.run() got multiple values for argument 'query'
+2025-03-27 15:31:42,024 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 15:31:42,024 - INFO - ✅ Connected to Neo4j.
+2025-03-27 15:31:42,028 - INFO - ✅ Redis connection established.
+2025-03-27 15:31:42,043 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 15:31:42,160 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 15:31:42,178 - INFO - ✅ Neo4j connection established.
+2025-03-27 15:31:42,230 - INFO - 🔌 Connections closed.
+2025-03-27 15:40:55,832 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 15:40:55,832 - INFO - ✅ Connected to Neo4j.
+2025-03-27 15:40:55,836 - INFO - ✅ Redis connection established.
+2025-03-27 15:40:55,851 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 15:40:55,967 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 15:40:55,973 - INFO - ✅ Neo4j connection established.
+2025-03-27 15:40:56,922 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:41:00,502 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:41:00,517 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "fetch_data",
+  "emotion": "neutral",
+  "topic": "cybersecurity projects",
+  "priority": "normal",
+  "lifespan": "single_use",
+  "storage_target": "graph"
+}
+2025-03-27 15:41:00,568 - INFO - 🔌 Connections closed.
+2025-03-27 15:46:48,530 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 15:46:48,531 - INFO - ✅ Connected to Neo4j.
+2025-03-27 15:46:48,533 - INFO - ✅ Redis connection established.
+2025-03-27 15:46:48,547 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 15:46:48,666 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 15:46:48,671 - INFO - ✅ Neo4j connection established.
+2025-03-27 15:46:49,541 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:46:52,715 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:46:52,720 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "fetch_related_projects",
+  "emotion": "neutral",
+  "topic": "cybersecurity",
+  "priority": "medium",
+  "lifespan": "long",
+  "storage_target": "graph"
+}
+2025-03-27 15:46:53,261 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:46:55,837 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:46:55,838 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "Connect User to Project",
+  "emotion": "Neutral",
+  "topic": "User-Project Assignment",
+  "priority": "Medium",
+  "lifespan": "Short-term",
+  "storage_target": "Update_logic"
+}
+2025-03-27 15:46:55,838 - INFO - 🔁 Fallback classification used: graph
+2025-03-27 15:46:56,477 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:46:59,875 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:46:59,876 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "delete_memory",
+  "emotion": "stress",
+  "topic": "work",
+  "priority": "high",
+  "lifespan": "immediate",
+  "storage_target": "delete_logic"
+}
+2025-03-27 15:47:00,079 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:47:03,721 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:47:03,724 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "update",
+  "emotion": "neutral",
+  "topic": "April launch meeting time",
+  "priority": "high",
+  "lifespan": "short",
+  "storage_target": "update_logic"
+}
+2025-03-27 15:47:04,018 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:47:06,388 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:47:06,391 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "finding_information",
+  "emotion": "neutral",
+  "topic": "deep learning similarities",
+  "priority": "medium",
+  "lifespan": "long_term",
+  "storage_target": "vector"
+}
+2025-03-27 15:47:06,665 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:47:09,283 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:47:09,284 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "analyze_conversations",
+  "emotion": "neutral",
+  "topic": "project_delays",
+  "priority": "high",
+  "lifespan": "recent",
+  "storage_target": "graph"
+}
+2025-03-27 15:47:09,594 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:47:12,413 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:47:12,414 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "venting",
+  "emotion": "frustration",
+  "topic": "personal",
+  "priority": "low",
+  "lifespan": "short",
+  "storage_target": "vector"
+}
+2025-03-27 15:47:13,010 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:47:16,073 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:47:16,075 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "Weather Forecast",
+  "emotion": "Neutral",
+  "topic": "Rain in Paris",
+  "priority": "Medium",
+  "lifespan": "Short Term",
+  "storage_target": "vector"
+}
+2025-03-27 15:47:16,376 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:47:19,299 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:47:19,305 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "none",
+  "emotion": "frustration",
+  "topic": "none",
+  "priority": "low",
+  "lifespan": "short",
+  "storage_target": "vector"
+}
+2025-03-27 15:47:19,770 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 400 Bad Request"
+2025-03-27 15:47:19,771 - ERROR - ❌ Embedding error: Error code: 400 - {'error': {'message': "'$.input' is invalid. Please check the API reference: https://platform.openai.com/docs/api-reference.", 'type': 'invalid_request_error', 'param': None, 'code': None}}
+2025-03-27 15:47:21,524 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:47:21,524 - INFO - 🧠 Enrichment Output:
+As there isn't a query provided, I'm unable to return a structured JSON. Please provide a query for analysis.
+2025-03-27 15:47:21,524 - WARNING - ⚠️ Failed to parse enrichment JSON: Expecting value: line 1 column 1 (char 0)
+2025-03-27 15:47:21,525 - INFO - 🔁 Fallback classification used: vector
+2025-03-27 15:47:21,574 - INFO - 🔌 Connections closed.
+2025-03-27 15:59:33,236 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 15:59:33,236 - INFO - ✅ Connected to Neo4j.
+2025-03-27 15:59:33,240 - INFO - ✅ Redis connection established.
+2025-03-27 15:59:33,255 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 15:59:33,372 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 15:59:33,378 - INFO - ✅ Neo4j connection established.
+2025-03-27 15:59:34,257 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:59:36,880 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:59:36,885 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "Analyze and correlate stress factor",
+  "emotion": "Stress",
+  "topic": "Work-related stress and impact on launch deadline",
+  "priority": "High",
+  "lifespan": "Until launch deadline",
+  "storage_target": "graph"
+}
+2025-03-27 15:59:36,897 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 15:59:36,897 - INFO - ✅ New session key: user_123
+2025-03-27 15:59:37,766 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:59:37,772 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-03-27 15:59:37,896 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-03-27 15:59:38,428 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:59:40,878 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:59:40,879 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "search",
+  "emotion": "stress",
+  "topic": "work burnout",
+  "priority": "high",
+  "lifespan": "persistent",
+  "storage_target": "graph"
+}
+2025-03-27 15:59:40,892 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 15:59:41,214 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:59:41,220 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-03-27 15:59:41,232 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-03-27 15:59:41,529 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:59:44,051 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:59:44,065 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "update",
+  "emotion": "neutral",
+  "topic": "April 10 meeting memory",
+  "priority": "high",
+  "lifespan": "long",
+  "storage_target": "update_logic"
+}
+2025-03-27 15:59:44,409 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:59:46,739 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:59:46,747 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "Delete",
+  "emotion": "Anxiety",
+  "topic": "User's statements",
+  "priority": "High",
+  "lifespan": "Immediate",
+  "storage_target": "delete_logic"
+}
+2025-03-27 15:59:46,759 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 15:59:47,094 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:59:50,483 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:59:50,485 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "fetch_information",
+  "emotion": "neutral",
+  "topic": "project Gemini",
+  "priority": "high",
+  "lifespan": "temporary",
+  "storage_target": "graph"
+}
+2025-03-27 15:59:50,496 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 15:59:51,020 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:59:51,026 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-03-27 15:59:51,038 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-03-27 15:59:51,435 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 15:59:53,915 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 15:59:53,927 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "unidentifiable",
+  "emotion": "neutral",
+  "topic": "unidentifiable",
+  "priority": "low",
+  "lifespan": "temporary",
+  "storage_target": "delete_logic"
+}
+2025-03-27 15:59:53,939 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 15:59:53,991 - INFO - 🔌 Connections closed.
+2025-03-27 16:13:49,167 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 16:13:49,168 - INFO - ✅ Connected to Neo4j.
+2025-03-27 16:13:49,169 - INFO - ✅ Redis connection established.
+2025-03-27 16:13:49,184 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 16:13:49,287 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 16:13:49,293 - INFO - ✅ Neo4j connection established.
+2025-03-27 16:13:49,298 - INFO - ✅ Connected to Neo4j.
+2025-03-27 16:13:49,299 - INFO - ✅ Redis connection established.
+2025-03-27 16:13:49,311 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 16:13:49,311 - INFO - ✅ Redis connection established.
+2025-03-27 16:13:54,400 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 16:13:54,400 - INFO - ✅ Connected to Neo4j.
+2025-03-27 16:13:54,402 - INFO - ✅ Redis connection established.
+2025-03-27 16:13:54,416 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 16:13:54,514 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 16:13:54,519 - INFO - ✅ Neo4j connection established.
+2025-03-27 16:13:54,523 - INFO - ✅ Connected to Neo4j.
+2025-03-27 16:13:54,524 - INFO - ✅ Redis connection established.
+2025-03-27 16:13:54,536 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 16:13:54,536 - INFO - ✅ Redis connection established.
+2025-03-27 16:14:11,868 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 16:14:14,428 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 16:14:14,436 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "retrieve_data",
+  "emotion": "neutral",
+  "topic": "burnout_and_deadlines",
+  "priority": "high",
+  "lifespan": "long_term",
+  "storage_target": "graph"
+}
+2025-03-27 16:14:14,447 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 16:14:14,448 - INFO - ✅ New session key: user_api_001
+2025-03-27 16:14:14,997 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 16:14:15,003 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-03-27 16:14:15,065 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-03-27 19:08:40,610 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 19:08:43,665 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 19:08:43,666 - INFO - 🧠 Enrichment Output:
+{
+"intent": "retrieve_information",
+"emotion": "neutral",
+"topic": "project deadlines",
+"priority": "medium",
+"lifespan": "current",
+"storage_target": "graph"
+}
+
+2025-03-27 19:08:43,678 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 19:08:43,678 - INFO - ✅ New session key: user_tool_001
+2025-03-27 19:08:44,224 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 19:08:44,230 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-03-27 19:08:44,309 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '

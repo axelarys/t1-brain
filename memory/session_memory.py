@@ -25,7 +25,6 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Set OpenAI key
 openai.api_key = OPENAI_API_KEY
 
 class PersistentSessionMemory:
@@ -72,7 +71,6 @@ class PersistentSessionMemory:
     def store_memory(self, session_id, query, response, memory_type="semantic", sentiment="neutral"):
         self.connect_to_db()
 
-        # Redis store
         try:
             session_key = f"session:{session_id}"
             if not self.redis_client.exists(session_key):
@@ -88,7 +86,6 @@ class PersistentSessionMemory:
         except Exception as e:
             logging.error(f"❌ Redis error: {e}")
 
-        # Vector DB (Postgres)
         try:
             embedding = self.generate_embedding(query)
             embedding_str = "[" + ",".join(map(str, embedding)) + "]"
@@ -104,7 +101,6 @@ class PersistentSessionMemory:
             logging.error(f"❌ PostgreSQL error: {e}")
             return {"status": "error", "message": "PostgreSQL insert failed"}
 
-        # Graph DB (Neo4j)
         try:
             self.graph_memory.store_graph_memory(session_id, query, response, memory_type, sentiment)
         except Exception as e:
@@ -140,3 +136,26 @@ class PersistentSessionMemory:
         except Exception as e:
             logging.error(f"❌ Delete error: {e}")
             return {"status": "error", "message": "Delete failed"}
+
+    def find_similar_queries(self, input_query, min_similarity=0.8):
+        try:
+            embedding = self.generate_embedding(input_query)
+            embedding_str = "[" + ",".join(map(str, embedding)) + "]"
+
+            self.pg_cursor.execute(
+                """
+                SELECT session_id, query, response,
+                       (embedding <=> %s::vector) AS similarity
+                FROM embeddings
+                WHERE (embedding <=> %s::vector) <= %s
+                ORDER BY similarity ASC
+                LIMIT 5
+                """,
+                (embedding_str, embedding_str, 1 - min_similarity)
+            )
+
+            rows = self.pg_cursor.fetchall()
+            return [{"session_id": r[0], "query": r[1], "response": r[2], "similarity": 1 - r[3]} for r in rows]
+        except Exception as e:
+            logging.error(f"❌ Similarity search error: {e}")
+            return []

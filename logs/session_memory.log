@@ -491,3 +491,32 @@ A detailed migration guide is available here: https://github.com/openai/openai-p
 
 2025-03-27 19:50:46,329 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
 2025-03-27 19:50:49,207 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-27 20:10:31,291 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 20:10:31,292 - INFO - ✅ New session key: test123
+2025-03-27 20:10:31,837 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-27 20:10:31,843 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-03-27 20:10:31,858 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-03-27 21:55:50,827 - INFO - 🚀 MemoryRouter initialized.
+2025-03-27 21:55:50,827 - INFO - ✅ Connected to Neo4j.
+2025-03-27 21:55:50,828 - INFO - ✅ Redis connection established.
+2025-03-27 21:55:50,839 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 21:55:50,885 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 21:55:50,891 - INFO - ✅ Neo4j connection established.
+2025-03-27 21:55:51,800 - INFO - ✅ Connected to Neo4j.
+2025-03-27 21:55:51,800 - INFO - ✅ Redis connection established.
+2025-03-27 21:55:51,815 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 21:55:51,856 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 21:55:51,863 - INFO - ✅ Neo4j connection established.
+2025-03-27 21:55:51,944 - INFO - ✅ Connected to Neo4j.
+2025-03-27 21:55:51,945 - INFO - ✅ Redis connection established.
+2025-03-27 21:55:51,960 - INFO - ✅ PostgreSQL connection established.
+2025-03-27 21:55:51,961 - INFO - ✅ Redis connection established.

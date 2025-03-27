@@ -42,9 +42,10 @@ except Exception as e:
 # 🔐 API Key Dependency
 def verify_api_key(request: Request):
     api_key = request.headers.get("X-API-KEY")
-    if not api_key:
-        raise HTTPException(status_code=401, detail="API Key missing")
+    if not api_key or api_key != "WsRocks1234":  # 🔐 Static API key for internal use
+        raise HTTPException(status_code=401, detail="Invalid or missing API Key")
     return api_key
+
 
 # 📦 Pydantic Models
 class MemoryRequest(BaseModel):

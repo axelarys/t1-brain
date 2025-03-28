@@ -1,170 +1,132 @@
-import sys
-import os
-import redis
-import psycopg2
-import json
-import time
-import openai
-import logging
-from datetime import datetime
-from fastapi import HTTPException
+# [UNCHANGED IMPORTS]
+import os, json, time, redis, logging, psycopg2, numpy as np, tiktoken
+from config import settings
+from openai import OpenAI
+from memory.graph_memory import GraphMemory
 
-# Add config + memory paths
-sys.path.append("/root/projects/t1-brain/config")
-sys.path.append("/root/projects/t1-brain/memory")
+# 📂 Logging
+log_dir = "/root/projects/t1-brain/logs/"
+os.makedirs(log_dir, exist_ok=True)
 
-from settings import OPENAI_API_KEY, PG_HOST, PG_DATABASE, PG_USER, PG_PASSWORD
-from graph_memory import GraphMemory
+log_file = os.path.join(log_dir, "session_memory.log")
+token_log_file = os.path.join(log_dir, "token_usage.log")
 
-# ✅ Named logger setup
-LOG_DIR = "/root/projects/t1-brain/logs"
-os.makedirs(LOG_DIR, exist_ok=True)
-log_file = os.path.join(LOG_DIR, "session_memory.log")
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[logging.FileHandler(log_file, mode='a'), logging.StreamHandler()])
+session_logger = logging.getLogger(__name__)
 
-session_logger = logging.getLogger("session_memory_logger")
-session_logger.setLevel(logging.INFO)
+token_logger = logging.getLogger("token_logger")
+token_handler = logging.FileHandler(token_log_file, mode='a')
+token_handler.setFormatter(logging.Formatter("%(asctime)s - %(message)s"))
+token_logger.addHandler(token_handler)
+token_logger.setLevel(logging.INFO)
 
-if not session_logger.handlers:
-    file_handler = logging.FileHandler(log_file)
-    file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
-    session_logger.addHandler(file_handler)
+# 🔢 Tokenizer
+encoder = tiktoken.encoding_for_model("text-embedding-ada-002")
 
-    stream_handler = logging.StreamHandler()
-    stream_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
-    session_logger.addHandler(stream_handler)
+def chunk_by_tokens(text, max_tokens=300):
+    words, chunks, current = text.split(), [], []
+    for word in words:
+        current.append(word)
+        if len(encoder.encode(" ".join(current))) >= max_tokens:
+            chunks.append(" ".join(current)); current = []
+    if current: chunks.append(" ".join(current))
+    return chunks
 
-# ✅ OpenAI Key
-openai.api_key = OPENAI_API_KEY
 
 class PersistentSessionMemory:
-    def __init__(self, redis_host="localhost", redis_port=6379, redis_db=0, ttl=1800):
-        self.ttl = ttl
+    def __init__(self):
+        self.ttl = 86400
+        self.pg_conn, self.pg_cursor = None, None
+        self.redis_client = redis.StrictRedis(host="localhost", port=6379, decode_responses=True)
         self.graph_memory = GraphMemory()
-
-        try:
-            self.redis_client = redis.StrictRedis(
-                host=redis_host, port=redis_port, db=redis_db, decode_responses=True
-            )
-            self.redis_client.ping()
-            session_logger.info("✅ Redis connection established.")
-        except redis.ConnectionError:
-            session_logger.error("❌ Redis connection failed.")
-            self.redis_client = None
-
-        self.connect_to_db()
+        self.client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
     def connect_to_db(self):
-        try:
+        if not self.pg_conn or self.pg_conn.closed:
             self.pg_conn = psycopg2.connect(
-                host=PG_HOST, database=PG_DATABASE, user=PG_USER, password=PG_PASSWORD
-            )
+                host=settings.PG_HOST, database=settings.PG_DATABASE,
+                user=settings.PG_USER, password=settings.PG_PASSWORD)
             self.pg_cursor = self.pg_conn.cursor()
-            session_logger.info("✅ PostgreSQL connection established.")
-        except psycopg2.OperationalError as e:
-            session_logger.error(f"❌ PostgreSQL Connection Error: {e}")
-            self.pg_conn = None
 
-    def generate_embedding(self, query):
+    def generate_embedding(self, text):
         try:
-            response = openai.embeddings.create(
-                model="text-embedding-ada-002", input=[query]
-            )
-            embedding = response.data[0].embedding
-            if len(embedding) != 1536:
-                raise ValueError("Embedding dimension mismatch.")
-            return embedding
+            response = self.client.embeddings.create(model="text-embedding-ada-002", input=text)
+            usage = getattr(response, 'usage', None)
+            if usage:
+                token_logger.info(f"embedding | tokens={usage.total_tokens} | model=text-embedding-ada-002")
+            return response.data[0].embedding
         except Exception as e:
             session_logger.error(f"❌ Embedding error: {e}")
-            return [0.0] * 1536
+            return np.zeros(1536).tolist()
 
     def store_memory(self, session_id, query, response, memory_type="semantic", sentiment="neutral"):
         self.connect_to_db()
-
         try:
             session_key = f"session:{session_id}"
             if not self.redis_client.exists(session_key):
                 self.redis_client.setex(session_key, self.ttl, json.dumps({"session_id": session_id}))
                 session_logger.info(f"✅ New session key: {session_id}")
 
-            memory_data = json.dumps({
-                "query": query, "response": response, "timestamp": time.time(),
-                "memory_type": memory_type, "sentiment": sentiment
-            })
-            self.redis_client.rpush(f"memory:{session_id}", memory_data)
-            self.redis_client.expire(f"memory:{session_id}", self.ttl)
-        except Exception as e:
-            session_logger.error(f"❌ Redis error: {e}")
+            chunks = chunk_by_tokens(query) if len(encoder.encode(query)) > 400 else [query]
+            for i, chunk in enumerate(chunks):
+                chunk_id = f"{session_id}_chunk_{i+1}"
+                memory_data = json.dumps({
+                    "query": chunk, "response": response, "timestamp": time.time(),
+                    "memory_type": memory_type, "sentiment": sentiment, "chunk_id": chunk_id
+                })
+                self.redis_client.rpush(f"memory:{session_id}", memory_data)
+                self.redis_client.expire(f"memory:{session_id}", self.ttl)
 
-        try:
-            embedding = self.generate_embedding(query)
-            embedding_str = "[" + ",".join(map(str, embedding)) + "]"
-            self.pg_cursor.execute(
-                """
-                INSERT INTO embeddings (session_id, query, response, embedding, memory_type, sentiment, created_at)
-                VALUES (%s, %s, %s, %s, %s, %s, NOW())
-                """,
-                (session_id, query, response, embedding_str, memory_type, sentiment)
-            )
-            self.pg_conn.commit()
-        except Exception as e:
-            session_logger.error(f"❌ PostgreSQL error: {e}")
-            return {"status": "error", "message": "PostgreSQL insert failed"}
+                embedding = self.generate_embedding(chunk)
+                embedding_str = "[" + ",".join(map(str, embedding)) + "]"
+                self.pg_cursor.execute(
+                    """INSERT INTO embeddings (session_id, query, response, embedding, memory_type, sentiment, created_at)
+                    VALUES (%s, %s, %s, %s, %s, %s, NOW())""",
+                    (session_id, chunk, response, embedding_str, memory_type, sentiment)
+                )
+                self.pg_conn.commit()
 
-        try:
             self.graph_memory.store_graph_memory(session_id, query, response, memory_type, sentiment)
+
         except Exception as e:
-            session_logger.error(f"❌ GraphMemory error: {e}")
+            session_logger.error(f"❌ Store error: {e}")
+            return {"status": "error", "message": "Memory store failed"}
 
-        return {"status": "stored", "message": "Memory stored in Redis, Postgres and Graph"}
+        return {"status": "stored", "message": f"Memory stored in {len(chunks)} chunk(s)."}
 
-    def retrieve_memory(self, session_id, query=None):
+    def retrieve_memory(self, session_id, query):
         try:
             key = f"memory:{session_id}"
-            if not self.redis_client.exists(key):
-                session_logger.info(f"ℹ️ No session found: {session_id}")
-                return []
-
-            entries = self.redis_client.lrange(key, 0, -1)
-            parsed = [json.loads(e) for e in entries]
-
-            return [p for p in parsed if p["query"] == query] if query else parsed
+            if self.redis_client.exists(key):
+                return [json.loads(m) for m in self.redis_client.lrange(key, 0, -1)]
+            return []
         except Exception as e:
             session_logger.error(f"❌ Retrieval error: {e}")
             return []
 
     def delete_memory(self, session_id, query):
-        self.connect_to_db()
         try:
-            self.pg_cursor.execute(
-                "DELETE FROM embeddings WHERE session_id = %s AND query = %s",
-                (session_id, query)
-            )
-            self.pg_conn.commit()
             self.redis_client.delete(f"memory:{session_id}")
-            return {"status": "deleted", "message": "Deleted from Redis and Postgres"}
+            self.pg_cursor.execute("DELETE FROM embeddings WHERE session_id = %s", (session_id,))
+            self.pg_conn.commit()
+            return {"status": "deleted", "message": "Session memory deleted."}
         except Exception as e:
-            session_logger.error(f"❌ Delete error: {e}")
-            return {"status": "error", "message": "Delete failed"}
+            session_logger.error(f"❌ Deletion error: {e}")
+            return {"status": "error", "message": "Memory deletion failed"}
 
-    def find_similar_queries(self, input_query, min_similarity=0.8):
+    def find_similar_queries(self, query, top_k=3):
         try:
-            embedding = self.generate_embedding(input_query)
+            self.connect_to_db()
+            embedding = self.generate_embedding(query)
             embedding_str = "[" + ",".join(map(str, embedding)) + "]"
-
             self.pg_cursor.execute(
-                """
-                SELECT session_id, query, response,
-                       (embedding <=> %s::vector) AS similarity
-                FROM embeddings
-                WHERE (embedding <=> %s::vector) <= %s
-                ORDER BY similarity ASC
-                LIMIT 5
-                """,
-                (embedding_str, embedding_str, 1 - min_similarity)
+                """SELECT session_id, query, response, 1 - (embedding <=> %s) AS similarity
+                   FROM embeddings ORDER BY embedding <=> %s LIMIT %s""",
+                (embedding_str, embedding_str, top_k)
             )
-
-            rows = self.pg_cursor.fetchall()
-            return [{"session_id": r[0], "query": r[1], "response": r[2], "similarity": 1 - r[3]} for r in rows]
+            results = self.pg_cursor.fetchall()
+            return [{"session_id": r[0], "query": r[1], "response": r[2], "similarity": float(r[3])} for r in results]
         except Exception as e:
             session_logger.error(f"❌ Similarity search error: {e}")
             return []

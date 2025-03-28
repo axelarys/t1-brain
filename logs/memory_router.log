@@ -13,3 +13,435 @@
 2025-03-27 22:59:24,974 - INFO - ✅ Redis connection established.
 2025-03-27 22:59:24,986 - INFO - ✅ PostgreSQL connection established.
 2025-03-27 22:59:24,987 - INFO - ✅ Redis connection established.
+2025-03-28 10:31:51,281 - INFO - 🚀 MemoryRouter initialized.
+2025-03-28 10:31:51,281 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:31:51,282 - INFO - ✅ Redis connection established.
+2025-03-28 10:31:51,292 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:31:51,336 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:31:51,343 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:31:52,270 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:31:52,270 - INFO - ✅ Redis connection established.
+2025-03-28 10:31:52,285 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:31:52,326 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:31:52,332 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:31:52,413 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:31:52,414 - INFO - ✅ Redis connection established.
+2025-03-28 10:31:52,429 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:31:52,430 - INFO - ✅ Redis connection established.
+2025-03-28 10:34:03,971 - INFO - 🟢 Received input: session_id=test_gpt_01, query=Remember that my launch deadline is April 10 and it's critical.
+2025-03-28 10:34:06,389 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-28 10:34:07,469 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 10:34:10,665 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-28 10:34:10,672 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "setting_reminder",
+  "emotion": "stress",
+  "topic": "project_deadline",
+  "priority": "high",
+  "lifespan": "until_april_10",
+  "storage_target": "update_logic"
+}
+2025-03-28 10:34:12,291 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-28 10:34:12,295 - INFO - ✅ Agent responded: {'status': 'success', 'response': '{\'input\': "[test_gpt_01] Remember that my launch deadline is April 10 and it\'s critical.", \'output\': "I\'ve made a note of your launch deadline. It\'s set for April 10 and I understand it\'s critical. I\'m here to help you stay on track."}'}
+2025-03-28 10:38:21,065 - INFO - 🟢 Received input: session_id=test_gpt_02, query=Store this: My mentor is Dr. Rao and I trust his advice deeply.
+2025-03-28 10:38:22,841 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-28 10:38:23,601 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 10:38:25,517 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-28 10:38:25,518 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "feedback",
+  "emotion": "trust",
+  "topic": "mentor",
+  "priority": "medium",
+  "lifespan": "long",
+  "storage_target": "vector"
+}
+2025-03-28 10:38:25,543 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:38:25,544 - INFO - ✅ New session key: test_gpt_02
+2025-03-28 10:38:26,366 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 10:38:26,378 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-03-28 10:38:26,490 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-03-28 10:38:28,619 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-28 10:38:28,625 - INFO - ✅ Agent responded: {'status': 'success', 'response': "{'input': '[test_gpt_02] Store this: My mentor is Dr. Rao and I trust his advice deeply.', 'output': 'I have successfully stored the information that your mentor is Dr. Rao and you deeply trust his advice. If you need to recall this information or anything related to it, feel free to ask.'}"}
+2025-03-28 10:43:13,817 - INFO - 🚀 MemoryRouter initialized.
+2025-03-28 10:43:13,817 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:43:13,818 - INFO - ✅ Redis connection established.
+2025-03-28 10:43:13,830 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:13,873 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:13,879 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:43:14,797 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:43:14,798 - INFO - ✅ Redis connection established.
+2025-03-28 10:43:14,812 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:14,852 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:14,858 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:43:14,892 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-03-28 10:43:14,937 - INFO - ✅ GPT-4 LLM initialized.
+2025-03-28 10:43:14,937 - INFO - 🚀 Memory agent initialized successfully.
+2025-03-28 10:43:14,939 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:43:14,940 - INFO - ✅ Redis connection established.
+2025-03-28 10:43:14,954 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:14,995 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:15,000 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:43:15,004 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:43:15,004 - INFO - ✅ Redis connection established.
+2025-03-28 10:43:15,023 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:15,025 - INFO - ✅ Redis connection established.
+2025-03-28 10:43:39,583 - INFO - 🚀 MemoryRouter initialized.
+2025-03-28 10:43:39,583 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:43:39,584 - INFO - ✅ Redis connection established.
+2025-03-28 10:43:39,596 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:39,643 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:39,649 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:43:40,557 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:43:40,557 - INFO - ✅ Redis connection established.
+2025-03-28 10:43:40,572 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:40,612 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:40,618 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:43:40,653 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-03-28 10:43:40,698 - INFO - ✅ GPT-4 LLM initialized.
+2025-03-28 10:43:40,698 - INFO - 🚀 Memory agent initialized successfully.
+2025-03-28 10:43:40,700 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:43:40,701 - INFO - ✅ Redis connection established.
+2025-03-28 10:43:40,715 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:40,755 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:40,761 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:43:40,765 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:43:40,766 - INFO - ✅ Redis connection established.
+2025-03-28 10:43:40,785 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:43:40,786 - INFO - ✅ Redis connection established.
+2025-03-28 10:47:08,515 - INFO - 🚀 MemoryRouter initialized.
+2025-03-28 10:47:08,515 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:47:08,517 - INFO - ✅ Redis connection established.
+2025-03-28 10:47:08,526 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:08,570 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:08,576 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:47:09,507 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:47:09,508 - INFO - ✅ Redis connection established.
+2025-03-28 10:47:09,523 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:09,566 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:09,572 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:47:09,607 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-03-28 10:47:09,652 - INFO - ✅ GPT-4 LLM initialized.
+2025-03-28 10:47:09,653 - INFO - 🚀 Memory agent initialized successfully.
+2025-03-28 10:47:09,654 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:47:09,655 - INFO - ✅ Redis connection established.
+2025-03-28 10:47:09,670 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:09,710 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:09,716 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:47:09,721 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:47:09,722 - INFO - ✅ Redis connection established.
+2025-03-28 10:47:09,739 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:09,741 - INFO - ✅ Redis connection established.
+2025-03-28 10:47:20,135 - INFO - 🚀 MemoryRouter initialized.
+2025-03-28 10:47:20,135 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:47:20,137 - INFO - ✅ Redis connection established.
+2025-03-28 10:47:20,147 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:20,192 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:20,199 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:47:21,119 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:47:21,119 - INFO - ✅ Redis connection established.
+2025-03-28 10:47:21,134 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:21,174 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:21,181 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:47:21,215 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-03-28 10:47:21,260 - INFO - ✅ GPT-4 LLM initialized.
+2025-03-28 10:47:21,261 - INFO - 🚀 Memory agent initialized successfully.
+2025-03-28 10:47:21,262 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:47:21,263 - INFO - ✅ Redis connection established.
+2025-03-28 10:47:21,278 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:21,319 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:21,325 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:47:21,328 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:47:21,329 - INFO - ✅ Redis connection established.
+2025-03-28 10:47:21,346 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:47:21,347 - INFO - ✅ Redis connection established.
+2025-03-28 10:47:54,506 - ERROR - ❌ route_memory_tool failed
+Traceback (most recent call last):
+  File "/root/projects/t1-brain/api/main.py", line 95, in test_route_memory_tool
+    result = route_memory(request.session_id, request.user_input)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/projects/t1-brain/brain/lib/python3.12/site-packages/langchain_core/_api/deprecation.py", line 181, in warning_emitting_wrapper
+    return wrapped(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/projects/t1-brain/brain/lib/python3.12/site-packages/langchain_core/tools/base.py", line 888, in __call__
+    return self.run(tool_input, callbacks=callbacks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/projects/t1-brain/brain/lib/python3.12/site-packages/langchain_core/tools/base.py", line 694, in run
+    callback_manager = CallbackManager.configure(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/projects/t1-brain/brain/lib/python3.12/site-packages/langchain_core/callbacks/manager.py", line 1564, in configure
+    return _configure(
+           ^^^^^^^^^^^
+  File "/root/projects/t1-brain/brain/lib/python3.12/site-packages/langchain_core/callbacks/manager.py", line 2292, in _configure
+    parent_run_id_ = inheritable_callbacks.parent_run_id
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'parent_run_id'
+2025-03-28 10:50:45,582 - INFO - 🚀 MemoryRouter initialized.
+2025-03-28 10:50:45,583 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:50:45,584 - INFO - ✅ Redis connection established.
+2025-03-28 10:50:45,595 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:45,640 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:45,644 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:50:46,559 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:50:46,560 - INFO - ✅ Redis connection established.
+2025-03-28 10:50:46,574 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:46,614 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:46,620 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:50:46,654 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-03-28 10:50:46,699 - INFO - ✅ GPT-4 LLM initialized.
+2025-03-28 10:50:46,700 - INFO - 🚀 Memory agent initialized successfully.
+2025-03-28 10:50:46,702 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:50:46,702 - INFO - ✅ Redis connection established.
+2025-03-28 10:50:46,718 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:46,718 - INFO - ✅ Redis connection established.
+2025-03-28 10:50:50,697 - INFO - 🚀 MemoryRouter initialized.
+2025-03-28 10:50:50,698 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:50:50,699 - INFO - ✅ Redis connection established.
+2025-03-28 10:50:50,709 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:50,754 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:50,761 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:50:51,679 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:50:51,680 - INFO - ✅ Redis connection established.
+2025-03-28 10:50:51,694 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:51,735 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:51,741 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:50:51,775 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-03-28 10:50:51,820 - INFO - ✅ GPT-4 LLM initialized.
+2025-03-28 10:50:51,821 - INFO - 🚀 Memory agent initialized successfully.
+2025-03-28 10:50:51,822 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:50:51,823 - INFO - ✅ Redis connection established.
+2025-03-28 10:50:51,838 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:51,839 - INFO - ✅ Redis connection established.
+2025-03-28 10:50:56,310 - INFO - 🚀 MemoryRouter initialized.
+2025-03-28 10:50:56,310 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:50:56,312 - INFO - ✅ Redis connection established.
+2025-03-28 10:50:56,323 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:56,371 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:56,377 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:50:57,308 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:50:57,309 - INFO - ✅ Redis connection established.
+2025-03-28 10:50:57,325 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:57,368 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:57,373 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:50:57,408 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-03-28 10:50:57,453 - INFO - ✅ GPT-4 LLM initialized.
+2025-03-28 10:50:57,454 - INFO - 🚀 Memory agent initialized successfully.
+2025-03-28 10:50:57,455 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:50:57,456 - INFO - ✅ Redis connection established.
+2025-03-28 10:50:57,470 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:50:57,471 - INFO - ✅ Redis connection established.
+2025-03-28 10:51:15,429 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:51:15,431 - INFO - ✅ Redis connection established.
+2025-03-28 10:51:15,455 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:51:15,506 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:51:15,512 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:51:15,927 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 10:51:18,610 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-28 10:51:18,618 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "store_reminder",
+  "emotion": "serious",
+  "topic": "Project Phoenix",
+  "priority": "high",
+  "lifespan": "long_term",
+  "storage_target": "vector"
+}
+2025-03-28 10:51:18,644 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:51:18,645 - INFO - ✅ New session key: tooltest_01
+2025-03-28 10:51:19,076 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 10:51:19,088 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-03-28 10:51:19,115 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-03-28 10:51:19,133 - INFO - 🔌 Connections closed.
+2025-03-28 10:53:57,587 - INFO - 🚀 MemoryRouter initialized.
+2025-03-28 10:53:57,587 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:53:57,589 - INFO - ✅ Redis connection established.
+2025-03-28 10:53:57,600 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:53:57,642 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:53:57,660 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:53:58,571 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:53:58,572 - INFO - ✅ Redis connection established.
+2025-03-28 10:53:58,586 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:53:58,627 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:53:58,633 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:53:58,667 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-03-28 10:53:58,712 - INFO - ✅ GPT-4 LLM initialized.
+2025-03-28 10:53:58,713 - INFO - 🚀 Memory agent initialized successfully.
+2025-03-28 10:53:58,714 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:53:58,715 - INFO - ✅ Redis connection established.
+2025-03-28 10:53:58,730 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:53:58,730 - INFO - ✅ Redis connection established.
+2025-03-28 10:59:33,201 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:59:33,202 - INFO - ✅ Redis connection established.
+2025-03-28 10:59:33,227 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:59:33,281 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:59:33,288 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:59:33,983 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 10:59:37,246 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-28 10:59:37,255 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "Information Recall",
+  "emotion": "Neutral",
+  "topic": {
+    "object": "Project Phoenix",
+    "relation": "work",
+    "subject": "User",
+    "subtopic":{
+      "object": "Alex",
+      "relation": "project manager"
+    }
+  },
+  "priority": "High",
+  "lifespan": "Long term",
+  "storage_target": "graph"
+}
+2025-03-28 10:59:37,279 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:59:37,280 - INFO - ✅ New session key: reflect_01
+2025-03-28 10:59:37,518 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 10:59:37,530 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-03-28 10:59:37,614 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-03-28 10:59:37,627 - INFO - 🔌 Connections closed.
+2025-03-28 10:59:44,560 - INFO - ✅ Connected to Neo4j.
+2025-03-28 10:59:44,561 - INFO - ✅ Redis connection established.
+2025-03-28 10:59:44,586 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:59:44,640 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 10:59:44,648 - INFO - ✅ Neo4j connection established.
+2025-03-28 10:59:44,982 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 10:59:47,464 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-28 10:59:47,466 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "update",
+  "emotion": "neutral",
+  "topic": "project management",
+  "priority": "high",
+  "lifespan": "permanent",
+  "storage_target": "update_logic"
+}
+2025-03-28 10:59:47,467 - INFO - 🔌 Connections closed.
+2025-03-28 11:03:48,943 - INFO - ✅ Connected to Neo4j.
+2025-03-28 11:03:48,945 - INFO - ✅ Redis connection established.
+2025-03-28 11:03:48,969 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:03:49,023 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:03:49,030 - INFO - ✅ Neo4j connection established.
+2025-03-28 11:03:49,772 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 11:03:52,100 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-28 11:03:52,103 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "store_information",
+  "emotion": "neutral",
+  "topic": "project_management",
+  "priority": "high",
+  "lifespan": "long_term",
+  "storage_target": "vector"
+}
+2025-03-28 11:03:52,128 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:03:52,696 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 11:03:52,708 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-03-28 11:03:52,732 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-03-28 11:03:52,744 - INFO - 🔌 Connections closed.
+2025-03-28 11:03:57,531 - INFO - ✅ Connected to Neo4j.
+2025-03-28 11:03:57,533 - INFO - ✅ Redis connection established.
+2025-03-28 11:03:57,558 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:03:57,611 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:03:57,618 - INFO - ✅ Neo4j connection established.
+2025-03-28 11:03:58,346 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 11:04:00,505 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-28 11:04:00,507 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "update",
+  "emotion": "neutral",
+  "topic": "project management",
+  "priority": "high",
+  "lifespan": "permanent",
+  "storage_target": "update_logic"
+}
+2025-03-28 11:04:00,508 - INFO - 🔌 Connections closed.
+2025-03-28 11:05:57,883 - INFO - 🚀 MemoryRouter initialized.
+2025-03-28 11:05:57,884 - INFO - ✅ Connected to Neo4j.
+2025-03-28 11:05:57,885 - INFO - ✅ Redis connection established.
+2025-03-28 11:05:57,894 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:05:57,939 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:05:57,946 - INFO - ✅ Neo4j connection established.
+2025-03-28 11:05:58,852 - INFO - ✅ Connected to Neo4j.
+2025-03-28 11:05:58,853 - INFO - ✅ Redis connection established.
+2025-03-28 11:05:58,867 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:05:58,909 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:05:58,915 - INFO - ✅ Neo4j connection established.
+2025-03-28 11:05:58,949 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-03-28 11:05:58,994 - INFO - ✅ GPT-4 LLM initialized.
+2025-03-28 11:05:58,995 - INFO - 🚀 Memory agent initialized successfully.
+2025-03-28 11:05:58,996 - INFO - ✅ Connected to Neo4j.
+2025-03-28 11:05:58,997 - INFO - ✅ Redis connection established.
+2025-03-28 11:05:59,012 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:05:59,013 - INFO - ✅ Redis connection established.
+2025-03-28 11:06:12,740 - INFO - ✅ Connected to Neo4j.
+2025-03-28 11:06:12,742 - INFO - ✅ Redis connection established.
+2025-03-28 11:06:12,766 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:06:12,820 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:06:12,827 - INFO - ✅ Neo4j connection established.
+2025-03-28 11:06:13,476 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 11:06:15,717 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-28 11:06:15,726 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "information_provision",
+  "emotion": "neutral",
+  "topic": "project_management",
+  "priority": "high",
+  "lifespan": "long",
+  "storage_target": "update_logic"
+}
+2025-03-28 11:06:16,217 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 11:06:16,388 - INFO - 🔌 Connections closed.
+2025-03-28 11:06:23,115 - INFO - ✅ Connected to Neo4j.
+2025-03-28 11:06:23,117 - INFO - ✅ Redis connection established.
+2025-03-28 11:06:23,141 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:06:23,191 - INFO - ✅ PostgreSQL connection established.
+2025-03-28 11:06:23,198 - INFO - ✅ Neo4j connection established.
+2025-03-28 11:06:23,486 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 11:06:25,749 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-28 11:06:25,751 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "Update Information",
+  "emotion": "Neutral",
+  "topic": "Project Management",
+  "priority": "High",
+  "lifespan": "Long Term",
+  "storage_target": "update_logic"
+}
+2025-03-28 11:06:26,457 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-28 11:06:26,467 - INFO - 🔌 Connections closed.

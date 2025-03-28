@@ -1,66 +1,53 @@
 import sys
+import os
 import logging
 import redis
-import psycopg2
-from fastapi import FastAPI, Depends, HTTPException, Header, Request
+from fastapi import FastAPI, Depends, HTTPException, Request
 from pydantic import BaseModel
-from typing import Optional, Dict
+from typing import Optional
 
-# Ensure Python can locate settings.py
-sys.path.append("/root/t1-brain/config")
-from settings import PG_HOST, PG_DATABASE, PG_USER, PG_PASSWORD
+# 🔧 Project Path Setup
+sys.path.append("/root/projects/t1-brain")
 
-# Ensure Python can locate session_memory.py
-sys.path.append("/root/t1-brain/memory")
-from session_memory import HybridSessionMemory
+# ✅ Imports
+from config.settings import PG_HOST, PG_DATABASE, PG_USER, PG_PASSWORD
+from memory.session_memory import PersistentSessionMemory
+from api.routes import memory   # /memory/route
+from api.routes import agent    # /agent/run
+from memory.memory_router import MemoryRouter  # 🔁 Direct memory routing logic
 
-# ✅ Setup Logging (API Request Monitoring)
+# 📂 Logging Setup
+LOG_DIR = "/root/projects/t1-brain/logs"
+os.makedirs(LOG_DIR, exist_ok=True)
 logging.basicConfig(
-    filename="/root/t1-brain/logs/api_requests.log",
+    filename=os.path.join(LOG_DIR, "session_memory.log"),
     level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    force=True  # ✅ Ensure existing log handlers are replaced
+    format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# ✅ Initialize FastAPI
+# 🚀 FastAPI App
 app = FastAPI()
 
-# ✅ Initialize Hybrid Memory Handler
-memory_handler = HybridSessionMemory()
+# 🧠 Memory Layer
+memory_handler = PersistentSessionMemory()
 
-# ✅ Initialize Redis Connection
+# 🔗 Redis Connection
 try:
     redis_client = redis.StrictRedis(host="localhost", port=6379, decode_responses=True)
+    redis_client.ping()
     logging.info("✅ Redis connection established.")
 except Exception as e:
     logging.error(f"❌ Redis connection failed: {str(e)}")
     raise
 
-# ✅ API Key Authentication Function
+# 🔐 API Key Dependency
 def verify_api_key(request: Request):
-    """Validate API Key from headers"""
-    api_key = request.headers.get("X-API-KEY") or request.headers.get("x-api-key")
-
-    if not api_key:
-        logging.warning("⚠ API Key missing in request headers.")
-        raise HTTPException(status_code=401, detail="API Key missing")
-
-    logging.info(f"🔑 API Key Verified: {api_key}")
+    api_key = request.headers.get("X-API-KEY")
+    if not api_key or api_key != "WsRocks1234":
+        raise HTTPException(status_code=401, detail="Invalid or missing API Key")
     return api_key
 
-# ✅ API Middleware for Logging Requests
-@app.middleware("http")
-async def log_requests(request: Request, call_next):
-    """Log incoming API requests for security monitoring."""
-    client_ip = request.client.host
-    request_info = f"🔍 API Request - IP: {client_ip}, Path: {request.url.path}, Method: {request.method}"
-    
-    logging.info(request_info)  # ✅ Log the request
-    
-    response = await call_next(request)
-    return response
-
-# ✅ Memory API Endpoints - Secured with API Key Authentication
+# 📦 Pydantic Models
 class MemoryRequest(BaseModel):
     session_id: str
     query: str
@@ -68,87 +55,55 @@ class MemoryRequest(BaseModel):
     memory_type: Optional[str] = "semantic"
     sentiment: Optional[str] = "neutral"
 
-class MemoryRetrieveRequest(BaseModel):
-    session_id: str
-    query: str
-    filters: Optional[Dict] = {}
-
 class MemoryDeleteRequest(BaseModel):
     session_id: str
     query: str
 
+class ToolMemoryRequest(BaseModel):  # Used only for internal routing test (optional)
+    session_id: str
+    user_input: str
+
+# 🧠 Core API Endpoints
 @app.post("/memory/store")
 async def api_store_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
-    """Store memory securely."""
-    return memory_handler.store_memory(request.session_id, request.query, request.response, request.memory_type, request.sentiment)
+    return memory_handler.store_memory(
+        request.session_id, request.query, request.response, request.memory_type, request.sentiment
+    )
 
 @app.post("/memory/retrieve")
-async def api_retrieve_memory(request: MemoryRetrieveRequest, api_key: str = Depends(verify_api_key)):
-    """Retrieve stored memory."""
-    memory = memory_handler.retrieve_memory(request.session_id, request.query, request.filters)
-    return {"status": "retrieved", "memory": memory} if memory else {"status": "not_found"}
-
-@app.post("/memory/update")
-async def api_update_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
-    """Update existing memory without duplication."""
-    return memory_handler.update_memory(request.session_id, request.query, request.response, request.memory_type, request.sentiment)
-
-@app.get("/memory/topics")
-async def api_list_memory_topics(session_id: str, api_key: str = Depends(verify_api_key)):
-    """List memory topics for a session."""
-    topics = memory_handler.list_topics(session_id)
-    return {"status": "retrieved", "topics": topics} if topics else {"status": "not_found"}
-
-@app.post("/memory/session")
-async def api_manage_session(api_key: str = Depends(verify_api_key)):
-    """Manage session rehydration and expiration."""
-    return memory_handler.session_management(api_key)
+async def api_retrieve_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
+    return {
+        "status": "retrieved",
+        "memory": memory_handler.retrieve_memory(request.session_id, request.query)
+    }
 
 @app.delete("/memory/delete")
 async def api_delete_memory(request: MemoryDeleteRequest, api_key: str = Depends(verify_api_key)):
-    """Delete stored memory."""
     return memory_handler.delete_memory(request.session_id, request.query)
 
-# ✅ Health Check API
 @app.get("/health")
 async def health_check():
-    """Check API health status."""
-    redis_status = "✅ Redis Connected" if redis_client.ping() else "❌ Redis Not Connected"
-    try:
-        conn = psycopg2.connect(host=PG_HOST, database=PG_DATABASE, user=PG_USER, password=PG_PASSWORD)
-        conn.close()
-        db_status = "✅ PostgreSQL Connected"
-    except:
-        db_status = "❌ PostgreSQL Not Connected"
-    return {"redis": redis_status, "database": db_status}
+    return {
+        "status": "healthy",
+        "redis": "connected" if redis_client.ping() else "disconnected"
+    }
 
-# ✅ Monitor Redis Sessions
-@app.get("/monitor/sessions")
-def monitor_sessions():
-    """Monitor active Redis sessions."""
+# 🧪 Internal Debug Endpoint (can remove for final prod)
+@app.post("/tool/memory")
+async def test_route_memory_tool(request: ToolMemoryRequest):
     try:
-        sessions = list(redis_client.keys("session:*"))
-        return {"active_sessions": sessions}
+        router = MemoryRouter()
+        enriched = router.enrich_and_classify(request.session_id, request.user_input)
+        result = router.execute_action(
+            session_id=request.session_id,
+            user_input=request.user_input,
+            enriched=enriched
+        )
+        return {"status": "success", "enriched": enriched, "result": result}
     except Exception as e:
-        logging.error(f"❌ Error retrieving active sessions: {e}")
-        return {"error": "Could not retrieve session data"}
+        logging.exception("❌ route_memory_tool direct call failed")
+        return {"status": "error", "message": str(e)}
 
-# ✅ Optimize PostgreSQL Query Performance
-@app.get("/optimize/postgres")
-def optimize_postgresql_queries():
-    """Optimize PostgreSQL queries by adding indexes."""
-    memory_handler.connect_to_db()
-    try:
-        memory_handler.pg_cursor.execute("CREATE INDEX IF NOT EXISTS idx_embeddings_session_id ON embeddings(session_id);")
-        memory_handler.pg_cursor.execute("CREATE INDEX IF NOT EXISTS idx_embeddings_query ON embeddings(query);")
-        memory_handler.pg_conn.commit()
-        logging.info("✅ PostgreSQL indexes optimized for faster retrieval.")
-        return {"status": "success", "message": "PostgreSQL indexes created successfully."}
-    except Exception as e:
-        logging.error(f"❌ PostgreSQL Optimization Error: {e}")
-        return {"status": "error", "message": "Database optimization failed."}
-
-@app.get("/secure-endpoint")
-def secure_route(api_key: str = Depends(verify_api_key)):
-    """Test API Key authentication"""
-    return {"message": "You have access to this endpoint!"}
+# 🔗 Register Routes
+app.include_router(memory.router)
+app.include_router(agent.router)

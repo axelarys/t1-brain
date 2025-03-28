@@ -6,16 +6,17 @@ from fastapi import FastAPI, Depends, HTTPException, Request
 from pydantic import BaseModel
 from typing import Optional
 
-# 🔧 Force project root into path
+# 🔧 Project Path Setup
 sys.path.append("/root/projects/t1-brain")
 
-# ✅ Correct imports from project root
+# ✅ Imports
 from config.settings import PG_HOST, PG_DATABASE, PG_USER, PG_PASSWORD
 from memory.session_memory import PersistentSessionMemory
 from api.routes import memory   # /memory/route
 from api.routes import agent    # /agent/run
+from memory.memory_router import MemoryRouter  # 🔁 Direct memory routing logic
 
-# 📂 Logging setup
+# 📂 Logging Setup
 LOG_DIR = "/root/projects/t1-brain/logs"
 os.makedirs(LOG_DIR, exist_ok=True)
 logging.basicConfig(
@@ -24,10 +25,10 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# 🚀 FastAPI App Init
+# 🚀 FastAPI App
 app = FastAPI()
 
-# 🧠 Memory Handler
+# 🧠 Memory Layer
 memory_handler = PersistentSessionMemory()
 
 # 🔗 Redis Connection
@@ -42,10 +43,9 @@ except Exception as e:
 # 🔐 API Key Dependency
 def verify_api_key(request: Request):
     api_key = request.headers.get("X-API-KEY")
-    if not api_key or api_key != "WsRocks1234":  # 🔐 Static API key for internal use
+    if not api_key or api_key != "WsRocks1234":
         raise HTTPException(status_code=401, detail="Invalid or missing API Key")
     return api_key
-
 
 # 📦 Pydantic Models
 class MemoryRequest(BaseModel):
@@ -59,7 +59,11 @@ class MemoryDeleteRequest(BaseModel):
     session_id: str
     query: str
 
-# 🧠 Core Endpoints
+class ToolMemoryRequest(BaseModel):  # Used only for internal routing test (optional)
+    session_id: str
+    user_input: str
+
+# 🧠 Core API Endpoints
 @app.post("/memory/store")
 async def api_store_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
     return memory_handler.store_memory(
@@ -84,6 +88,22 @@ async def health_check():
         "redis": "connected" if redis_client.ping() else "disconnected"
     }
 
-# 🧩 Register Routers
+# 🧪 Internal Debug Endpoint (can remove for final prod)
+@app.post("/tool/memory")
+async def test_route_memory_tool(request: ToolMemoryRequest):
+    try:
+        router = MemoryRouter()
+        enriched = router.enrich_and_classify(request.session_id, request.user_input)
+        result = router.execute_action(
+            session_id=request.session_id,
+            user_input=request.user_input,
+            enriched=enriched
+        )
+        return {"status": "success", "enriched": enriched, "result": result}
+    except Exception as e:
+        logging.exception("❌ route_memory_tool direct call failed")
+        return {"status": "error", "message": str(e)}
+
+# 🔗 Register Routes
 app.include_router(memory.router)
 app.include_router(agent.router)

@@ -973,3 +973,177 @@ AttributeError: 'MemoryRouter' object has no attribute '_fallback_classification
 2025-04-01 13:59:45,631 - INFO - ✅ Connected to Neo4j.
 2025-04-01 13:59:45,676 - INFO - ✅ PostgreSQL connection established.
 2025-04-01 13:59:45,682 - INFO - ✅ Neo4j connection established.
+2025-04-01 14:10:07,273 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:10:08,192 - INFO - 🚀 MemoryRouter initialized.
+2025-04-01 14:10:08,193 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:10:08,237 - INFO - ✅ PostgreSQL connection established.
+2025-04-01 14:10:08,242 - INFO - ✅ Neo4j connection established.
+2025-04-01 14:10:08,278 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-01 14:10:08,323 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-01 14:10:08,324 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-01 14:10:08,327 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:10:08,327 - INFO - ✅ Redis connection established.
+2025-04-01 14:23:43,746 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:23:44,651 - INFO - 🚀 MemoryRouter initialized.
+2025-04-01 14:23:44,651 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:23:44,695 - INFO - ✅ PostgreSQL connection established.
+2025-04-01 14:23:44,701 - INFO - ✅ Neo4j connection established.
+2025-04-01 14:23:44,735 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-01 14:23:44,781 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-01 14:23:44,782 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-01 14:23:44,784 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:23:44,785 - INFO - ✅ Redis connection established.
+2025-04-01 14:23:44,790 - INFO - 🚀 FastAPI server started
+2025-04-01 14:23:44,790 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-01 14:23:44,790 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-01 14:23:44,790 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-01 14:23:44,790 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-01 14:23:44,790 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-01 14:23:44,790 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-01 14:23:44,790 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-01 14:23:44,790 - INFO - Registered route: /health - {'GET'}
+2025-04-01 14:23:44,790 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-01 14:23:44,790 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-01 14:23:44,790 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-01 14:23:44,790 - INFO - Registered route: /memory/store_image - {'POST'}
+2025-04-01 14:23:44,790 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-01 14:23:54,409 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:23:55,316 - INFO - 🚀 MemoryRouter initialized.
+2025-04-01 14:23:55,316 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:23:55,361 - INFO - ✅ PostgreSQL connection established.
+2025-04-01 14:23:55,368 - INFO - ✅ Neo4j connection established.
+2025-04-01 14:23:55,415 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-01 14:23:55,461 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-01 14:23:55,462 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-01 14:23:55,465 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:23:55,465 - INFO - ✅ Redis connection established.
+2025-04-01 14:23:55,470 - INFO - 🚀 FastAPI server started
+2025-04-01 14:23:55,470 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-01 14:23:55,470 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-01 14:23:55,470 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-01 14:23:55,470 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-01 14:23:55,471 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-01 14:23:55,471 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-01 14:23:55,471 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-01 14:23:55,471 - INFO - Registered route: /health - {'GET'}
+2025-04-01 14:23:55,471 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-01 14:23:55,471 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-01 14:23:55,471 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-01 14:23:55,471 - INFO - Registered route: /memory/store_image - {'POST'}
+2025-04-01 14:23:55,471 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-01 14:23:58,356 - INFO - Request received: GET /debug/routes
+2025-04-01 14:23:58,356 - INFO - Client: 127.0.0.1
+2025-04-01 14:23:58,357 - INFO - Debug routes called
+2025-04-01 14:23:58,358 - INFO - Response status: 200
+2025-04-01 14:23:58,377 - INFO - Request received: GET /health
+2025-04-01 14:23:58,377 - INFO - Client: 127.0.0.1
+2025-04-01 14:23:58,377 - INFO - Health check called
+2025-04-01 14:23:58,378 - INFO - Response status: 200
+2025-04-01 14:24:47,122 - INFO - Request received: GET /health
+2025-04-01 14:24:47,122 - INFO - Client: 127.0.0.1
+2025-04-01 14:24:47,123 - INFO - Health check called
+2025-04-01 14:24:47,123 - INFO - Response status: 200
+2025-04-01 14:25:09,997 - INFO - Request received: GET /health
+2025-04-01 14:25:09,997 - INFO - Client: 127.0.0.1
+2025-04-01 14:25:09,997 - INFO - Health check called
+2025-04-01 14:25:09,998 - INFO - Response status: 200
+2025-04-01 14:25:11,045 - INFO - Request received: POST /memory/store_image
+2025-04-01 14:25:11,045 - INFO - Client: 127.0.0.1
+2025-04-01 14:25:11,049 - INFO - 📥 /memory/store_image | session: test_001
+2025-04-01 14:25:11,075 - INFO - ✅ New session key: test_001
+2025-04-01 14:25:14,949 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-01 14:25:14,961 - INFO - 🧠 Image description extracted: The image features three transparent, colored dice with white dots, floating against a multicolored striped background. The dice are red, green, and blue. Each die shows different numbers on their visible faces, and their transparency allows the background colors to be seen through them. The background is divided into vertical stripes with colors such as blue, green, yellow, and red, creating a vibrant and dynamic appearance.
+2025-04-01 14:25:14,963 - ERROR - ❌ Store error: column "hash_id" does not exist
+LINE 1: SELECT 1 FROM embeddings WHERE hash_id = 'cac154520da0ea4b35...
+                                       ^
+
+2025-04-01 14:25:14,964 - INFO - Response status: 200
+2025-04-01 14:34:39,131 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:34:40,039 - INFO - 🚀 MemoryRouter initialized.
+2025-04-01 14:34:40,039 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:34:40,085 - INFO - ✅ PostgreSQL connection established.
+2025-04-01 14:34:40,091 - INFO - ✅ Neo4j connection established.
+2025-04-01 14:34:40,126 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-01 14:34:40,172 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-01 14:34:40,173 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-01 14:34:40,176 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:34:40,176 - INFO - ✅ Redis connection established.
+2025-04-01 14:34:40,181 - INFO - 🚀 FastAPI server started
+2025-04-01 14:34:40,181 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-01 14:34:40,181 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-01 14:34:40,181 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-01 14:34:40,181 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-01 14:34:40,181 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-01 14:34:40,181 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-01 14:34:40,181 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-01 14:34:40,181 - INFO - Registered route: /health - {'GET'}
+2025-04-01 14:34:40,182 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-01 14:34:40,182 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-01 14:34:40,182 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-01 14:34:40,182 - INFO - Registered route: /memory/store_image - {'POST'}
+2025-04-01 14:34:40,182 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-01 14:35:33,106 - INFO - Request received: POST /memory/store_image
+2025-04-01 14:35:33,106 - INFO - Client: 127.0.0.1
+2025-04-01 14:35:33,110 - INFO - 📥 /memory/store_image | session: test_001
+2025-04-01 14:35:35,762 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-01 14:35:35,773 - INFO - 🧠 Image description extracted: The image features three transparent, multicolored dice floating against a vivid, blended background of blue, green, yellow, and red. Each die has visible white dots indicating numbers. The dice colors are red, blue, and green, complementing the dynamic, colorful backdrop. The overall effect is vibrant and dynamic, creating a sense of motion and energy.
+2025-04-01 14:35:36,502 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-04-01 14:35:36,503 - ERROR - ❌ Embedding error (image): Error code: 400 - {'error': {'message': 'Failed to download image from The image features three transparent, multicolored dice floating against a vivid, blended background of blue, green, yellow, and red. Each die has visible white dots indicating numbers. The dice colors are red, blue, and green, complementing the dynamic, colorful backdrop. The overall effect is vibrant and dynamic, creating a sense of motion and energy.. Image URL is invalid.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_image_url'}}
+2025-04-01 14:35:36,509 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-01 14:35:36,617 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-04-01 14:35:36,709 - INFO - Response status: 200
+2025-04-01 14:35:59,228 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:36:00,140 - INFO - 🚀 MemoryRouter initialized.
+2025-04-01 14:36:00,140 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:36:00,185 - INFO - ✅ PostgreSQL connection established.
+2025-04-01 14:36:00,203 - INFO - ✅ Neo4j connection established.
+2025-04-01 14:36:00,243 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-01 14:36:00,294 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-01 14:36:00,295 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-01 14:36:00,298 - INFO - ✅ Connected to Neo4j.
+2025-04-01 14:36:00,299 - INFO - ✅ Redis connection established.
+2025-04-01 14:36:00,304 - INFO - 🚀 FastAPI server started
+2025-04-01 14:36:00,304 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-01 14:36:00,304 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-01 14:36:00,304 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-01 14:36:00,304 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-01 14:36:00,304 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-01 14:36:00,304 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-01 14:36:00,304 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-01 14:36:00,304 - INFO - Registered route: /health - {'GET'}
+2025-04-01 14:36:00,304 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-01 14:36:00,304 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-01 14:36:00,304 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-01 14:36:00,304 - INFO - Registered route: /memory/store_image - {'POST'}
+2025-04-01 14:36:00,304 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-01 14:36:18,774 - INFO - Request received: POST /memory/store_image
+2025-04-01 14:36:18,775 - INFO - Client: 127.0.0.1
+2025-04-01 14:36:18,779 - INFO - 📥 /memory/store_image | session: test_001
+2025-04-01 14:36:24,399 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-01 14:36:24,411 - INFO - 🧠 Image description extracted: The image features three translucent dice, each a different color: blue, red, and green. The dice are scattered against a colorful background featuring stripes of blue, yellow, green, and red. Each die displays white dots, representing numbers typical of standard dice. The arrangement and orientation of the dice suggest they are in motion or levitating.
+2025-04-01 14:36:24,684 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-04-01 14:36:24,685 - ERROR - ❌ Embedding error (image): Error code: 400 - {'error': {'message': 'Failed to download image from The image features three translucent dice, each a different color: blue, red, and green. The dice are scattered against a colorful background featuring stripes of blue, yellow, green, and red. Each die displays white dots, representing numbers typical of standard dice. The arrangement and orientation of the dice suggest they are in motion or levitating.. Image URL is invalid.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_image_url'}}
+2025-04-01 14:36:24,691 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-01 14:36:24,717 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-04-01 14:36:24,737 - INFO - Response status: 200
+2025-04-01 14:46:20,680 - INFO - Request received: GET /
+2025-04-01 14:46:20,681 - INFO - Client: 205.210.31.99
+2025-04-01 14:46:20,682 - INFO - Response status: 404

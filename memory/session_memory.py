@@ -2,7 +2,7 @@ import os, json, time, redis, logging, psycopg2, numpy as np, tiktoken
 from config import settings
 from openai import OpenAI
 from memory.graph_memory import GraphMemory
-from utils.memory_utils import get_api_key, get_sha256_hash
+from utils.memory_utils import get_api_key
 
 # 📂 Logging setup
 log_dir = "/root/projects/t1-brain/logs/"
@@ -68,7 +68,7 @@ class PersistentSessionMemory:
                         ]}
                     ]
                 )
-                return np.random.rand(1536).tolist()  # Placeholder for actual future image embeddings
+                return np.random.rand(1536).tolist()  # Placeholder
             else:
                 response = client.embeddings.create(model="text-embedding-ada-002", input=content)
                 usage = getattr(response, 'usage', None)
@@ -112,10 +112,12 @@ class PersistentSessionMemory:
             input_chunks = [query] if is_image else chunk_by_tokens(query) if len(encoder.encode(query)) > 400 else [query]
 
             for i, chunk in enumerate(input_chunks):
-                hash_key = get_sha256_hash(chunk + response)
-                self.pg_cursor.execute("SELECT 1 FROM embeddings WHERE hash_id = %s LIMIT 1", (hash_key,))
+                self.pg_cursor.execute(
+                    """SELECT 1 FROM embeddings WHERE session_id = %s AND query = %s AND response = %s LIMIT 1""",
+                    (session_id, chunk, response)
+                )
                 if self.pg_cursor.fetchone():
-                    session_logger.info(f"⚠️ Duplicate skipped (hash: {hash_key})")
+                    session_logger.info(f"⚠️ Duplicate skipped (chunk: {chunk[:50]})")
                     continue
 
                 chunk_id = f"{session_id}_chunk_{i+1}"
@@ -135,9 +137,9 @@ class PersistentSessionMemory:
                 embedding_str = "[" + ",".join(map(str, embedding)) + "]"
 
                 self.pg_cursor.execute(
-                    """INSERT INTO embeddings (session_id, query, response, embedding, memory_type, sentiment, hash_id, created_at)
-                       VALUES (%s, %s, %s, %s, %s, %s, %s, NOW())""",
-                    (session_id, chunk, response, embedding_str, memory_type, sentiment, hash_key)
+                    """INSERT INTO embeddings (session_id, query, response, embedding, memory_type, sentiment, created_at)
+                       VALUES (%s, %s, %s, %s, %s, %s, NOW())""",
+                    (session_id, chunk, response, embedding_str, memory_type, sentiment)
                 )
                 self.pg_conn.commit()
 

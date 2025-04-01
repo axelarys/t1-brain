@@ -28,6 +28,15 @@ logging.basicConfig(
 # 🚀 FastAPI App
 app = FastAPI()
 
+# Middleware to log incoming requests
+@app.middleware("http")
+async def log_requests(request, call_next):
+    logging.info(f"Request received: {request.method} {request.url.path}")
+    logging.info(f"Client: {request.client.host if request.client else 'Unknown'}")
+    response = await call_next(request)
+    logging.info(f"Response status: {response.status_code}")
+    return response
+
 # 🧠 Memory Layer
 memory_handler = PersistentSessionMemory()
 
@@ -66,12 +75,14 @@ class ToolMemoryRequest(BaseModel):  # Used only for internal routing test (opti
 # 🧠 Core API Endpoints
 @app.post("/memory/store")
 async def api_store_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
+    logging.info(f"API store memory called: {request.session_id}")
     return memory_handler.store_memory(
         request.session_id, request.query, request.response, request.memory_type, request.sentiment
     )
 
 @app.post("/memory/retrieve")
 async def api_retrieve_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
+    logging.info(f"API retrieve memory called: {request.session_id}")
     return {
         "status": "retrieved",
         "memory": memory_handler.retrieve_memory(request.session_id, request.query)
@@ -79,18 +90,34 @@ async def api_retrieve_memory(request: MemoryRequest, api_key: str = Depends(ver
 
 @app.delete("/memory/delete")
 async def api_delete_memory(request: MemoryDeleteRequest, api_key: str = Depends(verify_api_key)):
+    logging.info(f"API delete memory called: {request.session_id}")
     return memory_handler.delete_memory(request.session_id, request.query)
 
 @app.get("/health")
 async def health_check():
+    logging.info("Health check called")
     return {
         "status": "healthy",
         "redis": "connected" if redis_client.ping() else "disconnected"
     }
 
+# Debug endpoint to list all registered routes
+@app.get("/debug/routes")
+async def debug_routes():
+    logging.info("Debug routes called")
+    routes = []
+    for route in app.routes:
+        routes.append({
+            "path": route.path,
+            "name": route.name,
+            "methods": route.methods
+        })
+    return {"routes": routes}
+
 # 🧪 Internal Debug Endpoint (can remove for final prod)
 @app.post("/tool/memory")
 async def test_route_memory_tool(request: ToolMemoryRequest):
+    logging.info(f"Tool memory called: {request.session_id}")
     try:
         router = MemoryRouter()
         enriched = router.enrich_and_classify(request.session_id, request.user_input)
@@ -105,5 +132,13 @@ async def test_route_memory_tool(request: ToolMemoryRequest):
         return {"status": "error", "message": str(e)}
 
 # 🔗 Register Routes
-app.include_router(memory.router)
-app.include_router(agent.router)
+app.include_router(memory.router, prefix="")  # Ensure no prefix
+app.include_router(agent.router, prefix="")   # Ensure no prefix
+
+# Startup event to log when the server starts
+@app.on_event("startup")
+async def startup_event():
+    logging.info("🚀 FastAPI server started")
+    # Print all registered routes for debugging
+    for route in app.routes:
+        logging.info(f"Registered route: {route.path} - {route.methods}")

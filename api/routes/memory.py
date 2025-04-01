@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request
 from pydantic import BaseModel
-from memory.memory_router import MemoryRouter
+from memory.session_memory import PersistentSessionMemory
 import logging
 import os
 
@@ -21,39 +21,50 @@ if not memory_logger.handlers:
     stream_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
     memory_logger.addHandler(stream_handler)
 
-# 🧩 Router & Model
+# 🧠 Router & Session Memory
 router = APIRouter()
-memory_router = MemoryRouter()
+memory_handler = PersistentSessionMemory()
 
+# 📦 Standard Memory Input Model
 class MemoryRouteRequest(BaseModel):
     session_id: str
     user_input: str
 
-@router.post("/memory/route")
-async def route_and_execute_memory(request: MemoryRouteRequest):
-    memory_logger.info(f"📥 Received route request | Session: {request.session_id} | Input: {request.user_input}")
+class MemoryStoreRequest(BaseModel):
+    session_id: str
+    query: str
+    response: str
+    sentiment: str = "neutral"
+    memory_type: str = "semantic"  # default
 
-    try:
-        classification = memory_router.enrich_and_classify(
-            user_id=request.session_id, user_input=request.user_input
-        )
-        memory_logger.info(f"🔎 Classified: {classification}")
+class MemoryImageStoreRequest(BaseModel):
+    session_id: str
+    image_url: str
+    response: str
+    sentiment: str = "neutral"
 
-        result = memory_router.execute_action(
-            session_id=request.session_id,
-            user_input=request.user_input,
-            enriched=classification
-        )
-        memory_logger.info(f"✅ Action result: {result}")
+# 🔁 Route: Standard Text or Semantic Memory
+@router.post("/memory/store")
+async def store_memory(request: MemoryStoreRequest):
+    memory_logger.info(f"📥 /memory/store | session: {request.session_id}")
+    result = memory_handler.store_memory(
+        session_id=request.session_id,
+        query=request.query,
+        response=request.response,
+        memory_type=request.memory_type,
+        sentiment=request.sentiment
+    )
+    return result
 
-        return {
-            "status": result.get("status"),
-            "route": result.get("route"),
-            "message": result.get("message"),
-            "matches": result.get("matches", []),
-            "meta": classification
-        }
-
-    except Exception as e:
-        memory_logger.error(f"❌ Memory routing failed: {str(e)}")
-        return {"status": "error", "message": str(e)}
+# 🔁 Route: Image Memory (visual understanding)
+@router.post("/memory/store_image")
+async def store_image_memory(request: MemoryImageStoreRequest):
+    memory_logger.info(f"📥 /memory/store_image | session: {request.session_id}")
+    result = memory_handler.store_memory(
+        session_id=request.session_id,
+        query=request.image_url,
+        response=request.response,
+        memory_type="image",
+        sentiment=request.sentiment
+    )
+    return result

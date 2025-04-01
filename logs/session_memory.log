@@ -947,3 +947,29 @@ Traceback (most recent call last):
     return self._fallback_classification(user_input)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'MemoryRouter' object has no attribute '_fallback_classification'
+2025-04-01 12:59:38,385 - INFO - ✅ Connected to Neo4j.
+2025-04-01 12:59:39,285 - INFO - 🚀 MemoryRouter initialized.
+2025-04-01 12:59:39,286 - INFO - ✅ Connected to Neo4j.
+2025-04-01 13:00:41,149 - INFO - ✅ Connected to Neo4j.
+2025-04-01 13:00:42,051 - INFO - 🚀 MemoryRouter initialized.
+2025-04-01 13:00:42,052 - INFO - ✅ Connected to Neo4j.
+2025-04-01 13:05:07,949 - INFO - ✅ Connected to Neo4j.
+2025-04-01 13:05:08,857 - INFO - 🚀 MemoryRouter initialized.
+2025-04-01 13:05:08,857 - INFO - ✅ Connected to Neo4j.
+2025-04-01 13:05:08,902 - INFO - ✅ PostgreSQL connection established.
+2025-04-01 13:05:08,908 - INFO - ✅ Neo4j connection established.
+2025-04-01 13:05:21,554 - INFO - ✅ Connected to Neo4j.
+2025-04-01 13:05:22,459 - INFO - 🚀 MemoryRouter initialized.
+2025-04-01 13:05:22,460 - INFO - ✅ Connected to Neo4j.
+2025-04-01 13:05:22,505 - INFO - ✅ PostgreSQL connection established.
+2025-04-01 13:05:22,511 - INFO - ✅ Neo4j connection established.
+2025-04-01 13:19:38,593 - INFO - ✅ Connected to Neo4j.
+2025-04-01 13:19:39,486 - INFO - 🚀 MemoryRouter initialized.
+2025-04-01 13:19:39,487 - INFO - ✅ Connected to Neo4j.
+2025-04-01 13:19:39,531 - INFO - ✅ PostgreSQL connection established.
+2025-04-01 13:19:39,537 - INFO - ✅ Neo4j connection established.
+2025-04-01 13:59:44,728 - INFO - ✅ Connected to Neo4j.
+2025-04-01 13:59:45,630 - INFO - 🚀 MemoryRouter initialized.
+2025-04-01 13:59:45,631 - INFO - ✅ Connected to Neo4j.
+2025-04-01 13:59:45,676 - INFO - ✅ PostgreSQL connection established.
+2025-04-01 13:59:45,682 - INFO - ✅ Neo4j connection established.

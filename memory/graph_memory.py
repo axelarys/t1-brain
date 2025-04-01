@@ -5,10 +5,11 @@ import openai
 import re
 import hashlib
 
-from config.settings import GRAPH_URI, GRAPH_USER, GRAPH_PASSWORD, OPENAI_API_KEY
+from config.settings import GRAPH_URI, GRAPH_USER, GRAPH_PASSWORD
+from utils.memory_utils import get_api_key
 
-# Configure OpenAI
-openai.api_key = OPENAI_API_KEY
+# Configure OpenAI using dynamic API key
+openai.api_key = get_api_key("text")
 
 # Logging setup
 logger = logging.getLogger(__name__)

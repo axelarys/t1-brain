@@ -40,6 +40,9 @@ def route_memory(session_id: str, user_input: str) -> str:
         route = enriched.get("storage_target", "unknown")
         route_logger.info(f"🔍 Classification: {enriched}")
 
+        if route == "unknown":
+            route_logger.warning("⚠️ Enrichment failed to determine proper route.")
+
         result = router.execute_action(
             session_id=session_id,
             user_input=user_input,

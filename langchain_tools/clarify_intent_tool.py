@@ -6,7 +6,7 @@ from openai import OpenAI
 
 # 🔧 Path to access settings.py
 sys.path.append("/root/projects/t1-brain")
-from config.settings import OPENAI_API_KEY
+from utils.memory_utils import get_api_key
 
 # 🧠 Logger Setup
 LOG_DIR = "/root/projects/t1-brain/logs"
@@ -25,8 +25,8 @@ if not clarify_logger.handlers:
     stream_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
     clarify_logger.addHandler(stream_handler)
 
-# 🤖 OpenAI Client
-client = OpenAI(api_key=OPENAI_API_KEY)
+# 🤖 OpenAI Client with API key based on type
+client = OpenAI(api_key=get_api_key("text"))
 
 @tool
 def clarify_intent(user_input: str) -> str:

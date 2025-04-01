@@ -8,7 +8,7 @@ from langchain.agents import initialize_agent, AgentType
 from langchain_openai import ChatOpenAI
 from route_memory_tool import route_memory
 from clarify_intent_tool import clarify_intent
-from config.settings import OPENAI_API_KEY
+from utils.memory_utils import get_api_key
 
 # 🧠 Logger Setup
 LOG_DIR = "/root/projects/t1-brain/logs"
@@ -35,7 +35,7 @@ agent_logger.info("🔧 Tools registered: route_memory, clarify_intent")
 llm = ChatOpenAI(
     model="gpt-4",
     temperature=0.3,
-    api_key=OPENAI_API_KEY
+    api_key=get_api_key("text")
 )
 agent_logger.info("✅ GPT-4 LLM initialized.")
 

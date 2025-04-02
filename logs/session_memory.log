@@ -1325,3 +1325,454 @@ A detailed migration guide is available here: https://github.com/openai/openai-p
 2025-04-02 11:59:25,277 - INFO - Client: 127.0.0.1
 2025-04-02 11:59:25,280 - INFO - 📤 /memory/retrieve | session=test_image_cat
 2025-04-02 11:59:25,281 - INFO - Response status: 200
+2025-04-02 12:19:24,283 - INFO - Request received: POST /tool/memory
+2025-04-02 12:19:24,283 - INFO - Client: 127.0.0.1
+2025-04-02 12:19:24,285 - INFO - 🔧 /tool/memory | session=test_image_cat
+2025-04-02 12:19:24,285 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:19:24,370 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 12:19:24,375 - INFO - ✅ Neo4j connection established.
+2025-04-02 12:19:25,290 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-02 12:19:25,293 - INFO - embedding | tokens=4 | model=text-embedding-ada-002
+2025-04-02 12:19:28,566 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-02 12:19:28,575 - INFO - enrichment | session=user_test_image_cat | tokens=205 | model=gpt-4
+2025-04-02 12:19:28,575 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "image_analysis",
+  "emotion": "calmness",
+  "topic": "orange tabby cat",
+  "priority": "normal",
+  "lifespan": "single-use",
+  "storage_target": "vector"
+}
+2025-04-02 12:19:28,575 - ERROR - ❌ /tool/memory internal error
+Traceback (most recent call last):
+  File "/root/projects/t1-brain/api/main.py", line 142, in test_route_memory_tool
+    result = router.execute_action(
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MemoryRouter' object has no attribute 'execute_action'
+2025-04-02 12:19:28,578 - INFO - Response status: 200
+2025-04-02 12:26:17,283 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:26:18,434 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 12:26:18,435 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:26:18,476 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 12:26:18,480 - INFO - ✅ Neo4j connection established.
+2025-04-02 12:26:18,517 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 12:26:18,577 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 12:26:18,578 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 12:26:18,578 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:26:18,583 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:26:18,583 - INFO - ✅ Redis connection established.
+2025-04-02 12:26:18,591 - INFO - 🚀 FastAPI server started
+2025-04-02 12:26:18,591 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-02 12:26:18,591 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-02 12:26:18,591 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-02 12:26:18,591 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-02 12:26:18,591 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 12:26:18,591 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 12:26:18,591 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 12:26:18,591 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 12:26:18,591 - INFO - Registered route: /health - {'GET'}
+2025-04-02 12:26:18,591 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 12:26:18,591 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 12:26:18,591 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 12:26:18,591 - INFO - Registered route: /memory/store_image - {'POST'}
+2025-04-02 12:26:18,592 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 12:27:30,905 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:27:32,520 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 12:27:32,520 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:27:32,567 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 12:27:32,573 - INFO - ✅ Neo4j connection established.
+2025-04-02 12:27:32,628 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 12:27:32,676 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 12:27:32,676 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 12:27:32,677 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:27:32,681 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:27:32,682 - INFO - ✅ Redis connection established.
+2025-04-02 12:27:32,688 - INFO - 🚀 FastAPI server started
+2025-04-02 12:27:32,688 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-02 12:27:32,688 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-02 12:27:32,688 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-02 12:27:32,688 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-02 12:27:32,688 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 12:27:32,688 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 12:27:32,688 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 12:27:32,688 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 12:27:32,688 - INFO - Registered route: /health - {'GET'}
+2025-04-02 12:27:32,688 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 12:27:32,688 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 12:27:32,688 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 12:27:32,688 - INFO - Registered route: /memory/store_image - {'POST'}
+2025-04-02 12:27:32,688 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 12:27:36,564 - INFO - Request received: POST /memory/session
+2025-04-02 12:27:36,565 - INFO - Client: 127.0.0.1
+2025-04-02 12:27:36,567 - INFO - ♻️ /memory/session | Restoring session=test_image_cat
+2025-04-02 12:35:21,666 - INFO - Request received: GET /
+2025-04-02 12:35:21,666 - INFO - Client: 87.236.176.5
+2025-04-02 12:35:21,666 - INFO - Response status: 404
+2025-04-02 12:38:12,520 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:38:13,950 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 12:38:13,950 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:38:14,049 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 12:38:14,053 - INFO - ✅ Neo4j connection established.
+2025-04-02 12:38:14,135 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 12:38:14,282 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 12:38:14,283 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 12:38:14,284 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:38:14,290 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:38:14,291 - INFO - ✅ Redis connection established.
+2025-04-02 12:38:14,300 - INFO - 🚀 FastAPI server started
+2025-04-02 12:38:14,301 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-02 12:38:14,301 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-02 12:38:14,301 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-02 12:38:14,301 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-02 12:38:14,301 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 12:38:14,301 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 12:38:14,301 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 12:38:14,301 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 12:38:14,301 - INFO - Registered route: /health - {'GET'}
+2025-04-02 12:38:14,301 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 12:38:14,301 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 12:38:14,301 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 12:38:14,301 - INFO - Registered route: /memory/store_image - {'POST'}
+2025-04-02 12:38:14,301 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 12:38:21,623 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:38:23,568 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 12:38:23,569 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:38:23,673 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 12:38:23,678 - INFO - ✅ Neo4j connection established.
+2025-04-02 12:38:23,760 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 12:38:23,906 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 12:38:23,907 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 12:38:23,907 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:38:23,914 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:38:23,915 - INFO - ✅ Redis connection established.
+2025-04-02 12:38:23,924 - INFO - 🚀 FastAPI server started
+2025-04-02 12:38:23,924 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-02 12:38:23,924 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-02 12:38:23,924 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-02 12:38:23,924 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-02 12:38:23,925 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 12:38:23,925 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 12:38:23,925 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 12:38:23,925 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 12:38:23,925 - INFO - Registered route: /health - {'GET'}
+2025-04-02 12:38:23,925 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 12:38:23,925 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 12:38:23,925 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 12:38:23,925 - INFO - Registered route: /memory/store_image - {'POST'}
+2025-04-02 12:38:23,925 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 12:39:03,631 - INFO - Request received: POST /memory/session
+2025-04-02 12:39:03,631 - INFO - Client: 127.0.0.1
+2025-04-02 12:39:03,633 - INFO - ♻️ /memory/session | Restoring session=test_image_cat
+2025-04-02 12:39:03,646 - INFO - ♻️ Restored session 'test_image_cat' into Redis with 1 items.
+2025-04-02 12:39:03,646 - INFO - Response status: 200
+2025-04-02 12:43:23,810 - INFO - Request received: POST /tool/memory
+2025-04-02 12:43:23,810 - INFO - Client: 127.0.0.1
+2025-04-02 12:43:23,811 - INFO - 🔧 /tool/memory | session=test_router
+2025-04-02 12:43:23,812 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:43:23,897 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 12:43:23,902 - INFO - ✅ Neo4j connection established.
+2025-04-02 12:43:24,908 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-02 12:43:24,912 - INFO - embedding | tokens=7 | model=text-embedding-ada-002
+2025-04-02 12:43:27,961 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-02 12:43:27,968 - INFO - enrichment | session=user_test_router | tokens=141 | model=gpt-4
+2025-04-02 12:43:27,968 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "retrieve_memory",
+  "emotion": "neutral",
+  "topic": "self_quotation",
+  "priority": "normal",
+  "lifespan": "permanent",
+  "storage_target": "graph"
+}
+2025-04-02 12:43:27,968 - ERROR - ❌ /tool/memory internal error
+Traceback (most recent call last):
+  File "/root/projects/t1-brain/api/main.py", line 156, in test_route_memory_tool
+    result = router.execute_action(
+             ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MemoryRouter' object has no attribute 'execute_action'
+2025-04-02 12:43:27,971 - INFO - Response status: 200
+2025-04-02 12:44:05,235 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:44:06,811 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 12:44:06,812 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:44:06,857 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 12:44:06,863 - INFO - ✅ Neo4j connection established.
+2025-04-02 12:44:06,910 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 12:44:06,958 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 12:44:06,959 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 12:44:06,959 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:44:06,964 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:44:06,964 - INFO - ✅ Redis connection established.
+2025-04-02 12:44:06,970 - INFO - 🚀 FastAPI server started
+2025-04-02 12:44:06,970 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-02 12:44:06,970 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-02 12:44:06,970 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-02 12:44:06,970 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-02 12:44:06,971 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 12:44:06,971 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 12:44:06,971 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 12:44:06,971 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 12:44:06,971 - INFO - Registered route: /health - {'GET'}
+2025-04-02 12:44:06,971 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 12:44:06,971 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 12:44:06,971 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 12:44:06,971 - INFO - Registered route: /memory/store_image - {'POST'}
+2025-04-02 12:44:06,971 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 12:44:17,505 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:44:19,448 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 12:44:19,449 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:44:19,554 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 12:44:19,560 - INFO - ✅ Neo4j connection established.
+2025-04-02 12:44:19,647 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 12:44:19,804 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 12:44:19,805 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 12:44:19,805 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:44:19,813 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:44:19,814 - INFO - ✅ Redis connection established.
+2025-04-02 12:44:19,824 - INFO - 🚀 FastAPI server started
+2025-04-02 12:44:19,824 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-02 12:44:19,824 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-02 12:44:19,824 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-02 12:44:19,824 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-02 12:44:19,825 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 12:44:19,825 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 12:44:19,825 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 12:44:19,825 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 12:44:19,825 - INFO - Registered route: /health - {'GET'}
+2025-04-02 12:44:19,825 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 12:44:19,825 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 12:44:19,825 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 12:44:19,825 - INFO - Registered route: /memory/store_image - {'POST'}
+2025-04-02 12:44:19,825 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 12:44:23,018 - INFO - Request received: GET /debug/routes
+2025-04-02 12:44:23,018 - INFO - Client: 127.0.0.1
+2025-04-02 12:44:23,018 - INFO - 🔍 /debug/routes
+2025-04-02 12:44:23,019 - INFO - Response status: 200
+2025-04-02 12:44:32,245 - INFO - Request received: POST /tool/memory
+2025-04-02 12:44:32,245 - INFO - Client: 127.0.0.1
+2025-04-02 12:44:32,247 - INFO - 🔧 /tool/memory | session=test_router
+2025-04-02 12:44:32,247 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:44:32,309 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 12:44:32,314 - INFO - ✅ Neo4j connection established.
+2025-04-02 12:44:33,026 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-02 12:44:33,029 - INFO - embedding | tokens=7 | model=text-embedding-ada-002
+2025-04-02 12:44:36,021 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-02 12:44:36,068 - INFO - enrichment | session=user_test_router | tokens=151 | model=gpt-4
+2025-04-02 12:44:36,068 - INFO - 🧠 Enrichment Output:
+{
+  "intent": "retrieve_logic",
+  "emotion": "neutral",
+  "topic": "quote on simplicity",
+  "priority": "default",
+  "lifespan": "single_interaction",
+  "storage_target": "graph"
+}
+2025-04-02 12:44:36,069 - INFO - ✅ New session key: test_router
+2025-04-02 12:44:36,667 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-02 12:44:36,668 - INFO - embedding | tokens=7 | model=text-embedding-ada-002
+2025-04-02 12:44:36,672 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-02 12:44:36,725 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-04-02 12:44:36,735 - INFO - Response status: 200
+2025-04-02 12:56:11,833 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 12:56:11,834 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:56:11,938 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 12:56:11,942 - INFO - ✅ Neo4j connection established.
+2025-04-02 12:56:12,029 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 12:56:12,184 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 12:56:12,185 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 12:56:12,186 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:56:12,193 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:56:12,194 - INFO - ✅ Redis connection established.
+2025-04-02 12:56:19,578 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 12:56:19,578 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:56:19,623 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 12:56:19,629 - INFO - ✅ Neo4j connection established.
+2025-04-02 12:56:19,664 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 12:56:19,712 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 12:56:19,713 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 12:56:19,714 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:56:19,719 - INFO - ✅ Connected to Neo4j.
+2025-04-02 12:56:19,719 - INFO - ✅ Redis connection established.
+2025-04-02 13:00:47,080 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 13:00:48,906 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:00:49,004 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 13:00:49,009 - INFO - ✅ Neo4j connection established.
+2025-04-02 13:00:49,091 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 13:00:49,240 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 13:00:49,241 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 13:00:49,241 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:00:49,248 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:00:49,249 - INFO - ✅ Redis connection established.
+2025-04-02 13:01:30,589 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 13:01:32,209 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:01:32,252 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 13:01:32,257 - INFO - ✅ Neo4j connection established.
+2025-04-02 13:01:32,290 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 13:01:32,337 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 13:01:32,338 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 13:01:32,338 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:01:32,343 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:01:32,343 - INFO - ✅ Redis connection established.
+2025-04-02 13:03:37,944 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 13:03:39,807 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:03:39,852 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 13:03:39,858 - INFO - ✅ Neo4j connection established.
+2025-04-02 13:03:39,929 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 13:03:39,998 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 13:03:39,999 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 13:03:39,999 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:03:40,004 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:03:40,004 - INFO - ✅ Redis connection established.
+2025-04-02 13:03:45,266 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 13:03:46,699 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:03:46,745 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 13:03:46,750 - INFO - ✅ Neo4j connection established.
+2025-04-02 13:03:46,786 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 13:03:46,834 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 13:03:46,835 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 13:03:46,835 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:03:46,840 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:03:46,841 - INFO - ✅ Redis connection established.
+2025-04-02 13:11:33,003 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 13:11:34,866 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:11:34,965 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 13:11:34,970 - INFO - ✅ Neo4j connection established.
+2025-04-02 13:11:35,052 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 13:11:35,198 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 13:11:35,199 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 13:11:35,200 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:11:35,207 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:11:35,208 - INFO - ✅ Redis connection established.
+2025-04-02 13:11:39,628 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 13:11:41,605 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:11:41,709 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 13:11:41,715 - INFO - ✅ Neo4j connection established.
+2025-04-02 13:11:41,802 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 13:11:41,957 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 13:11:41,958 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 13:11:41,959 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:11:41,966 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:11:41,967 - INFO - ✅ Redis connection established.
+2025-04-02 13:15:35,350 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 13:15:35,353 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:15:36,363 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:15:36,458 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 13:15:36,462 - INFO - ✅ Neo4j connection established.
+2025-04-02 13:15:36,520 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 13:15:36,616 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 13:15:36,618 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 13:15:36,618 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:15:36,625 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:15:36,626 - INFO - ✅ Redis connection established.
+2025-04-02 13:15:36,639 - INFO - 🚀 FastAPI server started
+2025-04-02 13:15:36,639 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-02 13:15:36,639 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-02 13:15:36,639 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-02 13:15:36,639 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-02 13:15:36,639 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 13:15:36,640 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 13:15:36,640 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 13:15:36,640 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-02 13:15:36,640 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 13:15:36,640 - INFO - Registered route: /health - {'GET'}
+2025-04-02 13:15:36,640 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 13:15:36,640 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 13:15:36,640 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 13:15:36,640 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 13:15:36,640 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 13:15:36,640 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-02 13:15:36,640 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 13:15:36,640 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 13:43:47,830 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 13:43:47,836 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:43:49,611 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:43:49,710 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 13:43:49,715 - INFO - ✅ Neo4j connection established.
+2025-04-02 13:43:49,797 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 13:43:49,946 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 13:43:49,948 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 13:43:49,948 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:43:49,955 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:43:49,955 - INFO - ✅ Redis connection established.
+2025-04-02 13:43:49,968 - INFO - 🚀 FastAPI server started
+2025-04-02 13:43:49,968 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-02 13:43:49,968 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-02 13:43:49,968 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-02 13:43:49,968 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-02 13:43:49,968 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 13:43:49,968 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 13:43:49,968 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 13:43:49,968 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-02 13:43:49,968 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 13:43:49,968 - INFO - Registered route: /health - {'GET'}
+2025-04-02 13:43:49,968 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 13:43:49,968 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 13:43:49,969 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 13:43:49,969 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 13:43:49,969 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 13:43:49,969 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-02 13:43:49,969 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 13:43:49,969 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 13:43:56,516 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 13:43:56,521 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:43:58,314 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:43:58,359 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 13:43:58,365 - INFO - ✅ Neo4j connection established.
+2025-04-02 13:43:58,400 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 13:43:58,447 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 13:43:58,448 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 13:43:58,449 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:43:58,453 - INFO - ✅ Connected to Neo4j.
+2025-04-02 13:43:58,454 - INFO - ✅ Redis connection established.
+2025-04-02 13:43:58,461 - INFO - 🚀 FastAPI server started
+2025-04-02 13:43:58,461 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-02 13:43:58,461 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-02 13:43:58,461 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-02 13:43:58,461 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /health - {'GET'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 13:43:58,462 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 14:23:37,644 - INFO - ✅ Redis connection established.
+2025-04-02 14:23:49,578 - INFO - ✅ Redis connection established.
+2025-04-02 14:26:48,254 - INFO - ✅ Redis connection established.
+2025-04-02 14:26:48,864 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 14:26:48,867 - INFO - ✅ Connected to Neo4j.
+2025-04-02 14:26:49,780 - INFO - ✅ Connected to Neo4j.
+2025-04-02 14:26:49,825 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 14:26:49,831 - INFO - ✅ Neo4j connection established.
+2025-04-02 14:26:49,866 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 14:26:49,914 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 14:26:49,914 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 14:26:49,915 - INFO - ✅ Connected to Neo4j.
+2025-04-02 14:26:49,919 - INFO - 🚀 FastAPI server started
+2025-04-02 14:27:42,350 - INFO - ✅ Redis connection established.
+2025-04-02 14:27:43,643 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 14:27:43,645 - INFO - ✅ Connected to Neo4j.
+2025-04-02 14:27:45,158 - INFO - ✅ Connected to Neo4j.
+2025-04-02 14:27:45,237 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 14:27:45,243 - INFO - ✅ Neo4j connection established.
+2025-04-02 14:27:45,277 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 14:27:45,324 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 14:27:45,324 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 14:27:45,325 - INFO - ✅ Connected to Neo4j.
+2025-04-02 14:27:45,329 - INFO - 🚀 FastAPI server started

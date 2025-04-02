@@ -1,70 +1,91 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
+from typing import Optional
+
 from memory.session_memory import PersistentSessionMemory
-import logging
-import os
+from memory.graph_memory import GraphMemory
+from memory.memory_router import MemoryRouter
 
-# 🧠 Logger Setup
-LOG_DIR = "/root/projects/t1-brain/logs"
-os.makedirs(LOG_DIR, exist_ok=True)
-log_file = os.path.join(LOG_DIR, "memory_router_http.log")
+# 🔐 API Key Middleware
+def verify_api_key(request: Request):
+    api_key = request.headers.get("X-API-KEY")
+    if not api_key or api_key != "WsRocks1234":
+        raise HTTPException(status_code=401, detail="Invalid or missing API Key")
+    return api_key
 
-memory_logger = logging.getLogger("memory_router_logger")
-memory_logger.setLevel(logging.INFO)
+# 📦 Models
+class MemoryRequest(BaseModel):
+    session_id: str
+    query: str
+    response: Optional[str] = None
+    memory_type: Optional[str] = "semantic"
+    sentiment: Optional[str] = "neutral"
 
-if not memory_logger.handlers:
-    file_handler = logging.FileHandler(log_file)
-    file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
-    memory_logger.addHandler(file_handler)
+class MemoryDeleteRequest(BaseModel):
+    session_id: str
+    query: str
 
-    stream_handler = logging.StreamHandler()
-    stream_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
-    memory_logger.addHandler(stream_handler)
+class SessionRestoreRequest(BaseModel):
+    session_id: str
 
-# 🧠 Router & Session Memory
+class MemoryAggregateRequest(BaseModel):
+    session_id: str
+    query: str
+
+# 📡 Router Setup
 router = APIRouter()
 memory_handler = PersistentSessionMemory()
 
-# 📦 Standard Memory Input Model
-class MemoryRouteRequest(BaseModel):
-    session_id: str
-    user_input: str
-
-class MemoryStoreRequest(BaseModel):
-    session_id: str
-    query: str
-    response: str
-    sentiment: str = "neutral"
-    memory_type: str = "semantic"  # default
-
-class MemoryImageStoreRequest(BaseModel):
-    session_id: str
-    image_url: str
-    response: str
-    sentiment: str = "neutral"
-
-# 🔁 Route: Standard Text or Semantic Memory
+# 📥 Store Memory
 @router.post("/memory/store")
-async def store_memory(request: MemoryStoreRequest):
-    memory_logger.info(f"📥 /memory/store | session: {request.session_id}")
-    result = memory_handler.store_memory(
+async def store_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
+    return memory_handler.store_memory(
         session_id=request.session_id,
         query=request.query,
         response=request.response,
         memory_type=request.memory_type,
         sentiment=request.sentiment
     )
-    return result
 
-# 🔁 Route: Image Memory (visual understanding)
-@router.post("/memory/store_image")
-async def store_image_memory(request: MemoryImageStoreRequest):
-    memory_logger.info(f"📥 /memory/store_image | session: {request.session_id}")
-    result = memory_handler.store_memory(
-        session_id=request.session_id,
-        query=request.image_url,
-        response=request.response,
-        memory_type="image",
-        sentiment=request.sentiment
-    )
-    return result
+# 🧠 Retrieve Memory
+@router.post("/memory/retrieve")
+async def retrieve_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
+    raw = memory_handler.retrieve_memory(request.session_id, request.query)
+    results = []
+    for m in raw:
+        entry = {
+            "query": m.get("query"),
+            "response": m.get("response"),
+            "sentiment": m.get("sentiment"),
+            "memory_type": m.get("memory_type"),
+            "timestamp": m.get("timestamp"),
+        }
+        if m.get("source_type") == "image":
+            entry["source_type"] = "image"
+            entry["image_url"] = m.get("image_url")
+        results.append(entry)
+    return {"status": "retrieved", "count": len(results), "memory": results}
+
+# ♻️ Restore Session from PostgreSQL
+@router.post("/memory/session")
+async def restore_session(request: SessionRestoreRequest, api_key: str = Depends(verify_api_key)):
+    restored = memory_handler.restore_session_from_pg(request.session_id)
+    return {"status": "restored", "restored": len(restored), "chunks": restored}
+
+# 🔁 Aggregate Memory (Redis + Vector + Graph)
+@router.post("/memory/aggregate")
+async def aggregate_memory(request: MemoryAggregateRequest, api_key: str = Depends(verify_api_key)):
+    redis_mem = memory_handler.retrieve_memory(request.session_id, request.query)
+    vector_matches = memory_handler.find_similar_queries(request.query)
+    graph_matches = GraphMemory().retrieve_graph_memory(request.query, top_k=5)
+    return {
+        "status": "aggregated",
+        "redis": redis_mem,
+        "vector": vector_matches,
+        "graph": graph_matches
+    }
+
+# ❌ Delete Memory
+@router.delete("/memory/delete")
+async def delete_memory(request: MemoryDeleteRequest, api_key: str = Depends(verify_api_key)):
+    return memory_handler.delete_memory(request.session_id, request.query)

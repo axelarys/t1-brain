@@ -12,9 +12,10 @@ sys.path.append("/root/projects/t1-brain")
 # ✅ Imports
 from config.settings import PG_HOST, PG_DATABASE, PG_USER, PG_PASSWORD
 from memory.session_memory import PersistentSessionMemory
-from api.routes import memory   # /memory/route
-from api.routes import agent    # /agent/run
-from memory.memory_router import MemoryRouter  # 🔁 Direct memory routing logic
+from memory.memory_router import MemoryRouter
+from memory.graph_memory import GraphMemory
+from api.routes.memory import router as memory_router
+from api.routes.agent import router as agent_router
 
 # 📂 Logging Setup
 LOG_DIR = "/root/projects/t1-brain/logs"
@@ -27,6 +28,14 @@ logging.basicConfig(
 
 # 🚀 FastAPI App
 app = FastAPI()
+
+@app.middleware("http")
+async def log_requests(request, call_next):
+    logging.info(f"Request received: {request.method} {request.url.path}")
+    logging.info(f"Client: {request.client.host if request.client else 'Unknown'}")
+    response = await call_next(request)
+    logging.info(f"Response status: {response.status_code}")
+    return response
 
 # 🧠 Memory Layer
 memory_handler = PersistentSessionMemory()
@@ -59,38 +68,105 @@ class MemoryDeleteRequest(BaseModel):
     session_id: str
     query: str
 
-class ToolMemoryRequest(BaseModel):  # Used only for internal routing test (optional)
+class SessionRestoreRequest(BaseModel):
+    session_id: str
+
+class MemoryAggregateRequest(BaseModel):
+    session_id: str
+    query: str
+
+class ToolMemoryRequest(BaseModel):
     session_id: str
     user_input: str
 
-# 🧠 Core API Endpoints
+# 📥 Store Memory
 @app.post("/memory/store")
 async def api_store_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
+    logging.info(f"📥 /memory/store | session={request.session_id} | type={request.memory_type}")
     return memory_handler.store_memory(
-        request.session_id, request.query, request.response, request.memory_type, request.sentiment
+        session_id=request.session_id,
+        query=request.query,
+        response=request.response,
+        memory_type=request.memory_type,
+        sentiment=request.sentiment
     )
 
+# 📤 Retrieve Memory
 @app.post("/memory/retrieve")
 async def api_retrieve_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
+    logging.info(f"📤 /memory/retrieve | session={request.session_id}")
+    raw_memories = memory_handler.retrieve_memory(request.session_id, request.query)
+    memory_list = []
+    for m in raw_memories:
+        parsed = {
+            "query": m.get("query"),
+            "response": m.get("response"),
+            "sentiment": m.get("sentiment"),
+            "memory_type": m.get("memory_type"),
+            "timestamp": m.get("timestamp"),
+        }
+        if m.get("source_type") == "image":
+            parsed["source_type"] = "image"
+            parsed["image_url"] = m.get("image_url")
+        memory_list.append(parsed)
     return {
         "status": "retrieved",
-        "memory": memory_handler.retrieve_memory(request.session_id, request.query)
+        "count": len(memory_list),
+        "memory": memory_list
     }
 
+# ♻️ Restore Session from PostgreSQL
+@app.post("/memory/session")
+async def api_session_restore(request: SessionRestoreRequest, api_key: str = Depends(verify_api_key)):
+    logging.info(f"♻️ /memory/session | Restoring session={request.session_id}")
+    restored = memory_handler.restore_session_from_pg(request.session_id)
+    return {"status": "restored", "restored": len(restored), "chunks": restored}
+
+# 🔀 Aggregate Memory
+@app.post("/memory/aggregate")
+async def api_aggregate_memory(request: MemoryAggregateRequest, api_key: str = Depends(verify_api_key)):
+    logging.info(f"🔀 /memory/aggregate | session={request.session_id}")
+    redis_mem = memory_handler.retrieve_memory(request.session_id, request.query)
+    vector_mem = memory_handler.find_similar_queries(request.query)
+    graph_mem = GraphMemory().retrieve_graph_memory(request.query, top_k=5)
+    return {
+        "status": "aggregated",
+        "redis": redis_mem,
+        "vector": vector_mem,
+        "graph": graph_mem
+    }
+
+# ❌ Delete Memory
 @app.delete("/memory/delete")
 async def api_delete_memory(request: MemoryDeleteRequest, api_key: str = Depends(verify_api_key)):
+    logging.info(f"❌ /memory/delete | session={request.session_id}")
     return memory_handler.delete_memory(request.session_id, request.query)
 
+# 🩺 Health Check
 @app.get("/health")
 async def health_check():
+    logging.info("🩺 /health check")
     return {
         "status": "healthy",
         "redis": "connected" if redis_client.ping() else "disconnected"
     }
 
-# 🧪 Internal Debug Endpoint (can remove for final prod)
+# 🔍 Debug Routes
+@app.get("/debug/routes")
+async def debug_routes():
+    logging.info("🔍 /debug/routes")
+    return {
+        "routes": [{
+            "path": route.path,
+            "name": route.name,
+            "methods": list(route.methods)
+        } for route in app.routes]
+    }
+
+# 🧪 Tool Memory Route
 @app.post("/tool/memory")
 async def test_route_memory_tool(request: ToolMemoryRequest):
+    logging.info(f"🔧 /tool/memory | session={request.session_id}")
     try:
         router = MemoryRouter()
         enriched = router.enrich_and_classify(request.session_id, request.user_input)
@@ -101,9 +177,15 @@ async def test_route_memory_tool(request: ToolMemoryRequest):
         )
         return {"status": "success", "enriched": enriched, "result": result}
     except Exception as e:
-        logging.exception("❌ route_memory_tool direct call failed")
+        logging.exception("❌ /tool/memory internal error")
         return {"status": "error", "message": str(e)}
 
-# 🔗 Register Routes
-app.include_router(memory.router)
-app.include_router(agent.router)
+# ✅ Mount Routers
+app.include_router(memory_router, prefix="")
+app.include_router(agent_router, prefix="")
+
+@app.on_event("startup")
+async def startup_event():
+    logging.info("🚀 FastAPI server started")
+    for route in app.routes:
+        logging.info(f"Registered route: {route.path} - {route.methods}")

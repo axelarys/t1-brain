@@ -1,7 +1,6 @@
 import os, json, time, redis, logging, psycopg2, hashlib, numpy as np, tiktoken
 from config import settings
 from openai import OpenAI
-from memory.graph_memory import GraphMemory
 from utils.memory_utils import get_api_key
 
 # 📂 Logging setup
@@ -44,7 +43,15 @@ class PersistentSessionMemory:
         self.pg_conn = None
         self.pg_cursor = None
         self.redis_client = redis.StrictRedis(host="localhost", port=6379, decode_responses=True)
-        self.graph_memory = GraphMemory()
+        self._graph_memory = None  # Will be initialized lazily
+
+    @property
+    def graph_memory(self):
+        # Lazy initialization of graph memory to break circular dependency
+        if self._graph_memory is None:
+            from memory.graph_memory import GraphMemory
+            self._graph_memory = GraphMemory()
+        return self._graph_memory
 
     def connect_to_db(self):
         if not self.pg_conn or self.pg_conn.closed:
@@ -78,7 +85,6 @@ class PersistentSessionMemory:
                 session_logger.info(f"✅ New session key: {session_id}")
 
             is_image = memory_type == "image"
-
             if is_image:
                 try:
                     api_key = get_api_key("image")
@@ -188,3 +194,37 @@ class PersistentSessionMemory:
         except Exception as e:
             session_logger.error(f"❌ Similarity search error: {e}")
             return []
+
+    def restore_session_from_pg(self, session_id):
+        self.connect_to_db()
+        try:
+            self.pg_cursor.execute("SELECT query, response, memory_type, sentiment, source_type, image_url FROM embeddings WHERE session_id = %s", (session_id,))
+            rows = self.pg_cursor.fetchall()
+
+            if not rows:
+                return {"status": "error", "message": "No memory found for session."}
+
+            key = f"memory:{session_id}"
+            self.redis_client.delete(key)
+
+            for i, row in enumerate(rows):
+                query, response, memory_type, sentiment, source_type, image_url = row
+                memory = {
+                    "query": query,
+                    "response": response,
+                    "timestamp": time.time(),
+                    "memory_type": memory_type,
+                    "sentiment": sentiment,
+                    "chunk_id": f"{session_id}_chunk_{i+1}",
+                    "source_type": source_type,
+                    "image_url": image_url
+                }
+                self.redis_client.rpush(key, json.dumps(memory))
+
+            self.redis_client.expire(key, self.ttl)
+            session_logger.info(f"♻️ Restored session '{session_id}' into Redis with {len(rows)} items.")
+            return {"status": "restored", "count": len(rows)}
+
+        except Exception as e:
+            session_logger.error(f"❌ Session restore error: {e}")
+            return {"status": "error", "message": "Restore failed"}

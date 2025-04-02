@@ -4,3 +4,17 @@
 2025-03-28 11:39:40,667 - enrichment | session=user_billing_01 | tokens=208 | model=gpt-4
 2025-04-02 11:44:29,537 - embedding | tokens=70 | model=text-embedding-ada-002
 2025-04-02 11:44:29,537 - embedding | tokens=70 | model=text-embedding-ada-002
+2025-04-02 12:19:25,293 - embedding | tokens=4 | model=text-embedding-ada-002
+2025-04-02 12:19:25,293 - embedding | tokens=4 | model=text-embedding-ada-002
+2025-04-02 12:19:28,575 - enrichment | session=user_test_image_cat | tokens=205 | model=gpt-4
+2025-04-02 12:19:28,575 - enrichment | session=user_test_image_cat | tokens=205 | model=gpt-4
+2025-04-02 12:43:24,912 - embedding | tokens=7 | model=text-embedding-ada-002
+2025-04-02 12:43:24,912 - embedding | tokens=7 | model=text-embedding-ada-002
+2025-04-02 12:43:27,968 - enrichment | session=user_test_router | tokens=141 | model=gpt-4
+2025-04-02 12:43:27,968 - enrichment | session=user_test_router | tokens=141 | model=gpt-4
+2025-04-02 12:44:33,029 - embedding | tokens=7 | model=text-embedding-ada-002
+2025-04-02 12:44:33,029 - embedding | tokens=7 | model=text-embedding-ada-002
+2025-04-02 12:44:36,068 - enrichment | session=user_test_router | tokens=151 | model=gpt-4
+2025-04-02 12:44:36,068 - enrichment | session=user_test_router | tokens=151 | model=gpt-4
+2025-04-02 12:44:36,668 - embedding | tokens=7 | model=text-embedding-ada-002
+2025-04-02 12:44:36,668 - embedding | tokens=7 | model=text-embedding-ada-002

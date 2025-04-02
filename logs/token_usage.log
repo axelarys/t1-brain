@@ -22,3 +22,6 @@
 2025-04-02 19:26:59,419 - embedding | tokens=2 | model=text-embedding-ada-002
 2025-04-02 19:49:32,487 - embedding | tokens=18 | model=text-embedding-ada-002
 2025-04-02 20:02:08,236 - embedding | tokens=15 | model=text-embedding-ada-002
+2025-04-02 20:18:52,330 - embedding | tokens=9 | model=text-embedding-ada-002
+2025-04-02 20:21:24,325 - summarize_session | input_length=91
+2025-04-02 20:21:25,874 - embedding | tokens=2 | model=text-embedding-ada-002

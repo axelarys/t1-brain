@@ -2045,3 +2045,72 @@ A detailed migration guide is available here: https://github.com/openai/openai-p
 2025-04-02 20:02:08,371 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (m:Memory {hash: $query_hash, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (m)-[:MENTIONS]->(t)\n                    '
 2025-04-02 20:02:08,404 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (s:Session {id: $session_id, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (s)-[:TOUCHED]->(t)\n                    '
 2025-04-02 20:02:08,405 - INFO - Response status: 200
+2025-04-02 20:16:55,241 - INFO - ✅ Redis connection established.
+2025-04-02 20:16:55,250 - INFO - 🚀 FastAPI server started
+2025-04-02 20:16:55,841 - INFO - ✅ Connected to Neo4j.
+2025-04-02 20:16:55,841 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /health - {'GET'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-02 20:16:55,842 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 20:17:01,322 - INFO - Request received: POST /memory/store
+2025-04-02 20:17:01,322 - INFO - Client: 127.0.0.1
+2025-04-02 20:17:01,324 - INFO - Response status: 422
+2025-04-02 20:18:09,084 - INFO - Request received: POST /memory/store
+2025-04-02 20:18:09,084 - INFO - Client: 127.0.0.1
+2025-04-02 20:18:09,091 - INFO - Response status: 422
+2025-04-02 20:18:49,545 - INFO - Request received: POST /memory/store
+2025-04-02 20:18:49,545 - INFO - Client: 127.0.0.1
+2025-04-02 20:18:49,577 - INFO - ✅ New session key: final_phase5_test
+2025-04-02 20:18:52,325 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-02 20:18:52,330 - INFO - embedding | tokens=9 | model=text-embedding-ada-002
+2025-04-02 20:18:52,340 - INFO - ✅ Connected to Neo4j.
+2025-04-02 20:18:52,341 - WARNING - ⚠️ GPT enrichment fallback: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-02 20:18:52,365 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-04-02 20:18:52,384 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (m:Memory {hash: $query_hash, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (m)-[:MENTIONS]->(t)\n                    '
+2025-04-02 20:18:52,394 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (s:Session {id: $session_id, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (s)-[:TOUCHED]->(t)\n                    '
+2025-04-02 20:18:52,396 - INFO - Response status: 200
+2025-04-02 20:21:01,082 - INFO - Request received: POST /memory/cleanup
+2025-04-02 20:21:01,083 - INFO - Client: 127.0.0.1
+2025-04-02 20:21:01,086 - INFO - Response status: 200
+2025-04-02 20:21:24,323 - INFO - Request received: GET /memory/summarize
+2025-04-02 20:21:24,323 - INFO - Client: 127.0.0.1
+2025-04-02 20:21:24,325 - INFO - summarize_session | input_length=91
+2025-04-02 20:21:25,481 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-02 20:21:25,493 - INFO - 📄 Session summary generated:
+The user and assistant are preparing for the rollout of GPT Actions, indicating they are ready for production.
+2025-04-02 20:21:25,872 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-02 20:21:25,874 - INFO - embedding | tokens=2 | model=text-embedding-ada-002
+2025-04-02 20:21:25,881 - WARNING - ⚠️ GPT enrichment fallback: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-02 20:21:25,934 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-04-02 20:21:25,943 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (m:Memory {hash: $query_hash, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (m)-[:MENTIONS]->(t)\n                    '
+2025-04-02 20:21:25,945 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (s:Session {id: $session_id, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (s)-[:TOUCHED]->(t)\n                    '
+2025-04-02 20:21:25,946 - INFO - Response status: 200

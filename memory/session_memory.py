@@ -73,7 +73,7 @@ class PersistentSessionMemory:
             removed_count = 0
 
             all_memory = self.redis_client.lrange(key, 0, -1)
-            self.redis_client.delete(key)  ## clear list to re-insert only valid ones
+            self.redis_client.delete(key)
 
             for m in all_memory:
                 try:
@@ -83,7 +83,6 @@ class PersistentSessionMemory:
                     short_term = policy.get("short_term", False)
                     timestamp = m_obj.get("timestamp", 0)
 
-                    ## if expired short-term → skip
                     if short_term and expiration and now > (timestamp + expiration):
                         removed_count += 1
                         continue
@@ -92,7 +91,6 @@ class PersistentSessionMemory:
                 except Exception as e:
                     session_logger.warning(f"⚠️ Failed parsing memory item: {e}")
 
-            ## re-push valid ones
             for v in valid_memory:
                 self.redis_client.rpush(key, v)
             self.redis_client.expire(key, self.ttl)
@@ -124,7 +122,6 @@ class PersistentSessionMemory:
                 self.redis_client.setex(session_key, self.ttl, json.dumps({"session_id": session_id}))
                 session_logger.info(f"✅ New session key: {session_id}")
 
-            ## Cleanup short-term expired memory before storing
             self.cleanup_expired_memory(session_id)
 
             is_image = memory_type == "image"
@@ -254,7 +251,6 @@ class PersistentSessionMemory:
             key = f"memory:{session_id}"
             self.redis_client.delete(key)
 
-            ## Cleanup first in case of remnants
             self.cleanup_expired_memory(session_id)
 
             for i, row in enumerate(rows):

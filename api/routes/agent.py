@@ -1,15 +1,14 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Depends, HTTPException
 from pydantic import BaseModel
 import logging, os, asyncio
 from typing import Optional, Union
-from langchain_tools.memory_agent import agent
-from memory.session_memory import PersistentSessionMemory
+
+# Don't directly import these classes at the module level
+# from langchain_tools.memory_agent import agent
+# from memory.session_memory import PersistentSessionMemory
 
 # 🔁 Router
 router = APIRouter()
-
-# 🧠 Memory Handler
-memory_handler = PersistentSessionMemory()
 
 # 📝 Logger
 logger = logging.getLogger("agent_logger")
@@ -34,9 +33,28 @@ class AgentInput(BaseModel):
     session_id: str
     input: dict  # expects {"text": "..."} or {"image_url": "..."}
 
+# Memory handler dependency - initialized later
+_memory_handler = None
+
+def get_memory_handler():
+    if _memory_handler is None:
+        raise HTTPException(status_code=500, detail="Memory handler not initialized")
+    return _memory_handler
+
+def init_memory_handler():
+    """Initialize the memory handler - call this after app is created"""
+    global _memory_handler
+    # Import here to avoid circular imports
+    from memory.session_memory import PersistentSessionMemory
+    _memory_handler = PersistentSessionMemory()
+    return _memory_handler
+
 # 🚀 GPT Actions Entry Point
 @router.post("/agent/run")
-async def run_agent(request: AgentInput):
+async def run_agent(
+    request: AgentInput,
+    memory_handler = Depends(get_memory_handler)
+):
     session_id = request.session_id
     user_input = request.input
 
@@ -66,3 +84,9 @@ async def run_agent(request: AgentInput):
                 "response": f"Image memory failed: {str(e)}",
                 "source_type": "image"
             }
+
+    # Text flow would go here
+    # For example:
+    # elif "text" in user_input:
+    #     # Process text input
+    #     pass

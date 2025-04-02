@@ -1776,3 +1776,93 @@ A detailed migration guide is available here: https://github.com/openai/openai-p
 2025-04-02 14:27:45,324 - INFO - 🚀 Memory agent initialized successfully.
 2025-04-02 14:27:45,325 - INFO - ✅ Connected to Neo4j.
 2025-04-02 14:27:45,329 - INFO - 🚀 FastAPI server started
+2025-04-02 14:41:12,260 - INFO - ✅ Redis connection established.
+2025-04-02 14:41:12,865 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 14:41:13,815 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 14:41:13,821 - INFO - ✅ Neo4j connection established.
+2025-04-02 14:41:13,856 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 14:41:13,902 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 14:41:13,903 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 14:41:13,906 - INFO - 🚀 FastAPI server started
+2025-04-02 14:42:35,489 - INFO - ✅ Redis connection established.
+2025-04-02 14:42:36,771 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 14:42:36,817 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 14:42:36,821 - INFO - ✅ Neo4j connection established.
+2025-04-02 14:42:36,857 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 14:42:36,902 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 14:42:36,903 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 14:42:37,033 - INFO - 🚀 FastAPI server started
+2025-04-02 14:43:26,780 - INFO - ✅ Redis connection established.
+2025-04-02 14:43:28,051 - INFO - 🚀 MemoryRouter initialized.
+2025-04-02 14:43:28,098 - INFO - ✅ PostgreSQL connection established.
+2025-04-02 14:43:28,102 - INFO - ✅ Neo4j connection established.
+2025-04-02 14:43:28,141 - INFO - 🔧 Tools registered: route_memory, clarify_intent
+2025-04-02 14:43:28,186 - INFO - ✅ GPT-4 LLM initialized.
+2025-04-02 14:43:28,186 - INFO - 🚀 Memory agent initialized successfully.
+2025-04-02 14:43:28,317 - INFO - 🚀 FastAPI server started
+2025-04-02 14:43:28,318 - INFO - ✅ Connected to Neo4j.
+2025-04-02 14:43:28,318 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-02 14:43:28,318 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-02 14:43:28,318 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-02 14:43:28,318 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-02 14:43:28,318 - INFO - Registered route: /health - {'GET'}
+2025-04-02 14:43:28,318 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 14:43:28,318 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 14:43:28,318 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 14:43:28,318 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 14:43:28,318 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 14:43:28,318 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-02 14:43:28,318 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 14:43:28,318 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 14:45:31,387 - INFO - ✅ Redis connection established.
+2025-04-02 14:45:31,395 - INFO - 🚀 FastAPI server started
+2025-04-02 14:45:31,992 - INFO - ✅ Connected to Neo4j.
+2025-04-02 14:45:31,992 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-02 14:45:31,992 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-02 14:45:31,992 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-02 14:45:31,992 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-02 14:45:31,992 - INFO - Registered route: /health - {'GET'}
+2025-04-02 14:45:31,992 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 14:45:31,992 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 14:45:31,993 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 14:45:31,993 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 14:45:31,993 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 14:45:31,993 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-02 14:45:31,993 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 14:45:31,993 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 14:46:58,035 - INFO - ✅ Redis connection established.
+2025-04-02 14:46:58,042 - INFO - 🚀 FastAPI server started
+2025-04-02 14:46:58,646 - INFO - ✅ Connected to Neo4j.
+2025-04-02 14:46:58,647 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-02 14:46:58,647 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-02 14:46:58,647 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-02 14:46:58,647 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-02 14:46:58,647 - INFO - Registered route: /health - {'GET'}
+2025-04-02 14:46:58,647 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 14:46:58,647 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 14:46:58,647 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 14:46:58,647 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 14:46:58,647 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 14:46:58,647 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-02 14:46:58,647 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 14:46:58,647 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 14:47:25,307 - INFO - ✅ Redis connection established.
+2025-04-02 14:47:25,315 - INFO - 🚀 FastAPI server started
+2025-04-02 14:47:26,573 - INFO - ✅ Connected to Neo4j.
+2025-04-02 14:47:26,573 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-02 14:47:26,573 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-02 14:47:26,573 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-02 14:47:26,573 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-02 14:47:26,573 - INFO - Registered route: /health - {'GET'}
+2025-04-02 14:47:26,573 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 14:47:26,573 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 14:47:26,573 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 14:47:26,573 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 14:47:26,573 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 14:47:26,573 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-02 14:47:26,573 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 14:47:26,573 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 14:47:34,610 - INFO - Request received: GET /health
+2025-04-02 14:47:34,610 - INFO - Client: 127.0.0.1
+2025-04-02 14:47:34,610 - INFO - 🩺 /health check
+2025-04-02 14:47:34,611 - INFO - Response status: 200

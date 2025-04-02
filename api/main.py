@@ -3,8 +3,6 @@ import os
 import logging
 import redis
 from fastapi import FastAPI, Depends, HTTPException, Request
-from pydantic import BaseModel
-from typing import Optional
 
 # 🔧 Project Path Setup
 sys.path.append("/root/projects/t1-brain")
@@ -17,6 +15,9 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
+
+# Import models first (no circular dependencies here)
+from api.models import ToolMemoryRequest
 
 # 🚀 FastAPI App
 app = FastAPI()
@@ -45,11 +46,6 @@ def verify_api_key(request: Request):
         raise HTTPException(status_code=401, detail="Invalid or missing API Key")
     return api_key
 
-# 📦 Pydantic Models for the routes in main.py
-class ToolMemoryRequest(BaseModel):
-    session_id: str
-    user_input: str
-
 # 🩺 Health Check
 @app.get("/health")
 async def health_check():
@@ -76,8 +72,9 @@ async def debug_routes():
 async def test_route_memory_tool(request: ToolMemoryRequest):
     logging.info(f"🔧 /tool/memory | session={request.session_id}")
     try:
-        # Import here to avoid circular imports
+        # Lazy import to avoid circular imports
         from memory.memory_router import MemoryRouter
+        
         router = MemoryRouter()
         enriched = router.enrich_and_classify(request.session_id, request.user_input)
         result = router.execute_action(
@@ -90,22 +87,20 @@ async def test_route_memory_tool(request: ToolMemoryRequest):
         logging.exception("❌ /tool/memory internal error")
         return {"status": "error", "message": str(e)}
 
-# ✅ Mount Routers - Order matters!
-# First include base routes
-from api.routes import memory
-app.include_router(memory.router, prefix="")
+# ✅ Mount Routers - import order matters!
+from api.routes import memory, agent
 
-# Then import agent router - make sure this imports don't create circular dependencies
-from api.routes import agent
+# Include routers
+app.include_router(memory.router, prefix="")
 app.include_router(agent.router, prefix="")
 
 @app.on_event("startup")
 async def startup_event():
     logging.info("🚀 FastAPI server started")
     
-    # Now initialize the memory handler
-    memory.init_memory_handler()
-    memory.init_graph_memory()
+    # Initialize dependencies
+    memory.init_dependencies()
+    agent.init_memory_handler()  # Initialize the agent's memory handler
     
     for route in app.routes:
         logging.info(f"Registered route: {route.path} - {route.methods}")

@@ -15,7 +15,6 @@ openai.api_key = get_api_key("text")
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-
 class GraphMemory:
     def __init__(self):
         try:
@@ -30,7 +29,6 @@ class GraphMemory:
             self.driver.close()
 
     def _extract_enrichment(self, query_param):
-        """Use OpenAI to extract emotion, intent, topic, lifespan, priority, reusability."""
         prompt = f"""
         Analyze the user's message and return:
         {{
@@ -79,7 +77,6 @@ class GraphMemory:
         return hashlib.sha256(query_text.encode('utf-8')).hexdigest()
 
     def store_graph_memory(self, session_id, query_param, response, memory_type, sentiment):
-        """Store enriched memory into graph DB with auto property handling."""
         try:
             enrich = self._extract_enrichment(query_param)
             timestamp = datetime.utcnow().isoformat()
@@ -111,13 +108,14 @@ class GraphMemory:
                      lifespan=enrich["lifespan"], priority=enrich["priority"],
                      reusability=enrich["reusability"], topic=enrich["topic"])
 
-                # Relationships
+                # Session-Memory Relationship
                 session.run("""
                     MATCH (s:Session {id: $session_id, project: $project}),
                           (m:Memory {hash: $query_hash, project: $project})
                     MERGE (s)-[:STORED]->(m)
                 """, session_id=session_id, query_hash=query_hash, project=project)
 
+                # Emotion Link
                 session.run("""
                     MERGE (e:Emotion {name: $emotion, project: $project})
                     WITH e
@@ -125,6 +123,7 @@ class GraphMemory:
                     MERGE (m)-[:EXPRESSES]->(e)
                 """, emotion=enrich["emotion"], query_hash=query_hash, project=project)
 
+                # Intent Link
                 session.run("""
                     MERGE (i:Intent {type: $intent, project: $project})
                     WITH i
@@ -132,6 +131,7 @@ class GraphMemory:
                     MERGE (m)-[:HAS_INTENT]->(i)
                 """, intent=enrich["intent"], query_hash=query_hash, project=project)
 
+                # Topic Link
                 session.run("""
                     MERGE (t:Topic {label: $topic, project: $project})
                     WITH t
@@ -139,11 +139,33 @@ class GraphMemory:
                     MERGE (m)-[:ABOUT]->(t)
                 """, topic=enrich["topic"], query_hash=query_hash, project=project)
 
+                # 🖼️ If image, store image node + link
+                if memory_type == "image":
+                    image_hash = query_hash  # reuse
+                    session.run("""
+                        MERGE (img:Image {hash: $image_hash, project: $project})
+                        SET img.description = $query_param,
+                            img.timestamp = $timestamp,
+                            img.source_type = "image"
+                    """, image_hash=image_hash, query_param=query_param,
+                         timestamp=timestamp, project=project)
+
+                    session.run("""
+                        MATCH (img:Image {hash: $image_hash, project: $project}),
+                              (m:Memory {hash: $query_hash, project: $project})
+                        MERGE (m)-[:REPRESENTED_BY]->(img)
+                    """, image_hash=image_hash, query_hash=query_hash, project=project)
+
+                    session.run("""
+                        MATCH (s:Session {id: $session_id, project: $project}),
+                              (img:Image {hash: $image_hash, project: $project})
+                        MERGE (s)-[:INCLUDES_IMAGE]->(img)
+                    """, session_id=session_id, image_hash=image_hash, project=project)
+
         except Exception as e:
             logger.error(f"❌ Error storing to graph DB: {e}")
 
     def retrieve_graph_memory(self, query_text, top_k=5):
-        """Retrieve related memory nodes."""
         try:
             with self.driver.session() as session:
                 result = session.run("""
@@ -155,7 +177,6 @@ class GraphMemory:
                     ORDER BY m.timestamp DESC
                     LIMIT $top_k
                 """, query_text=query_text, top_k=top_k)
-
                 return [record.data() for record in result]
         except Exception as e:
             logger.error(f"❌ Error retrieving from graph DB: {e}")

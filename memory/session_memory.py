@@ -1,4 +1,4 @@
-import os, json, time, redis, logging, psycopg2, numpy as np, tiktoken
+import os, json, time, redis, logging, psycopg2, hashlib, numpy as np, tiktoken
 from config import settings
 from openai import OpenAI
 from memory.graph_memory import GraphMemory
@@ -35,6 +35,9 @@ def chunk_by_tokens(text, max_tokens=300):
         chunks.append(" ".join(current))
     return chunks
 
+def sha256_hash(text):
+    return hashlib.sha256(text.encode()).hexdigest()
+
 class PersistentSessionMemory:
     def __init__(self):
         self.ttl = 86400
@@ -53,31 +56,17 @@ class PersistentSessionMemory:
             )
             self.pg_cursor = self.pg_conn.cursor()
 
-    def generate_embedding(self, content, memory_type="text"):
+    def generate_embedding(self, content):
         try:
-            api_key = get_api_key(memory_type)
+            api_key = get_api_key("text")
             client = OpenAI(api_key=api_key)
-
-            if memory_type == "image":
-                response = client.chat.completions.create(
-                    model="gpt-4o",
-                    messages=[
-                        {"role": "user", "content": [
-                            {"type": "text", "text": "Understand and embed this image:"},
-                            {"type": "image_url", "image_url": {"url": content}}
-                        ]}
-                    ]
-                )
-                return np.random.rand(1536).tolist()  # Placeholder
-            else:
-                response = client.embeddings.create(model="text-embedding-ada-002", input=content)
-                usage = getattr(response, 'usage', None)
-                if usage:
-                    token_logger.info(f"embedding | tokens={usage.total_tokens} | model=text-embedding-ada-002")
-                return response.data[0].embedding
-
+            response = client.embeddings.create(model="text-embedding-ada-002", input=content)
+            usage = getattr(response, 'usage', None)
+            if usage:
+                token_logger.info(f"embedding | tokens={usage.total_tokens} | model=text-embedding-ada-002")
+            return response.data[0].embedding
         except Exception as e:
-            session_logger.error(f"❌ Embedding error ({memory_type}): {e}")
+            session_logger.error(f"❌ Embedding error: {e}")
             return np.zeros(1536).tolist()
 
     def store_memory(self, session_id, query, response, memory_type="semantic", sentiment="neutral"):
@@ -98,58 +87,71 @@ class PersistentSessionMemory:
                         model="gpt-4o",
                         messages=[
                             {"role": "user", "content": [
-                                {"type": "text", "text": "Describe this image for knowledge embedding."},
+                                {"type": "text", "text": "Describe this image for memory embedding."},
                                 {"type": "image_url", "image_url": {"url": query}}
                             ]}
                         ]
                     )
-                    query = extraction.choices[0].message.content.strip()
-                    session_logger.info(f"🧠 Image description extracted: {query}")
+                    description = extraction.choices[0].message.content.strip()
+                    session_logger.info(f"🧠 Extracted image description: {description}")
+                    image_url = query
+                    query = description
                 except Exception as e:
-                    session_logger.error(f"❌ Image extraction failed: {e}")
+                    session_logger.error(f"❌ Image analysis failed: {e}")
                     return {"status": "error", "message": "Image analysis failed"}
 
-            input_chunks = [query] if is_image else chunk_by_tokens(query) if len(encoder.encode(query)) > 400 else [query]
+            chunks = [query] if is_image else chunk_by_tokens(query) if len(encoder.encode(query)) > 400 else [query]
 
-            for i, chunk in enumerate(input_chunks):
-                self.pg_cursor.execute(
-                    """SELECT 1 FROM embeddings WHERE session_id = %s AND query = %s AND response = %s LIMIT 1""",
-                    (session_id, chunk, response)
-                )
+            for i, chunk in enumerate(chunks):
+                chunk_id = f"{session_id}_chunk_{i+1}"
+                dedup_hash = sha256_hash(chunk + response)
+
+                self.pg_cursor.execute("SELECT 1 FROM embeddings WHERE sha_hash = %s LIMIT 1", (dedup_hash,))
                 if self.pg_cursor.fetchone():
-                    session_logger.info(f"⚠️ Duplicate skipped (chunk: {chunk[:50]})")
+                    session_logger.info(f"⚠️ Duplicate memory skipped (hash: {dedup_hash})")
                     continue
 
-                chunk_id = f"{session_id}_chunk_{i+1}"
-                memory_data = json.dumps({
+                embedding = self.generate_embedding(chunk)
+                embedding_str = "[" + ",".join(map(str, embedding)) + "]"
+
+                memory_metadata = {
                     "query": chunk,
                     "response": response,
                     "timestamp": time.time(),
                     "memory_type": memory_type,
                     "sentiment": sentiment,
-                    "chunk_id": chunk_id
-                })
+                    "chunk_id": chunk_id,
+                    "source_type": "image" if is_image else "text",
+                    "image_url": image_url if is_image else None
+                }
 
-                self.redis_client.rpush(f"memory:{session_id}", memory_data)
+                self.redis_client.rpush(f"memory:{session_id}", json.dumps(memory_metadata))
                 self.redis_client.expire(f"memory:{session_id}", self.ttl)
 
-                embedding = self.generate_embedding(chunk, memory_type=memory_type)
-                embedding_str = "[" + ",".join(map(str, embedding)) + "]"
-
                 self.pg_cursor.execute(
-                    """INSERT INTO embeddings (session_id, query, response, embedding, memory_type, sentiment, created_at)
-                       VALUES (%s, %s, %s, %s, %s, %s, NOW())""",
-                    (session_id, chunk, response, embedding_str, memory_type, sentiment)
+                    """INSERT INTO embeddings (session_id, query, response, embedding, memory_type, sentiment, source_type, image_url, sha_hash, created_at)
+                       VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, NOW())""",
+                    (
+                        session_id,
+                        chunk,
+                        response,
+                        embedding_str,
+                        memory_type,
+                        sentiment,
+                        "image" if is_image else "text",
+                        image_url if is_image else None,
+                        dedup_hash
+                    )
                 )
                 self.pg_conn.commit()
 
-            self.graph_memory.store_graph_memory(session_id, query, response, memory_type, sentiment)
+                self.graph_memory.store_graph_memory(session_id, chunk, response, memory_type, sentiment)
 
         except Exception as e:
             session_logger.error(f"❌ Store error: {e}")
             return {"status": "error", "message": "Memory store failed"}
 
-        return {"status": "stored", "message": f"Memory stored in {len(input_chunks)} chunk(s)."}
+        return {"status": "stored", "message": f"Memory stored in {len(chunks)} chunk(s)."}
 
     def retrieve_memory(self, session_id, query):
         try:

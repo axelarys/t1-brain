@@ -4,3 +4,7 @@
 2025-03-28 10:34:12,295 - INFO - ✅ Agent responded: {'status': 'success', 'response': '{\'input\': "[test_gpt_01] Remember that my launch deadline is April 10 and it\'s critical.", \'output\': "I\'ve made a note of your launch deadline. It\'s set for April 10 and I understand it\'s critical. I\'m here to help you stay on track."}'}
 2025-03-28 10:38:21,065 - INFO - 🟢 Received input: session_id=test_gpt_02, query=Store this: My mentor is Dr. Rao and I trust his advice deeply.
 2025-03-28 10:38:28,625 - INFO - ✅ Agent responded: {'status': 'success', 'response': "{'input': '[test_gpt_02] Store this: My mentor is Dr. Rao and I trust his advice deeply.', 'output': 'I have successfully stored the information that your mentor is Dr. Rao and you deeply trust his advice. If you need to recall this information or anything related to it, feel free to ask.'}"}
+2025-04-02 11:42:11,522 - INFO - 🖼️ Image input detected: session=test_image_moose, image_url=https://upload.wikimedia.org/wikipedia/commons/5/5f/Alaska_Moose.jpg
+2025-04-02 11:42:12,384 - INFO - ✅ Image memory stored: {'status': 'error', 'message': 'Image analysis failed'}
+2025-04-02 11:44:24,396 - INFO - 🖼️ Image input detected: session=test_image_cat, image_url=https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg
+2025-04-02 11:44:29,932 - INFO - ✅ Image memory stored: {'status': 'stored', 'message': 'Memory stored in 1 chunk(s).'}

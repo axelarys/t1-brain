@@ -43,11 +43,10 @@ class PersistentSessionMemory:
         self.pg_conn = None
         self.pg_cursor = None
         self.redis_client = redis.StrictRedis(host="localhost", port=6379, decode_responses=True)
-        self._graph_memory = None  # Will be initialized lazily
+        self._graph_memory = None  # Lazy init
 
     @property
     def graph_memory(self):
-        # Lazy initialization of graph memory to break circular dependency
         if self._graph_memory is None:
             from memory.graph_memory import GraphMemory
             self._graph_memory = GraphMemory()
@@ -228,3 +227,39 @@ class PersistentSessionMemory:
         except Exception as e:
             session_logger.error(f"❌ Session restore error: {e}")
             return {"status": "error", "message": "Restore failed"}
+
+    def summarize_session(self, session_id):
+        self.connect_to_db()
+        try:
+            memories = self.retrieve_memory(session_id, "")
+            if not memories:
+                return {"status": "error", "message": "No memory found to summarize."}
+
+            summary_input = "\n".join([f"User: {m['query']}\nAssistant: {m['response']}" for m in memories])
+            token_logger.info(f"summarize_session | input_length={len(summary_input)}")
+
+            api_key = get_api_key("text")
+            client = OpenAI(api_key=api_key)
+
+            response = client.chat.completions.create(
+                model="gpt-4o",
+                messages=[
+                    {"role": "system", "content": "Summarize the following conversation for memory recall:"},
+                    {"role": "user", "content": summary_input}
+                ]
+            )
+
+            summary_text = response.choices[0].message.content.strip()
+            session_logger.info(f"📄 Session summary generated:\n{summary_text}")
+
+            return self.store_memory(
+                session_id=session_id,
+                query="Session Summary",
+                response=summary_text,
+                memory_type="summary",
+                sentiment="neutral"
+            )
+
+        except Exception as e:
+            session_logger.error(f"❌ Summarization error: {e}")
+            return {"status": "error", "message": "Summarization failed"}

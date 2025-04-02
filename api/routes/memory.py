@@ -27,7 +27,6 @@ def init_dependencies():
     """Initialize required dependencies - called during app startup"""
     global _memory_handler, _graph_memory
     
-    # Import here to avoid circular import
     from memory.session_memory import PersistentSessionMemory
     from memory.graph_memory import GraphMemory
     
@@ -123,3 +122,12 @@ async def delete_memory(
 ):
     memory_handler = get_memory_handler()
     return memory_handler.delete_memory(request.session_id, request.query)
+
+# 🧠 Summarize Session
+@router.get("/memory/summarize")
+async def summarize_session(
+    session_id: str,
+    api_key: str = Depends(verify_api_key)
+):
+    memory_handler = get_memory_handler()
+    return memory_handler.summarize_session(session_id)

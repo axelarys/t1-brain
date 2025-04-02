@@ -4,14 +4,15 @@ from datetime import datetime
 import openai
 import re
 import hashlib
+import json
 
 from config.settings import GRAPH_URI, GRAPH_USER, GRAPH_PASSWORD
 from utils.memory_utils import get_api_key
 
-# Configure OpenAI using dynamic API key
+# Configure OpenAI
 openai.api_key = get_api_key("text")
 
-# Logging setup
+# Logger setup
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
@@ -28,16 +29,19 @@ class GraphMemory:
         if self.driver:
             self.driver.close()
 
+    def _hash_query(self, query_text):
+        return hashlib.sha256(query_text.encode('utf-8')).hexdigest()
+
     def _extract_enrichment(self, query_param):
         prompt = f"""
-        Analyze the user's message and return:
+        Extract topics, intent, emotion and metadata from this message:
+        Return JSON like:
         {{
-          "emotion": "happy/sad/etc",
+          "topics": ["topic1", "topic2"],
           "intent": "ask_question/reflect/etc",
-          "topic": "short_label",
-          "lifespan": "short_term/long_term/one_time",
-          "priority": "high/medium/low",
-          "reusability": "yes/no"
+          "emotion": "neutral/happy/etc",
+          "lifespan": "short_term/long_term",
+          "priority": "high/medium/low"
         }}
 
         Message: "{query_param}"
@@ -45,36 +49,24 @@ class GraphMemory:
 
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-4",
+                model="gpt-4o",
                 messages=[{"role": "user", "content": prompt}],
-                temperature=0.4
+                temperature=0.3
             )
-            text = response.choices[0].message['content']
-            match = re.search(r'{.*}', text, re.DOTALL)
+            content = response.choices[0].message['content']
+            match = re.search(r'{.*}', content, re.DOTALL)
             if match:
-                data = eval(match.group())
-                return {
-                    "emotion": data.get("emotion", "neutral"),
-                    "intent": data.get("intent", "unknown"),
-                    "topic": data.get("topic", "general"),
-                    "lifespan": data.get("lifespan", "short_term"),
-                    "priority": data.get("priority", "medium"),
-                    "reusability": data.get("reusability", "no")
-                }
+                return json.loads(match.group())
         except Exception as e:
-            logger.error(f"❌ OpenAI enrichment failed: {e}")
+            logger.warning(f"⚠️ GPT enrichment fallback: {e}")
 
         return {
-            "emotion": "neutral",
+            "topics": ["general"],
             "intent": "unknown",
-            "topic": "general",
+            "emotion": "neutral",
             "lifespan": "short_term",
-            "priority": "medium",
-            "reusability": "no"
+            "priority": "medium"
         }
-
-    def _hash_query(self, query_text):
-        return hashlib.sha256(query_text.encode('utf-8')).hexdigest()
 
     def store_graph_memory(self, session_id, query_param, response, memory_type, sentiment):
         try:
@@ -84,13 +76,13 @@ class GraphMemory:
             query_hash = self._hash_query(query_param)
 
             with self.driver.session() as session:
-                # Session Node
+                # Session node
                 session.run("""
                     MERGE (s:Session {id: $session_id, project: $project})
                     SET s.last_interaction = $timestamp
                 """, session_id=session_id, timestamp=timestamp, project=project)
 
-                # Memory Node
+                # Memory node
                 session.run("""
                     MERGE (m:Memory {hash: $query_hash, project: $project})
                     SET m.query_text = $query_param,
@@ -99,23 +91,19 @@ class GraphMemory:
                         m.memory_type = $memory_type,
                         m.timestamp = $timestamp,
                         m.lifespan = $lifespan,
-                        m.priority = $priority,
-                        m.reusability = $reusability,
-                        m.topic = $topic
+                        m.priority = $priority
                 """, query_hash=query_hash, query_param=query_param, response=response,
-                     sentiment=sentiment, memory_type=memory_type,
-                     timestamp=timestamp, project=project,
-                     lifespan=enrich["lifespan"], priority=enrich["priority"],
-                     reusability=enrich["reusability"], topic=enrich["topic"])
+                     sentiment=sentiment, memory_type=memory_type, timestamp=timestamp,
+                     lifespan=enrich["lifespan"], priority=enrich["priority"], project=project)
 
-                # Session-Memory Relationship
+                # Session -> Memory
                 session.run("""
                     MATCH (s:Session {id: $session_id, project: $project}),
                           (m:Memory {hash: $query_hash, project: $project})
                     MERGE (s)-[:STORED]->(m)
                 """, session_id=session_id, query_hash=query_hash, project=project)
 
-                # Emotion Link
+                # Intent + Emotion
                 session.run("""
                     MERGE (e:Emotion {name: $emotion, project: $project})
                     WITH e
@@ -123,7 +111,6 @@ class GraphMemory:
                     MERGE (m)-[:EXPRESSES]->(e)
                 """, emotion=enrich["emotion"], query_hash=query_hash, project=project)
 
-                # Intent Link
                 session.run("""
                     MERGE (i:Intent {type: $intent, project: $project})
                     WITH i
@@ -131,36 +118,48 @@ class GraphMemory:
                     MERGE (m)-[:HAS_INTENT]->(i)
                 """, intent=enrich["intent"], query_hash=query_hash, project=project)
 
-                # Topic Link
-                session.run("""
-                    MERGE (t:Topic {label: $topic, project: $project})
-                    WITH t
-                    MATCH (m:Memory {hash: $query_hash, project: $project})
-                    MERGE (m)-[:ABOUT]->(t)
-                """, topic=enrich["topic"], query_hash=query_hash, project=project)
-
-                # 🖼️ If image, store image node + link
-                if memory_type == "image":
-                    image_hash = query_hash  # reuse
-                    session.run("""
-                        MERGE (img:Image {hash: $image_hash, project: $project})
-                        SET img.description = $query_param,
-                            img.timestamp = $timestamp,
-                            img.source_type = "image"
-                    """, image_hash=image_hash, query_param=query_param,
-                         timestamp=timestamp, project=project)
+                # Topic relationships
+                for topic in enrich["topics"]:
+                    topic = topic.strip()
+                    if not topic:
+                        continue
 
                     session.run("""
-                        MATCH (img:Image {hash: $image_hash, project: $project}),
-                              (m:Memory {hash: $query_hash, project: $project})
-                        MERGE (m)-[:REPRESENTED_BY]->(img)
-                    """, image_hash=image_hash, query_hash=query_hash, project=project)
+                        MERGE (t:Topic {label: $topic, project: $project})
+                        ON CREATE SET t.created_at = $timestamp
+                    """, topic=topic, project=project, timestamp=timestamp)
+
+                    session.run("""
+                        MATCH (m:Memory {hash: $query_hash, project: $project}),
+                              (t:Topic {label: $topic, project: $project})
+                        MERGE (m)-[:MENTIONS]->(t)
+                    """, topic=topic, query_hash=query_hash, project=project)
 
                     session.run("""
                         MATCH (s:Session {id: $session_id, project: $project}),
-                              (img:Image {hash: $image_hash, project: $project})
+                              (t:Topic {label: $topic, project: $project})
+                        MERGE (s)-[:TOUCHED]->(t)
+                    """, session_id=session_id, topic=topic, project=project)
+
+                # Image memory
+                if memory_type == "image":
+                    session.run("""
+                        MERGE (img:Image {hash: $query_hash, project: $project})
+                        SET img.description = $query_param,
+                            img.timestamp = $timestamp
+                    """, query_hash=query_hash, query_param=query_param, timestamp=timestamp, project=project)
+
+                    session.run("""
+                        MATCH (img:Image {hash: $query_hash, project: $project}),
+                              (m:Memory {hash: $query_hash, project: $project})
+                        MERGE (m)-[:REPRESENTED_BY]->(img)
+                    """, query_hash=query_hash, project=project)
+
+                    session.run("""
+                        MATCH (s:Session {id: $session_id, project: $project}),
+                              (img:Image {hash: $query_hash, project: $project})
                         MERGE (s)-[:INCLUDES_IMAGE]->(img)
-                    """, session_id=session_id, image_hash=image_hash, project=project)
+                    """, session_id=session_id, query_hash=query_hash, project=project)
 
         except Exception as e:
             logger.error(f"❌ Error storing to graph DB: {e}")
@@ -170,7 +169,7 @@ class GraphMemory:
             with self.driver.session() as session:
                 result = session.run("""
                     MATCH (m:Memory {project: 't1brain'})
-                    WHERE m.query_text CONTAINS $query_text OR m.topic CONTAINS $query_text
+                    WHERE m.query_text CONTAINS $query_text OR m.memory_type = $query_text
                     RETURN m.query_text AS query, m.response AS response, m.timestamp AS timestamp,
                            m.sentiment AS sentiment, m.memory_type AS memory_type,
                            m.priority AS priority, m.lifespan AS lifespan

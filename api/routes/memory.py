@@ -131,3 +131,12 @@ async def summarize_session(
 ):
     memory_handler = get_memory_handler()
     return memory_handler.summarize_session(session_id)
+
+# 🧹 Manual Cleanup of Expired Short-Term Memory
+@router.post("/memory/cleanup")
+async def cleanup_session_memory(
+    session_id: str,
+    api_key: str = Depends(verify_api_key)
+):
+    memory_handler = get_memory_handler()
+    return memory_handler.cleanup_expired_memory(session_id)

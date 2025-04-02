@@ -62,6 +62,47 @@ class PersistentSessionMemory:
             )
             self.pg_cursor = self.pg_conn.cursor()
 
+    def cleanup_expired_memory(self, session_id):
+        try:
+            key = f"memory:{session_id}"
+            if not self.redis_client.exists(key):
+                return {"status": "skipped", "message": "No memory to clean."}
+
+            now = time.time()
+            valid_memory = []
+            removed_count = 0
+
+            all_memory = self.redis_client.lrange(key, 0, -1)
+            self.redis_client.delete(key)  ## clear list to re-insert only valid ones
+
+            for m in all_memory:
+                try:
+                    m_obj = json.loads(m)
+                    policy = m_obj.get("memory_policy", {})
+                    expiration = policy.get("expiration", 0)
+                    short_term = policy.get("short_term", False)
+                    timestamp = m_obj.get("timestamp", 0)
+
+                    ## if expired short-term → skip
+                    if short_term and expiration and now > (timestamp + expiration):
+                        removed_count += 1
+                        continue
+
+                    valid_memory.append(json.dumps(m_obj))
+                except Exception as e:
+                    session_logger.warning(f"⚠️ Failed parsing memory item: {e}")
+
+            ## re-push valid ones
+            for v in valid_memory:
+                self.redis_client.rpush(key, v)
+            self.redis_client.expire(key, self.ttl)
+
+            return {"status": "cleaned", "removed": removed_count, "retained": len(valid_memory)}
+
+        except Exception as e:
+            session_logger.error(f"❌ Cleanup error: {e}")
+            return {"status": "error", "message": "Cleanup failed"}
+
     def generate_embedding(self, content):
         try:
             api_key = get_api_key("text")
@@ -82,6 +123,9 @@ class PersistentSessionMemory:
             if not self.redis_client.exists(session_key):
                 self.redis_client.setex(session_key, self.ttl, json.dumps({"session_id": session_id}))
                 session_logger.info(f"✅ New session key: {session_id}")
+
+            ## Cleanup short-term expired memory before storing
+            self.cleanup_expired_memory(session_id)
 
             is_image = memory_type == "image"
             if is_image:
@@ -127,7 +171,11 @@ class PersistentSessionMemory:
                     "sentiment": sentiment,
                     "chunk_id": chunk_id,
                     "source_type": "image" if is_image else "text",
-                    "image_url": image_url if is_image else None
+                    "image_url": image_url if is_image else None,
+                    "memory_policy": {
+                        "short_term": memory_type != "summary",
+                        "expiration": 3 * 86400 if memory_type != "summary" else 0
+                    }
                 }
 
                 self.redis_client.rpush(f"memory:{session_id}", json.dumps(memory_metadata))
@@ -206,6 +254,9 @@ class PersistentSessionMemory:
             key = f"memory:{session_id}"
             self.redis_client.delete(key)
 
+            ## Cleanup first in case of remnants
+            self.cleanup_expired_memory(session_id)
+
             for i, row in enumerate(rows):
                 query, response, memory_type, sentiment, source_type, image_url = row
                 memory = {
@@ -216,7 +267,11 @@ class PersistentSessionMemory:
                     "sentiment": sentiment,
                     "chunk_id": f"{session_id}_chunk_{i+1}",
                     "source_type": source_type,
-                    "image_url": image_url
+                    "image_url": image_url,
+                    "memory_policy": {
+                        "short_term": memory_type != "summary",
+                        "expiration": 3 * 86400 if memory_type != "summary" else 0
+                    }
                 }
                 self.redis_client.rpush(key, json.dumps(memory))
 

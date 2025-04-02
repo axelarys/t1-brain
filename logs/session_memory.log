@@ -1883,3 +1883,49 @@ A detailed migration guide is available here: https://github.com/openai/openai-p
 2025-04-02 19:17:44,464 - INFO - Registered route: /memory/delete - {'DELETE'}
 2025-04-02 19:17:44,464 - INFO - Registered route: /memory/summarize - {'GET'}
 2025-04-02 19:17:44,464 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 19:19:49,680 - INFO - ✅ Redis connection established.
+2025-04-02 19:19:49,688 - INFO - 🚀 FastAPI server started
+2025-04-02 19:19:50,304 - INFO - ✅ Connected to Neo4j.
+2025-04-02 19:19:50,304 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-02 19:19:50,304 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-02 19:19:50,305 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-02 19:19:50,305 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-02 19:19:50,305 - INFO - Registered route: /health - {'GET'}
+2025-04-02 19:19:50,305 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 19:19:50,305 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 19:19:50,305 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 19:19:50,305 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 19:19:50,305 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 19:19:50,305 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-02 19:19:50,305 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 19:19:50,305 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-02 19:19:50,305 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 19:21:12,438 - INFO - Request received: GET /health
+2025-04-02 19:21:12,438 - INFO - Client: 127.0.0.1
+2025-04-02 19:21:12,439 - INFO - 🩺 /health check
+2025-04-02 19:21:12,440 - INFO - Response status: 200
+2025-04-02 19:21:17,359 - INFO - Request received: GET /health
+2025-04-02 19:21:17,359 - INFO - Client: 127.0.0.1
+2025-04-02 19:21:17,360 - INFO - 🩺 /health check
+2025-04-02 19:21:17,361 - INFO - Response status: 200
+2025-04-02 19:26:56,069 - INFO - Request received: GET /memory/summarize
+2025-04-02 19:26:56,070 - INFO - Client: 127.0.0.1
+2025-04-02 19:26:56,100 - INFO - summarize_session | input_length=63
+2025-04-02 19:26:58,366 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-02 19:26:58,376 - INFO - 📄 Session summary generated:
+I can't store personal data or remember quotes permanently. However, I can help you with information and context about the quote "Simplicity is power" if you want.
+2025-04-02 19:26:59,417 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-02 19:26:59,419 - INFO - embedding | tokens=2 | model=text-embedding-ada-002
+2025-04-02 19:26:59,429 - INFO - ✅ Connected to Neo4j.
+2025-04-02 19:26:59,430 - ERROR - ❌ OpenAI enrichment failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-02 19:26:59,537 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-04-02 19:26:59,622 - INFO - Response status: 200

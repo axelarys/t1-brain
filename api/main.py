@@ -72,7 +72,6 @@ async def debug_routes():
 async def test_route_memory_tool(request: ToolMemoryRequest):
     logging.info(f"🔧 /tool/memory | session={request.session_id}")
     try:
-        # Lazy import to avoid circular imports
         from memory.memory_router import MemoryRouter
         
         router = MemoryRouter()
@@ -89,18 +88,19 @@ async def test_route_memory_tool(request: ToolMemoryRequest):
 
 # ✅ Mount Routers - import order matters!
 from api.routes import memory, agent
+from api.routes.tool import tool_router  # ✅ NEW
 
 # Include routers
 app.include_router(memory.router, prefix="")
 app.include_router(agent.router, prefix="")
+app.include_router(tool_router, prefix="")  # ✅ NEW
 
 @app.on_event("startup")
 async def startup_event():
     logging.info("🚀 FastAPI server started")
     
-    # Initialize dependencies
     memory.init_dependencies()
-    agent.init_memory_handler()  # Initialize the agent's memory handler
+    agent.init_memory_handler()
     
     for route in app.routes:
         logging.info(f"Registered route: {route.path} - {route.methods}")

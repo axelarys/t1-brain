@@ -4,7 +4,6 @@ from openai import OpenAI
 
 from config import settings
 from utils.memory_utils import get_api_key
-from memory.session_memory import PersistentSessionMemory
 
 # 📁 Logging Setup
 log_dir = "/root/projects/t1-brain/logs/"
@@ -27,9 +26,11 @@ token_logger.setLevel(logging.INFO)
 
 router_logger.info("🚀 MemoryRouter initialized.")
 
+
 class MemoryRouter:
     def __init__(self):
-        self.memory = PersistentSessionMemory()
+        # Lazy initialization for memory
+        self._memory = None
         self.client = OpenAI(api_key=get_api_key("text"))
 
         try:
@@ -56,6 +57,14 @@ class MemoryRouter:
         except Exception as e:
             router_logger.error(f"❌ Neo4j connection error: {e}")
             self.neo4j_driver = None
+            
+    @property
+    def memory(self):
+        if self._memory is None:
+            # Import at the point of use to avoid circular dependency
+            from memory.session_memory import PersistentSessionMemory
+            self._memory = PersistentSessionMemory()
+        return self._memory
 
     def enrich_and_classify(self, user_id: str, user_input: str) -> dict:
         session_id = f"user_{user_id}"
@@ -64,7 +73,7 @@ class MemoryRouter:
         system_prompt = (
             "You are an AI that analyzes queries and returns a structured JSON with: "
             "intent, emotion, topic, priority, lifespan, and storage_target "
-            "(choose from: 'graph', 'vector', 'retrieve_logic', 'update_logic', 'delete_logic', 'clarify_logic')."
+            "(choose from: 'graph', 'vector', 'update_logic', 'delete_logic')."
         )
 
         try:
@@ -113,34 +122,17 @@ class MemoryRouter:
             "storage_target": "graph"
         }
 
-    def execute_action(self, session_id: str, user_input: str, enriched: dict):
-        action = enriched.get("storage_target", "vector")
-        emotion = enriched.get("emotion", "neutral")
-        topic = enriched.get("topic", "general")
-
+    def execute_action(self, session_id: str, user_input: str, enriched: dict) -> dict:
         try:
-            if action == "vector":
-                return self.memory.store_memory(session_id, user_input, "", memory_type="semantic", sentiment=emotion)
-
-            elif action == "graph":
-                return self.memory.store_memory(session_id, user_input, "", memory_type="semantic", sentiment=emotion)
-
-            elif action == "retrieve_logic":
-                results = self.memory.find_similar_queries(user_input)
-                return {"status": "retrieved", "results": results}
-
-            elif action == "delete_logic":
-                return self.memory.delete_memory(session_id, user_input)
-
-            elif action == "clarify_logic":
-                return {"status": "todo", "message": "Clarification logic will be handled by clarify_intent tool."}
-
-            elif action == "update_logic":
-                return {"status": "todo", "message": "Update logic not implemented yet."}
-
-            else:
-                return {"status": "skipped", "message": f"No handler for storage_target: {action}"}
-
+            # Store directly using session memory logic
+            response = ""  # can be improved with actual assistant response if needed
+            return self.memory.store_memory(
+                session_id=session_id,
+                query=user_input,
+                response=response,
+                memory_type=enriched.get("storage_target", "semantic"),
+                sentiment=enriched.get("emotion", "neutral")
+            )
         except Exception as e:
-            router_logger.error(f"❌ Action execution error: {e}")
-            return {"status": "error", "message": str(e)}
+            router_logger.error(f"❌ Action execution failed: {e}")
+            return {"status": "error", "message": "Failed to execute memory logic"}

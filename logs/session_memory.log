@@ -2114,3 +2114,608 @@ A detailed migration guide is available here: https://github.com/openai/openai-p
 2025-04-02 20:21:25,943 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (m:Memory {hash: $query_hash, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (m)-[:MENTIONS]->(t)\n                    '
 2025-04-02 20:21:25,945 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (s:Session {id: $session_id, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (s)-[:TOUCHED]->(t)\n                    '
 2025-04-02 20:21:25,946 - INFO - Response status: 200
+2025-04-02 20:25:50,941 - INFO - ✅ Redis connection established.
+2025-04-02 20:25:50,949 - INFO - 🚀 FastAPI server started
+2025-04-02 20:25:51,539 - INFO - ✅ Connected to Neo4j.
+2025-04-02 20:25:51,539 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /health - {'GET'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-02 20:25:51,539 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-02 20:25:54,744 - INFO - Request received: GET /health
+2025-04-02 20:25:54,744 - INFO - Client: 127.0.0.1
+2025-04-02 20:25:54,745 - INFO - 🩺 /health check
+2025-04-02 20:25:54,745 - INFO - Response status: 200
+2025-04-02 20:27:43,379 - INFO - Request received: GET /
+2025-04-02 20:27:43,379 - INFO - Client: 87.236.176.79
+2025-04-02 20:27:43,380 - INFO - Response status: 404
+2025-04-02 21:33:00,635 - INFO - Request received: GET /
+2025-04-02 21:33:00,635 - INFO - Client: 106.75.5.138
+2025-04-02 21:33:00,636 - INFO - Response status: 404
+2025-04-02 21:36:32,584 - INFO - Request received: GET /
+2025-04-02 21:36:32,584 - INFO - Client: 106.75.147.247
+2025-04-02 21:36:32,584 - INFO - Response status: 404
+2025-04-02 21:36:33,494 - INFO - Request received: GET /favicon.ico
+2025-04-02 21:36:33,494 - INFO - Client: 106.75.147.247
+2025-04-02 21:36:33,495 - INFO - Response status: 404
+2025-04-02 23:53:33,214 - INFO - Request received: GET /
+2025-04-02 23:53:33,214 - INFO - Client: 152.32.200.117
+2025-04-02 23:53:33,215 - INFO - Response status: 404
+2025-04-02 23:53:38,687 - INFO - Request received: GET /favicon.ico
+2025-04-02 23:53:38,687 - INFO - Client: 152.32.200.117
+2025-04-02 23:53:38,688 - INFO - Response status: 404
+2025-04-02 23:53:39,392 - INFO - Request received: GET /robots.txt
+2025-04-02 23:53:39,392 - INFO - Client: 152.32.200.117
+2025-04-02 23:53:39,393 - INFO - Response status: 404
+2025-04-02 23:53:40,105 - INFO - Request received: GET /sitemap.xml
+2025-04-02 23:53:40,106 - INFO - Client: 152.32.200.117
+2025-04-02 23:53:40,106 - INFO - Response status: 404
+2025-04-02 23:58:03,184 - INFO - Request received: GET /.git/config
+2025-04-02 23:58:03,184 - INFO - Client: 52.91.183.94
+2025-04-02 23:58:03,185 - INFO - Response status: 404
+2025-04-03 01:31:07,352 - INFO - Request received: GET /src/.git/config
+2025-04-03 01:31:07,352 - INFO - Client: 52.91.183.94
+2025-04-03 01:31:07,353 - INFO - Response status: 404
+2025-04-03 01:58:24,051 - INFO - Request received: GET /
+2025-04-03 01:58:24,051 - INFO - Client: 91.196.152.77
+2025-04-03 01:58:24,053 - INFO - Response status: 404
+2025-04-03 01:58:48,674 - INFO - Request received: GET /
+2025-04-03 01:58:48,674 - INFO - Client: 91.196.152.76
+2025-04-03 01:58:48,675 - INFO - Response status: 404
+2025-04-03 01:59:05,965 - INFO - Request received: GET /
+2025-04-03 01:59:05,965 - INFO - Client: 5.135.58.192
+2025-04-03 01:59:05,966 - INFO - Response status: 404
+2025-04-03 02:05:54,664 - INFO - Request received: GET /favicon.ico
+2025-04-03 02:05:54,664 - INFO - Client: 91.196.152.153
+2025-04-03 02:05:54,665 - INFO - Response status: 404
+2025-04-03 02:05:59,141 - INFO - Request received: GET /favicon.ico
+2025-04-03 02:05:59,141 - INFO - Client: 91.196.152.56
+2025-04-03 02:05:59,141 - INFO - Response status: 404
+2025-04-03 02:06:27,850 - INFO - Request received: GET /favicon.ico
+2025-04-03 02:06:27,850 - INFO - Client: 91.196.152.65
+2025-04-03 02:06:27,851 - INFO - Response status: 404
+2025-04-03 02:59:53,689 - INFO - Request received: GET /
+2025-04-03 02:59:53,689 - INFO - Client: 154.212.141.159
+2025-04-03 02:59:53,690 - INFO - Response status: 404
+2025-04-03 03:04:54,625 - INFO - Request received: GET /backend/.git/config
+2025-04-03 03:04:54,626 - INFO - Client: 52.91.183.94
+2025-04-03 03:04:54,626 - INFO - Response status: 404
+2025-04-03 03:13:46,386 - INFO - Request received: GET /
+2025-04-03 03:13:46,386 - INFO - Client: 87.191.160.152
+2025-04-03 03:13:46,386 - INFO - Response status: 404
+2025-04-03 03:46:56,118 - INFO - Request received: GET /
+2025-04-03 03:46:56,118 - INFO - Client: 104.236.209.11
+2025-04-03 03:46:56,118 - INFO - Response status: 404
+2025-04-03 04:02:27,830 - INFO - Request received: GET /
+2025-04-03 04:02:27,830 - INFO - Client: 104.236.209.11
+2025-04-03 04:02:27,831 - INFO - Response status: 404
+2025-04-03 04:39:16,789 - INFO - Request received: GET /api/.git/config
+2025-04-03 04:39:16,790 - INFO - Client: 52.91.183.94
+2025-04-03 04:39:16,790 - INFO - Response status: 404
+2025-04-03 06:12:32,016 - INFO - Request received: GET /staging/.git/config
+2025-04-03 06:12:32,016 - INFO - Client: 52.91.183.94
+2025-04-03 06:12:32,016 - INFO - Response status: 404
+2025-04-03 08:02:57,787 - INFO - Request received: GET /
+2025-04-03 08:02:57,787 - INFO - Client: 185.196.11.109
+2025-04-03 08:02:57,788 - INFO - Response status: 404
+2025-04-03 08:03:04,893 - INFO - Request received: GET /favicon.ico
+2025-04-03 08:03:04,893 - INFO - Client: 185.196.11.109
+2025-04-03 08:03:04,894 - INFO - Response status: 404
+2025-04-03 08:26:57,311 - INFO - Request received: GET /
+2025-04-03 08:26:57,312 - INFO - Client: 59.126.32.90
+2025-04-03 08:26:57,312 - INFO - Response status: 404
+2025-04-03 09:05:45,361 - INFO - Request received: GET /
+2025-04-03 09:05:45,361 - INFO - Client: 167.94.145.108
+2025-04-03 09:05:45,362 - INFO - Response status: 404
+2025-04-03 09:05:53,931 - INFO - Request received: GET /
+2025-04-03 09:05:53,931 - INFO - Client: 167.94.145.108
+2025-04-03 09:05:53,932 - INFO - Response status: 404
+2025-04-03 09:05:54,182 - INFO - Request received: PRI 
+2025-04-03 09:05:54,183 - INFO - Client: 167.94.145.108
+2025-04-03 09:05:54,183 - INFO - Response status: 404
+2025-04-03 09:05:59,730 - INFO - Request received: GET /favicon.ico
+2025-04-03 09:05:59,730 - INFO - Client: 167.94.145.108
+2025-04-03 09:05:59,731 - INFO - Response status: 404
+2025-04-03 09:53:37,883 - INFO - Request received: GET /
+2025-04-03 09:53:37,883 - INFO - Client: 210.209.193.216
+2025-04-03 09:53:37,884 - INFO - Response status: 404
+2025-04-03 10:06:38,078 - INFO - Request received: GET /
+2025-04-03 10:06:38,078 - INFO - Client: 123.205.67.17
+2025-04-03 10:06:38,079 - INFO - Response status: 404
+2025-04-03 10:27:32,781 - INFO - Request received: GET /
+2025-04-03 10:27:32,781 - INFO - Client: 220.135.101.92
+2025-04-03 10:27:32,782 - INFO - Response status: 404
+2025-04-03 13:11:54,060 - INFO - Request received: GET /
+2025-04-03 13:11:54,060 - INFO - Client: 113.61.243.40
+2025-04-03 13:11:54,061 - INFO - Response status: 404
+2025-04-03 13:13:51,741 - INFO - Request received: GET /
+2025-04-03 13:13:51,741 - INFO - Client: 205.210.31.219
+2025-04-03 13:13:51,742 - INFO - Response status: 404
+2025-04-03 14:00:21,527 - INFO - Request received: GET /
+2025-04-03 14:00:21,527 - INFO - Client: 64.23.217.124
+2025-04-03 14:00:21,528 - INFO - Response status: 404
+2025-04-03 14:00:22,056 - INFO - Request received: GET /login
+2025-04-03 14:00:22,056 - INFO - Client: 64.23.217.124
+2025-04-03 14:00:22,057 - INFO - Response status: 404
+2025-04-03 14:42:07,160 - INFO - Request received: CONNECT 
+2025-04-03 14:42:07,161 - INFO - Client: 116.107.167.204
+2025-04-03 14:42:07,161 - INFO - Response status: 404
+2025-04-03 15:54:23,471 - INFO - Request received: GET /
+2025-04-03 15:54:23,471 - INFO - Client: 104.236.209.11
+2025-04-03 15:54:23,472 - INFO - Response status: 404
+2025-04-03 16:39:58,270 - INFO - Request received: GET /
+2025-04-03 16:39:58,270 - INFO - Client: 99.113.27.192
+2025-04-03 16:39:58,271 - INFO - Response status: 404
+2025-04-03 16:52:56,907 - INFO - Request received: GET /
+2025-04-03 16:52:56,907 - INFO - Client: 65.49.1.58
+2025-04-03 16:52:56,908 - INFO - Response status: 404
+2025-04-03 16:53:12,696 - INFO - Request received: GET /favicon.ico
+2025-04-03 16:53:12,696 - INFO - Client: 65.49.1.54
+2025-04-03 16:53:12,697 - INFO - Response status: 404
+2025-04-03 16:53:16,820 - INFO - Request received: GET //api.ipify.org/
+2025-04-03 16:53:16,820 - INFO - Client: 65.49.1.65
+2025-04-03 16:53:16,821 - INFO - Response status: 404
+2025-04-03 16:53:19,492 - INFO - Request received: CONNECT 
+2025-04-03 16:53:19,493 - INFO - Client: 65.49.1.53
+2025-04-03 16:53:19,493 - INFO - Response status: 404
+2025-04-03 17:58:47,697 - INFO - Request received: GET /
+2025-04-03 17:58:47,698 - INFO - Client: 176.35.81.242
+2025-04-03 17:58:47,698 - INFO - Response status: 404
+2025-04-03 18:33:40,741 - INFO - Request received: GET /
+2025-04-03 18:33:40,741 - INFO - Client: 159.203.37.62
+2025-04-03 18:33:40,742 - INFO - Response status: 404
+2025-04-03 18:33:41,086 - INFO - Request received: GET /favicon.ico
+2025-04-03 18:33:41,086 - INFO - Client: 159.203.37.62
+2025-04-03 18:33:41,086 - INFO - Response status: 404
+2025-04-03 21:20:09,576 - INFO - Request received: GET /
+2025-04-03 21:20:09,576 - INFO - Client: 167.94.146.59
+2025-04-03 21:20:09,577 - INFO - Response status: 404
+2025-04-03 21:20:17,635 - INFO - Request received: GET /
+2025-04-03 21:20:17,635 - INFO - Client: 167.94.146.59
+2025-04-03 21:20:17,635 - INFO - Response status: 404
+2025-04-03 21:20:17,724 - INFO - Request received: PRI 
+2025-04-03 21:20:17,724 - INFO - Client: 167.94.146.59
+2025-04-03 21:20:17,724 - INFO - Response status: 404
+2025-04-03 21:20:20,781 - INFO - Request received: GET /favicon.ico
+2025-04-03 21:20:20,781 - INFO - Client: 167.94.146.59
+2025-04-03 21:20:20,782 - INFO - Response status: 404
+2025-04-03 22:51:33,206 - INFO - Request received: GET /
+2025-04-03 22:51:33,206 - INFO - Client: 162.154.191.67
+2025-04-03 22:51:33,207 - INFO - Response status: 404
+2025-04-03 23:10:45,518 - INFO - Request received: GET /
+2025-04-03 23:10:45,518 - INFO - Client: 206.168.34.78
+2025-04-03 23:10:45,518 - INFO - Response status: 404
+2025-04-03 23:10:58,666 - INFO - Request received: GET /
+2025-04-03 23:10:58,666 - INFO - Client: 206.168.34.78
+2025-04-03 23:10:58,666 - INFO - Response status: 404
+2025-04-03 23:11:00,247 - INFO - Request received: PRI 
+2025-04-03 23:11:00,247 - INFO - Client: 206.168.34.78
+2025-04-03 23:11:00,247 - INFO - Response status: 404
+2025-04-03 23:11:09,246 - INFO - Request received: GET /favicon.ico
+2025-04-03 23:11:09,246 - INFO - Client: 206.168.34.78
+2025-04-03 23:11:09,247 - INFO - Response status: 404
+2025-04-03 23:13:54,341 - INFO - Request received: GET /
+2025-04-03 23:13:54,342 - INFO - Client: 128.14.227.37
+2025-04-03 23:13:54,342 - INFO - Response status: 404
+2025-04-03 23:13:59,805 - INFO - Request received: GET /favicon.ico
+2025-04-03 23:13:59,805 - INFO - Client: 128.14.227.37
+2025-04-03 23:13:59,806 - INFO - Response status: 404
+2025-04-03 23:14:00,551 - INFO - Request received: GET /robots.txt
+2025-04-03 23:14:00,551 - INFO - Client: 128.14.227.37
+2025-04-03 23:14:00,552 - INFO - Response status: 404
+2025-04-03 23:14:01,252 - INFO - Request received: GET /sitemap.xml
+2025-04-03 23:14:01,252 - INFO - Client: 128.14.227.37
+2025-04-03 23:14:01,252 - INFO - Response status: 404
+2025-04-04 00:04:19,312 - INFO - Request received: GET /
+2025-04-04 00:04:19,312 - INFO - Client: 219.102.112.152
+2025-04-04 00:04:19,312 - INFO - Response status: 404
+2025-04-04 01:09:35,108 - INFO - Request received: GET /
+2025-04-04 01:09:35,108 - INFO - Client: 73.192.184.224
+2025-04-04 01:09:35,109 - INFO - Response status: 404
+2025-04-04 01:24:15,800 - INFO - Request received: GET /
+2025-04-04 01:24:15,800 - INFO - Client: 195.178.110.224
+2025-04-04 01:24:15,801 - INFO - Response status: 404
+2025-04-04 01:58:46,311 - INFO - Request received: GET /
+2025-04-04 01:58:46,312 - INFO - Client: 198.235.24.169
+2025-04-04 01:58:46,312 - INFO - Response status: 404
+2025-04-04 03:06:12,344 - INFO - Request received: GET /
+2025-04-04 03:06:12,344 - INFO - Client: 198.235.24.66
+2025-04-04 03:06:12,345 - INFO - Response status: 404
+2025-04-04 03:11:48,103 - INFO - Request received: GET /
+2025-04-04 03:11:48,103 - INFO - Client: 175.143.29.212
+2025-04-04 03:11:48,104 - INFO - Response status: 404
+2025-04-04 03:21:20,456 - INFO - Request received: GET /
+2025-04-04 03:21:20,456 - INFO - Client: 88.249.252.177
+2025-04-04 03:21:20,457 - INFO - Response status: 404
+2025-04-04 04:00:22,284 - INFO - Request received: GET /
+2025-04-04 04:00:22,284 - INFO - Client: 220.132.173.50
+2025-04-04 04:00:22,285 - INFO - Response status: 404
+2025-04-04 04:02:15,132 - INFO - Request received: GET /
+2025-04-04 04:02:15,133 - INFO - Client: 104.236.209.11
+2025-04-04 04:02:15,133 - INFO - Response status: 404
+2025-04-04 04:15:32,630 - INFO - Request received: GET /
+2025-04-04 04:15:32,630 - INFO - Client: 114.35.173.128
+2025-04-04 04:15:32,631 - INFO - Response status: 404
+2025-04-04 06:29:20,364 - INFO - Request received: GET /
+2025-04-04 06:29:20,364 - INFO - Client: 69.110.172.17
+2025-04-04 06:29:20,365 - INFO - Response status: 404
+2025-04-04 08:04:40,623 - INFO - Request received: GET /
+2025-04-04 08:04:40,624 - INFO - Client: 205.210.31.30
+2025-04-04 08:04:40,624 - INFO - Response status: 404
+2025-04-04 08:44:57,550 - INFO - Request received: GET /
+2025-04-04 08:44:57,550 - INFO - Client: 205.210.31.81
+2025-04-04 08:44:57,551 - INFO - Response status: 404
+2025-04-04 09:31:22,944 - INFO - Request received: GET /
+2025-04-04 09:31:22,945 - INFO - Client: 64.23.159.17
+2025-04-04 09:31:22,946 - INFO - Response status: 404
+2025-04-04 09:31:23,481 - INFO - Request received: GET /login
+2025-04-04 09:31:23,481 - INFO - Client: 64.23.159.17
+2025-04-04 09:31:23,482 - INFO - Response status: 404
+2025-04-04 10:53:37,761 - INFO - Request received: GET /
+2025-04-04 10:53:37,761 - INFO - Client: 100.15.193.231
+2025-04-04 10:53:37,762 - INFO - Response status: 404
+2025-04-04 11:06:27,097 - INFO - Request received: GET /
+2025-04-04 11:06:27,098 - INFO - Client: 172.172.245.78
+2025-04-04 11:06:27,098 - INFO - Response status: 404
+2025-04-04 11:13:29,513 - INFO - Request received: GET /
+2025-04-04 11:13:29,514 - INFO - Client: 206.85.97.23
+2025-04-04 11:13:29,514 - INFO - Response status: 404
+2025-04-04 11:35:35,596 - INFO - Request received: GET /
+2025-04-04 11:35:35,596 - INFO - Client: 125.228.34.164
+2025-04-04 11:35:35,597 - INFO - Response status: 404
+2025-04-04 12:14:54,960 - INFO - Request received: GET /
+2025-04-04 12:14:54,960 - INFO - Client: 146.90.6.169
+2025-04-04 12:14:54,961 - INFO - Response status: 404
+2025-04-04 12:26:18,895 - INFO - Request received: GET /
+2025-04-04 12:26:18,895 - INFO - Client: 125.228.34.164
+2025-04-04 12:26:18,896 - INFO - Response status: 404
+2025-04-04 14:17:52,417 - INFO - Request received: GET /
+2025-04-04 14:17:52,417 - INFO - Client: 185.247.137.46
+2025-04-04 14:17:52,418 - INFO - Response status: 404
+2025-04-04 15:06:06,481 - INFO - Request received: GET /status
+2025-04-04 15:06:06,481 - INFO - Client: 31.31.22.14
+2025-04-04 15:06:06,482 - INFO - Response status: 404
+2025-04-04 15:06:06,652 - INFO - Request received: GET /stat
+2025-04-04 15:06:06,652 - INFO - Client: 31.31.22.14
+2025-04-04 15:06:06,652 - INFO - Response status: 404
+2025-04-04 15:18:12,706 - INFO - Request received: GET /
+2025-04-04 15:18:12,706 - INFO - Client: 15.204.37.90
+2025-04-04 15:18:12,706 - INFO - Response status: 404
+2025-04-04 15:26:07,246 - INFO - Request received: GET /favicon.ico
+2025-04-04 15:26:07,246 - INFO - Client: 195.184.76.14
+2025-04-04 15:26:07,246 - INFO - Response status: 404
+2025-04-04 15:28:42,088 - INFO - Request received: GET /
+2025-04-04 15:28:42,088 - INFO - Client: 123.58.196.28
+2025-04-04 15:28:42,089 - INFO - Response status: 404
+2025-04-04 15:28:47,635 - INFO - Request received: GET /favicon.ico
+2025-04-04 15:28:47,635 - INFO - Client: 123.58.196.28
+2025-04-04 15:28:47,636 - INFO - Response status: 404
+2025-04-04 15:28:48,451 - INFO - Request received: GET /robots.txt
+2025-04-04 15:28:48,452 - INFO - Client: 123.58.196.28
+2025-04-04 15:28:48,452 - INFO - Response status: 404
+2025-04-04 15:28:49,268 - INFO - Request received: GET /sitemap.xml
+2025-04-04 15:28:49,268 - INFO - Client: 123.58.196.28
+2025-04-04 15:28:49,269 - INFO - Response status: 404
+2025-04-04 15:46:35,225 - INFO - Request received: GET /
+2025-04-04 15:46:35,226 - INFO - Client: 64.62.197.58
+2025-04-04 15:46:35,226 - INFO - Response status: 404
+2025-04-04 15:46:53,535 - INFO - Request received: GET /favicon.ico
+2025-04-04 15:46:53,535 - INFO - Client: 64.62.197.47
+2025-04-04 15:46:53,536 - INFO - Response status: 404
+2025-04-04 15:46:56,870 - INFO - Request received: GET //api.ipify.org/
+2025-04-04 15:46:56,870 - INFO - Client: 64.62.197.60
+2025-04-04 15:46:56,870 - INFO - Response status: 404
+2025-04-04 15:46:59,547 - INFO - Request received: CONNECT 
+2025-04-04 15:46:59,547 - INFO - Client: 64.62.197.49
+2025-04-04 15:46:59,548 - INFO - Response status: 404
+2025-04-04 16:06:50,092 - INFO - Request received: GET /
+2025-04-04 16:06:50,092 - INFO - Client: 104.236.209.11
+2025-04-04 16:06:50,093 - INFO - Response status: 404
+2025-04-04 16:51:19,446 - INFO - Request received: GET /
+2025-04-04 16:51:19,446 - INFO - Client: 112.166.251.88
+2025-04-04 16:51:19,446 - INFO - Response status: 404
+2025-04-04 18:12:51,289 - INFO - Request received: GET /
+2025-04-04 18:12:51,289 - INFO - Client: 104.234.115.21
+2025-04-04 18:12:51,290 - INFO - Response status: 404
+2025-04-04 18:13:15,204 - INFO - Request received: GET /manage/account/login
+2025-04-04 18:13:15,204 - INFO - Client: 104.234.115.21
+2025-04-04 18:13:15,205 - INFO - Response status: 404
+2025-04-04 18:13:27,334 - INFO - Request received: GET /admin/index.html
+2025-04-04 18:13:27,334 - INFO - Client: 104.234.115.21
+2025-04-04 18:13:27,335 - INFO - Response status: 404
+2025-04-04 18:13:39,456 - INFO - Request received: GET /index.html
+2025-04-04 18:13:39,456 - INFO - Client: 104.234.115.21
+2025-04-04 18:13:39,456 - INFO - Response status: 404
+2025-04-04 18:13:51,582 - INFO - Request received: GET /+CSCOE+/logon.html
+2025-04-04 18:13:51,582 - INFO - Client: 104.234.115.21
+2025-04-04 18:13:51,583 - INFO - Response status: 404
+2025-04-04 18:14:03,696 - INFO - Request received: GET /cgi-bin/login.cgi
+2025-04-04 18:14:03,696 - INFO - Client: 104.234.115.21
+2025-04-04 18:14:03,696 - INFO - Response status: 404
+2025-04-04 18:14:15,847 - INFO - Request received: GET /login.htm
+2025-04-04 18:14:15,847 - INFO - Client: 104.234.115.21
+2025-04-04 18:14:15,848 - INFO - Response status: 404
+2025-04-04 18:14:27,975 - INFO - Request received: GET /login.html
+2025-04-04 18:14:27,975 - INFO - Client: 104.234.115.21
+2025-04-04 18:14:27,976 - INFO - Response status: 404
+2025-04-04 18:14:40,106 - INFO - Request received: GET /login.jsp
+2025-04-04 18:14:40,106 - INFO - Client: 104.234.115.21
+2025-04-04 18:14:40,106 - INFO - Response status: 404
+2025-04-04 18:14:52,218 - INFO - Request received: GET /login
+2025-04-04 18:14:52,218 - INFO - Client: 104.234.115.21
+2025-04-04 18:14:52,219 - INFO - Response status: 404
+2025-04-04 18:15:04,355 - INFO - Request received: GET /doc/index.html
+2025-04-04 18:15:04,355 - INFO - Client: 104.234.115.21
+2025-04-04 18:15:04,356 - INFO - Response status: 404
+2025-04-04 18:15:16,503 - INFO - Request received: GET /remote/login
+2025-04-04 18:15:16,504 - INFO - Client: 104.234.115.21
+2025-04-04 18:15:16,504 - INFO - Response status: 404
+2025-04-04 18:15:28,622 - INFO - Request received: GET //admin/login.asp
+2025-04-04 18:15:28,622 - INFO - Client: 104.234.115.21
+2025-04-04 18:15:28,622 - INFO - Response status: 404
+2025-04-04 18:15:40,728 - INFO - Request received: GET /web/
+2025-04-04 18:15:40,729 - INFO - Client: 104.234.115.21
+2025-04-04 18:15:40,729 - INFO - Response status: 404
+2025-04-04 18:15:52,847 - INFO - Request received: GET //webpages/login.html
+2025-04-04 18:15:52,847 - INFO - Client: 104.234.115.21
+2025-04-04 18:15:52,848 - INFO - Response status: 404
+2025-04-04 18:50:02,984 - INFO - Request received: GET /
+2025-04-04 18:50:02,984 - INFO - Client: 44.220.188.148
+2025-04-04 18:50:02,985 - INFO - Response status: 404
+2025-04-04 19:02:03,027 - INFO - Request received: GET /
+2025-04-04 19:02:03,027 - INFO - Client: 198.235.24.69
+2025-04-04 19:02:03,027 - INFO - Response status: 404
+2025-04-04 19:07:08,607 - INFO - Request received: GET /
+2025-04-04 19:07:08,607 - INFO - Client: 114.33.89.105
+2025-04-04 19:07:08,608 - INFO - Response status: 404
+2025-04-04 20:55:12,325 - INFO - Request received: GET /
+2025-04-04 20:55:12,325 - INFO - Client: 147.185.132.57
+2025-04-04 20:55:12,326 - INFO - Response status: 404
+2025-04-04 22:32:17,752 - INFO - Request received: GET /
+2025-04-04 22:32:17,752 - INFO - Client: 147.185.132.39
+2025-04-04 22:32:17,753 - INFO - Response status: 404
+2025-04-05 00:11:47,471 - INFO - Request received: GET /status
+2025-04-05 00:11:47,471 - INFO - Client: 109.168.217.142
+2025-04-05 00:11:47,472 - INFO - Response status: 404
+2025-04-05 00:11:47,991 - INFO - Request received: GET /stat
+2025-04-05 00:11:47,991 - INFO - Client: 109.168.217.142
+2025-04-05 00:11:47,992 - INFO - Response status: 404
+2025-04-05 03:49:29,348 - INFO - Request received: GET /
+2025-04-05 03:49:29,348 - INFO - Client: 210.3.12.202
+2025-04-05 03:49:29,349 - INFO - Response status: 404
+2025-04-05 04:03:08,537 - INFO - Request received: GET /
+2025-04-05 04:03:08,538 - INFO - Client: 104.236.209.11
+2025-04-05 04:03:08,538 - INFO - Response status: 404
+2025-04-05 04:15:46,753 - INFO - Request received: GET /
+2025-04-05 04:15:46,754 - INFO - Client: 104.236.209.11
+2025-04-05 04:15:46,754 - INFO - Response status: 404
+2025-04-05 04:17:48,435 - INFO - Request received: GET /
+2025-04-05 04:17:48,435 - INFO - Client: 107.170.33.97
+2025-04-05 04:17:48,436 - INFO - Response status: 404
+2025-04-05 04:17:48,754 - INFO - Request received: GET /login
+2025-04-05 04:17:48,754 - INFO - Client: 107.170.33.97
+2025-04-05 04:17:48,755 - INFO - Response status: 404
+2025-04-05 05:49:40,035 - INFO - Request received: GET /
+2025-04-05 05:49:40,035 - INFO - Client: 84.2.157.69
+2025-04-05 05:49:40,036 - INFO - Response status: 404
+2025-04-05 06:02:44,703 - INFO - ✅ Redis connection established.
+2025-04-05 06:02:44,711 - INFO - 🚀 FastAPI server started
+2025-04-05 06:02:45,316 - INFO - ✅ Connected to Neo4j.
+2025-04-05 06:02:45,316 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-05 06:02:45,316 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-05 06:02:45,316 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-05 06:02:45,316 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-05 06:02:45,316 - INFO - Registered route: /health - {'GET'}
+2025-04-05 06:02:45,316 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-05 06:02:45,316 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-05 06:02:45,316 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-05 06:02:45,316 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-05 06:02:45,316 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-05 06:02:45,316 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-05 06:02:45,317 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-05 06:02:45,317 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-05 06:02:45,317 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-05 06:02:45,317 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-05 06:26:09,207 - INFO - Request received: GET /
+2025-04-05 06:26:09,207 - INFO - Client: 185.242.226.48
+2025-04-05 06:26:09,208 - INFO - Response status: 404
+2025-04-05 06:34:10,491 - INFO - Request received: GET /.env
+2025-04-05 06:34:10,491 - INFO - Client: 47.238.188.245
+2025-04-05 06:34:10,492 - INFO - Response status: 404
+2025-04-05 08:00:07,324 - INFO - Request received: GET /
+2025-04-05 08:00:07,324 - INFO - Client: 184.105.139.89
+2025-04-05 08:00:07,324 - INFO - Response status: 404
+2025-04-05 08:00:57,828 - INFO - Request received: GET /favicon.ico
+2025-04-05 08:00:57,828 - INFO - Client: 184.105.139.97
+2025-04-05 08:00:57,829 - INFO - Response status: 404
+2025-04-05 08:01:21,298 - INFO - Request received: GET //api.ipify.org/
+2025-04-05 08:01:21,298 - INFO - Client: 184.105.139.113
+2025-04-05 08:01:21,298 - INFO - Response status: 404
+2025-04-05 08:01:43,185 - INFO - Request received: CONNECT 
+2025-04-05 08:01:43,186 - INFO - Client: 184.105.139.113
+2025-04-05 08:01:43,187 - INFO - Response status: 404
+2025-04-05 08:02:57,702 - INFO - Request received: GET /
+2025-04-05 08:02:57,702 - INFO - Client: 198.235.24.28
+2025-04-05 08:02:57,702 - INFO - Response status: 404
+2025-04-05 10:07:32,594 - INFO - Request received: GET /
+2025-04-05 10:07:32,595 - INFO - Client: 119.203.11.243
+2025-04-05 10:07:32,595 - INFO - Response status: 404
+2025-04-05 11:57:25,340 - INFO - Request received: GET /
+2025-04-05 11:57:25,340 - INFO - Client: 198.235.24.122
+2025-04-05 11:57:25,340 - INFO - Response status: 404
+2025-04-05 12:08:06,782 - INFO - Request received: GET /
+2025-04-05 12:08:06,782 - INFO - Client: 165.154.120.253
+2025-04-05 12:08:06,783 - INFO - Response status: 404
+2025-04-05 12:08:07,203 - INFO - Request received: GET /favicon.ico
+2025-04-05 12:08:07,204 - INFO - Client: 165.154.120.253
+2025-04-05 12:08:07,204 - INFO - Response status: 404
+2025-04-05 12:08:07,622 - INFO - Request received: GET /robots.txt
+2025-04-05 12:08:07,622 - INFO - Client: 165.154.120.253
+2025-04-05 12:08:07,623 - INFO - Request received: GET /sitemap.xml
+2025-04-05 12:08:07,623 - INFO - Client: 165.154.120.253
+2025-04-05 12:08:07,624 - INFO - Response status: 404
+2025-04-05 12:08:07,625 - INFO - Response status: 404
+2025-04-05 12:49:44,277 - INFO - Request received: GET /
+2025-04-05 12:49:44,277 - INFO - Client: 167.94.138.170
+2025-04-05 12:49:44,277 - INFO - Response status: 404
+2025-04-05 12:49:48,828 - INFO - Request received: PRI 
+2025-04-05 12:49:48,829 - INFO - Client: 167.94.138.170
+2025-04-05 12:49:48,829 - INFO - Response status: 404
+2025-04-05 12:50:05,542 - INFO - Request received: GET /favicon.ico
+2025-04-05 12:50:05,542 - INFO - Client: 167.94.138.170
+2025-04-05 12:50:05,543 - INFO - Response status: 404
+2025-04-05 13:00:54,258 - INFO - Request received: GET /
+2025-04-05 13:00:54,258 - INFO - Client: 185.180.140.4
+2025-04-05 13:00:54,258 - INFO - Response status: 404
+2025-04-05 16:21:32,420 - INFO - Request received: GET /
+2025-04-05 16:21:32,420 - INFO - Client: 104.236.209.11
+2025-04-05 16:21:32,420 - INFO - Response status: 404
+2025-04-05 19:08:39,592 - INFO - Request received: GET /
+2025-04-05 19:08:39,593 - INFO - Client: 205.210.31.57
+2025-04-05 19:08:39,593 - INFO - Response status: 404
+2025-04-05 19:11:38,040 - INFO - Request received: GET /xpcom.common.js
+2025-04-05 19:11:38,040 - INFO - Client: 149.102.237.41
+2025-04-05 19:11:38,041 - INFO - Response status: 404
+2025-04-05 19:11:38,326 - INFO - Request received: GET /c/xpcom.common.js
+2025-04-05 19:11:38,326 - INFO - Client: 149.102.237.41
+2025-04-05 19:11:38,327 - INFO - Response status: 404
+2025-04-05 19:11:38,613 - INFO - Request received: GET /stalker_portal/c/xpcom.common.js
+2025-04-05 19:11:38,613 - INFO - Client: 149.102.237.41
+2025-04-05 19:11:38,614 - INFO - Response status: 404
+2025-04-05 19:38:53,316 - INFO - Request received: GET /
+2025-04-05 19:38:53,317 - INFO - Client: 121.137.98.180
+2025-04-05 19:38:53,318 - INFO - Response status: 404
+2025-04-05 20:12:58,102 - INFO - Request received: GET /.env
+2025-04-05 20:12:58,103 - INFO - Client: 103.175.163.104
+2025-04-05 20:12:58,103 - INFO - Response status: 404
+2025-04-05 20:53:52,502 - INFO - Request received: GET /
+2025-04-05 20:53:52,503 - INFO - Client: 194.156.102.137
+2025-04-05 20:53:52,503 - INFO - Response status: 404
+2025-04-05 22:23:09,709 - INFO - Request received: GET /
+2025-04-05 22:23:09,709 - INFO - Client: 195.184.76.80
+2025-04-05 22:23:09,710 - INFO - Response status: 404
+2025-04-05 22:24:07,237 - INFO - Request received: GET /
+2025-04-05 22:24:07,237 - INFO - Client: 195.184.76.87
+2025-04-05 22:24:07,238 - INFO - Response status: 404
+2025-04-05 22:30:07,669 - INFO - Request received: GET /favicon.ico
+2025-04-05 22:30:07,670 - INFO - Client: 195.184.76.86
+2025-04-05 22:30:07,670 - INFO - Response status: 404
+2025-04-05 22:36:11,885 - INFO - ✅ Redis connection established.
+2025-04-05 22:36:11,895 - INFO - 🚀 FastAPI server started
+2025-04-05 22:36:12,495 - INFO - ✅ Connected to Neo4j.
+2025-04-05 22:36:12,495 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-05 22:36:12,495 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-05 22:36:12,495 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-05 22:36:12,495 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-05 22:36:12,496 - INFO - Registered route: /health - {'GET'}
+2025-04-05 22:36:12,496 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-05 22:36:12,496 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-05 22:36:12,496 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-05 22:36:12,496 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-05 22:36:12,496 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-05 22:36:12,496 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-05 22:36:12,496 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-05 22:36:12,496 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-05 22:36:12,496 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-05 22:36:12,496 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-05 22:42:20,403 - INFO - Request received: POST /tool/execute
+2025-04-05 22:42:20,404 - INFO - Client: 127.0.0.1
+2025-04-05 22:42:20,404 - INFO - Response status: 404
+2025-04-05 22:45:06,431 - INFO - ✅ Redis connection established.
+2025-04-05 22:45:06,441 - INFO - 🚀 FastAPI server started
+2025-04-05 22:45:07,037 - INFO - ✅ Connected to Neo4j.
+2025-04-05 22:45:07,037 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /health - {'GET'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-05 22:45:07,037 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-05 22:46:57,013 - INFO - ✅ Redis connection established.
+2025-04-05 22:46:57,023 - INFO - 🚀 FastAPI server started
+2025-04-05 22:46:57,618 - INFO - ✅ Connected to Neo4j.
+2025-04-05 22:46:57,618 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /health - {'GET'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-05 22:46:57,618 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-05 22:48:44,003 - INFO - Request received: POST /tool/execute
+2025-04-05 22:48:44,003 - INFO - Client: 127.0.0.1
+2025-04-05 22:48:44,011 - INFO - Response status: 200
+2025-04-05 22:54:54,336 - INFO - ✅ Redis connection established.
+2025-04-05 22:54:54,346 - INFO - 🚀 FastAPI server started
+2025-04-05 22:54:54,941 - INFO - ✅ Connected to Neo4j.
+2025-04-05 22:54:54,941 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /health - {'GET'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-05 22:54:54,941 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-05 22:55:00,149 - INFO - ✅ Redis connection established.
+2025-04-05 22:55:00,159 - INFO - 🚀 FastAPI server started
+2025-04-05 22:55:00,754 - INFO - ✅ Connected to Neo4j.
+2025-04-05 22:55:00,754 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-05 22:55:00,754 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-05 22:55:00,754 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-05 22:55:00,754 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-05 22:55:00,755 - INFO - Registered route: /health - {'GET'}
+2025-04-05 22:55:00,755 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-05 22:55:00,755 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-05 22:55:00,755 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-05 22:55:00,755 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-05 22:55:00,755 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-05 22:55:00,755 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-05 22:55:00,755 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-05 22:55:00,755 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-05 22:55:00,755 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-05 22:55:00,755 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-05 22:55:00,755 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-05 22:56:02,050 - INFO - Request received: POST /tool/execute
+2025-04-05 22:56:02,050 - INFO - Client: 127.0.0.1
+2025-04-05 22:56:02,059 - INFO - 🚀 MemoryRouter initialized.
+2025-04-05 22:56:02,060 - ERROR - Tool execution failed: run_action() got an unexpected keyword argument 'session_id'
+2025-04-05 22:56:02,061 - INFO - Response status: 500
+2025-04-05 23:00:10,718 - INFO - Request received: POST /tool/execute
+2025-04-05 23:00:10,719 - INFO - Client: 127.0.0.1
+2025-04-05 23:00:10,720 - ERROR - Tool execution failed: run_action() got an unexpected keyword argument 'session_id'
+2025-04-05 23:00:10,721 - INFO - Response status: 500

@@ -445,3 +445,12 @@ A detailed migration guide is available here: https://github.com/openai/openai-p
 }
 2025-03-28 11:06:26,457 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
 2025-03-28 11:06:26,467 - INFO - 🔌 Connections closed.
+2025-04-05 22:18:14,083 - INFO - 🚀 MemoryRouter initialized.
+2025-04-05 22:18:14,136 - INFO - ✅ PostgreSQL connection established.
+2025-04-05 22:18:14,154 - INFO - ✅ Neo4j connection established.
+2025-04-05 22:18:15,101 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-05 22:18:15,110 - INFO - embedding | tokens=15 | model=text-embedding-ada-002
+2025-04-05 22:18:15,958 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-05 22:18:15,967 - WARNING - [GPT Action Parser] First attempt failed: Expecting value: line 1 column 1 (char 0)
+2025-04-05 22:18:16,848 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-05 22:18:16,854 - INFO - ⚙️ Routed as GPT Action: set_reminder

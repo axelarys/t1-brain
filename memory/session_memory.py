@@ -1,3 +1,5 @@
+# session_memory.py
+
 import os, json, time, redis, logging, psycopg2, hashlib, numpy as np, tiktoken
 from config import settings
 from openai import OpenAI
@@ -20,7 +22,7 @@ token_handler.setFormatter(logging.Formatter("%(asctime)s - %(message)s"))
 token_logger.addHandler(token_handler)
 token_logger.setLevel(logging.INFO)
 
-# 🔢 Tokenizer
+# 🖗 Tokenizer
 encoder = tiktoken.encoding_for_model("text-embedding-ada-002")
 
 def chunk_by_tokens(text, max_tokens=300):
@@ -43,7 +45,7 @@ class PersistentSessionMemory:
         self.pg_conn = None
         self.pg_cursor = None
         self.redis_client = redis.StrictRedis(host="localhost", port=6379, decode_responses=True)
-        self._graph_memory = None  # Lazy init
+        self._graph_memory = None
 
     @property
     def graph_memory(self):
@@ -69,8 +71,7 @@ class PersistentSessionMemory:
                 return {"status": "skipped", "message": "No memory to clean."}
 
             now = time.time()
-            valid_memory = []
-            removed_count = 0
+            valid_memory, removed_count = [], 0
 
             all_memory = self.redis_client.lrange(key, 0, -1)
             self.redis_client.delete(key)
@@ -114,7 +115,16 @@ class PersistentSessionMemory:
             session_logger.error(f"❌ Embedding error: {e}")
             return np.zeros(1536).tolist()
 
-    def store_memory(self, session_id, query, response, memory_type="semantic", sentiment="neutral"):
+    def store_memory(
+        self,
+        session_id,
+        query,
+        response,
+        memory_type="semantic",
+        sentiment="neutral",
+        source_type="text",
+        metadata=None
+    ):
         self.connect_to_db()
         try:
             session_key = f"session:{session_id}"
@@ -125,6 +135,8 @@ class PersistentSessionMemory:
             self.cleanup_expired_memory(session_id)
 
             is_image = memory_type == "image"
+            image_url = None
+
             if is_image:
                 try:
                     api_key = get_api_key("image")
@@ -167,13 +179,16 @@ class PersistentSessionMemory:
                     "memory_type": memory_type,
                     "sentiment": sentiment,
                     "chunk_id": chunk_id,
-                    "source_type": "image" if is_image else "text",
+                    "source_type": "image" if is_image else source_type,
                     "image_url": image_url if is_image else None,
                     "memory_policy": {
                         "short_term": memory_type != "summary",
                         "expiration": 3 * 86400 if memory_type != "summary" else 0
                     }
                 }
+
+                if metadata:
+                    memory_metadata.update(metadata)
 
                 self.redis_client.rpush(f"memory:{session_id}", json.dumps(memory_metadata))
                 self.redis_client.expire(f"memory:{session_id}", self.ttl)
@@ -188,8 +203,8 @@ class PersistentSessionMemory:
                         embedding_str,
                         memory_type,
                         sentiment,
-                        "image" if is_image else "text",
-                        image_url if is_image else None,
+                        memory_metadata.get("source_type"),
+                        memory_metadata.get("image_url"),
                         dedup_hash
                     )
                 )
@@ -212,105 +227,3 @@ class PersistentSessionMemory:
         except Exception as e:
             session_logger.error(f"❌ Retrieval error: {e}")
             return []
-
-    def delete_memory(self, session_id, query):
-        try:
-            self.redis_client.delete(f"memory:{session_id}")
-            self.pg_cursor.execute("DELETE FROM embeddings WHERE session_id = %s", (session_id,))
-            self.pg_conn.commit()
-            return {"status": "deleted", "message": "Session memory deleted."}
-        except Exception as e:
-            session_logger.error(f"❌ Deletion error: {e}")
-            return {"status": "error", "message": "Memory deletion failed"}
-
-    def find_similar_queries(self, query, top_k=3):
-        try:
-            self.connect_to_db()
-            embedding = self.generate_embedding(query)
-            embedding_str = "[" + ",".join(map(str, embedding)) + "]"
-            self.pg_cursor.execute(
-                """SELECT session_id, query, response, 1 - (embedding <=> %s) AS similarity
-                   FROM embeddings ORDER BY embedding <=> %s LIMIT %s""",
-                (embedding_str, embedding_str, top_k)
-            )
-            results = self.pg_cursor.fetchall()
-            return [{"session_id": r[0], "query": r[1], "response": r[2], "similarity": float(r[3])} for r in results]
-        except Exception as e:
-            session_logger.error(f"❌ Similarity search error: {e}")
-            return []
-
-    def restore_session_from_pg(self, session_id):
-        self.connect_to_db()
-        try:
-            self.pg_cursor.execute("SELECT query, response, memory_type, sentiment, source_type, image_url FROM embeddings WHERE session_id = %s", (session_id,))
-            rows = self.pg_cursor.fetchall()
-
-            if not rows:
-                return {"status": "error", "message": "No memory found for session."}
-
-            key = f"memory:{session_id}"
-            self.redis_client.delete(key)
-
-            self.cleanup_expired_memory(session_id)
-
-            for i, row in enumerate(rows):
-                query, response, memory_type, sentiment, source_type, image_url = row
-                memory = {
-                    "query": query,
-                    "response": response,
-                    "timestamp": time.time(),
-                    "memory_type": memory_type,
-                    "sentiment": sentiment,
-                    "chunk_id": f"{session_id}_chunk_{i+1}",
-                    "source_type": source_type,
-                    "image_url": image_url,
-                    "memory_policy": {
-                        "short_term": memory_type != "summary",
-                        "expiration": 3 * 86400 if memory_type != "summary" else 0
-                    }
-                }
-                self.redis_client.rpush(key, json.dumps(memory))
-
-            self.redis_client.expire(key, self.ttl)
-            session_logger.info(f"♻️ Restored session '{session_id}' into Redis with {len(rows)} items.")
-            return {"status": "restored", "count": len(rows)}
-
-        except Exception as e:
-            session_logger.error(f"❌ Session restore error: {e}")
-            return {"status": "error", "message": "Restore failed"}
-
-    def summarize_session(self, session_id):
-        self.connect_to_db()
-        try:
-            memories = self.retrieve_memory(session_id, "")
-            if not memories:
-                return {"status": "error", "message": "No memory found to summarize."}
-
-            summary_input = "\n".join([f"User: {m['query']}\nAssistant: {m['response']}" for m in memories])
-            token_logger.info(f"summarize_session | input_length={len(summary_input)}")
-
-            api_key = get_api_key("text")
-            client = OpenAI(api_key=api_key)
-
-            response = client.chat.completions.create(
-                model="gpt-4o",
-                messages=[
-                    {"role": "system", "content": "Summarize the following conversation for memory recall:"},
-                    {"role": "user", "content": summary_input}
-                ]
-            )
-
-            summary_text = response.choices[0].message.content.strip()
-            session_logger.info(f"📄 Session summary generated:\n{summary_text}")
-
-            return self.store_memory(
-                session_id=session_id,
-                query="Session Summary",
-                response=summary_text,
-                memory_type="summary",
-                sentiment="neutral"
-            )
-
-        except Exception as e:
-            session_logger.error(f"❌ Summarization error: {e}")
-            return {"status": "error", "message": "Summarization failed"}

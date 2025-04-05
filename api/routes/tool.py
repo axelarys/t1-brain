@@ -1,8 +1,14 @@
-from fastapi import APIRouter, HTTPException, Request
+# api/routes/tool.py
+
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Dict, Any
 import importlib
+import sys
 import logging
+
+from memory.memory_router import MemoryRouter
+from agents.tool_agent import ToolAgent
 
 tool_router = APIRouter()
 logger = logging.getLogger("tool_executor")
@@ -13,21 +19,30 @@ class ToolAction(BaseModel):
 
 @tool_router.post("/tool/execute")
 def execute_tool(action_input: ToolAction):
-    from memory.memory_router import MemoryRouter
-
     action_name = action_input.action
     params = action_input.parameters
 
+    # ⚠️ Fallback: Non-actionable input
+    if action_name == "none":
+        logger.warning("[ToolExecutor] No actionable tool detected — fallback engaged.")
+        agent = ToolAgent(session_id=params.get("session_id", "failsafe"))
+        fallback = agent._run_failsafe_response(params)
+        return fallback  # ✅ Return already formatted dict
+
     try:
-        # 🧩 1. Dynamically load tool module
-        module = importlib.import_module(f"tools.{action_name}")
+        # 🔁 Reload tool module if already cached
+        module_path = f"tools.{action_name}"
+        if module_path in sys.modules:
+            del sys.modules[module_path]
+        module = importlib.import_module(module_path)
+
         if not hasattr(module, "run_action"):
             raise Exception("Missing 'run_action' function in tool.")
 
-        # ⚙️ 2. Execute the tool
+        # ⚙️ Run tool
         result = module.run_action(**params)
 
-        # 🧠 3. Loopback: Store result in memory
+        # 🧠 Store in memory
         session_id = params.get("session_id", "user_tool_session")
         query = params.get("query", f"{action_name} tool triggered")
 
@@ -38,11 +53,11 @@ def execute_tool(action_input: ToolAction):
             response=result,
             memory_type="result",
             source_type="tool",
-            metadata={ "tool": action_name }
+            metadata={"tool": action_name}
         )
 
         return { "status": "success", "output": result }
 
     except Exception as e:
-        logger.error(f"Tool execution failed: {e}")
+        logger.error(f"[ToolExecutor] Execution failed for '{action_name}': {e}")
         raise HTTPException(status_code=500, detail=str(e))

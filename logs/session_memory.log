@@ -2719,3 +2719,461 @@ A detailed migration guide is available here: https://github.com/openai/openai-p
 2025-04-05 23:00:10,719 - INFO - Client: 127.0.0.1
 2025-04-05 23:00:10,720 - ERROR - Tool execution failed: run_action() got an unexpected keyword argument 'session_id'
 2025-04-05 23:00:10,721 - INFO - Response status: 500
+2025-04-05 23:06:59,207 - INFO - ✅ Redis connection established.
+2025-04-05 23:06:59,217 - INFO - 🚀 FastAPI server started
+2025-04-05 23:06:59,826 - INFO - ✅ Connected to Neo4j.
+2025-04-05 23:06:59,826 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /health - {'GET'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-05 23:06:59,826 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-05 23:07:06,436 - INFO - ✅ Redis connection established.
+2025-04-05 23:07:06,446 - INFO - 🚀 FastAPI server started
+2025-04-05 23:07:07,043 - INFO - ✅ Connected to Neo4j.
+2025-04-05 23:07:07,044 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /health - {'GET'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-05 23:07:07,044 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-05 23:07:11,425 - INFO - Request received: POST /tool/execute
+2025-04-05 23:07:11,425 - INFO - Client: 127.0.0.1
+2025-04-05 23:07:11,434 - INFO - 🚀 MemoryRouter initialized.
+2025-04-05 23:07:11,501 - INFO - ✅ PostgreSQL connection established.
+2025-04-05 23:07:11,509 - INFO - ✅ Neo4j connection established.
+2025-04-05 23:07:11,510 - ERROR - Tool execution failed: PersistentSessionMemory.store_memory() got an unexpected keyword argument 'source_type'
+2025-04-05 23:07:11,510 - INFO - Response status: 500
+2025-04-05 23:15:29,996 - INFO - ✅ Redis connection established.
+2025-04-05 23:15:30,006 - INFO - 🚀 FastAPI server started
+2025-04-05 23:15:30,607 - INFO - ✅ Connected to Neo4j.
+2025-04-05 23:15:30,607 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /health - {'GET'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-05 23:15:30,607 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-05 23:15:44,802 - INFO - Request received: POST /tool/execute
+2025-04-05 23:15:44,802 - INFO - Client: 127.0.0.1
+2025-04-05 23:15:44,810 - INFO - 🚀 MemoryRouter initialized.
+2025-04-05 23:15:44,878 - INFO - ✅ PostgreSQL connection established.
+2025-04-05 23:15:44,885 - INFO - ✅ Neo4j connection established.
+2025-04-05 23:15:44,906 - INFO - ✅ New session key: user_123
+2025-04-05 23:15:45,541 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-05 23:15:45,548 - INFO - embedding | tokens=13 | model=text-embedding-ada-002
+2025-04-05 23:15:45,559 - INFO - ✅ Connected to Neo4j.
+2025-04-05 23:15:45,559 - WARNING - ⚠️ GPT enrichment fallback: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-05 23:15:45,652 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-04-05 23:15:45,749 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (m:Memory {hash: $query_hash, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (m)-[:MENTIONS]->(t)\n                    '
+2025-04-05 23:15:45,779 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (s:Session {id: $session_id, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (s)-[:TOUCHED]->(t)\n                    '
+2025-04-05 23:15:45,781 - INFO - Response status: 200
+2025-04-05 23:29:26,717 - INFO - Request received: GET /.env
+2025-04-05 23:29:26,717 - INFO - Client: 161.35.235.64
+2025-04-05 23:29:26,718 - INFO - Response status: 404
+2025-04-05 23:29:27,250 - INFO - Request received: GET /.git/config
+2025-04-05 23:29:27,250 - INFO - Client: 161.35.235.64
+2025-04-05 23:29:27,251 - INFO - Response status: 404
+2025-04-05 23:32:35,976 - INFO - Request received: POST /tool/execute
+2025-04-05 23:32:35,976 - INFO - Client: 127.0.0.1
+2025-04-05 23:32:36,232 - INFO - ✅ PostgreSQL connection established.
+2025-04-05 23:32:36,238 - INFO - ✅ Neo4j connection established.
+2025-04-05 23:32:36,918 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-05 23:32:36,926 - INFO - embedding | tokens=5 | model=text-embedding-ada-002
+2025-04-05 23:32:36,936 - INFO - ✅ Connected to Neo4j.
+2025-04-05 23:32:36,936 - WARNING - ⚠️ GPT enrichment fallback: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-05 23:32:36,959 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-04-05 23:32:36,979 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (m:Memory {hash: $query_hash, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (m)-[:MENTIONS]->(t)\n                    '
+2025-04-05 23:32:36,983 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (s:Session {id: $session_id, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (s)-[:TOUCHED]->(t)\n                    '
+2025-04-05 23:32:36,985 - INFO - Response status: 200
+2025-04-05 23:38:54,003 - INFO - Request received: POST /tool/execute
+2025-04-05 23:38:54,003 - INFO - Client: 127.0.0.1
+2025-04-05 23:38:54,117 - INFO - ✅ PostgreSQL connection established.
+2025-04-05 23:38:54,123 - INFO - ✅ Neo4j connection established.
+2025-04-05 23:38:54,920 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-05 23:38:54,922 - INFO - embedding | tokens=5 | model=text-embedding-ada-002
+2025-04-05 23:38:54,933 - INFO - ✅ Connected to Neo4j.
+2025-04-05 23:38:54,933 - WARNING - ⚠️ GPT enrichment fallback: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-05 23:38:54,992 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-04-05 23:38:55,000 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (m:Memory {hash: $query_hash, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (m)-[:MENTIONS]->(t)\n                    '
+2025-04-05 23:38:55,002 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (s:Session {id: $session_id, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (s)-[:TOUCHED]->(t)\n                    '
+2025-04-05 23:38:55,005 - INFO - Response status: 200
+2025-04-06 00:13:05,363 - INFO - Request received: POST /tool/execute
+2025-04-06 00:13:05,364 - INFO - Client: 127.0.0.1
+2025-04-06 00:13:05,424 - INFO - ✅ PostgreSQL connection established.
+2025-04-06 00:13:05,431 - INFO - ✅ Neo4j connection established.
+2025-04-06 00:13:05,456 - INFO - ✅ New session key: user_tooltest
+2025-04-06 00:13:07,520 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-06 00:13:07,522 - INFO - embedding | tokens=12 | model=text-embedding-ada-002
+2025-04-06 00:13:07,531 - INFO - ✅ Connected to Neo4j.
+2025-04-06 00:13:07,531 - WARNING - ⚠️ GPT enrichment fallback: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-06 00:13:07,610 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-04-06 00:13:07,645 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (m:Memory {hash: $query_hash, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (m)-[:MENTIONS]->(t)\n                    '
+2025-04-06 00:13:07,672 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (s:Session {id: $session_id, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (s)-[:TOUCHED]->(t)\n                    '
+2025-04-06 00:13:07,674 - INFO - Response status: 200
+2025-04-06 00:14:31,255 - INFO - Request received: POST /token
+2025-04-06 00:14:31,255 - INFO - Client: 106.75.189.197
+2025-04-06 00:14:31,256 - INFO - Response status: 404
+2025-04-06 00:27:34,771 - INFO - Request received: POST /tool/execute
+2025-04-06 00:27:34,771 - INFO - Client: 127.0.0.1
+2025-04-06 00:27:34,831 - INFO - ✅ PostgreSQL connection established.
+2025-04-06 00:27:34,838 - INFO - ✅ Neo4j connection established.
+2025-04-06 00:27:34,859 - INFO - ✅ New session key: user_test67
+2025-04-06 00:27:35,784 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-06 00:27:35,786 - INFO - embedding | tokens=15 | model=text-embedding-ada-002
+2025-04-06 00:27:35,796 - INFO - ✅ Connected to Neo4j.
+2025-04-06 00:27:35,796 - WARNING - ⚠️ GPT enrichment fallback: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-06 00:27:35,820 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-04-06 00:27:35,838 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (m:Memory {hash: $query_hash, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (m)-[:MENTIONS]->(t)\n                    '
+2025-04-06 00:27:35,844 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (s:Session {id: $session_id, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (s)-[:TOUCHED]->(t)\n                    '
+2025-04-06 00:27:35,846 - INFO - Response status: 200
+2025-04-06 00:39:05,967 - INFO - Request received: POST /tool/execute
+2025-04-06 00:39:05,968 - INFO - Client: 127.0.0.1
+2025-04-06 00:39:05,969 - ERROR - Tool execution failed: No module named 'tools.none'
+2025-04-06 00:39:05,970 - INFO - Response status: 500
+2025-04-06 00:41:48,359 - INFO - ✅ Redis connection established.
+2025-04-06 00:41:48,813 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 00:47:09,516 - INFO - ✅ Redis connection established.
+2025-04-06 00:47:09,970 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 00:47:42,832 - INFO - ✅ Redis connection established.
+2025-04-06 00:47:43,285 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 00:53:31,972 - INFO - ✅ Redis connection established.
+2025-04-06 00:53:32,432 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 00:53:38,016 - INFO - ✅ Redis connection established.
+2025-04-06 00:53:38,475 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 00:55:50,580 - INFO - ✅ Redis connection established.
+2025-04-06 00:55:51,039 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 00:55:58,460 - INFO - ✅ Redis connection established.
+2025-04-06 00:55:58,913 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 00:58:37,692 - INFO - ✅ Redis connection established.
+2025-04-06 00:58:38,144 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 00:58:38,152 - INFO - 🚀 FastAPI server started
+2025-04-06 00:58:38,286 - INFO - ✅ Connected to Neo4j.
+2025-04-06 00:58:38,286 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /health - {'GET'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 00:58:38,286 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 00:58:45,999 - INFO - ✅ Redis connection established.
+2025-04-06 00:58:46,451 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 00:58:46,457 - INFO - 🚀 FastAPI server started
+2025-04-06 00:58:46,587 - INFO - ✅ Connected to Neo4j.
+2025-04-06 00:58:46,587 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /health - {'GET'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 00:58:46,587 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 00:58:49,333 - INFO - Request received: POST /tool/execute
+2025-04-06 00:58:49,334 - INFO - Client: 127.0.0.1
+2025-04-06 00:58:49,337 - WARNING - [ToolExecutor] No actionable tool detected — fallback engaged.
+2025-04-06 00:58:49,391 - ERROR - [ToolAgent] Failsafe fallback failed: 'str' object has no attribute 'get'
+2025-04-06 00:58:49,392 - INFO - Response status: 200
+2025-04-06 01:00:14,223 - INFO - ✅ Redis connection established.
+2025-04-06 01:00:14,677 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 01:00:14,684 - INFO - 🚀 FastAPI server started
+2025-04-06 01:00:14,813 - INFO - ✅ Connected to Neo4j.
+2025-04-06 01:00:14,813 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /health - {'GET'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 01:00:14,813 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 01:00:21,930 - INFO - ✅ Redis connection established.
+2025-04-06 01:00:22,379 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 01:00:22,386 - INFO - 🚀 FastAPI server started
+2025-04-06 01:00:22,516 - INFO - ✅ Connected to Neo4j.
+2025-04-06 01:00:22,516 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /health - {'GET'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 01:00:22,516 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 01:00:30,585 - INFO - Request received: POST /tool/execute
+2025-04-06 01:00:30,585 - INFO - Client: 127.0.0.1
+2025-04-06 01:00:30,589 - WARNING - [ToolExecutor] No actionable tool detected — fallback engaged.
+2025-04-06 01:00:30,641 - ERROR - [ToolAgent] Failsafe fallback failed: 'str' object has no attribute 'get'
+2025-04-06 01:00:30,642 - INFO - Response status: 200
+2025-04-06 01:01:16,441 - INFO - ✅ Redis connection established.
+2025-04-06 01:01:16,898 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 01:01:16,905 - INFO - 🚀 FastAPI server started
+2025-04-06 01:01:17,035 - INFO - ✅ Connected to Neo4j.
+2025-04-06 01:01:17,035 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /health - {'GET'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 01:01:17,035 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 01:01:20,738 - INFO - ✅ Redis connection established.
+2025-04-06 01:01:21,190 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 01:01:21,197 - INFO - 🚀 FastAPI server started
+2025-04-06 01:01:21,327 - INFO - ✅ Connected to Neo4j.
+2025-04-06 01:01:21,327 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-06 01:01:21,327 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-06 01:01:21,327 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-06 01:01:21,327 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-06 01:01:21,327 - INFO - Registered route: /health - {'GET'}
+2025-04-06 01:01:21,327 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 01:01:21,327 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 01:01:21,327 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 01:01:21,327 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 01:01:21,327 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 01:01:21,328 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 01:01:21,328 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 01:01:21,328 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 01:01:21,328 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 01:01:21,328 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 01:01:21,328 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 01:01:26,153 - INFO - Request received: POST /tool/execute
+2025-04-06 01:01:26,153 - INFO - Client: 127.0.0.1
+2025-04-06 01:01:26,157 - WARNING - [ToolExecutor] No actionable tool detected — fallback engaged.
+2025-04-06 01:01:26,210 - ERROR - [ToolAgent] Failsafe fallback failed: 'str' object has no attribute 'get'
+2025-04-06 01:01:26,211 - INFO - Response status: 200
+2025-04-06 01:03:25,455 - INFO - ✅ Redis connection established.
+2025-04-06 01:03:25,909 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 01:03:25,918 - INFO - 🚀 FastAPI server started
+2025-04-06 01:03:26,050 - INFO - ✅ Connected to Neo4j.
+2025-04-06 01:03:26,050 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /health - {'GET'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 01:03:26,050 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 01:03:31,554 - INFO - Request received: POST /tool/execute
+2025-04-06 01:03:31,554 - INFO - Client: 127.0.0.1
+2025-04-06 01:03:31,559 - WARNING - [ToolExecutor] No actionable tool detected — fallback engaged.
+2025-04-06 01:03:31,610 - ERROR - [ToolAgent] Failsafe fallback failed: 'str' object has no attribute 'get'
+2025-04-06 01:03:31,611 - INFO - Response status: 200
+2025-04-06 01:06:24,239 - INFO - ✅ Redis connection established.
+2025-04-06 01:06:24,696 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 01:06:24,705 - INFO - 🚀 FastAPI server started
+2025-04-06 01:06:24,835 - INFO - ✅ Connected to Neo4j.
+2025-04-06 01:06:24,835 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-06 01:06:24,835 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-06 01:06:24,835 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-06 01:06:24,835 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-06 01:06:24,835 - INFO - Registered route: /health - {'GET'}
+2025-04-06 01:06:24,835 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 01:06:24,836 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 01:06:24,836 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 01:06:24,836 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 01:06:24,836 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 01:06:24,836 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 01:06:24,836 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 01:06:24,836 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 01:06:24,836 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 01:06:24,836 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 01:06:24,836 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 01:06:29,881 - INFO - Request received: POST /tool/execute
+2025-04-06 01:06:29,881 - INFO - Client: 127.0.0.1
+2025-04-06 01:06:29,885 - WARNING - [ToolExecutor] No actionable tool detected — fallback engaged.
+2025-04-06 01:06:29,937 - ERROR - [ToolAgent] Failsafe fallback failed: 'str' object has no attribute 'get'
+2025-04-06 01:06:29,938 - INFO - Response status: 200
+2025-04-06 01:07:20,087 - INFO - Request received: GET /
+2025-04-06 01:07:20,087 - INFO - Client: 104.236.209.11
+2025-04-06 01:07:20,088 - INFO - Response status: 404
+2025-04-06 01:08:30,851 - INFO - ✅ Redis connection established.
+2025-04-06 01:08:31,304 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 01:08:31,312 - INFO - 🚀 FastAPI server started
+2025-04-06 01:08:31,443 - INFO - ✅ Connected to Neo4j.
+2025-04-06 01:08:31,443 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /health - {'GET'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 01:08:31,443 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 01:08:47,576 - INFO - Request received: POST /tool/execute
+2025-04-06 01:08:47,577 - INFO - Client: 127.0.0.1
+2025-04-06 01:08:47,580 - WARNING - [ToolExecutor] No actionable tool detected — fallback engaged.
+2025-04-06 01:08:47,634 - ERROR - [ToolAgent] Failsafe fallback failed: 'str' object has no attribute 'get'
+2025-04-06 01:08:47,634 - INFO - Response status: 200
+2025-04-06 01:10:22,469 - INFO - ✅ Redis connection established.
+2025-04-06 01:10:22,922 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 01:10:22,929 - INFO - 🚀 FastAPI server started
+2025-04-06 01:10:23,062 - INFO - ✅ Connected to Neo4j.
+2025-04-06 01:10:23,062 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /health - {'GET'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 01:10:23,062 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 01:10:26,962 - INFO - ✅ Redis connection established.
+2025-04-06 01:10:27,416 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 01:10:27,423 - INFO - 🚀 FastAPI server started
+2025-04-06 01:10:27,556 - INFO - ✅ Connected to Neo4j.
+2025-04-06 01:10:27,556 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /health - {'GET'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 01:10:27,556 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 01:10:32,311 - INFO - Request received: POST /tool/execute
+2025-04-06 01:10:32,311 - INFO - Client: 127.0.0.1
+2025-04-06 01:10:32,314 - WARNING - [ToolExecutor] No actionable tool detected — fallback engaged.
+2025-04-06 01:10:34,447 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-06 01:10:34,513 - INFO - Response status: 200

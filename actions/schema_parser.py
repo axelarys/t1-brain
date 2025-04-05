@@ -3,6 +3,7 @@
 import openai
 import logging
 import json
+import re
 from typing import Dict, Any
 import config.settings as settings  # Use constants from config/settings.py
 
@@ -30,6 +31,10 @@ Now parse this:
 "{user_input}"
 """
 
+def clean_json_string(raw: str) -> str:
+    """Remove markdown-style ```json wrappers or code block fences."""
+    return re.sub(r"^```(?:json)?|```$", "", raw.strip(), flags=re.IGNORECASE).strip()
+
 def generate_action_schema(user_input: str, memory_snippet: str = "", tools: list[str] = None) -> Dict[str, Any]:
     if tools is None:
         tools = ["set_reminder", "summarize_file", "web_search"]
@@ -51,24 +56,29 @@ def generate_action_schema(user_input: str, memory_snippet: str = "", tools: lis
         )
         return response.choices[0].message.content.strip()
 
-    # First attempt
     try:
-        output = call_gpt(prompt)
-        print("\n🪵 Raw GPT Output (1st try):\n", output)
-        return json.loads(output)
+        raw = call_gpt(prompt)
+        print("\n🪵 Raw GPT Output (1st try):\n", raw)
+        return json.loads(clean_json_string(raw))
+
     except Exception as e1:
         logging.warning(f"[GPT Action Parser] First attempt failed: {e1}")
-
-        # Retry with stricter instruction
         retry_prompt = prompt + "\n\nIMPORTANT: Return ONLY compact JSON and nothing else."
+
         try:
-            output_retry = call_gpt(retry_prompt)
-            print("\n🪵 Raw GPT Output (Retry):\n", output_retry)
-            return json.loads(output_retry)
+            raw_retry = call_gpt(retry_prompt)
+            print("\n🪵 Raw GPT Output (Retry):\n", raw_retry)
+            return json.loads(clean_json_string(raw_retry))
+
         except Exception as e2:
-            logging.error(f"[GPT Action Parser] Retry also failed: {e2}")
-            return {
-                "action": "none",
-                "parameters": {},
-                "error": str(e2)
-            }
+            logging.warning(f"[GPT Action Parser] Retry failed: {e2}")
+            try:
+                # Final fallback using eval (only in dev)
+                return eval(clean_json_string(raw_retry))
+            except Exception as e3:
+                logging.error(f"[GPT Action Parser] All parsing failed: {e3}")
+                return {
+                    "action": "none",
+                    "parameters": {},
+                    "error": str(e3)
+                }

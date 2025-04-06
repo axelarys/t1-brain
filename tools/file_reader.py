@@ -4,6 +4,18 @@ import docx
 import openpyxl
 
 def run_action(file_path: str, summary: bool = False, **kwargs) -> str:
+    """
+    Read and optionally summarize the contents of a file.
+    
+    Supports: PDF, DOCX/DOC, XLSX/XLS files.
+
+    Parameters:
+    - file_path (str): Absolute path to the file.
+    - summary (bool): Return first 2000 chars if True.
+    
+    Returns:
+    - str: Extracted or summarized text.
+    """
     if not os.path.exists(file_path):
         return f"❌ File not found: {file_path}"
 
@@ -30,6 +42,7 @@ def run_action(file_path: str, summary: bool = False, **kwargs) -> str:
 
 
 def extract_pdf(path):
+    """Extract text from a PDF using PyMuPDF."""
     text = ""
     with fitz.open(path) as doc:
         for page in doc:
@@ -38,11 +51,13 @@ def extract_pdf(path):
 
 
 def extract_docx(path):
+    """Extract text from a Word document."""
     doc = docx.Document(path)
     return "\n".join([para.text for para in doc.paragraphs])
 
 
 def extract_excel(path):
+    """Extract text from all cells in all sheets of an Excel file."""
     wb = openpyxl.load_workbook(path)
     all_text = ""
     for sheet in wb.worksheets:

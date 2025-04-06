@@ -3177,3 +3177,242 @@ A detailed migration guide is available here: https://github.com/openai/openai-p
 2025-04-06 01:10:32,314 - WARNING - [ToolExecutor] No actionable tool detected — fallback engaged.
 2025-04-06 01:10:34,447 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-04-06 01:10:34,513 - INFO - Response status: 200
+2025-04-06 04:25:12,898 - INFO - Request received: GET /
+2025-04-06 04:25:12,898 - INFO - Client: 104.236.209.11
+2025-04-06 04:25:12,899 - INFO - Response status: 404
+2025-04-06 05:48:19,895 - INFO - Request received: GET /
+2025-04-06 05:48:19,895 - INFO - Client: 46.10.161.163
+2025-04-06 05:48:19,895 - INFO - Response status: 404
+2025-04-06 07:51:24,938 - INFO - Request received: GET /
+2025-04-06 07:51:24,938 - INFO - Client: 87.236.176.143
+2025-04-06 07:51:24,939 - INFO - Response status: 404
+2025-04-06 08:04:47,451 - INFO - Request received: GET /
+2025-04-06 08:04:47,451 - INFO - Client: 147.185.132.39
+2025-04-06 08:04:47,452 - INFO - Response status: 404
+2025-04-06 08:52:07,507 - INFO - Request received: GET /favicon.ico
+2025-04-06 08:52:07,507 - INFO - Client: 51.81.181.171
+2025-04-06 08:52:07,508 - INFO - Response status: 404
+2025-04-06 09:19:06,662 - INFO - Request received: GET /
+2025-04-06 09:19:06,662 - INFO - Client: 74.82.47.42
+2025-04-06 09:19:06,662 - INFO - Response status: 404
+2025-04-06 09:19:39,888 - INFO - Request received: GET /favicon.ico
+2025-04-06 09:19:39,889 - INFO - Client: 74.82.47.26
+2025-04-06 09:19:39,889 - INFO - Response status: 404
+2025-04-06 09:20:01,914 - INFO - Request received: GET //api.ipify.org/
+2025-04-06 09:20:01,914 - INFO - Client: 74.82.47.22
+2025-04-06 09:20:01,914 - INFO - Response status: 404
+2025-04-06 09:20:24,057 - INFO - Request received: CONNECT 
+2025-04-06 09:20:24,057 - INFO - Client: 74.82.47.50
+2025-04-06 09:20:24,058 - INFO - Response status: 404
+2025-04-06 11:01:26,261 - INFO - Request received: GET /
+2025-04-06 11:01:26,262 - INFO - Client: 18.218.41.190
+2025-04-06 11:01:26,262 - INFO - Response status: 404
+2025-04-06 11:01:26,722 - INFO - Request received: GET /
+2025-04-06 11:01:26,722 - INFO - Client: 18.218.41.190
+2025-04-06 11:01:26,722 - INFO - Response status: 404
+2025-04-06 11:27:43,269 - INFO - ✅ Redis connection established.
+2025-04-06 11:27:43,721 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 11:27:43,728 - INFO - 🚀 FastAPI server started
+2025-04-06 11:27:43,860 - INFO - ✅ Connected to Neo4j.
+2025-04-06 11:27:43,860 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /health - {'GET'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 11:27:43,860 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-06 11:27:50,789 - INFO - ✅ Redis connection established.
+2025-04-06 11:27:51,242 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 11:27:51,249 - INFO - 🚀 FastAPI server started
+2025-04-06 11:27:51,379 - INFO - ✅ Connected to Neo4j.
+2025-04-06 11:27:51,380 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /health - {'GET'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 11:27:51,380 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-06 11:27:55,167 - INFO - Request received: GET /tool/list
+2025-04-06 11:27:55,167 - INFO - Client: 127.0.0.1
+2025-04-06 11:27:55,169 - ERROR - [ToolDiscovery] Failed to list tools: [Errno 2] No such file or directory: 'tools'
+2025-04-06 11:27:55,170 - INFO - Response status: 500
+2025-04-06 11:29:15,024 - INFO - Request received: GET /tool/list
+2025-04-06 11:29:15,025 - INFO - Client: 127.0.0.1
+2025-04-06 11:29:15,026 - ERROR - [ToolDiscovery] Failed to list tools: [Errno 2] No such file or directory: 'tools'
+2025-04-06 11:29:15,026 - INFO - Response status: 500
+2025-04-06 11:29:22,860 - INFO - Request received: GET /tool/list
+2025-04-06 11:29:22,860 - INFO - Client: 127.0.0.1
+2025-04-06 11:29:22,861 - ERROR - [ToolDiscovery] Failed to list tools: [Errno 2] No such file or directory: 'tools'
+2025-04-06 11:29:22,861 - INFO - Response status: 500
+2025-04-06 11:30:00,268 - INFO - ✅ Redis connection established.
+2025-04-06 11:30:00,725 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 11:30:00,733 - INFO - 🚀 FastAPI server started
+2025-04-06 11:30:00,866 - INFO - ✅ Connected to Neo4j.
+2025-04-06 11:30:00,867 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /health - {'GET'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 11:30:00,867 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-06 11:30:06,167 - INFO - ✅ Redis connection established.
+2025-04-06 11:30:06,615 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 11:30:06,622 - INFO - 🚀 FastAPI server started
+2025-04-06 11:30:06,752 - INFO - ✅ Connected to Neo4j.
+2025-04-06 11:30:06,752 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /health - {'GET'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 11:30:06,752 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-06 11:30:12,134 - INFO - Request received: GET /tool/list
+2025-04-06 11:30:12,134 - INFO - Client: 127.0.0.1
+2025-04-06 11:30:12,136 - ERROR - [ToolDiscovery] Failed to scan tools: [Errno 2] No such file or directory: 'tools'
+2025-04-06 11:30:12,137 - INFO - Response status: 200
+2025-04-06 11:37:31,884 - INFO - Request received: GET /tool/list
+2025-04-06 11:37:31,884 - INFO - Client: 127.0.0.1
+2025-04-06 11:37:31,885 - ERROR - [ToolDiscovery] Failed to scan tools: [Errno 2] No such file or directory: 'tools'
+2025-04-06 11:37:31,886 - INFO - Response status: 200
+2025-04-06 11:38:11,536 - INFO - ✅ Redis connection established.
+2025-04-06 11:38:11,991 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 11:38:11,998 - INFO - 🚀 FastAPI server started
+2025-04-06 11:38:12,128 - INFO - ✅ Connected to Neo4j.
+2025-04-06 11:38:12,128 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-06 11:38:12,128 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-06 11:38:12,128 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-06 11:38:12,128 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-06 11:38:12,128 - INFO - Registered route: /health - {'GET'}
+2025-04-06 11:38:12,128 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 11:38:12,129 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 11:38:12,129 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 11:38:12,129 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 11:38:12,129 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 11:38:12,129 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 11:38:12,129 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 11:38:12,129 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 11:38:12,129 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 11:38:12,129 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 11:38:12,129 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 11:38:12,129 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-06 11:38:15,771 - INFO - Request received: GET /tool/list
+2025-04-06 11:38:15,771 - INFO - Client: 127.0.0.1
+2025-04-06 11:38:15,773 - ERROR - [ToolDiscovery] Failed to scan tools: [Errno 2] No such file or directory: 'tools'
+2025-04-06 11:38:15,774 - INFO - Response status: 200
+2025-04-06 11:39:12,734 - INFO - ✅ Redis connection established.
+2025-04-06 11:39:13,189 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 11:39:13,196 - INFO - 🚀 FastAPI server started
+2025-04-06 11:39:13,326 - INFO - ✅ Connected to Neo4j.
+2025-04-06 11:39:13,326 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-06 11:39:13,326 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-06 11:39:13,326 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-06 11:39:13,326 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-06 11:39:13,326 - INFO - Registered route: /health - {'GET'}
+2025-04-06 11:39:13,326 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 11:39:13,327 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 11:39:13,327 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 11:39:13,327 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 11:39:13,327 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 11:39:13,327 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 11:39:13,327 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 11:39:13,327 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 11:39:13,327 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 11:39:13,327 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 11:39:13,327 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 11:39:13,327 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-06 11:39:17,824 - INFO - ✅ Redis connection established.
+2025-04-06 11:39:18,280 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 11:39:18,287 - INFO - 🚀 FastAPI server started
+2025-04-06 11:39:18,418 - INFO - ✅ Connected to Neo4j.
+2025-04-06 11:39:18,418 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /health - {'GET'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 11:39:18,418 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-06 11:39:49,894 - INFO - Request received: GET /tool/list
+2025-04-06 11:39:49,894 - INFO - Client: 127.0.0.1
+2025-04-06 11:39:49,896 - WARNING - [ToolDiscovery] Skipped 'file_reader': No module named '/root/projects/t1-brain/tools'
+2025-04-06 11:39:49,897 - WARNING - [ToolDiscovery] Skipped 'set_reminder': No module named '/root/projects/t1-brain/tools'
+2025-04-06 11:39:49,898 - INFO - Response status: 200
+2025-04-06 11:41:38,392 - INFO - ✅ Redis connection established.
+2025-04-06 11:41:38,845 - INFO - 🚀 MemoryRouter initialized.
+2025-04-06 11:41:38,852 - INFO - 🚀 FastAPI server started
+2025-04-06 11:41:38,985 - INFO - ✅ Connected to Neo4j.
+2025-04-06 11:41:38,985 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-06 11:41:38,985 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-06 11:41:38,985 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-06 11:41:38,985 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-06 11:41:38,985 - INFO - Registered route: /health - {'GET'}
+2025-04-06 11:41:38,985 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-06 11:41:38,985 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-06 11:41:38,985 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-06 11:41:38,986 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-06 11:41:38,986 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-06 11:41:38,986 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-06 11:41:38,986 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-06 11:41:38,986 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-06 11:41:38,986 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-06 11:41:38,986 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-06 11:41:38,986 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-06 11:41:38,986 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-06 11:41:56,371 - INFO - Request received: GET /tool/list
+2025-04-06 11:41:56,371 - INFO - Client: 127.0.0.1
+2025-04-06 11:41:56,586 - INFO - Response status: 200
+2025-04-06 11:50:58,205 - INFO - Request received: GET /
+2025-04-06 11:50:58,205 - INFO - Client: 146.190.92.253
+2025-04-06 11:50:58,206 - INFO - Response status: 404
+2025-04-06 11:52:48,163 - INFO - Request received: GET /tool/list
+2025-04-06 11:52:48,164 - INFO - Client: 127.0.0.1
+2025-04-06 11:52:48,165 - INFO - Response status: 200

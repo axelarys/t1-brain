@@ -9,6 +9,7 @@ import logging
 
 from memory.memory_router import MemoryRouter
 from agents.tool_agent import ToolAgent
+from utils.tool_discovery import discover_tools  # ✅ Added
 
 tool_router = APIRouter()
 logger = logging.getLogger("tool_executor")
@@ -27,7 +28,7 @@ def execute_tool(action_input: ToolAction):
         logger.warning("[ToolExecutor] No actionable tool detected — fallback engaged.")
         agent = ToolAgent(session_id=params.get("session_id", "failsafe"))
         fallback = agent._run_failsafe_response(params)
-        return fallback  # ✅ Return already formatted dict
+        return fallback
 
     try:
         # 🔁 Reload tool module if already cached
@@ -39,7 +40,6 @@ def execute_tool(action_input: ToolAction):
         if not hasattr(module, "run_action"):
             raise Exception("Missing 'run_action' function in tool.")
 
-        # ⚙️ Run tool
         result = module.run_action(**params)
 
         # 🧠 Store in memory
@@ -61,3 +61,12 @@ def execute_tool(action_input: ToolAction):
     except Exception as e:
         logger.error(f"[ToolExecutor] Execution failed for '{action_name}': {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@tool_router.get("/tool/list")
+def list_available_tools():
+    try:
+        tools = discover_tools()
+        return { "status": "success", "tools": tools }
+    except Exception as e:
+        logger.error(f"[ToolList] Failed to list tools: {e}")
+        raise HTTPException(status_code=500, detail="Failed to list tools")

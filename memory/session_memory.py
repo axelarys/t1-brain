@@ -5,7 +5,6 @@ from config import settings
 from openai import OpenAI
 from utils.memory_utils import get_api_key
 
-# 📂 Logging setup
 log_dir = "/root/projects/t1-brain/logs/"
 os.makedirs(log_dir, exist_ok=True)
 
@@ -22,7 +21,6 @@ token_handler.setFormatter(logging.Formatter("%(asctime)s - %(message)s"))
 token_logger.addHandler(token_handler)
 token_logger.setLevel(logging.INFO)
 
-# 🖗 Tokenizer
 encoder = tiktoken.encoding_for_model("text-embedding-ada-002")
 
 def chunk_by_tokens(text, max_tokens=300):
@@ -203,8 +201,8 @@ class PersistentSessionMemory:
                         embedding_str,
                         memory_type,
                         sentiment,
-                        memory_metadata.get("source_type"),
-                        memory_metadata.get("image_url"),
+                        memory_metadata["source_type"],
+                        memory_metadata["image_url"],
                         dedup_hash
                     )
                 )
@@ -227,3 +225,10 @@ class PersistentSessionMemory:
         except Exception as e:
             session_logger.error(f"❌ Retrieval error: {e}")
             return []
+
+    def store_tool_metadata(self, tool_name: str, doc: str):
+        try:
+            self.redis_client.hset("tool_docs", tool_name, doc)
+            session_logger.info(f"🛠️ Tool registered: {tool_name}")
+        except Exception as e:
+            session_logger.warning(f"⚠️ Tool registration failed: {e}")

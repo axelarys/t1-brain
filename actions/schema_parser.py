@@ -3,14 +3,15 @@
 import openai
 import logging
 import json
-import re
 from typing import Dict, Any
-import config.settings as settings  # Use constants from config/settings.py
+import config.settings as settings
 
-# Set your OpenAI API key from config constant
+from utils.tool_discovery import discover_tools  # ✅ Dynamic discovery
+
+# Set your OpenAI API key
 openai.api_key = settings.LANGCHAIN_OPENAI_API_KEY
 
-# Escaped-brace version of the hybrid prompt template
+# Prompt template with escaped braces
 PROMPT_TEMPLATE = """
 You are an intelligent assistant. Convert user queries into a structured action schema.
 
@@ -23,7 +24,9 @@ Return ONLY valid JSON:
 If no actionable intent is detected, return:
 {{ "action": "none", "parameters": {{}} }}
 
-Use available tools: {tools}
+Use available tools:
+{tools}
+
 Use this memory/context if needed:
 "{memory_snippet}"
 
@@ -31,16 +34,21 @@ Now parse this:
 "{user_input}"
 """
 
-def clean_json_string(raw: str) -> str:
-    """Remove markdown-style ```json wrappers or code block fences."""
-    return re.sub(r"^```(?:json)?|```$", "", raw.strip(), flags=re.IGNORECASE).strip()
+def format_tool_list(tools: list[dict]) -> str:
+    """Compact tool format for GPT prompt"""
+    return "\n".join([f"- {t['name']}: {t['description'].splitlines()[0]}" for t in tools])
 
-def generate_action_schema(user_input: str, memory_snippet: str = "", tools: list[str] = None) -> Dict[str, Any]:
-    if tools is None:
-        tools = ["set_reminder", "summarize_file", "web_search"]
+def generate_action_schema(user_input: str, memory_snippet: str = "", fallback_tools: list[str] = None) -> Dict[str, Any]:
+    try:
+        tool_metadata = discover_tools()
+        tools_prompt = format_tool_list(tool_metadata)
+    except Exception:
+        # Fallback tools in case discovery fails
+        fallback_tools = fallback_tools or ["set_reminder", "file_reader", "web_search"]
+        tools_prompt = ", ".join(fallback_tools)
 
     prompt = PROMPT_TEMPLATE.format(
-        tools=tools,
+        tools=tools_prompt,
         memory_snippet=memory_snippet,
         user_input=user_input
     )
@@ -57,28 +65,18 @@ def generate_action_schema(user_input: str, memory_snippet: str = "", tools: lis
         return response.choices[0].message.content.strip()
 
     try:
-        raw = call_gpt(prompt)
-        print("\n🪵 Raw GPT Output (1st try):\n", raw)
-        return json.loads(clean_json_string(raw))
-
+        output = call_gpt(prompt)
+        return json.loads(output)
     except Exception as e1:
         logging.warning(f"[GPT Action Parser] First attempt failed: {e1}")
-        retry_prompt = prompt + "\n\nIMPORTANT: Return ONLY compact JSON and nothing else."
-
         try:
-            raw_retry = call_gpt(retry_prompt)
-            print("\n🪵 Raw GPT Output (Retry):\n", raw_retry)
-            return json.loads(clean_json_string(raw_retry))
-
+            retry_prompt = prompt + "\n\nIMPORTANT: Return ONLY compact JSON and nothing else."
+            output_retry = call_gpt(retry_prompt)
+            return json.loads(output_retry)
         except Exception as e2:
-            logging.warning(f"[GPT Action Parser] Retry failed: {e2}")
-            try:
-                # Final fallback using eval (only in dev)
-                return eval(clean_json_string(raw_retry))
-            except Exception as e3:
-                logging.error(f"[GPT Action Parser] All parsing failed: {e3}")
-                return {
-                    "action": "none",
-                    "parameters": {},
-                    "error": str(e3)
-                }
+            logging.error(f"[GPT Action Parser] Retry also failed: {e2}")
+            return {
+                "action": "none",
+                "parameters": {},
+                "error": str(e2)
+            }

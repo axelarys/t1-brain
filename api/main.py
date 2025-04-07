@@ -2,6 +2,7 @@ import sys
 import os
 import logging
 import redis
+import asyncio
 from fastapi import FastAPI, Depends, HTTPException, Request
 
 # 🔧 Project Path Setup
@@ -55,6 +56,17 @@ async def health_check():
         "redis": "connected" if redis_client.ping() else "disconnected"
     }
 
+# 🧠 FAISS Warm Layer Status Check
+@app.get("/memory/health")
+async def memory_health():
+    from memory.warm_layer import WarmMemoryCache
+    warm = WarmMemoryCache.get_instance()
+    return {
+        "status": "warm cache active",
+        "vectors_stored": warm.index.ntotal,
+        "metadata_entries": len(warm.metadata)
+    }
+
 # 🔍 Debug Routes
 @app.get("/debug/routes")
 async def debug_routes():
@@ -88,19 +100,43 @@ async def test_route_memory_tool(request: ToolMemoryRequest):
 
 # ✅ Mount Routers - import order matters!
 from api.routes import memory, agent
-from api.routes.tool import tool_router  # ✅ NEW
+from api.routes.tool import tool_router
 
-# Include routers
 app.include_router(memory.router, prefix="")
 app.include_router(agent.router, prefix="")
-app.include_router(tool_router, prefix="")  # ✅ NEW
+app.include_router(tool_router, prefix="")
 
+# ♻️ Periodic FAISS Save Task
+async def save_warm_cache_periodically(interval=300):
+    from memory.warm_layer import WarmMemoryCache
+    warm_cache = WarmMemoryCache.get_instance()
+    while True:
+        await asyncio.sleep(interval)
+        warm_cache.save_index()
+        logging.info("[FAISS] ⏳ Periodic warm cache save completed.")
+
+# 🚀 Startup Event
 @app.on_event("startup")
 async def startup_event():
     logging.info("🚀 FastAPI server started")
-    
+
+    from memory.warm_layer import WarmMemoryCache
+    warm_cache = WarmMemoryCache.get_instance()
+    logging.info(f"[FAISS] Warm cache primed at startup with {warm_cache.index.ntotal} vectors")
+
+    # Start background task to periodically save FAISS index
+    asyncio.create_task(save_warm_cache_periodically())
+
     memory.init_dependencies()
     agent.init_memory_handler()
-    
+
     for route in app.routes:
         logging.info(f"Registered route: {route.path} - {route.methods}")
+
+# 🛑 Shutdown Event
+@app.on_event("shutdown")
+async def shutdown_event():
+    logging.info("🛑 FastAPI server shutting down")
+    from memory.warm_layer import WarmMemoryCache
+    WarmMemoryCache.get_instance().save_index()
+    logging.info("[FAISS] 💾 Warm memory index saved on shutdown")

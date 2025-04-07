@@ -3416,3 +3416,1573 @@ A detailed migration guide is available here: https://github.com/openai/openai-p
 2025-04-06 11:52:48,163 - INFO - Request received: GET /tool/list
 2025-04-06 11:52:48,164 - INFO - Client: 127.0.0.1
 2025-04-06 11:52:48,165 - INFO - Response status: 200
+2025-04-06 13:01:51,861 - INFO - Request received: GET /
+2025-04-06 13:01:51,861 - INFO - Client: 162.142.125.36
+2025-04-06 13:01:51,862 - INFO - Response status: 404
+2025-04-06 13:02:04,966 - INFO - Request received: GET /
+2025-04-06 13:02:04,966 - INFO - Client: 162.142.125.36
+2025-04-06 13:02:04,967 - INFO - Response status: 404
+2025-04-06 13:02:06,936 - INFO - Request received: PRI 
+2025-04-06 13:02:06,936 - INFO - Client: 162.142.125.36
+2025-04-06 13:02:06,937 - INFO - Response status: 404
+2025-04-06 13:02:13,058 - INFO - Request received: GET /favicon.ico
+2025-04-06 13:02:13,058 - INFO - Client: 162.142.125.36
+2025-04-06 13:02:13,058 - INFO - Response status: 404
+2025-04-06 13:54:07,289 - INFO - Request received: GET /
+2025-04-06 13:54:07,289 - INFO - Client: 143.110.170.23
+2025-04-06 13:54:07,290 - INFO - Response status: 404
+2025-04-06 13:54:07,785 - INFO - Request received: GET /favicon.ico
+2025-04-06 13:54:07,785 - INFO - Client: 143.110.170.23
+2025-04-06 13:54:07,786 - INFO - Response status: 404
+2025-04-06 14:04:03,147 - INFO - Request received: CONNECT 
+2025-04-06 14:04:03,147 - INFO - Client: 103.199.19.109
+2025-04-06 14:04:03,148 - INFO - Response status: 404
+2025-04-06 14:11:26,873 - INFO - Request received: GET /
+2025-04-06 14:11:26,873 - INFO - Client: 167.94.145.106
+2025-04-06 14:11:26,874 - INFO - Response status: 404
+2025-04-06 14:11:35,197 - INFO - Request received: GET /
+2025-04-06 14:11:35,197 - INFO - Client: 167.94.145.106
+2025-04-06 14:11:35,198 - INFO - Response status: 404
+2025-04-06 14:11:36,696 - INFO - Request received: PRI 
+2025-04-06 14:11:36,697 - INFO - Client: 167.94.145.106
+2025-04-06 14:11:36,697 - INFO - Response status: 404
+2025-04-06 14:11:40,067 - INFO - Request received: GET /favicon.ico
+2025-04-06 14:11:40,067 - INFO - Client: 167.94.145.106
+2025-04-06 14:11:40,068 - INFO - Response status: 404
+2025-04-06 15:50:05,181 - INFO - Request received: GET /.env
+2025-04-06 15:50:05,181 - INFO - Client: 103.88.132.242
+2025-04-06 15:50:05,182 - INFO - Response status: 404
+2025-04-06 16:37:35,314 - INFO - Request received: GET /
+2025-04-06 16:37:35,314 - INFO - Client: 104.236.209.11
+2025-04-06 16:37:35,315 - INFO - Response status: 404
+2025-04-06 19:02:47,179 - INFO - Request received: GET /
+2025-04-06 19:02:47,180 - INFO - Client: 198.235.24.12
+2025-04-06 19:02:47,180 - INFO - Response status: 404
+2025-04-06 20:02:16,126 - INFO - Request received: GET /
+2025-04-06 20:02:16,126 - INFO - Client: 199.45.154.134
+2025-04-06 20:02:16,127 - INFO - Response status: 404
+2025-04-06 20:02:26,455 - INFO - Request received: GET /
+2025-04-06 20:02:26,456 - INFO - Client: 199.45.154.134
+2025-04-06 20:02:26,456 - INFO - Response status: 404
+2025-04-06 20:02:27,476 - INFO - Request received: PRI 
+2025-04-06 20:02:27,476 - INFO - Client: 199.45.154.134
+2025-04-06 20:02:27,476 - INFO - Response status: 404
+2025-04-06 20:02:31,589 - INFO - Request received: GET /favicon.ico
+2025-04-06 20:02:31,589 - INFO - Client: 199.45.154.134
+2025-04-06 20:02:31,590 - INFO - Response status: 404
+2025-04-06 20:33:21,123 - INFO - Request received: GET /
+2025-04-06 20:33:21,124 - INFO - Client: 3.252.106.247
+2025-04-06 20:33:21,128 - INFO - Response status: 404
+2025-04-06 20:53:43,642 - INFO - Request received: PROPFIND /
+2025-04-06 20:53:43,643 - INFO - Client: 154.81.156.10
+2025-04-06 20:53:43,643 - INFO - Response status: 404
+2025-04-06 21:06:34,334 - INFO - Request received: GET /
+2025-04-06 21:06:34,334 - INFO - Client: 95.217.61.91
+2025-04-06 21:06:34,334 - INFO - Response status: 404
+2025-04-06 21:34:11,638 - INFO - Request received: GET /
+2025-04-06 21:34:11,638 - INFO - Client: 82.55.108.160
+2025-04-06 21:34:11,638 - INFO - Response status: 404
+2025-04-06 21:38:34,489 - INFO - Request received: PROPFIND /
+2025-04-06 21:38:34,490 - INFO - Client: 154.81.156.10
+2025-04-06 21:38:34,490 - INFO - Response status: 404
+2025-04-06 22:02:49,486 - INFO - Request received: GET /wp-content/plugins/security-malware-firewall/readme.txt
+2025-04-06 22:02:49,486 - INFO - Client: 89.248.172.183
+2025-04-06 22:02:49,487 - INFO - Response status: 404
+2025-04-06 22:07:00,952 - INFO - Request received: GET /
+2025-04-06 22:07:00,953 - INFO - Client: 157.180.29.204
+2025-04-06 22:07:00,953 - INFO - Response status: 404
+2025-04-06 22:07:29,958 - INFO - Request received: GET /
+2025-04-06 22:07:29,958 - INFO - Client: 157.180.29.204
+2025-04-06 22:07:29,959 - INFO - Response status: 404
+2025-04-06 22:15:04,383 - INFO - Request received: PROPFIND /
+2025-04-06 22:15:04,383 - INFO - Client: 154.81.156.10
+2025-04-06 22:15:04,384 - INFO - Response status: 404
+2025-04-06 22:15:54,096 - INFO - Request received: GET /
+2025-04-06 22:15:54,096 - INFO - Client: 172.233.62.72
+2025-04-06 22:15:54,096 - INFO - Response status: 404
+2025-04-06 22:16:25,023 - INFO - Request received: GET /
+2025-04-06 22:16:25,023 - INFO - Client: 172.233.62.72
+2025-04-06 22:16:25,023 - INFO - Response status: 404
+2025-04-06 22:21:29,741 - INFO - Request received: GET /
+2025-04-06 22:21:29,741 - INFO - Client: 51.81.46.212
+2025-04-06 22:21:29,741 - INFO - Response status: 404
+2025-04-06 22:29:21,163 - INFO - Request received: GET /
+2025-04-06 22:29:21,163 - INFO - Client: 154.28.229.73
+2025-04-06 22:29:21,164 - INFO - Response status: 404
+2025-04-06 22:35:20,210 - INFO - Request received: GET /
+2025-04-06 22:35:20,210 - INFO - Client: 135.148.100.196
+2025-04-06 22:35:20,211 - INFO - Response status: 404
+2025-04-06 22:37:05,227 - INFO - Request received: GET /
+2025-04-06 22:37:05,227 - INFO - Client: 23.27.145.109
+2025-04-06 22:37:05,228 - INFO - Response status: 404
+2025-04-06 22:38:20,194 - INFO - Request received: GET /
+2025-04-06 22:38:20,195 - INFO - Client: 182.52.66.171
+2025-04-06 22:38:20,195 - INFO - Response status: 404
+2025-04-06 22:55:22,191 - INFO - Request received: GET /
+2025-04-06 22:55:22,191 - INFO - Client: 150.195.175.124
+2025-04-06 22:55:22,192 - INFO - Response status: 404
+2025-04-06 23:01:40,362 - INFO - Request received: PROPFIND /
+2025-04-06 23:01:40,362 - INFO - Client: 154.81.156.10
+2025-04-06 23:01:40,363 - INFO - Response status: 404
+2025-04-06 23:04:24,300 - INFO - Request received: GET /
+2025-04-06 23:04:24,300 - INFO - Client: 52.16.245.145
+2025-04-06 23:04:24,301 - INFO - Response status: 404
+2025-04-06 23:15:05,812 - INFO - Request received: GET /
+2025-04-06 23:15:05,813 - INFO - Client: 185.242.226.109
+2025-04-06 23:15:05,813 - INFO - Response status: 404
+2025-04-06 23:26:58,319 - INFO - Request received: GET /robots.txt
+2025-04-06 23:26:58,319 - INFO - Client: 5.255.231.82
+2025-04-06 23:26:58,320 - INFO - Response status: 404
+2025-04-06 23:26:58,823 - INFO - Request received: GET /gent-watches/shockproof
+2025-04-06 23:26:58,824 - INFO - Client: 95.108.213.129
+2025-04-06 23:26:58,824 - INFO - Response status: 404
+2025-04-06 23:43:22,034 - INFO - Request received: GET /
+2025-04-06 23:43:22,035 - INFO - Client: 23.27.145.206
+2025-04-06 23:43:22,035 - INFO - Response status: 404
+2025-04-06 23:49:40,309 - INFO - Request received: GET /.env
+2025-04-06 23:49:40,310 - INFO - Client: 78.153.140.177
+2025-04-06 23:49:40,310 - INFO - Response status: 404
+2025-04-06 23:49:41,144 - INFO - Request received: GET /config/secrets.yml
+2025-04-06 23:49:41,144 - INFO - Client: 78.153.140.177
+2025-04-06 23:49:41,145 - INFO - Response status: 404
+2025-04-06 23:49:41,944 - INFO - Request received: GET /.env.1
+2025-04-06 23:49:41,944 - INFO - Client: 78.153.140.177
+2025-04-06 23:49:41,945 - INFO - Response status: 404
+2025-04-06 23:49:42,867 - INFO - Request received: GET /.env.2
+2025-04-06 23:49:42,868 - INFO - Client: 78.153.140.177
+2025-04-06 23:49:42,868 - INFO - Response status: 404
+2025-04-06 23:49:44,398 - INFO - Request received: GET /.env1
+2025-04-06 23:49:44,399 - INFO - Client: 78.153.140.177
+2025-04-06 23:49:44,399 - INFO - Response status: 404
+2025-04-06 23:49:52,534 - INFO - Request received: GET /.env_2
+2025-04-06 23:49:52,535 - INFO - Client: 78.153.140.177
+2025-04-06 23:49:52,535 - INFO - Response status: 404
+2025-04-06 23:49:53,451 - INFO - Request received: GET /.git/config
+2025-04-06 23:49:53,451 - INFO - Client: 78.153.140.177
+2025-04-06 23:49:53,451 - INFO - Response status: 404
+2025-04-06 23:49:54,130 - INFO - Request received: GET /.phpinfo
+2025-04-06 23:49:54,131 - INFO - Client: 78.153.140.177
+2025-04-06 23:49:54,131 - INFO - Response status: 404
+2025-04-06 23:49:54,746 - INFO - Request received: GET /.production.env
+2025-04-06 23:49:54,746 - INFO - Client: 78.153.140.177
+2025-04-06 23:49:54,747 - INFO - Response status: 404
+2025-04-06 23:49:56,444 - INFO - Request received: GET /.powenv
+2025-04-06 23:49:56,444 - INFO - Client: 78.153.140.177
+2025-04-06 23:49:56,444 - INFO - Response status: 404
+2025-04-06 23:49:58,725 - INFO - Request received: GET /.profile
+2025-04-06 23:49:58,725 - INFO - Client: 78.153.140.177
+2025-04-06 23:49:58,726 - INFO - Response status: 404
+2025-04-06 23:49:59,978 - INFO - Request received: GET /.s3cfg
+2025-04-06 23:49:59,978 - INFO - Client: 78.153.140.177
+2025-04-06 23:49:59,978 - INFO - Response status: 404
+2025-04-06 23:50:00,396 - INFO - Request received: GET /_info.php
+2025-04-06 23:50:00,396 - INFO - Client: 78.153.140.177
+2025-04-06 23:50:00,396 - INFO - Response status: 404
+2025-04-06 23:50:02,500 - INFO - Request received: GET /_phpinfo.php
+2025-04-06 23:50:02,500 - INFO - Client: 78.153.140.177
+2025-04-06 23:50:02,501 - INFO - Response status: 404
+2025-04-06 23:50:03,014 - INFO - Request received: GET /_poopinfo.php
+2025-04-06 23:50:03,014 - INFO - Client: 78.153.140.177
+2025-04-06 23:50:03,014 - INFO - Response status: 404
+2025-04-06 23:50:03,581 - INFO - Request received: GET /_profiler/info
+2025-04-06 23:50:03,581 - INFO - Client: 78.153.140.177
+2025-04-06 23:50:03,582 - INFO - Response status: 404
+2025-04-06 23:50:04,622 - INFO - Request received: GET /_profiler/phpinfo.php
+2025-04-06 23:50:04,623 - INFO - Client: 78.153.140.177
+2025-04-06 23:50:04,623 - INFO - Response status: 404
+2025-04-06 23:50:04,880 - INFO - Request received: GET /_profiler/phpinfo/info.php
+2025-04-06 23:50:04,880 - INFO - Client: 78.153.140.177
+2025-04-06 23:50:04,880 - INFO - Response status: 404
+2025-04-06 23:50:05,351 - INFO - Request received: GET /app.conf
+2025-04-06 23:50:05,351 - INFO - Client: 78.153.140.177
+2025-04-06 23:50:05,351 - INFO - Response status: 404
+2025-04-06 23:50:06,200 - INFO - Request received: GET /app.config
+2025-04-06 23:50:06,200 - INFO - Client: 78.153.140.177
+2025-04-06 23:50:06,201 - INFO - Response status: 404
+2025-04-06 23:50:06,726 - INFO - Request received: GET /app.json
+2025-04-06 23:50:06,726 - INFO - Client: 78.153.140.177
+2025-04-06 23:50:06,727 - INFO - Response status: 404
+2025-04-06 23:50:07,371 - INFO - Request received: GET /app.yaml
+2025-04-06 23:50:07,371 - INFO - Client: 78.153.140.177
+2025-04-06 23:50:07,372 - INFO - Response status: 404
+2025-04-06 23:50:08,045 - INFO - Request received: GET /config.env
+2025-04-06 23:50:08,045 - INFO - Client: 78.153.140.177
+2025-04-06 23:50:08,046 - INFO - Response status: 404
+2025-04-06 23:50:09,399 - INFO - Request received: GET /config.json
+2025-04-06 23:50:09,399 - INFO - Client: 78.153.140.177
+2025-04-06 23:50:09,400 - INFO - Response status: 404
+2025-04-07 00:15:29,039 - INFO - Request received: PROPFIND /
+2025-04-07 00:15:29,039 - INFO - Client: 154.81.156.10
+2025-04-07 00:15:29,039 - INFO - Response status: 404
+2025-04-07 00:19:04,471 - INFO - Request received: GET /
+2025-04-07 00:19:04,471 - INFO - Client: 73.127.102.51
+2025-04-07 00:19:04,472 - INFO - Response status: 404
+2025-04-07 00:26:55,288 - INFO - Request received: GET /.env
+2025-04-07 00:26:55,288 - INFO - Client: 193.122.182.27
+2025-04-07 00:26:55,289 - INFO - Response status: 404
+2025-04-07 00:26:55,607 - INFO - Request received: POST /
+2025-04-07 00:26:55,607 - INFO - Client: 193.122.182.27
+2025-04-07 00:26:55,608 - INFO - Response status: 404
+2025-04-07 00:27:23,978 - INFO - Request received: GET /
+2025-04-07 00:27:23,978 - INFO - Client: 73.127.102.51
+2025-04-07 00:27:23,979 - INFO - Response status: 404
+2025-04-07 00:28:22,415 - INFO - Request received: GET /
+2025-04-07 00:28:22,415 - INFO - Client: 68.183.205.203
+2025-04-07 00:28:22,415 - INFO - Response status: 404
+2025-04-07 00:28:25,376 - INFO - Request received: GET /favicon.ico
+2025-04-07 00:28:25,376 - INFO - Client: 68.183.205.203
+2025-04-07 00:28:25,377 - INFO - Response status: 404
+2025-04-07 00:32:35,800 - INFO - Request received: GET /
+2025-04-07 00:32:35,800 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:35,801 - INFO - Response status: 404
+2025-04-07 00:32:35,919 - INFO - Request received: GET /static../.git/config
+2025-04-07 00:32:35,919 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:35,920 - INFO - Response status: 404
+2025-04-07 00:32:36,053 - INFO - Request received: GET /dev/.git/config
+2025-04-07 00:32:36,053 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:36,054 - INFO - Response status: 404
+2025-04-07 00:32:36,156 - INFO - Request received: GET /.env.live
+2025-04-07 00:32:36,156 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:36,156 - INFO - Response status: 404
+2025-04-07 00:32:36,264 - INFO - Request received: GET /.env.template
+2025-04-07 00:32:36,264 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:36,265 - INFO - Response status: 404
+2025-04-07 00:32:36,393 - INFO - Request received: GET /.aws/credentials
+2025-04-07 00:32:36,393 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:36,394 - INFO - Response status: 404
+2025-04-07 00:32:36,513 - INFO - Request received: GET /.env.backup
+2025-04-07 00:32:36,514 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:36,514 - INFO - Response status: 404
+2025-04-07 00:32:36,646 - INFO - Request received: GET /.env.ci
+2025-04-07 00:32:36,646 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:36,647 - INFO - Response status: 404
+2025-04-07 00:32:36,749 - INFO - Request received: GET /.env.config
+2025-04-07 00:32:36,749 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:36,750 - INFO - Response status: 404
+2025-04-07 00:32:36,868 - INFO - Request received: GET /.env_sample
+2025-04-07 00:32:36,868 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:36,869 - INFO - Response status: 404
+2025-04-07 00:32:36,963 - INFO - Request received: GET /project/.git/config
+2025-04-07 00:32:36,963 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:36,963 - INFO - Response status: 404
+2025-04-07 00:32:37,061 - INFO - Request received: GET /api/.git/config
+2025-04-07 00:32:37,062 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:37,062 - INFO - Response status: 404
+2025-04-07 00:32:37,161 - INFO - Request received: GET /.env.production.local
+2025-04-07 00:32:37,161 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:37,162 - INFO - Response status: 404
+2025-04-07 00:32:37,280 - INFO - Request received: GET /build/.env
+2025-04-07 00:32:37,280 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:37,280 - INFO - Response status: 404
+2025-04-07 00:32:37,396 - INFO - Request received: GET /.env.test
+2025-04-07 00:32:37,396 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:37,397 - INFO - Response status: 404
+2025-04-07 00:32:37,516 - INFO - Request received: GET /www/.git/config
+2025-04-07 00:32:37,516 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:37,516 - INFO - Response status: 404
+2025-04-07 00:32:37,630 - INFO - Request received: GET /config.json
+2025-04-07 00:32:37,630 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:37,630 - INFO - Response status: 404
+2025-04-07 00:32:37,735 - INFO - Request received: GET /config/.env
+2025-04-07 00:32:37,735 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:37,736 - INFO - Response status: 404
+2025-04-07 00:32:37,832 - INFO - Request received: GET /server/.git/config
+2025-04-07 00:32:37,832 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:37,833 - INFO - Response status: 404
+2025-04-07 00:32:37,951 - INFO - Request received: GET /backup/.git/config
+2025-04-07 00:32:37,951 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:37,952 - INFO - Response status: 404
+2025-04-07 00:32:38,046 - INFO - Request received: GET /.env.default
+2025-04-07 00:32:38,046 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:38,046 - INFO - Response status: 404
+2025-04-07 00:32:38,172 - INFO - Request received: GET /.env.development.local
+2025-04-07 00:32:38,172 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:38,173 - INFO - Response status: 404
+2025-04-07 00:32:38,271 - INFO - Request received: GET /prod/.env
+2025-04-07 00:32:38,271 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:38,272 - INFO - Response status: 404
+2025-04-07 00:32:38,372 - INFO - Request received: GET /media../.git/config
+2025-04-07 00:32:38,372 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:38,373 - INFO - Response status: 404
+2025-04-07 00:32:38,504 - INFO - Request received: GET /src/.git/config
+2025-04-07 00:32:38,504 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:38,504 - INFO - Response status: 404
+2025-04-07 00:32:38,615 - INFO - Request received: GET /docker-compose.prod.yml
+2025-04-07 00:32:38,615 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:38,615 - INFO - Response status: 404
+2025-04-07 00:32:38,736 - INFO - Request received: GET /.env.dev
+2025-04-07 00:32:38,736 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:38,737 - INFO - Response status: 404
+2025-04-07 00:32:38,832 - INFO - Request received: GET /.env.dist
+2025-04-07 00:32:38,832 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:38,832 - INFO - Response status: 404
+2025-04-07 00:32:38,968 - INFO - Request received: GET /.env.preprod
+2025-04-07 00:32:38,968 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:38,969 - INFO - Response status: 404
+2025-04-07 00:32:39,111 - INFO - Request received: GET /.env.staging.local
+2025-04-07 00:32:39,111 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:39,112 - INFO - Response status: 404
+2025-04-07 00:32:39,211 - INFO - Request received: GET /cms/.git/config
+2025-04-07 00:32:39,211 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:39,212 - INFO - Response status: 404
+2025-04-07 00:32:39,310 - INFO - Request received: GET /.env.local
+2025-04-07 00:32:39,310 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:39,311 - INFO - Response status: 404
+2025-04-07 00:32:39,426 - INFO - Request received: GET /.env.stage
+2025-04-07 00:32:39,426 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:39,426 - INFO - Response status: 404
+2025-04-07 00:32:39,530 - INFO - Request received: GET /.env.testing
+2025-04-07 00:32:39,530 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:39,530 - INFO - Response status: 404
+2025-04-07 00:32:39,678 - INFO - Request received: GET /.env.bak
+2025-04-07 00:32:39,678 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:39,678 - INFO - Response status: 404
+2025-04-07 00:32:39,793 - INFO - Request received: GET /core/.git/config
+2025-04-07 00:32:39,793 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:39,793 - INFO - Response status: 404
+2025-04-07 00:32:39,885 - INFO - Request received: GET /settings/.env
+2025-04-07 00:32:39,885 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:39,885 - INFO - Response status: 404
+2025-04-07 00:32:40,014 - INFO - Request received: GET /files/.git/config
+2025-04-07 00:32:40,014 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:40,014 - INFO - Response status: 404
+2025-04-07 00:32:40,139 - INFO - Request received: GET /admin/.git/config
+2025-04-07 00:32:40,140 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:40,140 - INFO - Response status: 404
+2025-04-07 00:32:40,239 - INFO - Request received: GET /app/.git/config
+2025-04-07 00:32:40,240 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:40,240 - INFO - Response status: 404
+2025-04-07 00:32:40,343 - INFO - Request received: GET /.env
+2025-04-07 00:32:40,343 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:40,344 - INFO - Response status: 404
+2025-04-07 00:32:40,458 - INFO - Request received: GET /config/.git/config
+2025-04-07 00:32:40,458 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:40,458 - INFO - Response status: 404
+2025-04-07 00:32:40,553 - INFO - Request received: GET /.env.save
+2025-04-07 00:32:40,553 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:40,553 - INFO - Response status: 404
+2025-04-07 00:32:40,672 - INFO - Request received: GET /.env.uat
+2025-04-07 00:32:40,672 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:40,672 - INFO - Response status: 404
+2025-04-07 00:32:40,801 - INFO - Request received: GET /data/.git/config
+2025-04-07 00:32:40,801 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:40,802 - INFO - Response status: 404
+2025-04-07 00:32:40,893 - INFO - Request received: GET /public/.git/config
+2025-04-07 00:32:40,893 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:40,894 - INFO - Response status: 404
+2025-04-07 00:32:41,026 - INFO - Request received: GET /.env.sandbox
+2025-04-07 00:32:41,026 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:41,027 - INFO - Response status: 404
+2025-04-07 00:32:41,147 - INFO - Request received: GET /api/.env
+2025-04-07 00:32:41,147 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:41,147 - INFO - Response status: 404
+2025-04-07 00:32:41,289 - INFO - Request received: GET /configuration/.env
+2025-04-07 00:32:41,289 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:41,290 - INFO - Response status: 404
+2025-04-07 00:32:41,403 - INFO - Request received: GET /.git/config
+2025-04-07 00:32:41,403 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:41,404 - INFO - Response status: 404
+2025-04-07 00:32:41,500 - INFO - Request received: GET /media/.git/config
+2025-04-07 00:32:41,500 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:41,500 - INFO - Response status: 404
+2025-04-07 00:32:41,627 - INFO - Request received: GET /.env.dev.local
+2025-04-07 00:32:41,627 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:41,628 - INFO - Response status: 404
+2025-04-07 00:32:41,737 - INFO - Request received: GET /.env.production
+2025-04-07 00:32:41,737 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:41,737 - INFO - Response status: 404
+2025-04-07 00:32:41,837 - INFO - Request received: GET /.env.secret
+2025-04-07 00:32:41,837 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:41,838 - INFO - Response status: 404
+2025-04-07 00:32:41,935 - INFO - Request received: GET /.env.prod
+2025-04-07 00:32:41,936 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:41,936 - INFO - Response status: 404
+2025-04-07 00:32:42,052 - INFO - Request received: GET /assets../.git/config
+2025-04-07 00:32:42,052 - INFO - Client: 45.148.10.34
+2025-04-07 00:32:42,052 - INFO - Response status: 404
+2025-04-07 00:44:54,183 - INFO - Request received: GET /
+2025-04-07 00:44:54,183 - INFO - Client: 64.253.185.164
+2025-04-07 00:44:54,183 - INFO - Response status: 404
+2025-04-07 00:58:11,097 - INFO - Request received: GET /
+2025-04-07 00:58:11,097 - INFO - Client: 104.236.209.11
+2025-04-07 00:58:11,098 - INFO - Response status: 404
+2025-04-07 01:06:18,361 - INFO - Request received: GET /robots.txt
+2025-04-07 01:06:18,361 - INFO - Client: 5.255.231.189
+2025-04-07 01:06:18,362 - INFO - Response status: 404
+2025-04-07 01:06:18,873 - INFO - Request received: GET /classic-watches
+2025-04-07 01:06:18,873 - INFO - Client: 5.255.231.102
+2025-04-07 01:06:18,874 - INFO - Response status: 404
+2025-04-07 01:08:00,984 - INFO - Request received: PROPFIND /
+2025-04-07 01:08:00,984 - INFO - Client: 154.81.156.10
+2025-04-07 01:08:00,984 - INFO - Response status: 404
+2025-04-07 01:08:18,340 - INFO - Request received: GET /
+2025-04-07 01:08:18,340 - INFO - Client: 199.45.154.125
+2025-04-07 01:08:18,340 - INFO - Response status: 404
+2025-04-07 01:08:29,503 - INFO - Request received: GET /
+2025-04-07 01:08:29,504 - INFO - Client: 199.45.154.125
+2025-04-07 01:08:29,504 - INFO - Response status: 404
+2025-04-07 01:08:45,153 - INFO - Request received: GET /favicon.ico
+2025-04-07 01:08:45,153 - INFO - Client: 199.45.154.125
+2025-04-07 01:08:45,154 - INFO - Response status: 404
+2025-04-07 01:18:34,602 - INFO - Request received: GET /
+2025-04-07 01:18:34,602 - INFO - Client: 165.154.164.24
+2025-04-07 01:18:34,603 - INFO - Response status: 404
+2025-04-07 01:18:52,678 - INFO - Request received: GET /favicon.ico
+2025-04-07 01:18:52,678 - INFO - Client: 165.154.164.24
+2025-04-07 01:18:52,679 - INFO - Response status: 404
+2025-04-07 01:18:52,752 - INFO - Request received: GET /robots.txt
+2025-04-07 01:18:52,753 - INFO - Client: 165.154.164.24
+2025-04-07 01:18:52,753 - INFO - Response status: 404
+2025-04-07 01:18:52,826 - INFO - Request received: GET /sitemap.xml
+2025-04-07 01:18:52,826 - INFO - Client: 165.154.164.24
+2025-04-07 01:18:52,827 - INFO - Response status: 404
+2025-04-07 01:24:42,475 - INFO - Request received: GET /clock
+2025-04-07 01:24:42,475 - INFO - Client: 87.250.224.79
+2025-04-07 01:24:42,476 - INFO - Response status: 404
+2025-04-07 01:32:59,683 - INFO - Request received: GET /
+2025-04-07 01:32:59,683 - INFO - Client: 198.235.24.147
+2025-04-07 01:32:59,684 - INFO - Response status: 404
+2025-04-07 01:34:55,808 - INFO - Request received: PROPFIND /
+2025-04-07 01:34:55,808 - INFO - Client: 154.81.156.10
+2025-04-07 01:34:55,809 - INFO - Response status: 404
+2025-04-07 01:40:37,379 - INFO - Request received: GET /gent-watches/diesel
+2025-04-07 01:40:37,380 - INFO - Client: 87.250.224.90
+2025-04-07 01:40:37,380 - INFO - Response status: 404
+2025-04-07 01:56:38,211 - INFO - Request received: GET /
+2025-04-07 01:56:38,211 - INFO - Client: 167.94.146.48
+2025-04-07 01:56:38,212 - INFO - Response status: 404
+2025-04-07 01:56:47,292 - INFO - Request received: GET /
+2025-04-07 01:56:47,292 - INFO - Client: 167.94.146.48
+2025-04-07 01:56:47,293 - INFO - Response status: 404
+2025-04-07 01:57:01,844 - INFO - Request received: GET /favicon.ico
+2025-04-07 01:57:01,844 - INFO - Client: 167.94.146.48
+2025-04-07 01:57:01,845 - INFO - Response status: 404
+2025-04-07 02:09:12,364 - INFO - Request received: PROPFIND /
+2025-04-07 02:09:12,364 - INFO - Client: 154.81.156.10
+2025-04-07 02:09:12,365 - INFO - Response status: 404
+2025-04-07 02:19:03,511 - INFO - Request received: GET /
+2025-04-07 02:19:03,511 - INFO - Client: 115.192.35.132
+2025-04-07 02:19:03,512 - INFO - Response status: 404
+2025-04-07 02:32:46,283 - INFO - Request received: GET /
+2025-04-07 02:32:46,283 - INFO - Client: 162.142.125.122
+2025-04-07 02:32:46,284 - INFO - Response status: 404
+2025-04-07 02:33:02,528 - INFO - Request received: GET /
+2025-04-07 02:33:02,528 - INFO - Client: 162.142.125.122
+2025-04-07 02:33:02,528 - INFO - Response status: 404
+2025-04-07 02:33:32,186 - INFO - Request received: GET /favicon.ico
+2025-04-07 02:33:32,186 - INFO - Client: 162.142.125.122
+2025-04-07 02:33:32,187 - INFO - Response status: 404
+2025-04-07 02:42:21,687 - INFO - Request received: GET /
+2025-04-07 02:42:21,687 - INFO - Client: 165.154.182.221
+2025-04-07 02:42:21,688 - INFO - Response status: 404
+2025-04-07 02:42:27,071 - INFO - Request received: GET /favicon.ico
+2025-04-07 02:42:27,071 - INFO - Client: 165.154.182.221
+2025-04-07 02:42:27,071 - INFO - Response status: 404
+2025-04-07 02:42:27,614 - INFO - Request received: GET /robots.txt
+2025-04-07 02:42:27,614 - INFO - Client: 165.154.182.221
+2025-04-07 02:42:27,614 - INFO - Response status: 404
+2025-04-07 02:42:28,154 - INFO - Request received: GET /sitemap.xml
+2025-04-07 02:42:28,154 - INFO - Client: 165.154.182.221
+2025-04-07 02:42:28,154 - INFO - Response status: 404
+2025-04-07 03:09:01,174 - INFO - Request received: GET /.git/config
+2025-04-07 03:09:01,174 - INFO - Client: 37.27.247.249
+2025-04-07 03:09:01,174 - INFO - Response status: 404
+2025-04-07 03:09:39,495 - INFO - Request received: GET /
+2025-04-07 03:09:39,495 - INFO - Client: 199.45.154.146
+2025-04-07 03:09:39,496 - INFO - Response status: 404
+2025-04-07 03:09:53,776 - INFO - Request received: GET /
+2025-04-07 03:09:53,776 - INFO - Client: 199.45.154.146
+2025-04-07 03:09:53,776 - INFO - Response status: 404
+2025-04-07 03:10:11,629 - INFO - Request received: GET /favicon.ico
+2025-04-07 03:10:11,630 - INFO - Client: 199.45.154.146
+2025-04-07 03:10:11,630 - INFO - Response status: 404
+2025-04-07 03:14:56,024 - INFO - Request received: GET /.env
+2025-04-07 03:14:56,025 - INFO - Client: 78.153.140.93
+2025-04-07 03:14:56,025 - INFO - Response status: 404
+2025-04-07 03:14:56,188 - INFO - Request received: POST /
+2025-04-07 03:14:56,189 - INFO - Client: 78.153.140.93
+2025-04-07 03:14:56,190 - INFO - Response status: 404
+2025-04-07 03:16:56,169 - INFO - Request received: PROPFIND /
+2025-04-07 03:16:56,169 - INFO - Client: 154.81.156.10
+2025-04-07 03:16:56,170 - INFO - Response status: 404
+2025-04-07 03:43:20,034 - INFO - Request received: PROPFIND /
+2025-04-07 03:43:20,034 - INFO - Client: 154.81.156.10
+2025-04-07 03:43:20,035 - INFO - Response status: 404
+2025-04-07 03:44:41,994 - INFO - Request received: GET /
+2025-04-07 03:44:41,995 - INFO - Client: 217.229.151.8
+2025-04-07 03:44:41,995 - INFO - Response status: 404
+2025-04-07 03:56:16,542 - INFO - Request received: GET /.git/config
+2025-04-07 03:56:16,542 - INFO - Client: 170.64.192.38
+2025-04-07 03:56:16,543 - INFO - Response status: 404
+2025-04-07 04:41:14,920 - INFO - Request received: PROPFIND /
+2025-04-07 04:41:14,920 - INFO - Client: 154.81.156.10
+2025-04-07 04:41:14,920 - INFO - Response status: 404
+2025-04-07 04:42:26,312 - INFO - Request received: GET /
+2025-04-07 04:42:26,313 - INFO - Client: 104.236.209.11
+2025-04-07 04:42:26,313 - INFO - Response status: 404
+2025-04-07 05:16:27,955 - INFO - Request received: GET /.env
+2025-04-07 05:16:27,956 - INFO - Client: 78.153.140.93
+2025-04-07 05:16:27,956 - INFO - Response status: 404
+2025-04-07 05:16:28,155 - INFO - Request received: POST /
+2025-04-07 05:16:28,155 - INFO - Client: 78.153.140.93
+2025-04-07 05:16:28,155 - INFO - Response status: 404
+2025-04-07 05:32:08,773 - INFO - Request received: PROPFIND /
+2025-04-07 05:32:08,773 - INFO - Client: 154.81.156.10
+2025-04-07 05:32:08,774 - INFO - Response status: 404
+2025-04-07 05:47:40,315 - INFO - Request received: PROPFIND /
+2025-04-07 05:47:40,315 - INFO - Client: 154.81.156.10
+2025-04-07 05:47:40,316 - INFO - Response status: 404
+2025-04-07 06:14:55,114 - INFO - Request received: GET /
+2025-04-07 06:14:55,114 - INFO - Client: 207.241.225.134
+2025-04-07 06:14:55,115 - INFO - Response status: 404
+2025-04-07 06:34:58,202 - INFO - Request received: PROPFIND /
+2025-04-07 06:34:58,202 - INFO - Client: 154.81.156.10
+2025-04-07 06:34:58,203 - INFO - Response status: 404
+2025-04-07 07:17:11,055 - INFO - Request received: GET /
+2025-04-07 07:17:11,055 - INFO - Client: 45.90.63.223
+2025-04-07 07:17:11,056 - INFO - Response status: 404
+2025-04-07 07:17:11,206 - INFO - Request received: GET /favicon.ico
+2025-04-07 07:17:11,206 - INFO - Client: 45.90.63.223
+2025-04-07 07:17:11,207 - INFO - Response status: 404
+2025-04-07 07:27:57,566 - INFO - Request received: PROPFIND /
+2025-04-07 07:27:57,566 - INFO - Client: 154.81.156.10
+2025-04-07 07:27:57,567 - INFO - Response status: 404
+2025-04-07 08:01:36,969 - INFO - Request received: GET /
+2025-04-07 08:01:36,969 - INFO - Client: 205.210.31.149
+2025-04-07 08:01:36,970 - INFO - Response status: 404
+2025-04-07 08:06:11,300 - INFO - Request received: GET /
+2025-04-07 08:06:11,300 - INFO - Client: 205.210.31.184
+2025-04-07 08:06:11,300 - INFO - Response status: 404
+2025-04-07 08:11:27,996 - INFO - Request received: PROPFIND /
+2025-04-07 08:11:27,996 - INFO - Client: 154.81.156.10
+2025-04-07 08:11:27,997 - INFO - Response status: 404
+2025-04-07 08:19:17,113 - INFO - Request received: GET /
+2025-04-07 08:19:17,113 - INFO - Client: 20.65.194.175
+2025-04-07 08:19:17,114 - INFO - Response status: 404
+2025-04-07 08:46:38,155 - INFO - Request received: PROPFIND /
+2025-04-07 08:46:38,156 - INFO - Client: 154.81.156.10
+2025-04-07 08:46:38,156 - INFO - Response status: 404
+2025-04-07 08:48:00,503 - INFO - Request received: GET /robots.txt
+2025-04-07 08:48:00,503 - INFO - Client: 213.180.203.43
+2025-04-07 08:48:00,504 - INFO - Response status: 404
+2025-04-07 08:48:00,990 - INFO - Request received: GET /news
+2025-04-07 08:48:00,990 - INFO - Client: 213.180.203.154
+2025-04-07 08:48:00,990 - INFO - Response status: 404
+2025-04-07 09:01:44,903 - INFO - Request received: GET /.env
+2025-04-07 09:01:44,903 - INFO - Client: 196.251.71.111
+2025-04-07 09:01:44,903 - INFO - Response status: 404
+2025-04-07 09:06:55,918 - INFO - Request received: GET /.env
+2025-04-07 09:06:55,919 - INFO - Client: 78.153.140.148
+2025-04-07 09:06:55,919 - INFO - Response status: 404
+2025-04-07 09:06:56,062 - INFO - Request received: POST /
+2025-04-07 09:06:56,063 - INFO - Client: 78.153.140.148
+2025-04-07 09:06:56,063 - INFO - Response status: 404
+2025-04-07 09:20:50,597 - INFO - Request received: GET /
+2025-04-07 09:20:50,598 - INFO - Client: 162.216.149.43
+2025-04-07 09:20:50,598 - INFO - Response status: 404
+2025-04-07 09:46:15,537 - INFO - Request received: PROPFIND /
+2025-04-07 09:46:15,537 - INFO - Client: 154.81.156.10
+2025-04-07 09:46:15,538 - INFO - Response status: 404
+2025-04-07 09:48:06,960 - INFO - Request received: GET /
+2025-04-07 09:48:06,960 - INFO - Client: 153.139.204.131
+2025-04-07 09:48:06,961 - INFO - Response status: 404
+2025-04-07 09:58:38,441 - INFO - Request received: GET /
+2025-04-07 09:58:38,442 - INFO - Client: 3.18.213.149
+2025-04-07 09:58:38,442 - INFO - Response status: 404
+2025-04-07 10:01:17,241 - INFO - Request received: GET /
+2025-04-07 10:01:17,242 - INFO - Client: 2.102.247.130
+2025-04-07 10:01:17,242 - INFO - Response status: 404
+2025-04-07 10:12:24,696 - INFO - Request received: PROPFIND /
+2025-04-07 10:12:24,696 - INFO - Client: 154.81.156.10
+2025-04-07 10:12:24,696 - INFO - Response status: 404
+2025-04-07 10:47:05,450 - INFO - Request received: GET /ecp/Current/exporttool/microsoft.exchange.ediscovery.exporttool.application
+2025-04-07 10:47:05,450 - INFO - Client: 20.65.193.168
+2025-04-07 10:47:05,451 - INFO - Response status: 404
+2025-04-07 11:00:26,872 - INFO - Request received: GET /
+2025-04-07 11:00:26,872 - INFO - Client: 216.218.206.70
+2025-04-07 11:00:26,872 - INFO - Response status: 404
+2025-04-07 11:01:18,652 - INFO - Request received: GET /favicon.ico
+2025-04-07 11:01:18,652 - INFO - Client: 216.218.206.94
+2025-04-07 11:01:18,653 - INFO - Response status: 404
+2025-04-07 11:01:41,671 - INFO - Request received: GET //api.ipify.org/
+2025-04-07 11:01:41,671 - INFO - Client: 216.218.206.66
+2025-04-07 11:01:41,672 - INFO - Response status: 404
+2025-04-07 11:02:04,340 - INFO - Request received: CONNECT 
+2025-04-07 11:02:04,340 - INFO - Client: 216.218.206.114
+2025-04-07 11:02:04,341 - INFO - Response status: 404
+2025-04-07 11:12:30,331 - INFO - Request received: PROPFIND /
+2025-04-07 11:12:30,331 - INFO - Client: 154.81.156.10
+2025-04-07 11:12:30,332 - INFO - Response status: 404
+2025-04-07 11:13:40,406 - INFO - Request received: GET /
+2025-04-07 11:13:40,407 - INFO - Client: 103.203.59.1
+2025-04-07 11:13:40,407 - INFO - Response status: 404
+2025-04-07 11:16:01,966 - INFO - Request received: GET /
+2025-04-07 11:16:01,967 - INFO - Client: 61.205.233.240
+2025-04-07 11:16:01,967 - INFO - Response status: 404
+2025-04-07 11:16:05,080 - INFO - Request received: GET /
+2025-04-07 11:16:05,080 - INFO - Client: 61.205.233.240
+2025-04-07 11:16:05,081 - INFO - Response status: 404
+2025-04-07 11:26:35,439 - INFO - Request received: GET /
+2025-04-07 11:26:35,439 - INFO - Client: 185.242.226.109
+2025-04-07 11:26:35,440 - INFO - Response status: 404
+2025-04-07 11:35:28,450 - INFO - Request received: POST /memory/store
+2025-04-07 11:35:28,450 - INFO - Client: 127.0.0.1
+2025-04-07 11:35:28,453 - INFO - Response status: 401
+2025-04-07 11:37:28,876 - INFO - Request received: POST /memory/store
+2025-04-07 11:37:28,876 - INFO - Client: 127.0.0.1
+2025-04-07 11:37:28,878 - INFO - Response status: 401
+2025-04-07 11:38:23,501 - INFO - Request received: POST /memory/store
+2025-04-07 11:38:23,502 - INFO - Client: 127.0.0.1
+2025-04-07 11:38:23,538 - INFO - ✅ New session key: user_postgres_test
+2025-04-07 11:38:24,422 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-07 11:38:24,429 - INFO - embedding | tokens=9 | model=text-embedding-ada-002
+2025-04-07 11:38:24,438 - INFO - ✅ Connected to Neo4j.
+2025-04-07 11:38:24,439 - WARNING - ⚠️ GPT enrichment fallback: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-07 11:38:24,561 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-04-07 11:38:24,659 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (m:Memory {hash: $query_hash, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (m)-[:MENTIONS]->(t)\n                    '
+2025-04-07 11:38:24,685 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (s:Session {id: $session_id, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (s)-[:TOUCHED]->(t)\n                    '
+2025-04-07 11:38:24,685 - INFO - Response status: 200
+2025-04-07 11:40:24,070 - INFO - Request received: POST /memory/retrieve
+2025-04-07 11:40:24,070 - INFO - Client: 127.0.0.1
+2025-04-07 11:40:24,073 - INFO - Response status: 200
+2025-04-07 11:44:57,214 - INFO - Request received: GET /
+2025-04-07 11:44:57,214 - INFO - Client: 165.227.155.165
+2025-04-07 11:44:57,215 - INFO - Response status: 404
+2025-04-07 11:44:58,272 - INFO - Request received: GET /favicon.ico
+2025-04-07 11:44:58,272 - INFO - Client: 165.227.155.165
+2025-04-07 11:44:58,273 - INFO - Response status: 404
+2025-04-07 11:45:32,193 - INFO - ✅ Redis connection established.
+2025-04-07 11:45:32,662 - INFO - Loading faiss with AVX512 support.
+2025-04-07 11:45:32,676 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-07 11:45:32,679 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-07 11:45:32,802 - INFO - 🚀 MemoryRouter initialized.
+2025-04-07 11:45:32,810 - INFO - 🚀 FastAPI server started
+2025-04-07 11:45:32,810 - INFO - ✅ Connected to Neo4j.
+2025-04-07 11:45:32,811 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /health - {'GET'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-07 11:45:32,811 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-07 11:46:18,627 - INFO - Request received: POST /memory/retrieve
+2025-04-07 11:46:18,628 - INFO - Client: 127.0.0.1
+2025-04-07 11:46:19,204 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-07 11:46:19,208 - INFO - embedding | tokens=11 | model=text-embedding-ada-002
+2025-04-07 11:46:19,209 - INFO - 🔥 FAISS fallback result: []
+2025-04-07 11:46:19,209 - INFO - Response status: 200
+2025-04-07 11:48:12,290 - INFO - Request received: GET /
+2025-04-07 11:48:12,290 - INFO - Client: 87.236.176.199
+2025-04-07 11:48:12,291 - INFO - Response status: 404
+2025-04-07 11:48:25,196 - INFO - Request received: PROPFIND /
+2025-04-07 11:48:25,196 - INFO - Client: 154.81.156.10
+2025-04-07 11:48:25,196 - INFO - Response status: 404
+2025-04-07 11:57:37,363 - INFO - Request received: GET /robots.txt
+2025-04-07 11:57:37,363 - INFO - Client: 213.180.203.25
+2025-04-07 11:57:37,364 - INFO - Response status: 404
+2025-04-07 11:57:37,856 - INFO - Request received: GET /lady-watches/shockproof
+2025-04-07 11:57:37,856 - INFO - Client: 95.108.213.194
+2025-04-07 11:57:37,857 - INFO - Response status: 404
+2025-04-07 11:58:47,283 - INFO - ✅ Redis connection established.
+2025-04-07 11:58:47,761 - INFO - Loading faiss with AVX512 support.
+2025-04-07 11:58:47,775 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-07 11:58:47,778 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-07 11:58:47,904 - INFO - 🚀 MemoryRouter initialized.
+2025-04-07 11:58:47,912 - INFO - 🚀 FastAPI server started
+2025-04-07 11:58:47,913 - INFO - ✅ Connected to Neo4j.
+2025-04-07 11:58:47,913 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /health - {'GET'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-07 11:58:47,913 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-07 11:59:49,492 - INFO - Request received: POST /memory/store
+2025-04-07 11:59:49,493 - INFO - Client: 127.0.0.1
+2025-04-07 11:59:49,528 - INFO - ⚠️ Duplicate memory skipped (hash: 7880b71b3034cb69e205c5e095d5c037d6f6d08888958a314de264233c1ed333)
+2025-04-07 11:59:49,529 - INFO - Response status: 200
+2025-04-07 12:00:01,731 - INFO - Request received: POST /memory/retrieve
+2025-04-07 12:00:01,732 - INFO - Client: 127.0.0.1
+2025-04-07 12:00:02,703 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-07 12:00:02,708 - INFO - embedding | tokens=11 | model=text-embedding-ada-002
+2025-04-07 12:00:02,708 - INFO - 🔥 FAISS fallback result: []
+2025-04-07 12:00:02,708 - WARNING - ⚠️ FAISS fallback hit but returned no matches.
+2025-04-07 12:00:02,709 - INFO - Response status: 200
+2025-04-07 12:01:56,805 - INFO - ✅ Redis connection established.
+2025-04-07 12:05:44,809 - INFO - ✅ Redis connection established.
+2025-04-07 12:05:45,271 - INFO - Loading faiss with AVX512 support.
+2025-04-07 12:05:45,285 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-07 12:05:45,288 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-07 12:05:45,413 - INFO - 🚀 MemoryRouter initialized.
+2025-04-07 12:05:45,421 - INFO - 🚀 FastAPI server started
+2025-04-07 12:05:45,422 - INFO - ✅ Connected to Neo4j.
+2025-04-07 12:05:45,422 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /health - {'GET'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-07 12:05:45,422 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-07 12:06:12,181 - INFO - Request received: POST /memory/store
+2025-04-07 12:06:12,181 - INFO - Client: 127.0.0.1
+2025-04-07 12:06:12,214 - INFO - ⚠️ Duplicate memory skipped (hash: 7880b71b3034cb69e205c5e095d5c037d6f6d08888958a314de264233c1ed333)
+2025-04-07 12:06:12,215 - INFO - Response status: 200
+2025-04-07 12:06:20,056 - INFO - Request received: POST /memory/retrieve
+2025-04-07 12:06:20,056 - INFO - Client: 127.0.0.1
+2025-04-07 12:06:20,833 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-07 12:06:20,837 - INFO - embedding | tokens=11 | model=text-embedding-ada-002
+2025-04-07 12:06:20,838 - WARNING - ⚠️ FAISS fallback hit but returned no matches.
+2025-04-07 12:06:20,838 - INFO - Response status: 200
+2025-04-07 12:10:06,361 - INFO - Request received: GET /
+2025-04-07 12:10:06,362 - INFO - Client: 164.92.136.37
+2025-04-07 12:10:06,362 - INFO - Response status: 404
+2025-04-07 12:10:09,435 - INFO - Request received: GET /
+2025-04-07 12:10:09,435 - INFO - Client: 164.92.136.37
+2025-04-07 12:10:09,436 - INFO - Response status: 404
+2025-04-07 12:12:08,929 - INFO - Request received: GET /
+2025-04-07 12:12:08,929 - INFO - Client: 20.98.140.226
+2025-04-07 12:12:08,929 - INFO - Response status: 404
+2025-04-07 12:15:18,318 - INFO - Request received: PROPFIND /
+2025-04-07 12:15:18,318 - INFO - Client: 154.81.156.10
+2025-04-07 12:15:18,319 - INFO - Response status: 404
+2025-04-07 12:15:41,444 - INFO - Request received: GET /
+2025-04-07 12:15:41,444 - INFO - Client: 104.234.115.153
+2025-04-07 12:15:41,445 - INFO - Response status: 404
+2025-04-07 12:16:29,059 - INFO - Request received: GET /
+2025-04-07 12:16:29,059 - INFO - Client: 104.234.115.153
+2025-04-07 12:16:29,060 - INFO - Response status: 404
+2025-04-07 12:16:56,982 - INFO - Request received: GET /
+2025-04-07 12:16:56,982 - INFO - Client: 185.100.87.136
+2025-04-07 12:16:56,983 - INFO - Response status: 404
+2025-04-07 12:17:13,471 - INFO - Request received: GET /manage/account/login
+2025-04-07 12:17:13,471 - INFO - Client: 104.234.115.153
+2025-04-07 12:17:13,471 - INFO - Response status: 404
+2025-04-07 12:17:53,491 - INFO - Request received: GET /admin/index.html
+2025-04-07 12:17:53,491 - INFO - Client: 104.234.115.153
+2025-04-07 12:17:53,491 - INFO - Response status: 404
+2025-04-07 12:18:36,031 - INFO - Request received: GET /index.html
+2025-04-07 12:18:36,031 - INFO - Client: 104.234.115.153
+2025-04-07 12:18:36,032 - INFO - Response status: 404
+2025-04-07 12:19:12,534 - INFO - Request received: GET /+CSCOE+/logon.html
+2025-04-07 12:19:12,534 - INFO - Client: 104.234.115.153
+2025-04-07 12:19:12,535 - INFO - Response status: 404
+2025-04-07 12:19:54,042 - INFO - Request received: GET /cgi-bin/login.cgi
+2025-04-07 12:19:54,042 - INFO - Client: 104.234.115.153
+2025-04-07 12:19:54,043 - INFO - Response status: 404
+2025-04-07 12:20:31,334 - INFO - Request received: GET /login.htm
+2025-04-07 12:20:31,335 - INFO - Client: 104.234.115.153
+2025-04-07 12:20:31,335 - INFO - Response status: 404
+2025-04-07 12:20:47,603 - INFO - Request received: GET /login.html
+2025-04-07 12:20:47,604 - INFO - Client: 104.234.115.153
+2025-04-07 12:20:47,604 - INFO - Response status: 404
+2025-04-07 12:20:51,972 - INFO - Request received: GET /
+2025-04-07 12:20:51,972 - INFO - Client: 205.210.31.233
+2025-04-07 12:20:51,973 - INFO - Response status: 404
+2025-04-07 12:21:16,105 - INFO - Request received: GET /login.html
+2025-04-07 12:21:16,105 - INFO - Client: 104.234.115.153
+2025-04-07 12:21:16,105 - INFO - Response status: 404
+2025-04-07 12:21:35,198 - INFO - Request received: GET /login.jsp
+2025-04-07 12:21:35,198 - INFO - Client: 104.234.115.153
+2025-04-07 12:21:35,198 - INFO - Response status: 404
+2025-04-07 12:21:53,212 - INFO - Request received: GET /login.jsp
+2025-04-07 12:21:53,213 - INFO - Client: 104.234.115.153
+2025-04-07 12:21:53,213 - INFO - Response status: 404
+2025-04-07 12:22:27,139 - INFO - Request received: POST /memory/store
+2025-04-07 12:22:27,139 - INFO - Client: 127.0.0.1
+2025-04-07 12:22:27,148 - INFO - ⚠️ Duplicate memory skipped (hash: 7880b71b3034cb69e205c5e095d5c037d6f6d08888958a314de264233c1ed333)
+2025-04-07 12:22:27,148 - INFO - Response status: 200
+2025-04-07 12:22:34,467 - INFO - Request received: GET /login
+2025-04-07 12:22:34,467 - INFO - Client: 104.234.115.153
+2025-04-07 12:22:34,467 - INFO - Response status: 404
+2025-04-07 12:22:35,917 - INFO - Request received: POST /memory/retrieve
+2025-04-07 12:22:35,917 - INFO - Client: 127.0.0.1
+2025-04-07 12:22:36,732 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-07 12:22:36,735 - INFO - embedding | tokens=11 | model=text-embedding-ada-002
+2025-04-07 12:22:36,736 - WARNING - ⚠️ FAISS fallback hit but returned no matches.
+2025-04-07 12:22:36,736 - INFO - Response status: 200
+2025-04-07 12:22:50,692 - INFO - Request received: GET /doc/index.html
+2025-04-07 12:22:50,692 - INFO - Client: 104.234.115.153
+2025-04-07 12:22:50,693 - INFO - Response status: 404
+2025-04-07 12:24:15,232 - INFO - Request received: GET //admin/login.asp
+2025-04-07 12:24:15,233 - INFO - Client: 104.234.115.153
+2025-04-07 12:24:15,233 - INFO - Response status: 404
+2025-04-07 12:24:49,800 - INFO - Request received: GET /web/
+2025-04-07 12:24:49,800 - INFO - Client: 104.234.115.153
+2025-04-07 12:24:49,801 - INFO - Response status: 404
+2025-04-07 12:25:09,266 - INFO - Request received: GET /web/
+2025-04-07 12:25:09,266 - INFO - Client: 104.234.115.153
+2025-04-07 12:25:09,267 - INFO - Response status: 404
+2025-04-07 12:25:27,803 - INFO - Request received: GET //webpages/login.html
+2025-04-07 12:25:27,803 - INFO - Client: 104.234.115.153
+2025-04-07 12:25:27,803 - INFO - Response status: 404
+2025-04-07 12:41:24,023 - INFO - Request received: GET /
+2025-04-07 12:41:24,023 - INFO - Client: 167.94.146.57
+2025-04-07 12:41:24,024 - INFO - Response status: 404
+2025-04-07 12:41:33,784 - INFO - Request received: GET /
+2025-04-07 12:41:33,784 - INFO - Client: 167.94.146.57
+2025-04-07 12:41:33,785 - INFO - Response status: 404
+2025-04-07 12:41:48,785 - INFO - Request received: GET /favicon.ico
+2025-04-07 12:41:48,785 - INFO - Client: 167.94.146.57
+2025-04-07 12:41:48,786 - INFO - Response status: 404
+2025-04-07 12:59:20,863 - INFO - Request received: PROPFIND /
+2025-04-07 12:59:20,863 - INFO - Client: 154.81.156.10
+2025-04-07 12:59:20,864 - INFO - Response status: 404
+2025-04-07 13:20:41,145 - INFO - ✅ Redis connection established.
+2025-04-07 13:20:41,611 - INFO - Loading faiss with AVX512 support.
+2025-04-07 13:20:41,625 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-07 13:20:41,628 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-07 13:20:41,752 - INFO - 🚀 MemoryRouter initialized.
+2025-04-07 13:20:41,761 - INFO - 🚀 FastAPI server started
+2025-04-07 13:20:41,761 - INFO - ✅ Connected to Neo4j.
+2025-04-07 13:20:41,762 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /health - {'GET'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-07 13:20:41,762 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-07 13:20:45,411 - INFO - Request received: POST /memory/store
+2025-04-07 13:20:45,412 - INFO - Client: 127.0.0.1
+2025-04-07 13:20:45,439 - INFO - ⚠️ Duplicate memory skipped (hash: 7880b71b3034cb69e205c5e095d5c037d6f6d08888958a314de264233c1ed333)
+2025-04-07 13:20:45,440 - INFO - Response status: 200
+2025-04-07 13:20:54,049 - INFO - Request received: POST /memory/retrieve
+2025-04-07 13:20:54,049 - INFO - Client: 127.0.0.1
+2025-04-07 13:20:54,737 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-07 13:20:54,742 - INFO - embedding | tokens=11 | model=text-embedding-ada-002
+2025-04-07 13:20:54,742 - WARNING - ⚠️ FAISS fallback hit but returned no matches.
+2025-04-07 13:20:54,743 - INFO - Response status: 200
+2025-04-07 13:28:41,389 - INFO - ✅ Redis connection established.
+2025-04-07 13:30:31,162 - INFO - ✅ Redis connection established.
+2025-04-07 13:34:02,294 - INFO - ✅ Redis connection established.
+2025-04-07 13:34:02,877 - INFO - 🚀 MemoryRouter initialized.
+2025-04-07 13:34:02,885 - INFO - 🚀 FastAPI server started
+2025-04-07 13:34:02,885 - INFO - ✅ Connected to Neo4j.
+2025-04-07 13:34:02,885 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-07 13:34:02,885 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-07 13:34:02,885 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-07 13:34:02,885 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-07 13:34:02,886 - INFO - Registered route: /health - {'GET'}
+2025-04-07 13:34:02,886 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-07 13:34:02,886 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-07 13:34:02,886 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-07 13:34:02,886 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-07 13:34:02,886 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-07 13:34:02,886 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-07 13:34:02,886 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-07 13:34:02,886 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-07 13:34:02,886 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-07 13:34:02,886 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-07 13:34:02,886 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-07 13:34:02,886 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-07 13:34:09,169 - INFO - Request received: POST /memory/store
+2025-04-07 13:34:09,169 - INFO - Client: 127.0.0.1
+2025-04-07 13:34:09,172 - INFO - Response status: 401
+2025-04-07 13:34:09,202 - INFO - Request received: POST /memory/retrieve
+2025-04-07 13:34:09,203 - INFO - Client: 127.0.0.1
+2025-04-07 13:34:09,204 - INFO - Response status: 401
+2025-04-07 13:34:54,287 - INFO - Request received: POST /memory/store
+2025-04-07 13:34:54,287 - INFO - Client: 127.0.0.1
+2025-04-07 13:34:54,326 - INFO - ⚠️ Duplicate memory skipped (hash: 7880b71b3034cb69e205c5e095d5c037d6f6d08888958a314de264233c1ed333)
+2025-04-07 13:34:54,326 - INFO - Response status: 200
+2025-04-07 13:35:02,370 - INFO - Request received: POST /memory/retrieve
+2025-04-07 13:35:02,370 - INFO - Client: 127.0.0.1
+2025-04-07 13:35:02,971 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-07 13:35:02,978 - INFO - embedding | tokens=11 | model=text-embedding-ada-002
+2025-04-07 13:35:02,985 - INFO - Loading faiss with AVX512 support.
+2025-04-07 13:35:03,006 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-07 13:35:03,010 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-07 13:35:03,010 - WARNING - ⚠️ FAISS fallback hit but returned no matches.
+2025-04-07 13:35:03,010 - INFO - Response status: 200
+2025-04-07 13:38:18,835 - INFO - ✅ Redis connection established.
+2025-04-07 13:38:19,419 - INFO - 🚀 MemoryRouter initialized.
+2025-04-07 13:38:19,427 - INFO - 🚀 FastAPI server started
+2025-04-07 13:38:19,428 - INFO - Loading faiss with AVX512 support.
+2025-04-07 13:38:19,442 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-07 13:38:19,445 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-07 13:38:19,445 - INFO - [FAISS] Warm cache primed at startup
+2025-04-07 13:38:19,445 - INFO - ✅ Connected to Neo4j.
+2025-04-07 13:38:19,445 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /health - {'GET'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-07 13:38:19,446 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-07 13:38:25,966 - INFO - ✅ Redis connection established.
+2025-04-07 13:38:26,550 - INFO - 🚀 MemoryRouter initialized.
+2025-04-07 13:38:26,558 - INFO - 🚀 FastAPI server started
+2025-04-07 13:38:26,559 - INFO - Loading faiss with AVX512 support.
+2025-04-07 13:38:26,573 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-07 13:38:26,576 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-07 13:38:26,576 - INFO - [FAISS] Warm cache primed at startup
+2025-04-07 13:38:26,577 - INFO - ✅ Connected to Neo4j.
+2025-04-07 13:38:26,577 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /health - {'GET'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-07 13:38:26,577 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-07 13:38:39,261 - INFO - Request received: POST /memory/store
+2025-04-07 13:38:39,261 - INFO - Client: 127.0.0.1
+2025-04-07 13:38:39,295 - INFO - ⚠️ Duplicate memory skipped (hash: 7880b71b3034cb69e205c5e095d5c037d6f6d08888958a314de264233c1ed333)
+2025-04-07 13:38:39,296 - INFO - Response status: 200
+2025-04-07 13:38:47,637 - INFO - Request received: POST /memory/retrieve
+2025-04-07 13:38:47,638 - INFO - Client: 127.0.0.1
+2025-04-07 13:38:48,138 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-07 13:38:48,143 - INFO - embedding | tokens=11 | model=text-embedding-ada-002
+2025-04-07 13:38:48,144 - WARNING - ⚠️ FAISS fallback hit but returned no matches.
+2025-04-07 13:38:48,144 - INFO - Response status: 200
+2025-04-07 13:58:03,325 - INFO - Request received: OPTIONS /
+2025-04-07 13:58:03,326 - INFO - Client: 35.203.55.250
+2025-04-07 13:58:03,326 - INFO - Response status: 404
+2025-04-07 14:00:11,234 - INFO - Request received: GET //ip-api.com/json/
+2025-04-07 14:00:11,234 - INFO - Client: 89.187.179.199
+2025-04-07 14:00:11,235 - INFO - Response status: 404
+2025-04-07 14:04:39,509 - INFO - Request received: PROPFIND /
+2025-04-07 14:04:39,509 - INFO - Client: 154.81.156.10
+2025-04-07 14:04:39,510 - INFO - Response status: 404
+2025-04-07 14:08:53,992 - INFO - ✅ Redis connection established.
+2025-04-07 14:08:54,455 - INFO - Loading faiss with AVX512 support.
+2025-04-07 14:08:54,469 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-07 14:08:54,472 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-07 14:08:54,594 - INFO - 🚀 MemoryRouter initialized.
+2025-04-07 14:08:54,602 - INFO - 🚀 FastAPI server started
+2025-04-07 14:08:54,602 - INFO - [FAISS] Warm cache primed at startup with 0 vectors
+2025-04-07 14:08:54,603 - INFO - ✅ Connected to Neo4j.
+2025-04-07 14:08:54,603 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /health - {'GET'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /memory/health - {'GET'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-07 14:08:54,603 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-07 14:09:29,308 - INFO - ✅ Redis connection established.
+2025-04-07 14:09:29,770 - INFO - Loading faiss with AVX512 support.
+2025-04-07 14:09:29,784 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-07 14:09:29,787 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-07 14:09:29,910 - INFO - 🚀 MemoryRouter initialized.
+2025-04-07 14:09:29,919 - INFO - 🚀 FastAPI server started
+2025-04-07 14:09:29,919 - INFO - [FAISS] Warm cache primed at startup with 0 vectors
+2025-04-07 14:09:29,919 - INFO - ✅ Connected to Neo4j.
+2025-04-07 14:09:29,919 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-07 14:09:29,919 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /health - {'GET'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /memory/health - {'GET'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-07 14:09:29,920 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-07 14:09:38,436 - INFO - Request received: POST /memory/store
+2025-04-07 14:09:38,436 - INFO - Client: 127.0.0.1
+2025-04-07 14:09:38,472 - INFO - ⚠️ Duplicate memory skipped (hash: 7880b71b3034cb69e205c5e095d5c037d6f6d08888958a314de264233c1ed333)
+2025-04-07 14:09:38,473 - INFO - Response status: 200
+2025-04-07 14:09:48,258 - INFO - Request received: POST /memory/retrieve
+2025-04-07 14:09:48,258 - INFO - Client: 127.0.0.1
+2025-04-07 14:09:48,909 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-07 14:09:48,914 - INFO - embedding | tokens=11 | model=text-embedding-ada-002
+2025-04-07 14:09:48,915 - WARNING - ⚠️ FAISS fallback hit but returned no matches.
+2025-04-07 14:09:48,915 - INFO - Response status: 200
+2025-04-07 14:09:53,141 - INFO - Request received: GET /memory/health
+2025-04-07 14:09:53,141 - INFO - Client: 127.0.0.1
+2025-04-07 14:09:53,142 - INFO - Response status: 200
+2025-04-07 14:21:48,666 - INFO - Request received: GET /
+2025-04-07 14:21:48,667 - INFO - Client: 35.216.158.128
+2025-04-07 14:21:48,667 - INFO - Response status: 404
+2025-04-07 14:36:27,283 - INFO - Request received: PROPFIND /
+2025-04-07 14:36:27,283 - INFO - Client: 154.81.156.10
+2025-04-07 14:36:27,284 - INFO - Response status: 404
+2025-04-07 14:56:24,059 - INFO - Request received: POST /hello.world
+2025-04-07 14:56:24,059 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:24,060 - INFO - Response status: 404
+2025-04-07 14:56:24,357 - INFO - Request received: GET /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:24,357 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:24,357 - INFO - Response status: 404
+2025-04-07 14:56:24,519 - INFO - Request received: GET /vendor/phpunit/phpunit/Util/PHP/eval-stdin.php
+2025-04-07 14:56:24,519 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:24,519 - INFO - Response status: 404
+2025-04-07 14:56:24,734 - INFO - Request received: GET /vendor/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:24,734 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:24,735 - INFO - Response status: 404
+2025-04-07 14:56:24,933 - INFO - Request received: GET /vendor/phpunit/Util/PHP/eval-stdin.php
+2025-04-07 14:56:24,933 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:24,934 - INFO - Response status: 404
+2025-04-07 14:56:25,141 - INFO - Request received: GET /vendor/phpunit/phpunit/LICENSE/eval-stdin.php
+2025-04-07 14:56:25,142 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:25,142 - INFO - Response status: 404
+2025-04-07 14:56:25,313 - INFO - Request received: GET /vendor/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:25,313 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:25,313 - INFO - Response status: 404
+2025-04-07 14:56:25,485 - INFO - Request received: GET /phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:25,485 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:25,485 - INFO - Response status: 404
+2025-04-07 14:56:25,667 - INFO - Request received: GET /phpunit/phpunit/Util/PHP/eval-stdin.php
+2025-04-07 14:56:25,667 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:25,668 - INFO - Response status: 404
+2025-04-07 14:56:25,876 - INFO - Request received: GET /phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:25,876 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:25,876 - INFO - Response status: 404
+2025-04-07 14:56:26,041 - INFO - Request received: GET /phpunit/Util/PHP/eval-stdin.php
+2025-04-07 14:56:26,041 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:26,041 - INFO - Response status: 404
+2025-04-07 14:56:26,216 - INFO - Request received: GET /lib/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:26,216 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:26,217 - INFO - Response status: 404
+2025-04-07 14:56:26,405 - INFO - Request received: GET /lib/phpunit/phpunit/Util/PHP/eval-stdin.php
+2025-04-07 14:56:26,405 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:26,405 - INFO - Response status: 404
+2025-04-07 14:56:26,597 - INFO - Request received: GET /lib/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:26,597 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:26,598 - INFO - Response status: 404
+2025-04-07 14:56:26,769 - INFO - Request received: GET /lib/phpunit/Util/PHP/eval-stdin.php
+2025-04-07 14:56:26,769 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:26,769 - INFO - Response status: 404
+2025-04-07 14:56:26,952 - INFO - Request received: GET /lib/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:26,952 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:26,953 - INFO - Response status: 404
+2025-04-07 14:56:27,150 - INFO - Request received: GET /laravel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:27,150 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:27,156 - INFO - Response status: 404
+2025-04-07 14:56:27,352 - INFO - Request received: GET /www/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:27,352 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:27,352 - INFO - Response status: 404
+2025-04-07 14:56:27,534 - INFO - Request received: GET /ws/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:27,534 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:27,534 - INFO - Response status: 404
+2025-04-07 14:56:27,711 - INFO - Request received: GET /yii/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:27,711 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:27,712 - INFO - Response status: 404
+2025-04-07 14:56:27,905 - INFO - Request received: GET /zend/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:27,905 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:27,906 - INFO - Response status: 404
+2025-04-07 14:56:28,120 - INFO - Request received: GET /ws/ec/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:28,120 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:28,120 - INFO - Response status: 404
+2025-04-07 14:56:28,341 - INFO - Request received: GET /V2/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:28,341 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:28,341 - INFO - Response status: 404
+2025-04-07 14:56:28,559 - INFO - Request received: GET /tests/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:28,559 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:28,560 - INFO - Response status: 404
+2025-04-07 14:56:28,795 - INFO - Request received: GET /test/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:28,795 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:28,795 - INFO - Response status: 404
+2025-04-07 14:56:29,000 - INFO - Request received: GET /testing/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:29,000 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:29,001 - INFO - Response status: 404
+2025-04-07 14:56:29,230 - INFO - Request received: GET /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:29,230 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:29,231 - INFO - Response status: 404
+2025-04-07 14:56:29,447 - INFO - Request received: GET /demo/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:29,447 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:29,447 - INFO - Response status: 404
+2025-04-07 14:56:29,652 - INFO - Request received: GET /cms/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:29,652 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:29,653 - INFO - Response status: 404
+2025-04-07 14:56:29,889 - INFO - Request received: GET /crm/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:29,889 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:29,889 - INFO - Response status: 404
+2025-04-07 14:56:30,092 - INFO - Request received: GET /admin/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:30,092 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:30,093 - INFO - Response status: 404
+2025-04-07 14:56:30,405 - INFO - Request received: GET /backup/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:30,405 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:30,406 - INFO - Response status: 404
+2025-04-07 14:56:30,892 - INFO - Request received: GET /blog/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:30,892 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:30,892 - INFO - Response status: 404
+2025-04-07 14:56:31,104 - INFO - Request received: GET /workspace/drupal/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:31,104 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:31,105 - INFO - Response status: 404
+2025-04-07 14:56:31,301 - INFO - Request received: GET /panel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:31,301 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:31,302 - INFO - Response status: 404
+2025-04-07 14:56:31,459 - INFO - Request received: GET /public/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:31,459 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:31,459 - INFO - Response status: 404
+2025-04-07 14:56:31,644 - INFO - Request received: GET /apps/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:31,644 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:31,645 - INFO - Response status: 404
+2025-04-07 14:56:31,846 - INFO - Request received: GET /app/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 14:56:31,847 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:31,847 - INFO - Response status: 404
+2025-04-07 14:56:32,033 - INFO - Request received: GET /index.php
+2025-04-07 14:56:32,033 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:32,033 - INFO - Response status: 404
+2025-04-07 14:56:32,194 - INFO - Request received: GET /public/index.php
+2025-04-07 14:56:32,194 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:32,195 - INFO - Response status: 404
+2025-04-07 14:56:32,348 - INFO - Request received: GET /index.php
+2025-04-07 14:56:32,349 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:32,349 - INFO - Response status: 404
+2025-04-07 14:56:32,514 - INFO - Request received: GET /index.php
+2025-04-07 14:56:32,514 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:32,515 - INFO - Response status: 404
+2025-04-07 14:56:32,676 - INFO - Request received: GET /containers/json
+2025-04-07 14:56:32,676 - INFO - Client: 35.195.46.0
+2025-04-07 14:56:32,677 - INFO - Response status: 404
+2025-04-07 15:13:42,798 - INFO - Request received: POST /hello.world
+2025-04-07 15:13:42,798 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:42,799 - INFO - Response status: 404
+2025-04-07 15:13:43,536 - INFO - Request received: GET /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:13:43,536 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:43,536 - INFO - Response status: 404
+2025-04-07 15:13:44,262 - INFO - Request received: GET /vendor/phpunit/phpunit/Util/PHP/eval-stdin.php
+2025-04-07 15:13:44,262 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:44,262 - INFO - Response status: 404
+2025-04-07 15:13:45,169 - INFO - Request received: GET /vendor/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:13:45,169 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:45,170 - INFO - Response status: 404
+2025-04-07 15:13:46,105 - INFO - Request received: GET /vendor/phpunit/Util/PHP/eval-stdin.php
+2025-04-07 15:13:46,106 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:46,106 - INFO - Response status: 404
+2025-04-07 15:13:47,037 - INFO - Request received: GET /vendor/phpunit/phpunit/LICENSE/eval-stdin.php
+2025-04-07 15:13:47,037 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:47,037 - INFO - Response status: 404
+2025-04-07 15:13:47,913 - INFO - Request received: GET /vendor/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:13:47,913 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:47,913 - INFO - Response status: 404
+2025-04-07 15:13:48,704 - INFO - Request received: GET /phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:13:48,704 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:48,704 - INFO - Response status: 404
+2025-04-07 15:13:49,510 - INFO - Request received: GET /phpunit/phpunit/Util/PHP/eval-stdin.php
+2025-04-07 15:13:49,510 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:49,511 - INFO - Response status: 404
+2025-04-07 15:13:50,330 - INFO - Request received: GET /phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:13:50,330 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:50,331 - INFO - Response status: 404
+2025-04-07 15:13:51,272 - INFO - Request received: GET /phpunit/Util/PHP/eval-stdin.php
+2025-04-07 15:13:51,272 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:51,273 - INFO - Response status: 404
+2025-04-07 15:13:52,159 - INFO - Request received: GET /lib/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:13:52,160 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:52,160 - INFO - Response status: 404
+2025-04-07 15:13:53,090 - INFO - Request received: GET /lib/phpunit/phpunit/Util/PHP/eval-stdin.php
+2025-04-07 15:13:53,090 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:53,091 - INFO - Response status: 404
+2025-04-07 15:13:54,049 - INFO - Request received: GET /lib/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:13:54,049 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:54,050 - INFO - Response status: 404
+2025-04-07 15:13:54,958 - INFO - Request received: GET /lib/phpunit/Util/PHP/eval-stdin.php
+2025-04-07 15:13:54,958 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:54,959 - INFO - Response status: 404
+2025-04-07 15:13:55,862 - INFO - Request received: GET /lib/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:13:55,862 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:55,862 - INFO - Response status: 404
+2025-04-07 15:13:56,722 - INFO - Request received: GET /laravel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:13:56,722 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:56,723 - INFO - Response status: 404
+2025-04-07 15:13:57,617 - INFO - Request received: GET /www/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:13:57,617 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:57,617 - INFO - Response status: 404
+2025-04-07 15:13:58,518 - INFO - Request received: GET /ws/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:13:58,518 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:58,519 - INFO - Response status: 404
+2025-04-07 15:13:59,340 - INFO - Request received: GET /yii/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:13:59,340 - INFO - Client: 103.154.143.162
+2025-04-07 15:13:59,341 - INFO - Response status: 404
+2025-04-07 15:14:00,309 - INFO - Request received: GET /zend/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:00,309 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:00,310 - INFO - Response status: 404
+2025-04-07 15:14:01,220 - INFO - Request received: GET /ws/ec/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:01,220 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:01,220 - INFO - Response status: 404
+2025-04-07 15:14:02,171 - INFO - Request received: GET /V2/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:02,171 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:02,171 - INFO - Response status: 404
+2025-04-07 15:14:03,060 - INFO - Request received: GET /tests/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:03,060 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:03,061 - INFO - Response status: 404
+2025-04-07 15:14:03,967 - INFO - Request received: GET /test/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:03,967 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:03,968 - INFO - Response status: 404
+2025-04-07 15:14:04,848 - INFO - Request received: GET /testing/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:04,848 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:04,849 - INFO - Response status: 404
+2025-04-07 15:14:05,638 - INFO - Request received: GET /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:05,638 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:05,639 - INFO - Response status: 404
+2025-04-07 15:14:06,361 - INFO - Request received: GET /demo/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:06,361 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:06,362 - INFO - Response status: 404
+2025-04-07 15:14:07,192 - INFO - Request received: GET /cms/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:07,192 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:07,193 - INFO - Response status: 404
+2025-04-07 15:14:08,106 - INFO - Request received: GET /crm/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:08,107 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:08,107 - INFO - Response status: 404
+2025-04-07 15:14:09,011 - INFO - Request received: GET /admin/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:09,011 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:09,012 - INFO - Response status: 404
+2025-04-07 15:14:09,954 - INFO - Request received: GET /backup/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:09,954 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:09,955 - INFO - Response status: 404
+2025-04-07 15:14:10,891 - INFO - Request received: GET /blog/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:10,891 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:10,891 - INFO - Response status: 404
+2025-04-07 15:14:11,843 - INFO - Request received: GET /workspace/drupal/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:11,843 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:11,843 - INFO - Response status: 404
+2025-04-07 15:14:12,759 - INFO - Request received: GET /panel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:12,759 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:12,759 - INFO - Response status: 404
+2025-04-07 15:14:13,684 - INFO - Request received: GET /public/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:13,684 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:13,684 - INFO - Response status: 404
+2025-04-07 15:14:14,579 - INFO - Request received: GET /apps/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:14,579 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:14,579 - INFO - Response status: 404
+2025-04-07 15:14:15,512 - INFO - Request received: GET /app/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php
+2025-04-07 15:14:15,513 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:15,513 - INFO - Response status: 404
+2025-04-07 15:14:16,413 - INFO - Request received: GET /index.php
+2025-04-07 15:14:16,413 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:16,414 - INFO - Response status: 404
+2025-04-07 15:14:17,284 - INFO - Request received: GET /public/index.php
+2025-04-07 15:14:17,284 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:17,285 - INFO - Response status: 404
+2025-04-07 15:14:18,198 - INFO - Request received: GET /index.php
+2025-04-07 15:14:18,198 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:18,199 - INFO - Response status: 404
+2025-04-07 15:14:19,141 - INFO - Request received: GET /index.php
+2025-04-07 15:14:19,141 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:19,141 - INFO - Response status: 404
+2025-04-07 15:14:20,139 - INFO - Request received: GET /containers/json
+2025-04-07 15:14:20,139 - INFO - Client: 103.154.143.162
+2025-04-07 15:14:20,140 - INFO - Response status: 404
+2025-04-07 15:20:06,887 - INFO - Request received: GET /
+2025-04-07 15:20:06,887 - INFO - Client: 162.142.125.36
+2025-04-07 15:20:06,887 - INFO - Response status: 404
+2025-04-07 15:20:20,087 - INFO - Request received: GET /
+2025-04-07 15:20:20,087 - INFO - Client: 162.142.125.36
+2025-04-07 15:20:20,088 - INFO - Response status: 404
+2025-04-07 15:20:50,493 - INFO - Request received: GET /favicon.ico
+2025-04-07 15:20:50,493 - INFO - Client: 162.142.125.36
+2025-04-07 15:20:50,494 - INFO - Response status: 404
+2025-04-07 15:42:21,360 - INFO - Request received: GET /.env
+2025-04-07 15:42:21,360 - INFO - Client: 78.153.140.148
+2025-04-07 15:42:21,361 - INFO - Response status: 404
+2025-04-07 15:42:21,498 - INFO - Request received: POST /
+2025-04-07 15:42:21,499 - INFO - Client: 78.153.140.148
+2025-04-07 15:42:21,499 - INFO - Response status: 404
+2025-04-07 15:51:53,491 - INFO - Request received: GET /
+2025-04-07 15:51:53,491 - INFO - Client: 3.92.127.193
+2025-04-07 15:51:53,492 - INFO - Response status: 404
+2025-04-07 16:02:38,606 - INFO - Request received: GET /
+2025-04-07 16:02:38,606 - INFO - Client: 65.49.1.53
+2025-04-07 16:02:38,606 - INFO - Response status: 404
+2025-04-07 16:06:45,757 - INFO - Request received: GET /webui/
+2025-04-07 16:06:45,758 - INFO - Client: 65.49.1.56
+2025-04-07 16:06:45,758 - INFO - Response status: 404
+2025-04-07 16:09:59,547 - INFO - Request received: GET /favicon.ico
+2025-04-07 16:09:59,547 - INFO - Client: 65.49.1.55
+2025-04-07 16:09:59,548 - INFO - Response status: 404
+2025-04-07 16:11:08,382 - INFO - Request received: GET /
+2025-04-07 16:11:08,382 - INFO - Client: 65.49.1.63
+2025-04-07 16:11:08,382 - INFO - Response status: 404
+2025-04-07 16:11:32,665 - INFO - Request received: PROPFIND /
+2025-04-07 16:11:32,665 - INFO - Client: 154.81.156.10
+2025-04-07 16:11:32,666 - INFO - Response status: 404
+2025-04-07 16:15:38,378 - INFO - Request received: GET /geoserver/web/
+2025-04-07 16:15:38,378 - INFO - Client: 65.49.1.58
+2025-04-07 16:15:38,379 - INFO - Response status: 404
+2025-04-07 16:17:39,640 - INFO - Request received: GET /.git/config
+2025-04-07 16:17:39,640 - INFO - Client: 65.49.1.52
+2025-04-07 16:17:39,641 - INFO - Response status: 404
+2025-04-07 16:50:22,751 - INFO - Request received: PROPFIND /
+2025-04-07 16:50:22,751 - INFO - Client: 154.81.156.10
+2025-04-07 16:50:22,752 - INFO - Response status: 404
+2025-04-07 16:52:49,459 - INFO - Request received: GET /
+2025-04-07 16:52:49,460 - INFO - Client: 104.236.209.11
+2025-04-07 16:52:49,460 - INFO - Response status: 404
+2025-04-07 16:58:57,933 - INFO - Request received: GET /
+2025-04-07 16:58:57,933 - INFO - Client: 134.209.173.54
+2025-04-07 16:58:57,933 - INFO - Response status: 404
+2025-04-07 17:00:16,233 - INFO - Request received: PROPFIND /
+2025-04-07 17:00:16,233 - INFO - Client: 154.81.156.10
+2025-04-07 17:00:16,234 - INFO - Response status: 404
+2025-04-07 17:24:50,249 - INFO - Request received: GET /.env
+2025-04-07 17:24:50,249 - INFO - Client: 45.148.10.172
+2025-04-07 17:24:50,250 - INFO - Response status: 404
+2025-04-07 17:42:06,209 - INFO - Request received: PROPFIND /
+2025-04-07 17:42:06,209 - INFO - Client: 154.81.156.10
+2025-04-07 17:42:06,210 - INFO - Response status: 404
+2025-04-07 18:22:57,023 - INFO - Request received: PROPFIND /
+2025-04-07 18:22:57,023 - INFO - Client: 154.81.156.10
+2025-04-07 18:22:57,024 - INFO - Response status: 404
+2025-04-07 19:00:03,542 - INFO - Request received: PROPFIND /
+2025-04-07 19:00:03,542 - INFO - Client: 154.81.156.10
+2025-04-07 19:00:03,543 - INFO - Response status: 404
+2025-04-07 19:12:48,608 - INFO - Request received: GET /
+2025-04-07 19:12:48,608 - INFO - Client: 198.235.24.193
+2025-04-07 19:12:48,609 - INFO - Response status: 404
+2025-04-07 19:19:21,214 - INFO - Request received: PROPFIND /
+2025-04-07 19:19:21,214 - INFO - Client: 154.81.156.10
+2025-04-07 19:19:21,215 - INFO - Response status: 404
+2025-04-07 19:24:04,583 - INFO - Request received: GET /.env
+2025-04-07 19:24:04,584 - INFO - Client: 78.153.140.148
+2025-04-07 19:24:04,584 - INFO - Response status: 404
+2025-04-07 19:24:04,788 - INFO - Request received: POST /
+2025-04-07 19:24:04,788 - INFO - Client: 78.153.140.148
+2025-04-07 19:24:04,789 - INFO - Response status: 404
+2025-04-07 19:33:02,811 - INFO - Request received: GET /
+2025-04-07 19:33:02,811 - INFO - Client: 176.9.158.217
+2025-04-07 19:33:02,812 - INFO - Response status: 404
+2025-04-07 19:33:11,664 - INFO - Request received: POST /memory/store
+2025-04-07 19:33:11,664 - INFO - Client: 127.0.0.1
+2025-04-07 19:33:11,667 - INFO - ⚠️ Duplicate memory skipped (hash: 7880b71b3034cb69e205c5e095d5c037d6f6d08888958a314de264233c1ed333)
+2025-04-07 19:33:11,668 - INFO - Response status: 200
+2025-04-07 19:33:21,618 - INFO - Request received: POST /memory/retrieve
+2025-04-07 19:33:21,618 - INFO - Client: 127.0.0.1
+2025-04-07 19:33:22,265 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-07 19:33:22,268 - INFO - embedding | tokens=11 | model=text-embedding-ada-002
+2025-04-07 19:33:22,268 - WARNING - ⚠️ FAISS fallback hit but returned no matches.
+2025-04-07 19:33:22,268 - INFO - Response status: 200
+2025-04-07 19:33:27,031 - INFO - Request received: GET /memory/health
+2025-04-07 19:33:27,031 - INFO - Client: 127.0.0.1
+2025-04-07 19:33:27,032 - INFO - Response status: 200
+2025-04-07 19:51:46,478 - INFO - Request received: GET /.env
+2025-04-07 19:51:46,478 - INFO - Client: 45.148.10.172
+2025-04-07 19:51:46,479 - INFO - Response status: 404
+2025-04-07 19:53:16,929 - INFO - ✅ Redis connection established.
+2025-04-07 19:53:17,396 - INFO - Loading faiss with AVX512 support.
+2025-04-07 19:53:17,410 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-07 19:53:17,413 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-07 19:53:17,538 - INFO - 🚀 MemoryRouter initialized.
+2025-04-07 19:53:17,547 - INFO - 🚀 FastAPI server started
+2025-04-07 19:53:17,547 - INFO - [FAISS] Warm cache primed at startup with 0 vectors
+2025-04-07 19:53:17,547 - INFO - ✅ Connected to Neo4j.
+2025-04-07 19:53:17,548 - INFO - Registered route: /openapi.json - {'HEAD', 'GET'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /docs - {'HEAD', 'GET'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /docs/oauth2-redirect - {'HEAD', 'GET'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /redoc - {'HEAD', 'GET'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /health - {'GET'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /memory/health - {'GET'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-07 19:53:17,548 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-07 19:53:29,531 - INFO - Request received: GET /robots.txt
+2025-04-07 19:53:29,531 - INFO - Client: 213.180.203.55
+2025-04-07 19:53:29,532 - INFO - Response status: 404
+2025-04-07 19:53:29,913 - INFO - Request received: GET /lady-watches/swiss
+2025-04-07 19:53:29,913 - INFO - Client: 87.250.224.94
+2025-04-07 19:53:29,914 - INFO - Response status: 404
+2025-04-07 19:53:33,003 - INFO - 🛑 FastAPI server shutting down
+2025-04-07 19:53:33,004 - INFO - [FAISS] 💾 Warm memory index saved on shutdown
+2025-04-07 19:53:33,597 - INFO - ✅ Redis connection established.
+2025-04-07 19:53:34,060 - INFO - Loading faiss with AVX512 support.
+2025-04-07 19:53:34,074 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-07 19:53:34,077 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-07 19:53:34,200 - INFO - 🚀 MemoryRouter initialized.
+2025-04-07 19:53:34,208 - INFO - 🚀 FastAPI server started
+2025-04-07 19:53:34,208 - INFO - [FAISS] Warm cache primed at startup with 0 vectors
+2025-04-07 19:53:34,209 - INFO - ✅ Connected to Neo4j.
+2025-04-07 19:53:34,209 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /health - {'GET'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /memory/health - {'GET'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-07 19:53:34,209 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-07 19:53:38,540 - INFO - Request received: POST /memory/store
+2025-04-07 19:53:38,541 - INFO - Client: 127.0.0.1
+2025-04-07 19:53:38,578 - INFO - ⚠️ Duplicate memory skipped (hash: 7880b71b3034cb69e205c5e095d5c037d6f6d08888958a314de264233c1ed333)
+2025-04-07 19:53:38,578 - INFO - Response status: 200
+2025-04-07 19:53:45,880 - INFO - Request received: POST /memory/retrieve
+2025-04-07 19:53:45,880 - INFO - Client: 127.0.0.1
+2025-04-07 19:53:46,514 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-07 19:53:46,519 - INFO - embedding | tokens=11 | model=text-embedding-ada-002
+2025-04-07 19:53:46,520 - WARNING - ⚠️ FAISS fallback hit but returned no matches.
+2025-04-07 19:53:46,520 - INFO - Response status: 200
+2025-04-07 19:53:49,523 - INFO - Request received: GET /memory/health
+2025-04-07 19:53:49,524 - INFO - Client: 127.0.0.1
+2025-04-07 19:53:49,524 - INFO - Response status: 200
+2025-04-07 19:54:43,583 - INFO - Request received: POST /memory/store
+2025-04-07 19:54:43,583 - INFO - Client: 127.0.0.1
+2025-04-07 19:54:44,147 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-07 19:54:44,149 - INFO - embedding | tokens=10 | model=text-embedding-ada-002
+2025-04-07 19:54:44,150 - INFO - 🔥 FAISS Add: session=user_postgres_test, chunk=How do I improve PostgreSQL query performance usin..., index_total=1
+2025-04-07 19:54:44,160 - INFO - ✅ Connected to Neo4j.
+2025-04-07 19:54:44,160 - WARNING - ⚠️ GPT enrichment fallback: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-07 19:54:44,222 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (m))} {position: line: 2, column: 21, offset: 21} for query: '\n                    MATCH (s:Session {id: $session_id, project: $project}),\n                          (m:Memory {hash: $query_hash, project: $project})\n                    MERGE (s)-[:STORED]->(m)\n                '
+2025-04-07 19:54:44,261 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (m:Memory {hash: $query_hash, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (m)-[:MENTIONS]->(t)\n                    '
+2025-04-07 19:54:44,288 - INFO - Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (t))} {position: line: 2, column: 25, offset: 25} for query: '\n                        MATCH (s:Session {id: $session_id, project: $project}),\n                              (t:Topic {label: $topic, project: $project})\n                        MERGE (s)-[:TOUCHED]->(t)\n                    '
+2025-04-07 19:54:44,288 - INFO - Response status: 200
+2025-04-07 19:58:30,339 - INFO - Request received: POST /memory/retrieve
+2025-04-07 19:58:30,339 - INFO - Client: 127.0.0.1
+2025-04-07 19:58:30,341 - INFO - Response status: 200
+2025-04-07 19:58:34,210 - INFO - [FAISS] ⏳ Periodic warm cache save completed.
+2025-04-07 19:59:38,834 - INFO - Request received: POST /memory/retrieve
+2025-04-07 19:59:38,834 - INFO - Client: 127.0.0.1
+2025-04-07 19:59:38,836 - INFO - Response status: 200
+2025-04-07 19:59:48,130 - INFO - Request received: POST /memory/retrieve
+2025-04-07 19:59:48,130 - INFO - Client: 127.0.0.1
+2025-04-07 19:59:48,132 - INFO - Response status: 200
+2025-04-07 19:59:54,845 - INFO - Request received: GET /memory/health
+2025-04-07 19:59:54,845 - INFO - Client: 127.0.0.1
+2025-04-07 19:59:54,845 - INFO - Response status: 200
+2025-04-07 20:03:17,552 - INFO - Request received: PROPFIND /
+2025-04-07 20:03:17,552 - INFO - Client: 154.81.156.10
+2025-04-07 20:03:17,553 - INFO - Response status: 404
+2025-04-07 20:03:34,211 - INFO - [FAISS] ⏳ Periodic warm cache save completed.
+2025-04-07 20:06:23,473 - INFO - 🛑 FastAPI server shutting down
+2025-04-07 20:06:23,474 - INFO - [FAISS] 💾 Warm memory index saved on shutdown
+2025-04-07 20:06:24,438 - INFO - ✅ Redis connection established.
+2025-04-07 20:06:25,316 - INFO - Loading faiss with AVX512 support.
+2025-04-07 20:06:25,340 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-07 20:06:25,345 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-07 20:06:25,699 - INFO - 🚀 MemoryRouter initialized.
+2025-04-07 20:06:25,713 - INFO - 🚀 FastAPI server started
+2025-04-07 20:06:25,713 - INFO - [FAISS] Warm cache primed at startup with 1 vectors
+2025-04-07 20:06:25,714 - INFO - ✅ Connected to Neo4j.
+2025-04-07 20:06:25,714 - INFO - Registered route: /openapi.json - {'GET', 'HEAD'}
+2025-04-07 20:06:25,714 - INFO - Registered route: /docs - {'GET', 'HEAD'}
+2025-04-07 20:06:25,714 - INFO - Registered route: /docs/oauth2-redirect - {'GET', 'HEAD'}
+2025-04-07 20:06:25,714 - INFO - Registered route: /redoc - {'GET', 'HEAD'}
+2025-04-07 20:06:25,714 - INFO - Registered route: /health - {'GET'}
+2025-04-07 20:06:25,714 - INFO - Registered route: /memory/health - {'GET'}
+2025-04-07 20:06:25,714 - INFO - Registered route: /debug/routes - {'GET'}
+2025-04-07 20:06:25,714 - INFO - Registered route: /tool/memory - {'POST'}
+2025-04-07 20:06:25,714 - INFO - Registered route: /memory/store - {'POST'}
+2025-04-07 20:06:25,714 - INFO - Registered route: /memory/retrieve - {'POST'}
+2025-04-07 20:06:25,715 - INFO - Registered route: /memory/session - {'POST'}
+2025-04-07 20:06:25,715 - INFO - Registered route: /memory/aggregate - {'POST'}
+2025-04-07 20:06:25,715 - INFO - Registered route: /memory/delete - {'DELETE'}
+2025-04-07 20:06:25,715 - INFO - Registered route: /memory/summarize - {'GET'}
+2025-04-07 20:06:25,715 - INFO - Registered route: /memory/cleanup - {'POST'}
+2025-04-07 20:06:25,715 - INFO - Registered route: /agent/run - {'POST'}
+2025-04-07 20:06:25,715 - INFO - Registered route: /tool/execute - {'POST'}
+2025-04-07 20:06:25,715 - INFO - Registered route: /tool/list - {'GET'}
+2025-04-07 20:07:04,493 - INFO - Request received: POST /memory/store
+2025-04-07 20:07:04,494 - INFO - Client: 127.0.0.1
+2025-04-07 20:07:04,515 - INFO - ⚠️ Duplicate memory skipped (hash: 695b8f55006a3a8a99518f3391bd48f3df6c25b6d825e888e3a75610991820a9)
+2025-04-07 20:07:04,515 - INFO - Response status: 200
+2025-04-07 20:07:17,632 - INFO - Request received: POST /memory/retrieve
+2025-04-07 20:07:17,632 - INFO - Client: 127.0.0.1
+2025-04-07 20:07:18,541 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-07 20:07:18,544 - INFO - embedding | tokens=11 | model=text-embedding-ada-002
+2025-04-07 20:07:18,544 - INFO - 🔥 FAISS fallback returned 1 result(s)
+2025-04-07 20:07:18,544 - INFO - ➡️ Match | dist=0.0811 | query=How do I improve PostgreSQL query performance using indexes?
+2025-04-07 20:07:18,545 - INFO - Response status: 200
+2025-04-07 20:07:22,939 - INFO - Request received: GET /memory/health
+2025-04-07 20:07:22,939 - INFO - Client: 127.0.0.1
+2025-04-07 20:07:22,939 - INFO - Response status: 200

@@ -4,6 +4,7 @@ import os, json, time, redis, logging, psycopg2, hashlib, numpy as np, tiktoken
 from config import settings
 from openai import OpenAI
 from utils.memory_utils import get_api_key
+from memory.warm_layer import WarmMemoryCache  # ✅ Warm layer support
 
 log_dir = "/root/projects/t1-brain/logs/"
 os.makedirs(log_dir, exist_ok=True)
@@ -44,6 +45,7 @@ class PersistentSessionMemory:
         self.pg_cursor = None
         self.redis_client = redis.StrictRedis(host="localhost", port=6379, decode_responses=True)
         self._graph_memory = None
+        self._warm_cache = WarmMemoryCache.get_instance()  # ✅ Eager singleton load
 
     @property
     def graph_memory(self):
@@ -70,7 +72,6 @@ class PersistentSessionMemory:
 
             now = time.time()
             valid_memory, removed_count = [], 0
-
             all_memory = self.redis_client.lrange(key, 0, -1)
             self.redis_client.delete(key)
 
@@ -113,16 +114,8 @@ class PersistentSessionMemory:
             session_logger.error(f"❌ Embedding error: {e}")
             return np.zeros(1536).tolist()
 
-    def store_memory(
-        self,
-        session_id,
-        query,
-        response,
-        memory_type="semantic",
-        sentiment="neutral",
-        source_type="text",
-        metadata=None
-    ):
+    def store_memory(self, session_id, query, response, memory_type="semantic",
+                     sentiment="neutral", source_type="text", metadata=None):
         self.connect_to_db()
         try:
             session_key = f"session:{session_id}"
@@ -141,12 +134,13 @@ class PersistentSessionMemory:
                     client = OpenAI(api_key=api_key)
                     extraction = client.chat.completions.create(
                         model="gpt-4o",
-                        messages=[
-                            {"role": "user", "content": [
+                        messages=[{
+                            "role": "user",
+                            "content": [
                                 {"type": "text", "text": "Describe this image for memory embedding."},
                                 {"type": "image_url", "image_url": {"url": query}}
-                            ]}
-                        ]
+                            ]
+                        }]
                     )
                     description = extraction.choices[0].message.content.strip()
                     session_logger.info(f"🧠 Extracted image description: {description}")
@@ -168,6 +162,13 @@ class PersistentSessionMemory:
                     continue
 
                 embedding = self.generate_embedding(chunk)
+
+                if not embedding or len(embedding) != 1536:
+                    session_logger.warning("⚠️ Skipping FAISS insert: invalid embedding size")
+                else:
+                    self._warm_cache.add(session_id, chunk, response, embedding)
+                    session_logger.info(f"🔥 FAISS Add: session={session_id}, chunk={chunk[:50]}..., index_total={self._warm_cache.index.ntotal}")
+
                 embedding_str = "[" + ",".join(map(str, embedding)) + "]"
 
                 memory_metadata = {
@@ -221,14 +222,19 @@ class PersistentSessionMemory:
             key = f"memory:{session_id}"
             if self.redis_client.exists(key):
                 return [json.loads(m) for m in self.redis_client.lrange(key, 0, -1)]
+
+            embedding = self.generate_embedding(query)
+            warm_hits = self._warm_cache.find_similar(embedding)
+
+            if warm_hits:
+                session_logger.info(f"🔥 FAISS fallback returned {len(warm_hits)} result(s)")
+                for hit in warm_hits:
+                    session_logger.info(f"➡️ Match | dist={hit.get('distance', 0):.4f} | query={hit['query']}")
+                return warm_hits
+
+            session_logger.warning("⚠️ FAISS fallback hit but returned no matches.")
             return []
+
         except Exception as e:
             session_logger.error(f"❌ Retrieval error: {e}")
             return []
-
-    def store_tool_metadata(self, tool_name: str, doc: str):
-        try:
-            self.redis_client.hset("tool_docs", tool_name, doc)
-            session_logger.info(f"🛠️ Tool registered: {tool_name}")
-        except Exception as e:
-            session_logger.warning(f"⚠️ Tool registration failed: {e}")

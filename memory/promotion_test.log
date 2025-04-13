@@ -1,0 +1,238 @@
+2025-04-13 23:34:35,461 - INFO - Starting promotion test with session 'test_fix_1744567475'
+2025-04-13 23:34:35,492 - INFO - ✅ PostgreSQL connection and table structure verified
+2025-04-13 23:34:35,561 - INFO - ✅ Redis connection verified
+2025-04-13 23:34:35,561 - INFO - ✅ FAISS index file exists: /root/projects/t1-brain/warm_index.faiss
+2025-04-13 23:34:35,561 - INFO - ✅ FAISS metadata file exists: /root/projects/t1-brain/warm_metadata.pkl
+2025-04-13 23:34:35,577 - WARNING - ⚠️ No records found in PostgreSQL for session 'test_fix_1744567475'
+2025-04-13 23:34:36,035 - INFO - Loading faiss with AVX512 support.
+2025-04-13 23:34:36,049 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-13 23:34:36,052 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-13 23:34:36,307 - INFO - [FAISS] 📥 Loaded index from /root/projects/t1-brain/warm_index.faiss with 15 vectors
+2025-04-13 23:34:36,307 - INFO - [FAISS] 📥 Loaded metadata from /root/projects/t1-brain/warm_metadata.pkl with 15 entries
+2025-04-13 23:34:36,307 - INFO - [FAISS] 🧠 WarmMemoryCache initialized
+2025-04-13 23:34:36,307 - INFO - Step 1: Storing test memory for session 'test_fix_1744567475'
+2025-04-13 23:34:36,324 - INFO - Storing memory in 1 chunk(s) for session test_fix_1744567475
+2025-04-13 23:34:36,790 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-13 23:34:36,795 - INFO - embedding | tokens=9 | model=text-embedding-ada-002
+2025-04-13 23:34:36,806 - ERROR - ❌ PostgreSQL update error for sha=6b386583c1: column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:36,806 - ERROR - PostgreSQL error details: ERROR:  column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:36,807 - ERROR - PostgreSQL diagnostic: column "updated_at" of relation "embeddings" does not exist
+2025-04-13 23:34:36,821 - INFO - [GLACIER] ✅ Uploaded: test_fix_1744567475_1744567476.json
+2025-04-13 23:34:36,821 - INFO - Store result: {'status': 'stored', 'message': 'Memory stored in 1 chunk(s).'}
+2025-04-13 23:34:36,821 - INFO - Step 2: Retrieving memory 6 times to trigger promotion
+2025-04-13 23:34:36,821 - INFO - Retrieval 1/6
+2025-04-13 23:34:36,822 - INFO - 🔍 Found memory in Redis for session test_fix_1744567475
+2025-04-13 23:34:36,823 - ERROR - ❌ PostgreSQL update error for sha=6b386583c1: column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:36,823 - ERROR - PostgreSQL error details: ERROR:  column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:36,823 - ERROR - PostgreSQL diagnostic: column "updated_at" of relation "embeddings" does not exist
+2025-04-13 23:34:36,824 - INFO - 🧠 Redis memory updated for test_fix_1744567475 with 1 items
+2025-04-13 23:34:36,824 - INFO - Retrieved memory with access_score: 1
+2025-04-13 23:34:37,825 - INFO - Retrieval 2/6
+2025-04-13 23:34:37,825 - INFO - 🔍 Found memory in Redis for session test_fix_1744567475
+2025-04-13 23:34:37,827 - ERROR - ❌ PostgreSQL update error for sha=6b386583c1: column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:37,827 - ERROR - PostgreSQL error details: ERROR:  column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:37,827 - ERROR - PostgreSQL diagnostic: column "updated_at" of relation "embeddings" does not exist
+2025-04-13 23:34:37,828 - INFO - 🧠 Redis memory updated for test_fix_1744567475 with 1 items
+2025-04-13 23:34:37,828 - INFO - Retrieved memory with access_score: 2
+2025-04-13 23:34:38,829 - INFO - Retrieval 3/6
+2025-04-13 23:34:38,829 - INFO - 🔍 Found memory in Redis for session test_fix_1744567475
+2025-04-13 23:34:38,831 - ERROR - ❌ PostgreSQL update error for sha=6b386583c1: column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:38,831 - ERROR - PostgreSQL error details: ERROR:  column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:38,831 - ERROR - PostgreSQL diagnostic: column "updated_at" of relation "embeddings" does not exist
+2025-04-13 23:34:38,832 - INFO - 🧠 Redis memory updated for test_fix_1744567475 with 1 items
+2025-04-13 23:34:38,832 - INFO - Retrieved memory with access_score: 3
+2025-04-13 23:34:39,832 - INFO - Retrieval 4/6
+2025-04-13 23:34:39,833 - INFO - 🔍 Found memory in Redis for session test_fix_1744567475
+2025-04-13 23:34:39,835 - ERROR - ❌ PostgreSQL update error for sha=6b386583c1: column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:39,835 - ERROR - PostgreSQL error details: ERROR:  column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:39,835 - ERROR - PostgreSQL diagnostic: column "updated_at" of relation "embeddings" does not exist
+2025-04-13 23:34:39,836 - INFO - 🧠 Redis memory updated for test_fix_1744567475 with 1 items
+2025-04-13 23:34:39,836 - INFO - Retrieved memory with access_score: 4
+2025-04-13 23:34:40,837 - INFO - Retrieval 5/6
+2025-04-13 23:34:40,837 - INFO - 🔍 Found memory in Redis for session test_fix_1744567475
+2025-04-13 23:34:40,838 - INFO - 🚀 Attempting promotion for: How does T1 Brain promotion testing work...
+2025-04-13 23:34:41,650 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-13 23:34:41,653 - INFO - embedding | tokens=9 | model=text-embedding-ada-002
+2025-04-13 23:34:41,661 - ERROR - ❌ PostgreSQL update error for sha=6b386583c1: column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:41,661 - ERROR - PostgreSQL error details: ERROR:  column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:41,661 - ERROR - PostgreSQL diagnostic: column "updated_at" of relation "embeddings" does not exist
+2025-04-13 23:34:41,661 - WARNING - ⚠️ Promotion failed for: How does T1 Brain promotion testing work...
+2025-04-13 23:34:41,662 - INFO - 🧠 Redis memory updated for test_fix_1744567475 with 1 items
+2025-04-13 23:34:41,662 - INFO - Retrieved memory with access_score: 5
+2025-04-13 23:34:42,663 - INFO - Retrieval 6/6
+2025-04-13 23:34:42,664 - INFO - 🔍 Found memory in Redis for session test_fix_1744567475
+2025-04-13 23:34:42,664 - INFO - 🚀 Attempting promotion for: How does T1 Brain promotion testing work...
+2025-04-13 23:34:43,151 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-13 23:34:43,153 - INFO - embedding | tokens=9 | model=text-embedding-ada-002
+2025-04-13 23:34:43,162 - ERROR - ❌ PostgreSQL update error for sha=6b386583c1: column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:43,162 - ERROR - PostgreSQL error details: ERROR:  column "updated_at" of relation "embeddings" does not exist
+LINE 9:                     updated_at = NOW()
+                            ^
+
+2025-04-13 23:34:43,162 - ERROR - PostgreSQL diagnostic: column "updated_at" of relation "embeddings" does not exist
+2025-04-13 23:34:43,162 - WARNING - ⚠️ Promotion failed for: How does T1 Brain promotion testing work...
+2025-04-13 23:34:43,163 - INFO - 🧠 Redis memory updated for test_fix_1744567475 with 1 items
+2025-04-13 23:34:43,163 - INFO - Retrieved memory with access_score: 6
+2025-04-13 23:34:44,164 - INFO - Step 3: Verifying promotion to PostgreSQL
+2025-04-13 23:34:44,166 - ERROR - ❌ No records found in PostgreSQL after promotion attempts!
+2025-04-13 23:34:44,168 - INFO - Debug info: {
+  "status": "success",
+  "memory": {
+    "query": "How does T1 Brain promotion testing work?",
+    "access_score": 6,
+    "last_accessed": 1744567482.664581,
+    "timestamp": 1744567476.7957063,
+    "sha": "6b386583c1c4f63c400e42bd99eaad69688eb0f01c42ea5e1a14d1f2e171dcdd"
+  },
+  "promotion": {
+    "should_promote": true,
+    "promote_threshold": 5,
+    "time_threshold": 86400,
+    "in_postgresql": false,
+    "in_faiss": false,
+    "pg_access_score": null,
+    "pg_created_at": null
+  }
+}
+2025-04-13 23:34:44,168 - ERROR - ❌ Test FAILED: Memory promotion is not working correctly!
+2025-04-13 23:38:56,301 - INFO - Starting promotion test with session 'test_fix_1744567736'
+2025-04-13 23:38:56,331 - INFO - ✅ PostgreSQL connection and table structure verified
+2025-04-13 23:38:56,401 - INFO - ✅ Redis connection verified
+2025-04-13 23:38:56,401 - INFO - ✅ FAISS index file exists: /root/projects/t1-brain/warm_index.faiss
+2025-04-13 23:38:56,401 - INFO - ✅ FAISS metadata file exists: /root/projects/t1-brain/warm_metadata.pkl
+2025-04-13 23:38:56,417 - WARNING - ⚠️ No records found in PostgreSQL for session 'test_fix_1744567736'
+2025-04-13 23:38:56,873 - INFO - Loading faiss with AVX512 support.
+2025-04-13 23:38:56,888 - INFO - Successfully loaded faiss with AVX512 support.
+2025-04-13 23:38:56,890 - INFO - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes.
+2025-04-13 23:38:57,144 - INFO - [FAISS] 📥 Loaded index from /root/projects/t1-brain/warm_index.faiss with 15 vectors
+2025-04-13 23:38:57,144 - INFO - [FAISS] 📥 Loaded metadata from /root/projects/t1-brain/warm_metadata.pkl with 15 entries
+2025-04-13 23:38:57,144 - INFO - [FAISS] 🧠 WarmMemoryCache initialized
+2025-04-13 23:38:57,144 - INFO - Step 1: Storing test memory for session 'test_fix_1744567736'
+2025-04-13 23:38:57,160 - INFO - Storing memory in 1 chunk(s) for session test_fix_1744567736
+2025-04-13 23:38:57,820 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-13 23:38:57,825 - INFO - embedding | tokens=9 | model=text-embedding-ada-002
+2025-04-13 23:38:57,837 - INFO - ✅ PostgreSQL updated: id=292, sha=6b386583c1, score=0
+2025-04-13 23:38:57,838 - INFO - [FAISS] ✅ Added vector #15 | session=test_fix_1744567736 | score=0
+2025-04-13 23:38:57,838 - INFO - 🔥 FAISS updated for sha=6b386583c1
+2025-04-13 23:38:57,852 - INFO - [GLACIER] ✅ Uploaded: test_fix_1744567736_1744567737.json
+2025-04-13 23:38:57,852 - INFO - Store result: {'status': 'stored', 'message': 'Memory stored in 1 chunk(s).'}
+2025-04-13 23:38:57,852 - INFO - Step 2: Retrieving memory 6 times to trigger promotion
+2025-04-13 23:38:57,852 - INFO - Retrieval 1/6
+2025-04-13 23:38:57,853 - INFO - 🔍 Found memory in Redis for session test_fix_1744567736
+2025-04-13 23:38:57,855 - INFO - ✅ PostgreSQL updated: id=292, sha=6b386583c1, score=1
+2025-04-13 23:38:57,856 - INFO - 🧠 Redis memory updated for test_fix_1744567736 with 1 items
+2025-04-13 23:38:57,856 - INFO - Retrieved memory with access_score: 1
+2025-04-13 23:38:58,856 - INFO - Retrieval 2/6
+2025-04-13 23:38:58,857 - INFO - 🔍 Found memory in Redis for session test_fix_1744567736
+2025-04-13 23:38:58,860 - INFO - ✅ PostgreSQL updated: id=292, sha=6b386583c1, score=2
+2025-04-13 23:38:58,860 - INFO - 🧠 Redis memory updated for test_fix_1744567736 with 1 items
+2025-04-13 23:38:58,861 - INFO - Retrieved memory with access_score: 2
+2025-04-13 23:38:59,861 - INFO - Retrieval 3/6
+2025-04-13 23:38:59,862 - INFO - 🔍 Found memory in Redis for session test_fix_1744567736
+2025-04-13 23:38:59,865 - INFO - ✅ PostgreSQL updated: id=292, sha=6b386583c1, score=3
+2025-04-13 23:38:59,865 - INFO - 🧠 Redis memory updated for test_fix_1744567736 with 1 items
+2025-04-13 23:38:59,866 - INFO - Retrieved memory with access_score: 3
+2025-04-13 23:39:00,866 - INFO - Retrieval 4/6
+2025-04-13 23:39:00,867 - INFO - 🔍 Found memory in Redis for session test_fix_1744567736
+2025-04-13 23:39:00,869 - INFO - ✅ PostgreSQL updated: id=292, sha=6b386583c1, score=4
+2025-04-13 23:39:00,869 - INFO - 🧠 Redis memory updated for test_fix_1744567736 with 1 items
+2025-04-13 23:39:00,870 - INFO - Retrieved memory with access_score: 4
+2025-04-13 23:39:01,870 - INFO - Retrieval 5/6
+2025-04-13 23:39:01,871 - INFO - 🔍 Found memory in Redis for session test_fix_1744567736
+2025-04-13 23:39:01,871 - INFO - 🚀 Attempting promotion for: How does T1 Brain promotion testing work...
+2025-04-13 23:39:02,432 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-13 23:39:02,434 - INFO - embedding | tokens=9 | model=text-embedding-ada-002
+2025-04-13 23:39:02,440 - INFO - ✅ PostgreSQL updated: id=292, sha=6b386583c1, score=5
+2025-04-13 23:39:02,440 - INFO - [FAISS] 🔁 Duplicate skipped: 6b386583c1
+2025-04-13 23:39:02,440 - INFO - 🔥 FAISS updated for sha=6b386583c1
+2025-04-13 23:39:02,441 - INFO - 🚀 Promoted to PostgreSQL/FAISS: How does T1 Brain promotion testing work...
+2025-04-13 23:39:02,441 - INFO - 🧠 Redis memory updated for test_fix_1744567736 with 1 items
+2025-04-13 23:39:02,441 - INFO - ✅ Successfully promoted 1 memories to PostgreSQL/FAISS
+2025-04-13 23:39:02,442 - INFO - Retrieved memory with access_score: 5
+2025-04-13 23:39:03,442 - INFO - Retrieval 6/6
+2025-04-13 23:39:03,443 - INFO - 🔍 Found memory in Redis for session test_fix_1744567736
+2025-04-13 23:39:03,443 - INFO - 🚀 Attempting promotion for: How does T1 Brain promotion testing work...
+2025-04-13 23:39:04,064 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-13 23:39:04,066 - INFO - embedding | tokens=9 | model=text-embedding-ada-002
+2025-04-13 23:39:04,071 - INFO - ✅ PostgreSQL updated: id=292, sha=6b386583c1, score=6
+2025-04-13 23:39:04,072 - INFO - [FAISS] 🔁 Duplicate skipped: 6b386583c1
+2025-04-13 23:39:04,072 - INFO - 🔥 FAISS updated for sha=6b386583c1
+2025-04-13 23:39:04,072 - INFO - 🚀 Promoted to PostgreSQL/FAISS: How does T1 Brain promotion testing work...
+2025-04-13 23:39:04,073 - INFO - 🧠 Redis memory updated for test_fix_1744567736 with 1 items
+2025-04-13 23:39:04,073 - INFO - ✅ Successfully promoted 1 memories to PostgreSQL/FAISS
+2025-04-13 23:39:04,073 - INFO - Retrieved memory with access_score: 6
+2025-04-13 23:39:05,074 - INFO - Step 3: Verifying promotion to PostgreSQL
+2025-04-13 23:39:05,075 - INFO - ✅ Found 1 records in PostgreSQL:
+2025-04-13 23:39:05,075 - INFO -   - ID: 292, Query: How does T1 Brain promotion te..., Access Score: 6, Created: 2025-04-13 23:38:57.830113
+2025-04-13 23:39:05,075 - INFO - Step 4: Running debug helper for additional insights
+2025-04-13 23:39:05,077 - INFO - Debug info: {
+  "status": "success",
+  "memory": {
+    "query": "How does T1 Brain promotion testing work?",
+    "access_score": 6,
+    "last_accessed": 1744567743.4438543,
+    "timestamp": 1744567737.826151,
+    "sha": "6b386583c1c4f63c400e42bd99eaad69688eb0f01c42ea5e1a14d1f2e171dcdd"
+  },
+  "promotion": {
+    "should_promote": true,
+    "promote_threshold": 5,
+    "time_threshold": 86400,
+    "in_postgresql": true,
+    "in_faiss": true,
+    "pg_access_score": 6,
+    "pg_created_at": "2025-04-13T23:38:57.830113"
+  }
+}
+2025-04-13 23:39:05,077 - INFO - Step 5: Verifying FAISS integration
+2025-04-13 23:39:05,078 - INFO - 🔍 Found memory in Redis for session test_fix_1744567736
+2025-04-13 23:39:05,078 - INFO - 🚀 Attempting promotion for: How does T1 Brain promotion testing work...
+2025-04-13 23:39:05,633 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-04-13 23:39:05,635 - INFO - embedding | tokens=9 | model=text-embedding-ada-002
+2025-04-13 23:39:05,641 - INFO - ✅ PostgreSQL updated: id=292, sha=6b386583c1, score=7
+2025-04-13 23:39:05,641 - INFO - [FAISS] 🔁 Duplicate skipped: 6b386583c1
+2025-04-13 23:39:05,642 - INFO - 🔥 FAISS updated for sha=6b386583c1
+2025-04-13 23:39:05,642 - INFO - 🚀 Promoted to PostgreSQL/FAISS: How does T1 Brain promotion testing work...
+2025-04-13 23:39:05,642 - INFO - 🧠 Redis memory updated for test_fix_1744567736 with 1 items
+2025-04-13 23:39:05,643 - INFO - ✅ Successfully promoted 1 memories to PostgreSQL/FAISS
+2025-04-13 23:39:05,643 - INFO - ✅ Memory exists in FAISS
+2025-04-13 23:39:05,643 - INFO - ✅ Test PASSED: Memory promotion is working correctly!

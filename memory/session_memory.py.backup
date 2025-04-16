@@ -1,6 +1,7 @@
 # session_memory.py
 
 import os, json, time, redis, logging, psycopg2, hashlib, numpy as np, tiktoken
+import traceback
 from datetime import datetime
 from config import settings
 from openai import OpenAI
@@ -17,7 +18,6 @@ token_log_file = os.path.join(log_dir, "token_usage.log")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[logging.FileHandler(log_file, mode='a'), logging.StreamHandler()])
 session_logger = logging.getLogger(__name__)
-
 token_logger = logging.getLogger("token_logger")
 token_handler = logging.FileHandler(token_log_file, mode='a')
 token_handler.setFormatter(logging.Formatter("%(asctime)s - %(message)s"))
@@ -25,10 +25,11 @@ token_logger.addHandler(token_handler)
 token_logger.setLevel(logging.INFO)
 
 encoder = tiktoken.encoding_for_model("text-embedding-ada-002")
+PROMOTE_THRESHOLD = 5
+TIME_THRESHOLD = 86400  # 1 day
 
-# Constants
-PROMOTE_THRESHOLD = 5  # Promotion access score threshold
-TIME_THRESHOLD = 24 * 60 * 60  # 24 hours in seconds for time-based promotion
+def sha256_hash(text):
+    return hashlib.sha256(text.encode()).hexdigest()
 
 def chunk_by_tokens(text, max_tokens=300):
     words, chunks, current = text.split(), [], []
@@ -41,8 +42,90 @@ def chunk_by_tokens(text, max_tokens=300):
         chunks.append(" ".join(current))
     return chunks
 
-def sha256_hash(text):
-    return hashlib.sha256(text.encode()).hexdigest()
+# Fixed log_memory_access function with proper parameter passing
+def log_memory_access(session_id, query, matched, match_score=None, memory_type=None):
+    """
+    Log memory access to the PostgreSQL memory_access_log table.
+    
+    Args:
+        session_id (str): The session identifier
+        query (str): The query text
+        matched (bool): Whether a match was found
+        match_score (float, optional): The match score if applicable
+        memory_type (str, optional): The type of memory accessed
+        
+    Returns:
+        bool: True if logging was successful, False otherwise
+    """
+    # Validate parameters
+    if not session_id:
+        session_logger.error("❌ [LOGGING] Cannot log memory access: session_id is required")
+        return False
+    if not query:
+        session_logger.error("❌ [LOGGING] Cannot log memory access: query is required")
+        return False
+    
+    # Truncate query if too long (assuming PostgreSQL text field has some limit)
+    query_truncated = query[:500] if query and len(query) > 500 else query
+    
+    log_conn = None
+    log_cursor = None
+    try:
+        # Log attempt with parameter values
+        session_logger.debug(f"Attempting to log memory access: session_id={session_id}, query={query_truncated[:30]}..., matched={matched}")
+        
+        # Create a new connection for logging
+        log_conn = psycopg2.connect(
+            host=settings.PG_HOST,
+            database=settings.PG_DATABASE,
+            user=settings.PG_USER,
+            password=settings.PG_PASSWORD
+        )
+        log_cursor = log_conn.cursor()
+        
+        # Execute the insert query
+        log_cursor.execute(
+            "INSERT INTO memory_access_log (session_id, query, matched, match_score, memory_type) VALUES (%s, %s, %s, %s, %s) RETURNING id",
+            (session_id, query_truncated, matched, match_score, memory_type or "unknown")
+        )
+        
+        # Get the inserted row ID for verification
+        inserted_id = log_cursor.fetchone()[0]
+        
+        # Commit the transaction
+        log_conn.commit()
+        
+        # Log success
+        session_logger.debug(f"✅ Successfully logged memory access for session_id={session_id}, log_id={inserted_id}")
+        return True
+        
+    except Exception as e:
+        # Detailed error logging
+        session_logger.error(f"❌ [LOGGING] Failed to log memory access: {type(e).__name__}: {e}")
+        session_logger.error(f"Traceback: {traceback.format_exc()}")
+        
+        # Rollback if needed
+        if log_conn:
+            try:
+                log_conn.rollback()
+            except Exception as rollback_error:
+                session_logger.error(f"❌ [LOGGING] Failed to rollback transaction: {rollback_error}")
+        
+        return False
+        
+    finally:
+        # Ensure resources are always closed
+        if log_cursor:
+            try:
+                log_cursor.close()
+            except Exception as cursor_error:
+                session_logger.error(f"❌ [LOGGING] Failed to close cursor: {cursor_error}")
+                
+        if log_conn:
+            try:
+                log_conn.close()
+            except Exception as conn_error:
+                session_logger.error(f"❌ [LOGGING] Failed to close connection: {conn_error}")
 
 class PersistentSessionMemory:
     def __init__(self):
@@ -50,8 +133,8 @@ class PersistentSessionMemory:
         self.pg_conn = None
         self.pg_cursor = None
         self.redis_client = redis.StrictRedis(host="localhost", port=6379, decode_responses=True)
-        self._graph_memory = None
         self._warm_cache = WarmMemoryCache.get_instance()
+        self._graph_memory = None
 
     @property
     def graph_memory(self):
@@ -70,36 +153,6 @@ class PersistentSessionMemory:
             )
             self.pg_cursor = self.pg_conn.cursor()
 
-    def cleanup_expired_memory(self, session_id):
-        try:
-            key = f"memory:{session_id}"
-            if not self.redis_client.exists(key):
-                return {"status": "skipped", "message": "No memory to clean."}
-            now = time.time()
-            valid_memory, removed_count = [], 0
-            all_memory = self.redis_client.lrange(key, 0, -1)
-            self.redis_client.delete(key)
-            for m in all_memory:
-                try:
-                    m_obj = json.loads(m)
-                    policy = m_obj.get("memory_policy", {})
-                    expiration = policy.get("expiration", 0)
-                    short_term = policy.get("short_term", False)
-                    timestamp = m_obj.get("timestamp", 0)
-                    if short_term and expiration and now > (timestamp + expiration):
-                        removed_count += 1
-                        continue
-                    valid_memory.append(json.dumps(m_obj))
-                except Exception as e:
-                    session_logger.warning(f"⚠️ Failed parsing memory item: {e}")
-            for v in valid_memory:
-                self.redis_client.rpush(key, v)
-            self.redis_client.expire(key, self.ttl)
-            return {"status": "cleaned", "removed": removed_count, "retained": len(valid_memory)}
-        except Exception as e:
-            session_logger.error(f"❌ Cleanup error: {e}")
-            return {"status": "error", "message": "Cleanup failed"}
-
     def generate_embedding(self, content):
         try:
             api_key = get_api_key("text")
@@ -113,200 +166,55 @@ class PersistentSessionMemory:
             session_logger.error(f"❌ Embedding error: {e}")
             return np.zeros(1536).tolist()
 
-    def store_memory(self, session_id, query, response, memory_type="semantic", sentiment="neutral", source_type="text", metadata=None):
-        self.connect_to_db()
-        try:
-            session_key = f"session:{session_id}"
-            if not self.redis_client.exists(session_key):
-                self.redis_client.setex(session_key, self.ttl, json.dumps({"session_id": session_id}))
-                session_logger.info(f"✅ New session key: {session_id}")
-            self.cleanup_expired_memory(session_id)
+    def should_promote(self, memory):
+        access_score = memory.get("access_score", 0)
+        created_at = memory.get("timestamp", time.time())
+        return access_score >= PROMOTE_THRESHOLD or (time.time() - created_at > TIME_THRESHOLD)
 
-            is_image = memory_type == "image"
-            image_url = None
-            if is_image:
-                try:
-                    api_key = get_api_key("image")
-                    client = OpenAI(api_key=api_key)
-                    extraction = client.chat.completions.create(
-                        model="gpt-4o",
-                        messages=[{
-                            "role": "user",
-                            "content": [
-                                {"type": "text", "text": "Describe this image for memory embedding."},
-                                {"type": "image_url", "image_url": {"url": query}}
-                            ]
-                        }]
-                    )
-                    description = extraction.choices[0].message.content.strip()
-                    session_logger.info(f"🧠 Extracted image description: {description}")
-                    image_url = query
-                    query = description
-                except Exception as e:
-                    session_logger.error(f"❌ Image analysis failed: {e}")
-                    return {"status": "error", "message": "Image analysis failed"}
-
-            chunks = [query] if is_image else chunk_by_tokens(query) if len(encoder.encode(query)) > 400 else [query]
-            for i, chunk in enumerate(chunks):
-                chunk_id = f"{session_id}_chunk_{i+1}"
-                dedup_hash = sha256_hash(chunk + response)
-                self.pg_cursor.execute("SELECT 1 FROM embeddings WHERE sha_hash = %s LIMIT 1", (dedup_hash,))
-                if self.pg_cursor.fetchone():
-                    session_logger.info(f"⚠️ Duplicate memory skipped (hash: {dedup_hash})")
-                    continue
-
-                embedding = self.generate_embedding(chunk)
-                if not embedding or len(embedding) != 1536:
-                    session_logger.warning("⚠️ Skipping FAISS insert: invalid embedding size")
-                else:
-                    current_time = time.time()
-                    self._warm_cache.add(
-                        session_id, 
-                        chunk, 
-                        response, 
-                        embedding, 
-                        access_score=0, 
-                        last_accessed=current_time
-                    )
-                    session_logger.info(f"🔥 FAISS Add: session={session_id}, chunk={chunk[:50]}..., index_total={self._warm_cache.index.ntotal}")
-
-                embedding_str = "[" + ",".join(map(str, embedding)) + "]"
-                current_time = time.time()
-                memory_metadata = {
-                    "query": chunk,
-                    "response": response,
-                    "timestamp": current_time,
-                    "memory_type": memory_type,
-                    "sentiment": sentiment,
-                    "chunk_id": chunk_id,
-                    "source_type": "image" if is_image else source_type,
-                    "image_url": image_url if is_image else None,
-                    "access_score": 0,
-                    "last_accessed": current_time,
-                    "memory_policy": {
-                        "short_term": memory_type != "summary",
-                        "expiration": 3 * 86400 if memory_type != "summary" else 0
-                    }
-                }
-
-                if metadata:
-                    memory_metadata.update(metadata)
-
-                self.redis_client.rpush(f"memory:{session_id}", json.dumps(memory_metadata))
-                self.redis_client.expire(f"memory:{session_id}", self.ttl)
-
-                # Include access_score and last_accessed in PostgreSQL insertion
-                self.pg_cursor.execute(
-                    """INSERT INTO embeddings (
-                        session_id, query, response, embedding, memory_type, sentiment, 
-                        source_type, image_url, sha_hash, created_at, access_score, last_accessed
-                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), %s, NOW())""",
-                    (
-                        session_id,
-                        chunk,
-                        response,
-                        embedding_str,
-                        memory_type,
-                        sentiment,
-                        memory_metadata["source_type"],
-                        memory_metadata["image_url"],
-                        dedup_hash,
-                        memory_metadata["access_score"]
-                    )
-                )
-                self.pg_conn.commit()
-                self.graph_memory.store_graph_memory(session_id, chunk, response, memory_type, sentiment)
-
-                glacier_key = f"{session_id}_{int(current_time)}.json"
-                success = upload_object(glacier_key, memory_metadata)
-                if success:
-                    session_logger.info(f"✅ Glacier upload succeeded: {glacier_key}")
-                else:
-                    session_logger.warning(f"⚠️ Glacier upload failed: {glacier_key}")
-
-        except Exception as e:
-            session_logger.error(f"❌ Store error: {e}")
-            return {"status": "error", "message": "Memory store failed"}
-        return {"status": "stored", "message": f"Memory stored in {len(chunks)} chunk(s)."}
-
-    def should_promote(self, memory_item):
-        """Determine if memory should be promoted based on combined criteria."""
-        access_score = memory_item.get("access_score", 0)
-        created_time = memory_item.get("timestamp", time.time())
-        current_time = time.time()
-        
-        # Promote if access score threshold met OR time threshold passed
-        return (access_score >= PROMOTE_THRESHOLD or 
-                (current_time - created_time) > TIME_THRESHOLD)
-
-    def update_postgres_memory(self, session_id, memory_item, sha_hash, embedding=None):
-        """Update or insert memory in PostgreSQL with proper error handling."""
+    def update_postgres(self, session_id, memory, sha, embedding=None):
         try:
             self.connect_to_db()
-            # Check if entry exists
-            self.pg_cursor.execute("SELECT 1 FROM embeddings WHERE sha_hash = %s LIMIT 1", (sha_hash,))
-            exists = self.pg_cursor.fetchone()
-            
-            if exists:
-                # Update existing record
-                self.pg_cursor.execute(
-                    """UPDATE embeddings 
-                       SET access_score = %s, 
-                           last_accessed = NOW() 
-                       WHERE sha_hash = %s""",
-                    (memory_item["access_score"], sha_hash)
+            embedding_str = "[" + ",".join(map(str, embedding)) + "]" if embedding else None
+            access_score = memory.get("access_score", 0)
+            last_accessed = memory.get("last_accessed", time.time())
+
+            self.pg_cursor.execute("SELECT 1 FROM embeddings WHERE sha_hash = %s", (sha,))
+            record_exists = self.pg_cursor.fetchone() is not None
+
+            if record_exists:
+                sql = """UPDATE embeddings SET access_score = %s, last_accessed = to_timestamp(%s)
+                         WHERE sha_hash = %s RETURNING id, access_score"""
+                params = (access_score, last_accessed, sha)
+            else:
+                sql = """INSERT INTO embeddings (
+                            session_id, query, response, embedding, memory_type, sentiment,
+                            source_type, image_url, sha_hash, access_score, last_accessed, created_at
+                         ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, to_timestamp(%s), NOW())
+                         RETURNING id, access_score"""
+                params = (
+                    session_id, memory["query"], memory["response"], embedding_str,
+                    memory.get("memory_type", "semantic"), memory.get("sentiment", "neutral"),
+                    memory.get("source_type", "text"), memory.get("image_url", None),
+                    sha, access_score, last_accessed
                 )
-                self.pg_conn.commit()
-                return True
-            elif embedding and len(embedding) == 1536:
-                # Insert new record with full metadata
-                embedding_str = "[" + ",".join(map(str, embedding)) + "]"
-                self.pg_cursor.execute(
-                    """INSERT INTO embeddings (
-                        session_id, query, response, embedding, memory_type, sentiment,
-                        source_type, image_url, sha_hash, created_at, access_score, last_accessed
-                    ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), %s, NOW())""",
-                    (
-                        session_id,
-                        memory_item["query"],
-                        memory_item["response"],
-                        embedding_str,
-                        memory_item.get("memory_type", "semantic"),
-                        memory_item.get("sentiment", "neutral"),
-                        memory_item.get("source_type", "text"),
-                        memory_item.get("image_url", None),
-                        sha_hash,
-                        memory_item["access_score"]
-                    )
-                )
-                self.pg_conn.commit()
-                # Also update FAISS
-                self._warm_cache.add(
-                    session_id, 
-                    memory_item["query"], 
-                    memory_item["response"], 
-                    embedding,
-                    access_score=memory_item["access_score"],
-                    last_accessed=memory_item["last_accessed"]
-                )
+
+            self.pg_cursor.execute(sql, params)
+            result = self.pg_cursor.fetchone()
+            self.pg_conn.commit()
+
+            if result:
+                pg_id, pg_score = result
+                session_logger.info(f"✅ PostgreSQL updated: id={pg_id}, sha={sha[:10]}, score={pg_score}")
+                if embedding and hasattr(self, '_warm_cache'):
+                    self._warm_cache.add(session_id, memory["query"], memory["response"],
+                                         embedding, access_score=access_score, last_accessed=last_accessed)
                 return True
             return False
         except Exception as e:
-            self.pg_conn.rollback()
-            session_logger.error(f"❌ PostgreSQL update failed: {e}")
+            if self.pg_conn:
+                self.pg_conn.rollback()
+            session_logger.error(f"❌ PostgreSQL update error for sha={sha[:10]}: {e}")
             return False
-
-    def batch_process_promotions(self, session_id, promotion_candidates):
-        """Process multiple promotions in an efficient batch."""
-        success_count = 0
-        for memory in promotion_candidates:
-            embedding = self.generate_embedding(memory["query"])
-            sha_hash = sha256_hash(memory["query"] + memory["response"])
-            if self.update_postgres_memory(session_id, memory, sha_hash, embedding):
-                success_count += 1
-                session_logger.info(f"🚀 Promoted to PostgreSQL + FAISS (score={memory['access_score']})")
-        
-        return success_count
 
     def retrieve_memory(self, session_id, query):
         try:
@@ -314,134 +222,235 @@ class PersistentSessionMemory:
             key = f"memory:{session_id}"
 
             if self.redis_client.exists(key):
-                session_logger.info(f"🧠 Memory retrieved from Redis for session: {session_id}")
-                memories = [json.loads(m) for m in self.redis_client.lrange(key, 0, -1)]
-
+                memory_items = [json.loads(m) for m in self.redis_client.lrange(key, 0, -1)]
                 updated = []
-                promotion_candidates = []
-                
-                # First pass: update access scores
-                for m in memories:
+                for m in memory_items:
                     m["access_score"] = m.get("access_score", 0) + 1
                     m["last_accessed"] = time.time()
-                    updated.append(m)
-                    
-                    # Check if memory should be promoted
-                    if self.should_promote(m):
-                        promotion_candidates.append(m)
-                        
-                    # Always update PostgreSQL if record exists
                     sha = sha256_hash(m["query"] + m["response"])
-                    self.update_postgres_memory(session_id, m, sha)
-                
-                # Second pass: batch process promotions
-                if promotion_candidates:
-                    promoted = self.batch_process_promotions(session_id, promotion_candidates)
-                    if promoted:
-                        session_logger.info(f"✅ Batch promoted {promoted} memories")
-                
-                # Update Redis with new memory states
-                self.redis_client.delete(key)
-                for m in updated:
-                    self.redis_client.rpush(key, json.dumps(m))
-                self.redis_client.expire(key, self.ttl)
+                    
+                    # Fixed: Pass session_id and query as parameters to log_memory_access
+                    log_success = log_memory_access(session_id, query, True, m.get("access_score", 1), m.get("memory_type") or "redis")
+                    if not log_success:
+                        session_logger.warning(f"Failed to log memory access for session_id={session_id}")
+                    
+                    if self.should_promote(m):
+                        embedding = self.generate_embedding(m["query"])
+                        self.update_postgres(session_id, m, sha, embedding)
+                    else:
+                        self.update_postgres(session_id, m, sha)
+                    updated.append(json.dumps(m))
+                pipe = self.redis_client.pipeline()
+                pipe.delete(key)
+                pipe.rpush(key, *updated)
+                pipe.expire(key, self.ttl)
+                pipe.execute()
+                return [json.loads(m) for m in updated]
 
-                return updated
-
-            # FAISS fallback
             embedding = self.generate_embedding(query)
             warm_hits = self._warm_cache.find_similar(embedding)
             if warm_hits:
-                session_logger.info(f"🔥 FAISS fallback returned {len(warm_hits)} result(s)")
                 for hit in warm_hits:
-                    session_logger.info(f"➡️ Match | dist={hit.get('distance', 0):.4f} | query={hit['query']}")
-                    
-                    # Update access stats in PostgreSQL for FAISS hits
-                    sha = sha256_hash(hit["query"] + hit["response"])
                     hit["access_score"] = hit.get("access_score", 0) + 1
                     hit["last_accessed"] = time.time()
-                    self.update_postgres_memory(session_id, hit, sha)
-                
+                    sha = sha256_hash(hit["query"] + hit["response"])
+                    self.update_postgres(session_id, hit, sha)
+                    
+                    # Fixed: Pass session_id and query as parameters to log_memory_access
+                    log_success = log_memory_access(session_id, query, True, hit.get("access_score"), hit.get("memory_type", "faiss"))
+                    if not log_success:
+                        session_logger.warning(f"Failed to log memory access for session_id={session_id}")
+                        
                 return warm_hits
 
-            # Glacier fallback
             glacier_key = f"{session_id}_glacier.json"
             glacier_blob = download_object(glacier_key)
             if glacier_blob:
-                try:
-                    glacier_data = json.loads(glacier_blob) if isinstance(glacier_blob, str) else glacier_blob
-                    session_logger.info(f"❄️ Memory restored from Glacier Layer for session: {session_id}")
-                    if isinstance(glacier_data, dict):
-                        glacier_data = [glacier_data]
-                    for m in glacier_data:
-                        m["access_score"] = m.get("access_score", 0) + 1
-                        m["last_accessed"] = time.time()
-                        self.redis_client.rpush(key, json.dumps(m))
-                    self.redis_client.expire(key, self.ttl)
-                    return glacier_data
-                except Exception as e:
-                    session_logger.error(f"❌ Glacier decoding error: {e}")
-                    return []
+                glacier_data = json.loads(glacier_blob) if isinstance(glacier_blob, str) else glacier_blob
+                if isinstance(glacier_data, dict):
+                    glacier_data = [glacier_data]
+                for m in glacier_data:
+                    m["access_score"] = m.get("access_score", 0) + 1
+                    m["last_accessed"] = time.time()
+                    self.redis_client.rpush(key, json.dumps(m))
+                    
+                    # Fixed: Pass session_id and query as parameters to log_memory_access
+                    log_success = log_memory_access(session_id, query, True, m.get("access_score"), m.get("memory_type", "glacier"))
+                    if not log_success:
+                        session_logger.warning(f"Failed to log memory access for session_id={session_id}")
+                        
+                self.redis_client.expire(key, self.ttl)
+                return glacier_data
 
-            session_logger.warning("⚠️ No memory found in Redis, FAISS, or Glacier.")
+            # Fixed: Pass session_id and query as parameters to log_memory_access
+            log_success = log_memory_access(session_id, query, False)
+            if not log_success:
+                session_logger.warning(f"Failed to log memory access for session_id={session_id}")
+                
             return []
 
         except Exception as e:
             session_logger.error(f"❌ Retrieval error: {e}")
+            session_logger.error(traceback.format_exc())
             return []
 
-    def run_consistency_check(self, session_id=None):
+    def enrich_to_graph(self, query, memory):
         """
-        Run a consistency check between FAISS and PostgreSQL to ensure synchronization.
-        Can be scheduled to run periodically.
+        Enrich memory with graph data by linking memory chunks to intent, topic, and emotion.
+        
+        Args:
+            query (str): The query text
+            memory (dict): The memory dictionary containing metadata
+            
+        Returns:
+            bool: True if enrichment was successful, False otherwise
         """
         try:
-            self.connect_to_db()
+            intent = memory.get("intent")
+            topic = memory.get("topic")
+            emotion = memory.get("sentiment") or memory.get("emotion")
             
-            # Build query for checking embeddings
-            query = "SELECT session_id, query, response, embedding, sha_hash, access_score FROM embeddings"
-            params = []
-            if session_id:
-                query += " WHERE session_id = %s"
-                params.append(session_id)
-            
-            self.pg_cursor.execute(query, params)
-            records = self.pg_cursor.fetchall()
-            
-            consistency_issues = 0
-            fixed_issues = 0
-            
-            for record in records:
-                rec_session_id, query, response, embedding_str, sha_hash, access_score = record
-                
-                # Convert string embedding to vector
-                try:
-                    embedding = json.loads(embedding_str.replace("[", "[").replace("]", "]"))
-                    
-                    # Check if in FAISS
-                    in_faiss = self._warm_cache.exists(rec_session_id, query, response)
-                    if not in_faiss:
-                        consistency_issues += 1
-                        # Add to FAISS
-                        self._warm_cache.add(
-                            rec_session_id, 
-                            query, 
-                            response, 
-                            embedding,
-                            access_score=access_score,
-                            last_accessed=time.time()
-                        )
-                        fixed_issues += 1
-                        session_logger.info(f"🔄 Fixed consistency: Added missing FAISS entry for {sha_hash}")
-                except Exception as e:
-                    session_logger.error(f"❌ Consistency check error for {sha_hash}: {e}")
-            
-            if consistency_issues > 0:
-                session_logger.info(f"🔍 Consistency check: Found {consistency_issues} issues, fixed {fixed_issues}")
+            if intent or topic or emotion:
+                self.graph_memory.add_context_nodes(query, intent=intent, topic=topic, emotion=emotion)
+                session_logger.debug(f"✅ Neo4j enrichment successful for query: {query[:30]}...")
+                return True
             else:
-                session_logger.info(f"✅ Consistency check: No issues found")
-                
-            return {"status": "completed", "issues_found": consistency_issues, "issues_fixed": fixed_issues}
+                session_logger.debug(f"⚠️ No enrichment metadata for query: {query[:30]}...")
+                return False
         except Exception as e:
-            session_logger.error(f"❌ Consistency check failed: {e}")
-            return {"status": "error", "message": str(e)}
+            session_logger.warning(f"❌ Neo4j enrichment failed: {e}")
+            session_logger.debug(traceback.format_exc())
+            return False
+
+    def store_memory(self, session_id, query, response, memory_type="semantic", sentiment="neutral", source_type="text", metadata=None):
+        try:
+            if not query or not response:
+                session_logger.warning("❌ Missing query or response, skipping memory storage")
+                return False
+
+            if not metadata:
+                metadata = {}
+
+            chunks = chunk_by_tokens(response, max_tokens=300)
+            key = f"memory:{session_id}"
+            timestamp = time.time()
+            
+            for i, chunk in enumerate(chunks):
+                memory = {
+                    "query": query,
+                    "response": chunk,
+                    "memory_type": memory_type,
+                    "sentiment": sentiment,
+                    "source_type": source_type,
+                    "timestamp": timestamp,
+                    "access_score": 1,
+                    "last_accessed": timestamp,
+                    "chunk_id": i,
+                    "total_chunks": len(chunks)
+                }
+                
+                # Add metadata fields to memory
+                if metadata:
+                    for k, v in metadata.items():
+                        if k not in memory:
+                            memory[k] = v
+                
+                memory_json = json.dumps(memory)
+                self.redis_client.rpush(key, memory_json)
+                
+                # Enrich to graph with the memory containing metadata
+                self.enrich_to_graph(query, metadata or {})
+                
+                # Handle promotion to PostgreSQL if needed
+                if self.should_promote(memory):
+                    sha = sha256_hash(query + chunk)
+                    embedding = self.generate_embedding(query)
+                    self.update_postgres(session_id, memory, sha, embedding)
+            
+            self.redis_client.expire(key, self.ttl)
+            
+            # Store to glacier (S3) if more than 1 memory item
+            if len(chunks) > 1:
+                memory_items = [json.loads(m) for m in self.redis_client.lrange(key, 0, -1)]
+                if memory_items:
+                    glacier_key = f"{session_id}_glacier.json"
+                    glacier_data = json.dumps(memory_items)
+                    upload_object(glacier_key, glacier_data)
+                    session_logger.info(f"✅ Uploaded {len(memory_items)} memories to glacier: {glacier_key}")
+            
+            return True
+            
+        except Exception as e:
+            session_logger.error(f"❌ Memory storage error: {e}")
+            session_logger.error(traceback.format_exc())
+            return False
+
+    # Add a test function to verify memory access logging
+    def test_memory_access_logging(self):
+        """
+        Test function to verify memory access logging functionality.
+        This can be run independently to validate the logging system.
+        """
+        # Generate unique test session ID
+        test_session_id = f"test_session_{int(time.time())}"
+        test_query = "Test query for logging verification"
+        test_matched = True
+        test_score = 0.95
+        test_memory_type = "test"
+        
+        session_logger.info(f"Testing memory access logging with session_id: {test_session_id}")
+        
+        # Attempt to log
+        success = log_memory_access(
+            test_session_id, 
+            test_query, 
+            test_matched, 
+            test_score, 
+            test_memory_type
+        )
+        
+        if success:
+            session_logger.info(f"✅ Test log entry created successfully for session {test_session_id}")
+        else:
+            session_logger.error(f"❌ Failed to create test log entry for session {test_session_id}")
+        
+        # Verify in database
+        conn = None
+        cursor = None
+        try:
+            conn = psycopg2.connect(
+                host=settings.PG_HOST,
+                database=settings.PG_DATABASE,
+                user=settings.PG_USER,
+                password=settings.PG_PASSWORD
+            )
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT id, session_id, query, matched, match_score, memory_type, created_at FROM memory_access_log WHERE session_id = %s",
+                (test_session_id,)
+            )
+            rows = cursor.fetchall()
+            if rows:
+                session_logger.info(f"✅ Found {len(rows)} log entries in database for session {test_session_id}")
+                for row in rows:
+                    session_logger.info(f"  - ID: {row[0]}, Session: {row[1]}, Query: {row[2][:30]}..., Matched: {row[3]}, Score: {row[4]}, Type: {row[5]}, Created: {row[6]}")
+                return True
+            else:
+                session_logger.error(f"❌ No log entries found in database for session {test_session_id}")
+                return False
+                
+        except Exception as e:
+            session_logger.error(f"❌ Error verifying log entry: {type(e).__name__}: {e}")
+            session_logger.error(traceback.format_exc())
+            return False
+        finally:
+            if cursor:
+                try:
+                    cursor.close()
+                except:
+                    pass
+            if conn:
+                try:
+                    conn.close()
+                except:
+                    pass

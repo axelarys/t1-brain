@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 class GraphMemory:
     """
     Neo4j-based graph memory component for T1 Brain system.
-    Manages graph-based storage of queries, responses, and associated metadata (intent, topic, emotion, etc.).
+    Manages graph-based storage of queries, responses, and associated metadata (intent, topic, emotion).
     """
     def __init__(self):
         """
@@ -30,7 +30,7 @@ class GraphMemory:
         except Exception as e:
             logger.error(f"❌ Neo4j connection failed: {e}")
             logger.error(traceback.format_exc())
-            # Prevent breakage if Neo4j is down
+            # Don't raise here to prevent breaking the application if Neo4j is down
             self.driver = None
 
     def close(self):
@@ -45,7 +45,7 @@ class GraphMemory:
         Verify that the Neo4j connection is working properly by running a simple query.
         
         Returns:
-            bool: True if connection is valid, False otherwise.
+            bool: True if connection is valid, False otherwise
         """
         try:
             if not self.driver:
@@ -66,23 +66,27 @@ class GraphMemory:
         Store detailed memory context in Neo4j including relationships to sentiment, topics, intent, etc.
         
         Args:
-            query (str): User query text.
-            response (str): System response text.
-            session_id (str): Unique session identifier.
-            metadata (dict): Optional metadata dictionary with keys like 'intent', 'topic', 'sentiment'/'emotion'.
+            query (str): User query text
+            response (str): System response text
+            session_id (str): Unique session identifier
+            metadata (dict): Optional metadata dictionary with keys like 'intent', 'topic', 'sentiment'/'emotion'
             
         Returns:
-            bool: True if operation succeeded, False otherwise.
+            bool: True if operation succeeded, False otherwise
         """
         if not self.driver:
             logger.error("❌ Cannot store graph memory: Neo4j driver is not initialized")
             return False
             
         try:
+            # Log the input parameters for debugging
             logger.debug(f"store_graph_memory: query={query[:30]}..., session_id={session_id}, metadata={metadata}")
+            
+            # Use query_text to avoid parameter name collision
             query_text = query
             
             with self.driver.session() as session:
+                # Create query and response nodes with relationship
                 with session.begin_transaction() as tx:
                     tx.run(
                         """
@@ -95,7 +99,9 @@ class GraphMemory:
                         session_id=session_id
                     )
 
+                # Process metadata if provided
                 if metadata:
+                    # Add intent if present
                     if "intent" in metadata:
                         with session.begin_transaction() as tx:
                             tx.run(
@@ -109,6 +115,7 @@ class GraphMemory:
                                 session_id=session_id
                             )
                     
+                    # Add topic if present
                     if "topic" in metadata:
                         with session.begin_transaction() as tx:
                             tx.run(
@@ -122,6 +129,7 @@ class GraphMemory:
                                 session_id=session_id
                             )
                     
+                    # Handle both sentiment and emotion consistently
                     if "sentiment" in metadata or "emotion" in metadata:
                         emotion_value = metadata.get("emotion") or metadata.get("sentiment")
                         with session.begin_transaction() as tx:
@@ -136,7 +144,9 @@ class GraphMemory:
                                 session_id=session_id
                             )
             
+            # Verify nodes were created and log relationship counts
             with self.driver.session() as verify_session:
+                # Verify Query node exists
                 result = verify_session.run(
                     "MATCH (q:Query {text: $query_text, session_id: $session_id, project: 't1brain'}) RETURN count(q) as count",
                     query_text=query_text,
@@ -146,9 +156,11 @@ class GraphMemory:
                 if record and record["count"] > 0:
                     logger.info(f"✅ Verified Query node created in store_graph_memory: {record['count']} nodes found")
                 else:
-                    logger.warning("⚠️ Query node not found after creation attempt in store_graph_memory")
+                    logger.warning(f"⚠️ Query node not found after creation attempt in store_graph_memory")
                 
+                # Log relationship counts if metadata was provided
                 if metadata:
+                    # Check intent relationships
                     if "intent" in metadata:
                         intent_result = verify_session.run(
                             """
@@ -161,6 +173,7 @@ class GraphMemory:
                         intent_record = intent_result.single()
                         logger.info(f"Intent relationships: {intent_record['count'] if intent_record else 0}")
                     
+                    # Check topic relationships
                     if "topic" in metadata:
                         topic_result = verify_session.run(
                             """
@@ -173,6 +186,7 @@ class GraphMemory:
                         topic_record = topic_result.single()
                         logger.info(f"Topic relationships: {topic_record['count'] if topic_record else 0}")
                     
+                    # Check emotion relationships
                     if "sentiment" in metadata or "emotion" in metadata:
                         emotion_result = verify_session.run(
                             """
@@ -196,10 +210,10 @@ class GraphMemory:
         Summarize session by extracting intent/topic/emotion relationships.
         
         Args:
-            session_id (str): Unique session identifier.
+            session_id (str): Unique session identifier
             
         Returns:
-            list: List of dictionaries containing query and associated metadata.
+            list: List of dictionaries containing query and associated metadata
         """
         if not self.driver:
             logger.error("❌ Cannot summarize session: Neo4j driver is not initialized")
@@ -225,22 +239,19 @@ class GraphMemory:
             logger.error(traceback.format_exc())
             return []
 
-    def add_context_nodes(self, query, response=None, intent=None, topic=None, emotion=None, entities=None, context_props=None):
+    def add_context_nodes(self, query, intent=None, topic=None, emotion=None):
         """
-        Enrichment method to add extended context nodes to Neo4j.
-        Now accepts additional parameters to capture response text, entities list, and extra context properties.
+        Lightweight enrichment method called from session_memory.py
+        Adds minimal context links for intent, topic, and emotion.
         
         Args:
-            query (str): User query text.
-            response (str, optional): Full response text.
-            intent (str, optional): Intent classification.
-            topic (str, optional): Topic classification.
-            emotion (str, optional): Emotion/sentiment classification.
-            entities (list, optional): List of entities to link.
-            context_props (dict, optional): Extended context properties (e.g., session_id, timestamp).
+            query (str): User query text
+            intent (str, optional): Intent classification
+            topic (str, optional): Topic classification
+            emotion (str, optional): Emotion/sentiment classification
             
         Returns:
-            bool: True if operation succeeded, False otherwise.
+            bool: True if operation succeeded, False otherwise
         """
         if not self.driver:
             logger.error("❌ Cannot add context nodes: Neo4j driver is not initialized")
@@ -249,146 +260,109 @@ class GraphMemory:
         if not query:
             logger.error("❌ Cannot add context nodes: query is required")
             return False
-
+            
         logger.info(f"🚀 Enriching Query: {query[:50]} | intent={intent}, topic={topic}, emotion={emotion}")
-
+        
+        # Check if any metadata is provided
+        if not any([intent, topic, emotion]):
+            logger.info("ℹ️ No metadata provided for enrichment, skipping")
+            return True
+        
+        # Use query_text to avoid parameter name collision
+        query_text = query
+            
         try:
-            safe_context = {}
-            if context_props:
-                safe_context = context_props.copy()
-                safe_context.pop("query", None)
-                
             with self.driver.session() as session:
-                # Create the base Query node and merge extra context properties safely
+                # Create Query node with project label
                 with session.begin_transaction() as tx:
                     tx.run(
-                        """
-                        MERGE (q:Query {text: $query_text, project: 't1brain'})
-                        SET q += $props
-                        """,
-                        query_text=query,
-                        props=safe_context
+                        "MERGE (q:Query {text: $query_text, project: 't1brain'})",
+                        query_text=query_text
                     )
                 
-                # If response is provided, add a Response node and link it.
-                if response:
-                    with session.begin_transaction() as tx:
-                        tx.run(
-                            """
-                            MERGE (r:Response {text: $response, project: 't1brain'})
-                            WITH r
-                            MATCH (q:Query {text: $query_text, project: 't1brain'})
-                            MERGE (q)-[:REPLIED_WITH]->(r)
-                            """,
-                            query_text=query,
-                            response=response
-                        )
-                
-                # Add Intent relationship if provided.
+                # Add Intent if provided
                 if intent:
                     with session.begin_transaction() as tx:
-                        tx.run(
-                            """
-                            MERGE (i:Intent {type: $intent, project: 't1brain'})
-                            WITH i
+                        tx.run("""
                             MATCH (q:Query {text: $query_text, project: 't1brain'})
+                            MERGE (i:Intent {type: $intent, project: 't1brain'})
                             MERGE (q)-[:HAS_INTENT]->(i)
-                            """,
-                            query_text=query,
-                            intent=intent
-                        )
+                        """, query_text=query_text, intent=intent)
                 
-                # Add Topic relationship if provided.
+                # Add Topic if provided
                 if topic:
                     with session.begin_transaction() as tx:
-                        tx.run(
-                            """
-                            MERGE (t:Topic {label: $topic, project: 't1brain'})
-                            WITH t
+                        tx.run("""
                             MATCH (q:Query {text: $query_text, project: 't1brain'})
+                            MERGE (t:Topic {label: $topic, project: 't1brain'})
                             MERGE (q)-[:HAS_TOPIC]->(t)
-                            """,
-                            query_text=query,
-                            topic=topic
-                        )
+                        """, query_text=query_text, topic=topic)
                 
-                # Add Emotion relationship if provided.
+                # Add Emotion if provided
                 if emotion:
                     with session.begin_transaction() as tx:
-                        tx.run(
-                            """
-                            MERGE (e:Emotion {name: $emotion, project: 't1brain'})
-                            WITH e
+                        tx.run("""
                             MATCH (q:Query {text: $query_text, project: 't1brain'})
+                            MERGE (e:Emotion {name: $emotion, project: 't1brain'})
                             MERGE (q)-[:EXPRESSES]->(e)
-                            """,
-                            query_text=query,
-                            emotion=emotion
+                        """, query_text=query_text, emotion=emotion)
+            
+            # Verify nodes and relationships in a separate session
+            with self.driver.session() as verify_session:
+                # Verify Query node exists
+                result = verify_session.run(
+                    "MATCH (q:Query {text: $query_text, project: 't1brain'}) RETURN count(q) as count",
+                    query_text=query_text
+                )
+                record = result.single()
+                if record and record["count"] > 0:
+                    logger.info(f"✅ Verified Query node created: {record['count']} nodes found")
+                    
+                    # Log relationship counts
+                    if intent:
+                        intent_result = verify_session.run(
+                            "MATCH (q:Query {text: $query_text, project: 't1brain'})-[:HAS_INTENT]->(:Intent) RETURN count(*) as count",
+                            query_text=query_text
                         )
-                
-                # If entities list is provided, create Entity nodes and link them.
-                if entities and isinstance(entities, list):
-                    for ent in entities:
-                        if ent:
-                            with session.begin_transaction() as tx:
-                                tx.run(
-                                    """
-                                    MERGE (ent:Entity {name: $entity, project: 't1brain'})
-                                    WITH ent
-                                    MATCH (q:Query {text: $query_text, project: 't1brain'})
-                                    MERGE (q)-[:MENTIONS]->(ent)
-                                    """,
-                                    query_text=query,
-                                    entity=ent
-                                )
-                
+                        intent_record = intent_result.single()
+                        logger.info(f"Intent relationships: {intent_record['count'] if intent_record else 0}")
+                    
+                    if topic:
+                        topic_result = verify_session.run(
+                            "MATCH (q:Query {text: $query_text, project: 't1brain'})-[:HAS_TOPIC]->(:Topic) RETURN count(*) as count",
+                            query_text=query_text
+                        )
+                        topic_record = topic_result.single()
+                        logger.info(f"Topic relationships: {topic_record['count'] if topic_record else 0}")
+                    
+                    if emotion:
+                        emotion_result = verify_session.run(
+                            "MATCH (q:Query {text: $query_text, project: 't1brain'})-[:EXPRESSES]->(:Emotion) RETURN count(*) as count",
+                            query_text=query_text
+                        )
+                        emotion_record = emotion_result.single()
+                        logger.info(f"Emotion relationships: {emotion_record['count'] if emotion_record else 0}")
+                else:
+                    logger.warning(f"⚠️ Query node not found after creation attempt")
+            
             return True
         except Exception as e:
             logger.error(f"❌ Error in add_context_nodes(): {type(e).__name__}: {e}")
-            logger.error(f"Parameters: query={query}, response={response}, intent={intent}, topic={topic}, emotion={emotion}")
-            logger.error(traceback.format_exc())
+            logger.error(f"Parameters: query={query}, intent={intent}, topic={topic}, emotion={emotion}")
+            logger.error(f"Traceback: {traceback.format_exc()}")
             return False
-
-    def add_keyword_relationship(self, query, keyword):
-        """
-        Create a relationship between a Query node and a Keyword node.
-        
-        Args:
-            query (str): User query text.
-            keyword (str): Keyword to be linked.
             
-        Returns:
-            bool: True if operation succeeded, False otherwise.
-        """
-        try:
-            with self.driver.session() as session:
-                with session.begin_transaction() as tx:
-                    tx.run(
-                        """
-                        MATCH (q:Query {text: $query_text, project: 't1brain'})
-                        MERGE (k:Keyword {term: $keyword, project: 't1brain'})
-                        MERGE (q)-[:RELATED_TO]->(k)
-                        """,
-                        query_text=query,
-                        keyword=keyword
-                    )
-            return True
-        except Exception as e:
-            logger.error(f"❌ Error in add_keyword_relationship: {e}")
-            logger.error(traceback.format_exc())
-            return False
-
     def debug_enrichment(self, query, metadata=None):
         """
         Debug method to test enrichment functionality directly.
         Can be used independently for CLI testing.
         
         Args:
-            query (str): User query text.
-            metadata (dict): Optional metadata dictionary with keys like 'intent', 'topic', 'sentiment'/'emotion'.
+            query (str): User query text
+            metadata (dict): Optional metadata dictionary with keys like 'intent', 'topic', 'sentiment'/'emotion'
             
         Returns:
-            bool: True if operation succeeded, False otherwise.
+            bool: True if operation succeeded, False otherwise
         """
         logger.info(f"🔍 Debug enrichment for query: {query[:50]}")
         logger.info(f"Metadata: {metadata}")
@@ -401,7 +375,7 @@ class GraphMemory:
         topic = metadata.get("topic")
         emotion = metadata.get("emotion") or metadata.get("sentiment")
         
-        result = self.add_context_nodes(query, response=metadata.get("response"), intent=intent, topic=topic, emotion=emotion, entities=metadata.get("entities"), context_props=metadata.get("context_props"))
+        result = self.add_context_nodes(query, intent, topic, emotion)
         logger.info(f"Debug enrichment result: {result}")
         return result
 
@@ -414,6 +388,7 @@ def main():
     import sys
     import argparse
     
+    # Configure logging for CLI usage
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s [%(levelname)s] %(message)s',
@@ -428,6 +403,7 @@ def main():
     
     args = parser.parse_args()
     
+    # Create metadata dictionary from arguments
     metadata = {}
     if args.intent:
         metadata["intent"] = args.intent
@@ -436,6 +412,7 @@ def main():
     if args.emotion:
         metadata["emotion"] = args.emotion
         
+    # Test GraphMemory
     logger.info("Initializing GraphMemory...")
     memory = GraphMemory()
     
@@ -451,9 +428,9 @@ def main():
     else:
         logger.error("❌ Debug enrichment failed")
         
+    # Clean up
     memory.close()
     return 0 if result else 1
 
 if __name__ == "__main__":
-    import sys
     sys.exit(main())

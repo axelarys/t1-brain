@@ -4,6 +4,7 @@ from openai import OpenAI
 
 from config import settings
 from utils.memory_utils import get_api_key
+from actions.schema_parser import generate_action_schema
 
 # 📁 Logging Setup
 log_dir = "/root/projects/t1-brain/logs/"
@@ -29,7 +30,6 @@ router_logger.info("🚀 MemoryRouter initialized.")
 
 class MemoryRouter:
     def __init__(self):
-        # Lazy initialization for memory
         self._memory = None
         self.client = OpenAI(api_key=get_api_key("text"))
 
@@ -61,7 +61,6 @@ class MemoryRouter:
     @property
     def memory(self):
         if self._memory is None:
-            # Import at the point of use to avoid circular dependency
             from memory.session_memory import PersistentSessionMemory
             self._memory = PersistentSessionMemory()
         return self._memory
@@ -122,10 +121,27 @@ class MemoryRouter:
             "storage_target": "graph"
         }
 
+    def route_user_query(self, session_id: str, user_input: str) -> dict:
+        memory_snippet = "\n".join([m["query"] for m in self.memory.find_similar_queries(user_input)])[:500]
+        tools = ["set_reminder", "summarize_file", "web_search", "storeMemory", "updateMemory"]
+
+        schema = generate_action_schema(user_input, memory_snippet, tools)
+
+        if schema["action"] == "none":
+            router_logger.info("🧠 Routed as memory enrichment (fallback).")
+            enriched = self.enrich_and_classify(session_id, user_input)
+            return self.execute_action(session_id, user_input, enriched)
+        else:
+            router_logger.info(f"⚙️ Routed as GPT Action: {schema['action']}")
+            return {
+                "status": "tool_action",
+                "action": schema["action"],
+                "parameters": schema["parameters"]
+            }
+
     def execute_action(self, session_id: str, user_input: str, enriched: dict) -> dict:
         try:
-            # Store directly using session memory logic
-            response = ""  # can be improved with actual assistant response if needed
+            response = ""  # Placeholder response
             return self.memory.store_memory(
                 session_id=session_id,
                 query=user_input,

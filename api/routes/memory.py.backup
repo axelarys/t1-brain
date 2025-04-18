@@ -1,7 +1,7 @@
-# memory.py
 from fastapi import APIRouter, Depends, HTTPException, Request
 from typing import Optional
 
+# Import shared models 
 from api.models import (
     MemoryRequest, 
     MemoryDeleteRequest, 
@@ -9,14 +9,17 @@ from api.models import (
     MemoryAggregateRequest
 )
 
+# 📡 Router Setup
 router = APIRouter()
 
+# 🔐 API Key Middleware
 def verify_api_key(request: Request):
     api_key = request.headers.get("X-API-KEY")
     if not api_key or api_key != "WsRocks1234":
         raise HTTPException(status_code=401, detail="Invalid or missing API Key")
     return api_key
 
+# Dependency providers
 _memory_handler = None
 _graph_memory = None
 
@@ -29,6 +32,7 @@ def init_dependencies():
     
     if _memory_handler is None:
         _memory_handler = PersistentSessionMemory()
+    
     if _graph_memory is None:
         _graph_memory = GraphMemory()
 
@@ -42,10 +46,14 @@ def get_graph_memory():
         raise HTTPException(status_code=500, detail="Graph memory not initialized")
     return _graph_memory
 
+# 📥 Store Memory
 @router.post("/memory/store")
-async def store_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
-    handler = get_memory_handler()
-    return handler.store_memory(
+async def store_memory(
+    request: MemoryRequest, 
+    api_key: str = Depends(verify_api_key)
+):
+    memory_handler = get_memory_handler()
+    return memory_handler.store_memory(
         session_id=request.session_id,
         query=request.query,
         response=request.response,
@@ -53,10 +61,14 @@ async def store_memory(request: MemoryRequest, api_key: str = Depends(verify_api
         sentiment=request.sentiment
     )
 
+# 🧠 Retrieve Memory
 @router.post("/memory/retrieve")
-async def retrieve_memory(request: MemoryRequest, api_key: str = Depends(verify_api_key)):
-    handler = get_memory_handler()
-    raw = handler.retrieve_memory(request.session_id, request.query)
+async def retrieve_memory(
+    request: MemoryRequest, 
+    api_key: str = Depends(verify_api_key)
+):
+    memory_handler = get_memory_handler()
+    raw = memory_handler.retrieve_memory(request.session_id, request.query)
     results = []
     for m in raw:
         entry = {
@@ -72,34 +84,59 @@ async def retrieve_memory(request: MemoryRequest, api_key: str = Depends(verify_
         results.append(entry)
     return {"status": "retrieved", "count": len(results), "memory": results}
 
+# ♻️ Restore Session from PostgreSQL
 @router.post("/memory/session")
-async def restore_session(request: SessionRestoreRequest, api_key: str = Depends(verify_api_key)):
-    handler = get_memory_handler()
-    restored = handler.restore_session_from_pg(request.session_id)
+async def restore_session(
+    request: SessionRestoreRequest, 
+    api_key: str = Depends(verify_api_key)
+):
+    memory_handler = get_memory_handler()
+    restored = memory_handler.restore_session_from_pg(request.session_id)
     return {"status": "restored", "restored": len(restored), "chunks": restored}
 
+# 🔁 Aggregate Memory (Redis + Vector + Graph)
 @router.post("/memory/aggregate")
-async def aggregate_memory(request: MemoryAggregateRequest, api_key: str = Depends(verify_api_key)):
-    handler = get_memory_handler()
-    graph = get_graph_memory()
+async def aggregate_memory(
+    request: MemoryAggregateRequest, 
+    api_key: str = Depends(verify_api_key)
+):
+    memory_handler = get_memory_handler()
+    graph_memory = get_graph_memory()
+    
+    redis_mem = memory_handler.retrieve_memory(request.session_id, request.query)
+    vector_matches = memory_handler.find_similar_queries(request.query)
+    graph_matches = graph_memory.retrieve_graph_memory(request.query, top_k=5)
+    
     return {
         "status": "aggregated",
-        "redis": handler.retrieve_memory(request.session_id, request.query),
-        "vector": handler.find_similar_queries(request.query),
-        "graph": graph.retrieve_graph_memory(request.query, top_k=5)
+        "redis": redis_mem,
+        "vector": vector_matches,
+        "graph": graph_matches
     }
 
+# ❌ Delete Memory
 @router.delete("/memory/delete")
-async def delete_memory(request: MemoryDeleteRequest, api_key: str = Depends(verify_api_key)):
-    handler = get_memory_handler()
-    return handler.delete_memory(request.session_id, request.query)
+async def delete_memory(
+    request: MemoryDeleteRequest, 
+    api_key: str = Depends(verify_api_key)
+):
+    memory_handler = get_memory_handler()
+    return memory_handler.delete_memory(request.session_id, request.query)
 
+# 🧠 Summarize Session
 @router.get("/memory/summarize")
-async def summarize_session(session_id: str, api_key: str = Depends(verify_api_key)):
-    handler = get_memory_handler()
-    return handler.summarize_session(session_id)
+async def summarize_session(
+    session_id: str,
+    api_key: str = Depends(verify_api_key)
+):
+    memory_handler = get_memory_handler()
+    return memory_handler.summarize_session(session_id)
 
+# 🧹 Manual Cleanup of Expired Short-Term Memory
 @router.post("/memory/cleanup")
-async def cleanup_session_memory(session_id: str, api_key: str = Depends(verify_api_key)):
-    handler = get_memory_handler()
-    return handler.cleanup_expired_memory(session_id)
+async def cleanup_session_memory(
+    session_id: str,
+    api_key: str = Depends(verify_api_key)
+):
+    memory_handler = get_memory_handler()
+    return memory_handler.cleanup_expired_memory(session_id)

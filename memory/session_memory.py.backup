@@ -1,22 +1,35 @@
 # session_memory.py
 
-import os, json, time, redis, logging, psycopg2, hashlib, numpy as np, tiktoken
+import os
+import json
+import time
+import redis
+import logging
+import psycopg2
+import hashlib
+import numpy as np
+import tiktoken
 import traceback
 from datetime import datetime
+
 from config import settings
 from openai import OpenAI
 from utils.memory_utils import get_api_key
 from memory.warm_layer import WarmMemoryCache
 from memory.glacier_client import upload_object, download_object
 
+# Set up log directories and files
 log_dir = "/root/projects/t1-brain/logs/"
 os.makedirs(log_dir, exist_ok=True)
 
 log_file = os.path.join(log_dir, "session_memory.log")
 token_log_file = os.path.join(log_dir, "token_usage.log")
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.FileHandler(log_file, mode='a'), logging.StreamHandler()])
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[logging.FileHandler(log_file, mode='a'), logging.StreamHandler()]
+)
 session_logger = logging.getLogger(__name__)
 token_logger = logging.getLogger("token_logger")
 token_handler = logging.FileHandler(token_log_file, mode='a')
@@ -24,6 +37,7 @@ token_handler.setFormatter(logging.Formatter("%(asctime)s - %(message)s"))
 token_logger.addHandler(token_handler)
 token_logger.setLevel(logging.INFO)
 
+# Encoder for tokenization
 encoder = tiktoken.encoding_for_model("text-embedding-ada-002")
 PROMOTE_THRESHOLD = 5
 TIME_THRESHOLD = 86400  # 1 day
@@ -32,7 +46,10 @@ def sha256_hash(text):
     return hashlib.sha256(text.encode()).hexdigest()
 
 def chunk_by_tokens(text, max_tokens=300):
-    words, chunks, current = text.split(), [], []
+    """Chunk text into smaller pieces limited by max_tokens per chunk."""
+    words = text.split()
+    chunks = []
+    current = []
     for word in words:
         current.append(word)
         if len(encoder.encode(" ".join(current))) >= max_tokens:
@@ -42,39 +59,34 @@ def chunk_by_tokens(text, max_tokens=300):
         chunks.append(" ".join(current))
     return chunks
 
-# Fixed log_memory_access function with proper parameter passing
 def log_memory_access(session_id, query, matched, match_score=None, memory_type=None):
     """
     Log memory access to the PostgreSQL memory_access_log table.
     
     Args:
-        session_id (str): The session identifier
-        query (str): The query text
-        matched (bool): Whether a match was found
-        match_score (float, optional): The match score if applicable
-        memory_type (str, optional): The type of memory accessed
+        session_id (str): The session identifier.
+        query (str): The query text.
+        matched (bool): Whether a match was found.
+        match_score (float, optional): The match score if applicable.
+        memory_type (str, optional): The type of memory accessed.
         
     Returns:
-        bool: True if logging was successful, False otherwise
+        bool: True if logging was successful, False otherwise.
     """
-    # Validate parameters
     if not session_id:
         session_logger.error("❌ [LOGGING] Cannot log memory access: session_id is required")
         return False
     if not query:
         session_logger.error("❌ [LOGGING] Cannot log memory access: query is required")
         return False
-    
-    # Truncate query if too long (assuming PostgreSQL text field has some limit)
-    query_truncated = query[:500] if query and len(query) > 500 else query
-    
+
+    query_truncated = query[:500] if len(query) > 500 else query
+
     log_conn = None
     log_cursor = None
     try:
-        # Log attempt with parameter values
         session_logger.debug(f"Attempting to log memory access: session_id={session_id}, query={query_truncated[:30]}..., matched={matched}")
         
-        # Create a new connection for logging
         log_conn = psycopg2.connect(
             host=settings.PG_HOST,
             database=settings.PG_DATABASE,
@@ -82,45 +94,33 @@ def log_memory_access(session_id, query, matched, match_score=None, memory_type=
             password=settings.PG_PASSWORD
         )
         log_cursor = log_conn.cursor()
-        
-        # Execute the insert query
+
         log_cursor.execute(
             "INSERT INTO memory_access_log (session_id, query, matched, match_score, memory_type) VALUES (%s, %s, %s, %s, %s) RETURNING id",
             (session_id, query_truncated, matched, match_score, memory_type or "unknown")
         )
-        
-        # Get the inserted row ID for verification
         inserted_id = log_cursor.fetchone()[0]
-        
-        # Commit the transaction
         log_conn.commit()
-        
-        # Log success
+
         session_logger.debug(f"✅ Successfully logged memory access for session_id={session_id}, log_id={inserted_id}")
         return True
-        
+
     except Exception as e:
-        # Detailed error logging
         session_logger.error(f"❌ [LOGGING] Failed to log memory access: {type(e).__name__}: {e}")
-        session_logger.error(f"Traceback: {traceback.format_exc()}")
-        
-        # Rollback if needed
+        session_logger.error(traceback.format_exc())
         if log_conn:
             try:
                 log_conn.rollback()
             except Exception as rollback_error:
                 session_logger.error(f"❌ [LOGGING] Failed to rollback transaction: {rollback_error}")
-        
         return False
-        
+
     finally:
-        # Ensure resources are always closed
         if log_cursor:
             try:
                 log_cursor.close()
             except Exception as cursor_error:
                 session_logger.error(f"❌ [LOGGING] Failed to close cursor: {cursor_error}")
-                
         if log_conn:
             try:
                 log_conn.close()
@@ -229,7 +229,6 @@ class PersistentSessionMemory:
                     m["last_accessed"] = time.time()
                     sha = sha256_hash(m["query"] + m["response"])
                     
-                    # Fixed: Pass session_id and query as parameters to log_memory_access
                     log_success = log_memory_access(session_id, query, True, m.get("access_score", 1), m.get("memory_type") or "redis")
                     if not log_success:
                         session_logger.warning(f"Failed to log memory access for session_id={session_id}")
@@ -256,7 +255,6 @@ class PersistentSessionMemory:
                     sha = sha256_hash(hit["query"] + hit["response"])
                     self.update_postgres(session_id, hit, sha)
                     
-                    # Fixed: Pass session_id and query as parameters to log_memory_access
                     log_success = log_memory_access(session_id, query, True, hit.get("access_score"), hit.get("memory_type", "faiss"))
                     if not log_success:
                         session_logger.warning(f"Failed to log memory access for session_id={session_id}")
@@ -274,7 +272,6 @@ class PersistentSessionMemory:
                     m["last_accessed"] = time.time()
                     self.redis_client.rpush(key, json.dumps(m))
                     
-                    # Fixed: Pass session_id and query as parameters to log_memory_access
                     log_success = log_memory_access(session_id, query, True, m.get("access_score"), m.get("memory_type", "glacier"))
                     if not log_success:
                         session_logger.warning(f"Failed to log memory access for session_id={session_id}")
@@ -282,11 +279,9 @@ class PersistentSessionMemory:
                 self.redis_client.expire(key, self.ttl)
                 return glacier_data
 
-            # Fixed: Pass session_id and query as parameters to log_memory_access
             log_success = log_memory_access(session_id, query, False)
             if not log_success:
                 session_logger.warning(f"Failed to log memory access for session_id={session_id}")
-                
             return []
 
         except Exception as e:
@@ -294,35 +289,76 @@ class PersistentSessionMemory:
             session_logger.error(traceback.format_exc())
             return []
 
-    def enrich_to_graph(self, query, memory):
+    def enrich_to_graph(self, session_id, query, memory_data):
         """
         Enrich memory with graph data by linking memory chunks to intent, topic, and emotion.
         
         Args:
-            query (str): The query text
-            memory (dict): The memory dictionary containing metadata
+            session_id (str): The session identifier.
+            query (str): The query text.
+            memory_data (dict): The memory dictionary containing metadata.
             
         Returns:
-            bool: True if enrichment was successful, False otherwise
+            bool: True if enrichment was successful, False otherwise.
         """
         try:
-            intent = memory.get("intent")
-            topic = memory.get("topic")
-            emotion = memory.get("sentiment") or memory.get("emotion")
+            # Extract enrichment metadata from memory_data
+            intent = memory_data.get("intent")
+            topic = memory_data.get("topic")
+            emotion = memory_data.get("sentiment") or memory_data.get("emotion")
+            user_id = memory_data.get("user_id")
             
-            if intent or topic or emotion:
-                self.graph_memory.add_context_nodes(query, intent=intent, topic=topic, emotion=emotion)
-                session_logger.debug(f"✅ Neo4j enrichment successful for query: {query[:30]}...")
+            session_logger.info(f"🚀 Enriching Query: {query[:50]} | intent={intent}, topic={topic}, emotion={emotion}")
+            
+            entities = memory_data.get("entities", [])
+            keywords = memory_data.get("keywords", [])
+            memory_type = memory_data.get("memory_type", "semantic")
+            response = memory_data.get("response", "")
+            
+            context_props = {
+                "session_id": session_id,
+                "memory_type": memory_type,
+                "timestamp": memory_data.get("timestamp", time.time()),
+            }
+            if user_id:
+                context_props["user_id"] = user_id
+                
+            if any([intent, topic, emotion, entities, keywords]):
+                enrichment_result = self.graph_memory.add_context_nodes(
+                    query,
+                    response=response,
+                    intent=intent,
+                    topic=topic,
+                    emotion=emotion,
+                    entities=entities,
+                    context_props=context_props
+                )
+                if keywords and isinstance(keywords, list):
+                    for keyword in keywords:
+                        if keyword and isinstance(keyword, str):
+                            try:
+                                self.graph_memory.add_keyword_relationship(query, keyword)
+                            except Exception as kw_error:
+                                session_logger.debug(f"⚠️ Error adding keyword relationship for '{keyword}': {kw_error}")
+                
+                session_logger.info(f"✅ Neo4j enrichment successful for session={session_id}, query={query[:30]}...")
                 return True
             else:
-                session_logger.debug(f"⚠️ No enrichment metadata for query: {query[:30]}...")
+                session_logger.warning(f"⚠️ No enrichment metadata available for graph storage, session={session_id}")
                 return False
+                
         except Exception as e:
-            session_logger.warning(f"❌ Neo4j enrichment failed: {e}")
-            session_logger.debug(traceback.format_exc())
+            session_logger.error(f"❌ Neo4j enrichment failed: {e}")
+            session_logger.error(traceback.format_exc())
             return False
 
     def store_memory(self, session_id, query, response, memory_type="semantic", sentiment="neutral", source_type="text", metadata=None):
+        """
+        Stores a memory entry into Redis, promotes to PostgreSQL/FAISS as needed,
+        uploads to Glacier for long-term backup, and enriches the memory into the graph.
+        
+        Graph enrichment is performed BEFORE response chunking to ensure full context.
+        """
         try:
             if not query or not response:
                 session_logger.warning("❌ Missing query or response, skipping memory storage")
@@ -331,45 +367,45 @@ class PersistentSessionMemory:
             if not metadata:
                 metadata = {}
 
-            chunks = chunk_by_tokens(response, max_tokens=300)
-            key = f"memory:{session_id}"
             timestamp = time.time()
+            full_memory = {
+                "query": query,
+                "response": response,  # Full response for graph enrichment
+                "memory_type": memory_type,
+                "sentiment": sentiment,
+                "source_type": source_type,
+                "timestamp": timestamp,
+                "access_score": 1,
+                "last_accessed": timestamp
+            }
+            # Incorporate additional metadata
+            for k, v in metadata.items():
+                full_memory[k] = v
+
+            # Perform Neo4j graph enrichment BEFORE chunking the response
+            self.enrich_to_graph(session_id, query, full_memory)
             
+            # Proceed with token-based chunking of the response for Redis storage
+            chunks = chunk_by_tokens(response, max_tokens=300)
+            full_memory["total_chunks"] = len(chunks)
+            key = f"memory:{session_id}"
+
             for i, chunk in enumerate(chunks):
-                memory = {
-                    "query": query,
-                    "response": chunk,
-                    "memory_type": memory_type,
-                    "sentiment": sentiment,
-                    "source_type": source_type,
-                    "timestamp": timestamp,
-                    "access_score": 1,
-                    "last_accessed": timestamp,
-                    "chunk_id": i,
-                    "total_chunks": len(chunks)
-                }
-                
-                # Add metadata fields to memory
-                if metadata:
-                    for k, v in metadata.items():
-                        if k not in memory:
-                            memory[k] = v
-                
-                memory_json = json.dumps(memory)
+                chunked_memory = full_memory.copy()
+                chunked_memory["response"] = chunk
+                chunked_memory["chunk_id"] = i
+
+                memory_json = json.dumps(chunked_memory)
                 self.redis_client.rpush(key, memory_json)
-                
-                # Enrich to graph with the memory containing metadata
-                self.enrich_to_graph(query, metadata or {})
-                
-                # Handle promotion to PostgreSQL if needed
-                if self.should_promote(memory):
+
+                if self.should_promote(chunked_memory):
                     sha = sha256_hash(query + chunk)
                     embedding = self.generate_embedding(query)
-                    self.update_postgres(session_id, memory, sha, embedding)
+                    self.update_postgres(session_id, chunked_memory, sha, embedding)
             
             self.redis_client.expire(key, self.ttl)
             
-            # Store to glacier (S3) if more than 1 memory item
+            # Backup to Glacier if multiple memory items exist
             if len(chunks) > 1:
                 memory_items = [json.loads(m) for m in self.redis_client.lrange(key, 0, -1)]
                 if memory_items:
@@ -377,21 +413,18 @@ class PersistentSessionMemory:
                     glacier_data = json.dumps(memory_items)
                     upload_object(glacier_key, glacier_data)
                     session_logger.info(f"✅ Uploaded {len(memory_items)} memories to glacier: {glacier_key}")
-            
+
             return True
-            
+
         except Exception as e:
             session_logger.error(f"❌ Memory storage error: {e}")
             session_logger.error(traceback.format_exc())
             return False
 
-    # Add a test function to verify memory access logging
     def test_memory_access_logging(self):
         """
         Test function to verify memory access logging functionality.
-        This can be run independently to validate the logging system.
         """
-        # Generate unique test session ID
         test_session_id = f"test_session_{int(time.time())}"
         test_query = "Test query for logging verification"
         test_matched = True
@@ -400,7 +433,6 @@ class PersistentSessionMemory:
         
         session_logger.info(f"Testing memory access logging with session_id: {test_session_id}")
         
-        # Attempt to log
         success = log_memory_access(
             test_session_id, 
             test_query, 
@@ -414,7 +446,6 @@ class PersistentSessionMemory:
         else:
             session_logger.error(f"❌ Failed to create test log entry for session {test_session_id}")
         
-        # Verify in database
         conn = None
         cursor = None
         try:
@@ -438,7 +469,6 @@ class PersistentSessionMemory:
             else:
                 session_logger.error(f"❌ No log entries found in database for session {test_session_id}")
                 return False
-                
         except Exception as e:
             session_logger.error(f"❌ Error verifying log entry: {type(e).__name__}: {e}")
             session_logger.error(traceback.format_exc())
@@ -454,3 +484,54 @@ class PersistentSessionMemory:
                     conn.close()
                 except:
                     pass
+
+    def test_graph_enrichment(self, session_id=None):
+        """
+        Test function to verify graph enrichment functionality.
+        
+        Args:
+            session_id (str, optional): Session ID for testing; if None, a test ID is generated.
+            
+        Returns:
+            bool: True if the test passed successfully, False otherwise.
+        """
+        if not session_id:
+            session_id = f"test_graph_{int(time.time())}"
+            
+        test_query = "How do I improve my machine learning model?"
+        test_response = "You can improve your model by collecting more data, feature engineering, and fine-tuning hyperparameters."
+        test_metadata = {
+            "intent": "learn",
+            "topic": "machine learning",
+            "sentiment": "curious",
+            "entities": ["machine learning model", "data"],
+            "keywords": ["improvement", "hyperparameters", "feature engineering"]
+        }
+        
+        session_logger.info(f"Testing graph enrichment with session_id: {session_id}")
+        
+        try:
+            store_success = self.store_memory(
+                session_id,
+                test_query,
+                test_response,
+                memory_type="semantic",
+                sentiment="curious",
+                metadata=test_metadata
+            )
+            
+            if store_success:
+                session_logger.info(f"✅ Test memory stored with graph enrichment: {session_id}")
+                if self.graph_memory.find_related_contexts(test_query):
+                    session_logger.info(f"✅ Graph connections verified for query: {test_query[:30]}...")
+                    return True
+                else:
+                    session_logger.warning("⚠️ No graph connections found for test query")
+                    return False
+            else:
+                session_logger.error("❌ Failed to store test memory with graph enrichment")
+                return False
+        except Exception as e:
+            session_logger.error(f"❌ Graph enrichment test error: {type(e).__name__}: {e}")
+            session_logger.error(traceback.format_exc())
+            return False

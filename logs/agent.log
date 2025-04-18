@@ -8,3 +8,5 @@
 2025-04-02 11:42:12,384 - INFO - ✅ Image memory stored: {'status': 'error', 'message': 'Image analysis failed'}
 2025-04-02 11:44:24,396 - INFO - 🖼️ Image input detected: session=test_image_cat, image_url=https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg
 2025-04-02 11:44:29,932 - INFO - ✅ Image memory stored: {'status': 'stored', 'message': 'Memory stored in 1 chunk(s).'}
+2025-04-17 12:14:25,574 - INFO - 📝 Text input detected: session=phase6_step1_test, text=Show me the architecture of hybrid memory systems.
+2025-04-17 12:14:25,575 - INFO - ✅ Text memory stored: False

@@ -678,3 +678,114 @@
 2025-04-15 22:25:56,240 - embedding | tokens=9 | model=text-embedding-ada-002
 2025-04-15 22:32:51,739 - embedding | tokens=9 | model=text-embedding-ada-002
 2025-04-15 22:32:51,739 - embedding | tokens=9 | model=text-embedding-ada-002
+2025-04-17 12:25:48,059 - embedding | tokens=3 | model=text-embedding-ada-002
+2025-04-17 12:25:48,059 - embedding | tokens=3 | model=text-embedding-ada-002
+2025-04-17 12:40:21,610 - embedding | tokens=3
+2025-04-17 12:42:11,383 - embedding | tokens=3
+2025-04-17 12:43:06,838 - embedding | tokens=3
+2025-04-17 12:44:15,493 - embedding | tokens=4 | model=text-embedding-ada-002
+2025-04-17 12:44:15,493 - embedding | tokens=4 | model=text-embedding-ada-002
+2025-04-17 12:44:16,229 - embedding | tokens=5 | model=text-embedding-ada-002
+2025-04-17 12:44:16,229 - embedding | tokens=5 | model=text-embedding-ada-002
+2025-04-17 12:44:22,596 - embedding | tokens=3
+2025-04-17 12:45:02,044 - embedding | tokens=4 | model=text-embedding-ada-002
+2025-04-17 12:45:02,044 - embedding | tokens=4 | model=text-embedding-ada-002
+2025-04-17 12:45:02,430 - embedding | tokens=5 | model=text-embedding-ada-002
+2025-04-17 12:45:02,430 - embedding | tokens=5 | model=text-embedding-ada-002
+2025-04-17 12:45:18,892 - embedding | tokens=4 | model=text-embedding-ada-002
+2025-04-17 12:45:18,892 - embedding | tokens=4 | model=text-embedding-ada-002
+2025-04-17 12:45:19,177 - embedding | tokens=5 | model=text-embedding-ada-002
+2025-04-17 12:45:19,177 - embedding | tokens=5 | model=text-embedding-ada-002
+2025-04-17 12:45:24,582 - embedding | tokens=3
+2025-04-17 14:25:53,704 - embedding | tokens=3 | model=text-embedding-ada-002
+2025-04-17 14:25:53,704 - embedding | tokens=3 | model=text-embedding-ada-002
+2025-04-17 14:42:44,075 - embedding | tokens=4
+2025-04-17 14:42:44,075 - embedding | tokens=4
+2025-04-17 14:42:47,546 - enrichment | session=user_tool_test_fallback | tokens=119 | model=gpt-4
+2025-04-17 14:42:47,546 - enrichment | session=user_tool_test_fallback | tokens=119 | model=gpt-4
+2025-04-17 14:42:54,559 - embedding | tokens=3
+2025-04-17 14:42:54,559 - embedding | tokens=3
+2025-04-17 14:43:02,375 - enrichment | session=user_tool_test_action | tokens=113 | model=gpt-4
+2025-04-17 14:43:02,375 - enrichment | session=user_tool_test_action | tokens=113 | model=gpt-4
+2025-04-17 14:55:22,792 - embedding | tokens=3
+2025-04-17 14:55:22,792 - embedding | tokens=3
+2025-04-17 14:55:36,355 - embedding | tokens=2
+2025-04-17 14:55:36,355 - embedding | tokens=2
+2025-04-17 14:55:39,415 - enrichment | session=user_manual_tool | tokens=113 | model=gpt-4
+2025-04-17 14:55:39,415 - enrichment | session=user_manual_tool | tokens=113 | model=gpt-4
+2025-04-17 14:55:46,209 - embedding | tokens=2
+2025-04-17 14:55:46,209 - embedding | tokens=2
+2025-04-17 14:55:53,013 - embedding | tokens=3
+2025-04-17 14:55:53,013 - embedding | tokens=3
+2025-04-17 14:55:55,777 - enrichment | session=user_manual_tool2 | tokens=115 | model=gpt-4
+2025-04-17 14:55:55,777 - enrichment | session=user_manual_tool2 | tokens=115 | model=gpt-4
+2025-04-17 14:56:00,520 - embedding | tokens=3
+2025-04-17 14:56:00,520 - embedding | tokens=3
+2025-04-17 15:03:18,159 - embedding | tokens=2
+2025-04-17 15:03:18,159 - embedding | tokens=2
+2025-04-17 15:03:20,699 - enrichment | session=user_TTEST_FALL | tokens=114 | model=gpt-4
+2025-04-17 15:03:20,699 - enrichment | session=user_TTEST_FALL | tokens=114 | model=gpt-4
+2025-04-17 15:03:24,114 - embedding | tokens=3
+2025-04-17 15:03:24,114 - embedding | tokens=3
+2025-04-17 15:03:26,918 - enrichment | session=user_TTEST_TOOL | tokens=113 | model=gpt-4
+2025-04-17 15:03:26,918 - enrichment | session=user_TTEST_TOOL | tokens=113 | model=gpt-4
+2025-04-17 15:03:28,939 - embedding | tokens=3
+2025-04-17 15:03:28,939 - embedding | tokens=3
+2025-04-17 15:06:47,924 - embedding | tokens=2
+2025-04-17 15:06:47,924 - embedding | tokens=2
+2025-04-17 15:06:50,424 - enrichment | session=user_TTEST_FALL | tokens=114 | model=gpt-4
+2025-04-17 15:06:50,424 - enrichment | session=user_TTEST_FALL | tokens=114 | model=gpt-4
+2025-04-17 15:06:55,524 - embedding | tokens=3
+2025-04-17 15:06:55,524 - embedding | tokens=3
+2025-04-17 15:06:58,265 - enrichment | session=user_TTEST_TOOL | tokens=115 | model=gpt-4
+2025-04-17 15:06:58,265 - enrichment | session=user_TTEST_TOOL | tokens=115 | model=gpt-4
+2025-04-18 14:22:36,202 - embedding | tokens=2
+2025-04-18 14:22:36,202 - embedding | tokens=2
+2025-04-18 14:22:38,772 - enrichment | session=user_TTEST_FALL | tokens=113 | model=gpt-4
+2025-04-18 14:22:38,772 - enrichment | session=user_TTEST_FALL | tokens=113 | model=gpt-4
+2025-04-18 14:22:39,483 - embedding | tokens=2
+2025-04-18 14:22:39,483 - embedding | tokens=2
+2025-04-18 14:22:41,756 - enrichment | session=user_TTEST_FALL | tokens=108 | model=gpt-4
+2025-04-18 14:22:41,756 - enrichment | session=user_TTEST_FALL | tokens=108 | model=gpt-4
+2025-04-18 14:22:43,906 - embedding | tokens=3
+2025-04-18 14:22:43,906 - embedding | tokens=3
+2025-04-18 14:22:46,432 - enrichment | session=user_TTEST_TOOL | tokens=114 | model=gpt-4
+2025-04-18 14:22:46,432 - enrichment | session=user_TTEST_TOOL | tokens=114 | model=gpt-4
+2025-04-18 14:22:46,862 - embedding | tokens=3
+2025-04-18 14:22:46,862 - embedding | tokens=3
+2025-04-18 14:22:50,130 - enrichment | session=user_TTEST_TOOL | tokens=114 | model=gpt-4
+2025-04-18 14:22:50,130 - enrichment | session=user_TTEST_TOOL | tokens=114 | model=gpt-4
+2025-04-18 14:22:52,552 - embedding | tokens=3
+2025-04-18 14:22:52,552 - embedding | tokens=3
+2025-04-18 15:01:45,296 - embedding | tokens=2
+2025-04-18 15:01:45,296 - embedding | tokens=2
+2025-04-18 15:01:47,875 - embedding | tokens=2
+2025-04-18 15:01:47,875 - embedding | tokens=2
+2025-04-18 15:01:50,726 - enrichment | session=user_TEST_FALL | tokens=115 | model=gpt-4
+2025-04-18 15:01:50,726 - enrichment | session=user_TEST_FALL | tokens=115 | model=gpt-4
+2025-04-18 15:01:51,508 - embedding | tokens=2
+2025-04-18 15:01:51,508 - embedding | tokens=2
+2025-04-18 15:01:53,823 - enrichment | session=user_TEST_FALL | tokens=114 | model=gpt-4
+2025-04-18 15:01:53,823 - enrichment | session=user_TEST_FALL | tokens=114 | model=gpt-4
+2025-04-18 15:20:28,779 - embedding | tokens=2
+2025-04-18 15:20:28,779 - embedding | tokens=2
+2025-04-18 15:20:31,208 - embedding | tokens=2
+2025-04-18 15:20:31,208 - embedding | tokens=2
+2025-04-18 15:20:33,576 - enrichment | session=user_TEST_FALL | tokens=113 | model=gpt-4
+2025-04-18 15:20:33,576 - enrichment | session=user_TEST_FALL | tokens=113 | model=gpt-4
+2025-04-18 15:20:34,003 - embedding | tokens=2
+2025-04-18 15:20:34,003 - embedding | tokens=2
+2025-04-18 15:20:36,337 - enrichment | session=user_TEST_FALL | tokens=113 | model=gpt-4
+2025-04-18 15:20:36,337 - enrichment | session=user_TEST_FALL | tokens=113 | model=gpt-4
+2025-04-18 15:20:48,979 - embedding | tokens=3
+2025-04-18 15:20:48,979 - embedding | tokens=3
+2025-04-18 15:20:50,976 - embedding | tokens=3
+2025-04-18 15:20:50,976 - embedding | tokens=3
+2025-04-18 15:20:53,404 - enrichment | session=user_TEST_TOOL | tokens=120 | model=gpt-4
+2025-04-18 15:20:53,404 - enrichment | session=user_TEST_TOOL | tokens=120 | model=gpt-4
+2025-04-18 15:20:53,821 - embedding | tokens=3
+2025-04-18 15:20:53,821 - embedding | tokens=3
+2025-04-18 15:20:56,122 - enrichment | session=user_TEST_TOOL | tokens=113 | model=gpt-4
+2025-04-18 15:20:56,122 - enrichment | session=user_TEST_TOOL | tokens=113 | model=gpt-4
+2025-04-18 15:21:01,151 - embedding | tokens=3
+2025-04-18 15:21:01,151 - embedding | tokens=3

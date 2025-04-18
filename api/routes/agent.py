@@ -1,11 +1,8 @@
+# agent.py
 from fastapi import APIRouter, Request, Depends, HTTPException
 from pydantic import BaseModel
 import logging, os, asyncio
 from typing import Optional, Union
-
-# Don't directly import these classes at the module level
-# from langchain_tools.memory_agent import agent
-# from memory.session_memory import PersistentSessionMemory
 
 # 🔁 Router
 router = APIRouter()
@@ -21,10 +18,8 @@ os.makedirs(log_dir, exist_ok=True)
 if not logger.handlers:
     file_handler = logging.FileHandler(log_file)
     file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
-
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
-
     logger.addHandler(file_handler)
     logger.addHandler(stream_handler)
 
@@ -33,7 +28,7 @@ class AgentInput(BaseModel):
     session_id: str
     input: dict  # expects {"text": "..."} or {"image_url": "..."}
 
-# Memory handler dependency - initialized later
+# Memory handler dependency - initialized in startup
 _memory_handler = None
 
 def get_memory_handler():
@@ -44,7 +39,6 @@ def get_memory_handler():
 def init_memory_handler():
     """Initialize the memory handler - call this after app is created"""
     global _memory_handler
-    # Import here to avoid circular imports
     from memory.session_memory import PersistentSessionMemory
     _memory_handler = PersistentSessionMemory()
     return _memory_handler
@@ -58,20 +52,19 @@ async def run_agent(
     session_id = request.session_id
     user_input = request.input
 
-    # 🔍 Image Input Flow
+    # 🖼️ Image Input Flow
     if "image_url" in user_input:
         image_url = user_input["image_url"]
         logger.info(f"🖼️ Image input detected: session={session_id}, image_url={image_url}")
-
         try:
-            result = memory_handler.store_memory(
+            success = memory_handler.store_memory(
                 session_id=session_id,
                 query=image_url,
-                response="",  # No user text response
+                response="",  # No text response for image
                 memory_type="image",
                 sentiment="neutral"
             )
-            logger.info(f"✅ Image memory stored: {result}")
+            logger.info(f"✅ Image memory stored: {success}")
             return {
                 "status": "success",
                 "response": "Image processed and stored as memory.",
@@ -85,8 +78,39 @@ async def run_agent(
                 "source_type": "image"
             }
 
-    # Text flow would go here
-    # For example:
-    # elif "text" in user_input:
-    #     # Process text input
-    #     pass
+    # 📝 Text Input Flow
+    elif "text" in user_input:
+        text = user_input["text"]
+        logger.info(f"📝 Text input detected: session={session_id}, text={text}")
+        metadata = {
+            "intent": "inform",
+            "topic": "user query",
+            "emotion": "neutral"
+        }
+        try:
+            success = memory_handler.store_memory(
+                session_id=session_id,
+                query=text,
+                response="",  # No immediate response
+                memory_type="semantic",
+                sentiment="neutral",
+                metadata=metadata
+            )
+            logger.info(f"✅ Text memory stored: {success}")
+            return {
+                "status": "success",
+                "response": "Text processed and stored as memory.",
+                "source_type": "text"
+            }
+        except Exception as e:
+            logger.error(f"❌ Text memory store failed: {e}")
+            return {
+                "status": "error",
+                "response": f"Text memory failed: {str(e)}",
+                "source_type": "text"
+            }
+
+    # ❓ Unsupported Input
+    else:
+        logger.warning(f"❓ Unsupported input type: session={session_id}, input={user_input}")
+        raise HTTPException(status_code=400, detail="Unsupported input type. Provide 'text' or 'image_url'.")

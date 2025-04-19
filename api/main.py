@@ -1,6 +1,7 @@
 # main.py
 
 import sys
+sys.path.append("/root/projects/t1-brain")
 import os
 import logging
 import redis
@@ -85,10 +86,12 @@ async def exec_tool_memory(
 # Mount your other routers
 from api.routes import memory, agent
 from api.routes.tool import tool_router
+from api.routes.health import health_router  # ✅ New
 
 app.include_router(memory.router, prefix="")
 app.include_router(agent.router, prefix="")
 app.include_router(tool_router, prefix="")
+app.include_router(health_router, prefix="")  # ✅ New
 
 # Periodic FAISS saver
 async def save_warm_cache_periodically(interval=300):

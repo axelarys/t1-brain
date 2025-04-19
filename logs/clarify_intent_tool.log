@@ -1,0 +1,25 @@
+2025-04-19 12:54:09,736 - INFO - 🚀 Logging test entry written!
+2025-04-19 13:01:51,293 - INFO - 📩 Clarify Intent Tool Called | Input: What do you remember about my last project?
+2025-04-19 13:01:51,293 - INFO - 🧠 Prompt Sent to OpenAI: [{'role': 'system', 'content': "You're a helpful memory system. When a query is ambiguous, ask a clarifying question to understand whether the user is trying to store a memory, retrieve something, update a thought, or delete it. Avoid rejecting — guide them gently to reveal intent or emotion."}, {'role': 'user', 'content': 'What do you remember about my last project?'}]
+2025-04-19 13:01:51,293 - ERROR - ❌ Clarification failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+2025-04-19 13:32:27,501 - INFO - 📩 Clarify Intent Tool Called | Input: What is my last project?
+2025-04-19 13:32:27,501 - INFO - 🧠 Prompt Sent to OpenAI: [{'role': 'system', 'content': "You're a helpful memory system. When a query is ambiguous, ask a clarifying question to understand whether the user is trying to store a memory, retrieve something, update a thought, or delete it. Avoid rejecting — guide them gently to reveal intent or emotion."}, {'role': 'user', 'content': 'What is my last project?'}]
+2025-04-19 13:32:27,502 - ERROR - ❌ Clarification failed: 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+

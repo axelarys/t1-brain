@@ -1,0 +1,155 @@
+.
+├── actions
+│   ├── __pycache__
+│   │   └── schema_parser.cpython-312.pyc
+│   └── schema_parser.py
+├── agents
+│   ├── __pycache__
+│   │   └── tool_agent.cpython-312.pyc
+│   └── tool_agent.py
+├── api
+│   ├── __init__.py
+│   ├── main.py
+│   ├── main.py.backup
+│   ├── models.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-312.pyc
+│   │   ├── main.cpython-312.pyc
+│   │   └── models.cpython-312.pyc
+│   └── routes
+│       ├── agent.py
+│       ├── memory.py
+│       ├── memory.py.backup
+│       ├── __pycache__
+│       └── tool.py
+├── brain
+│   ├── bin
+│   │   ├── activate
+│   │   ├── activate.csh
+│   │   ├── activate.fish
+│   │   ├── Activate.ps1
+│   │   ├── distro
+│   │   ├── dotenv
+│   │   ├── f2py
+│   │   ├── fastapi
+│   │   ├── httpx
+│   │   ├── jp.py
+│   │   ├── jsondiff
+│   │   ├── jsonpatch
+│   │   ├── jsonpointer
+│   │   ├── langchain-server
+│   │   ├── normalizer
+│   │   ├── numpy-config
+│   │   ├── openai
+│   │   ├── pip
+│   │   ├── pip3
+│   │   ├── pip3.12
+│   │   ├── __pycache__
+│   │   ├── pymupdf
+│   │   ├── python -> python3
+│   │   ├── python3 -> /usr/bin/python3
+│   │   ├── python3.12 -> python3
+│   │   ├── tqdm
+│   │   └── uvicorn
+│   ├── include
+│   │   ├── python3.12
+│   │   └── site
+│   ├── lib
+│   │   └── python3.12
+│   ├── lib64 -> lib
+│   └── pyvenv.cfg
+├── config
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-312.pyc
+│   │   └── settings.cpython-312.pyc
+│   └── settings.py
+├── data
+├── debug-imports-script.py
+├── debug_output.log
+├── deploy_prod.sh
+├── dev
+│   ├── __pycache__
+│   │   └── test_memory_endpoints.cpython-312-pytest-7.4.4.pyc
+│   ├── test_action_parser.py
+│   ├── test_clarify_intent_tool.py
+│   ├── test_graph_enrichment.py
+│   ├── test_memory_agent.py
+│   ├── test_memory_endpoints.py
+│   ├── test_memory_router.py
+│   ├── test_promotion.py
+│   ├── test_route_memory_tool.py
+│   ├── test_route_user_query.py
+│   ├── test_similarity_query.py
+│   ├── test_tool_agent.py
+│   ├── test_tool_chain.py
+│   └── test_tool_discovery.py
+├── langchain_tools
+│   ├── clarify_intent_tool.py
+│   ├── __init__.py
+│   ├── memory_agent.py
+│   ├── __pycache__
+│   │   ├── clarify_intent_tool.cpython-312.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   │   ├── memory_agent.cpython-312.pyc
+│   │   └── route_memory_tool.cpython-312.pyc
+│   └── route_memory_tool.py
+├── logs
+│   ├── agent.log
+│   ├── clarify_intent_tool.log
+│   ├── memory_agent.log
+│   ├── memory_router_http.log
+│   ├── memory_router.log
+│   ├── route_memory_tool.log
+│   ├── session_memory.log
+│   └── token_usage.log
+├── memory
+│   ├── glacier_client.py
+│   ├── graph_memory.py
+│   ├── graph_memory.py.backup
+│   ├── __init__.py
+│   ├── memory_router.py
+│   ├── memory_router.py.bkup
+│   ├── promotion_test.log
+│   ├── __pycache__
+│   │   ├── glacier_client.cpython-312.pyc
+│   │   ├── graph_memory.cpython-312.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   │   ├── memory_router.cpython-312.pyc
+│   │   ├── session_memory.cpython-312.pyc
+│   │   └── warm_layer.cpython-312.pyc
+│   ├── session_memory.py
+│   ├── session_memory.py.backup
+│   └── warm_layer.py
+├── project_structure.txt
+├── README.md
+├── requirements.txt
+├── scb.pdf
+├── test_graph_enriched.py
+├── test_graph_memory.py
+├── test_image_endpoint.py
+├── test_memory_router_action.py
+├── test_query_router.py
+├── test_router.py
+├── test_session_memory.py
+├── tools
+│   ├── file_reader.py
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── file_reader.cpython-312.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   │   ├── route_memory_tool.cpython-312.pyc
+│   │   ├── set_reminder.cpython-312.pyc
+│   │   └── tool_discovery.cpython-312.pyc
+│   ├── set_reminder.py
+│   └── tool_discovery.py
+├── utils
+│   ├── memory_utils.py
+│   ├── __pycache__
+│   │   ├── memory_utils.cpython-312.pyc
+│   │   └── tool_discovery.cpython-312.pyc
+│   └── tool_discovery.py
+├── warm_index.faiss
+└── warm_metadata.pkl
+
+32 directories, 121 files

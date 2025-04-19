@@ -80,3 +80,23 @@ def generate_action_schema(user_input: str, memory_snippet: str = "", fallback_t
                 "parameters": {},
                 "error": str(e2)
             }
+
+# ✅ Compatibility wrapper for memory_router.py
+def parse_action_schema(enriched: dict) -> dict:
+    """
+    Compatibility wrapper that generates a tool schema from enriched metadata.
+    """
+    try:
+        return {
+            "tool": enriched.get("intent", "clarify_intent"),
+            "session_id": enriched.get("session_id", ""),
+            "user_input": enriched.get("query", ""),
+            "enriched": enriched
+        }
+    except Exception as e:
+        return {
+            "tool": "clarify_intent",
+            "session_id": enriched.get("session_id", ""),
+            "user_input": enriched.get("query", ""),
+            "fallback_reason": str(e)
+        }

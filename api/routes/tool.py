@@ -1,72 +1,166 @@
-# api/routes/tool.py
+# tool.py
 
-from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
-from typing import Dict, Any
-import importlib
 import sys
+import os
 import logging
+import importlib
+import inspect
+from fastapi import APIRouter, HTTPException, status
+from pydantic import BaseModel
 
-from memory.memory_router import MemoryRouter
-from agents.tool_agent import ToolAgent
-from utils.tool_discovery import discover_tools  # ✅ Added
+# Configure logging
+logger = logging.getLogger("tool_routes")
 
+# Setup safe path handling
+try:
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if base_dir not in sys.path:
+        sys.path.insert(0, base_dir)
+    logger.debug(f"Path configuration: {sys.path}")
+except Exception as e:
+    logger.error(f"Failed to configure import paths: {e}")
+
+# Safely import ToolDiscovery with fallback
+try:
+    from langchain_tools.tool_discovery import ToolDiscovery
+except ImportError:
+    logger.error("Failed to import ToolDiscovery. Using minimal implementation.")
+    
+    # Minimal ToolDiscovery implementation as fallback
+    class ToolDiscovery:
+        def __init__(self, tools_dir=None):
+            self.tools_dir = tools_dir or "langchain_tools"
+            
+        def list_tools(self):
+            try:
+                if not os.path.isdir(self.tools_dir):
+                    logger.warning(f"Tools directory not found: {self.tools_dir}")
+                    return []
+                
+                return [f[:-3] for f in os.listdir(self.tools_dir) 
+                        if f.endswith('.py') and not f.startswith('_') 
+                        and f != "__init__.py"]
+            except Exception as e:
+                logger.error(f"Failed to list tools: {e}")
+                return []
+
+# Router Setup
 tool_router = APIRouter()
-logger = logging.getLogger("tool_executor")
 
-class ToolAction(BaseModel):
-    action: str
-    parameters: Dict[str, Any]
+# Tool Execution Model
+class ToolRequest(BaseModel):
+    tool: str
+    input: dict
 
-@tool_router.post("/tool/execute")
-def execute_tool(action_input: ToolAction):
-    action_name = action_input.action
-    params = action_input.parameters
+# Tool Execution Handler with robust error handling
+@tool_router.post("/tool/execute", status_code=status.HTTP_200_OK)
+def execute_tool(request: ToolRequest):
+    tool_name = request.tool
+    try:
+        try:
+            module = importlib.import_module(f"langchain_tools.{tool_name}")
+        except ImportError:
+            module = importlib.import_module(f"langchain_tools.{tool_name}_tool")
 
-    # ⚠️ Fallback: Non-actionable input
-    if action_name == "none":
-        logger.warning("[ToolExecutor] No actionable tool detected — fallback engaged.")
-        agent = ToolAgent(session_id=params.get("session_id", "failsafe"))
-        fallback = agent._run_failsafe_response(params)
-        return fallback
+        func = getattr(module, tool_name, None)
+        if not callable(func):
+            return {"status": "error", "tool": tool_name, "message": f"No callable '{tool_name}' found."}
+        result = func(**request.input)
+        return {"status": "success", "tool": tool_name, "input": request.input, "output": result}
+    except Exception as e:
+        logger.warning(f"[ToolRouter] Tool '{tool_name}' execution failed: {e}")
+        return {"status": "error", "tool": tool_name, "message": str(e)}
+
+# Metadata Extractor with enhanced reliability
+def get_tool_metadata(tool_name: str) -> dict:
+    """
+    Safely gets tool metadata without crashing on import errors.
+    Tries both direct and _tool suffix for file/module import.
+    """
+    metadata = {
+        "name": tool_name,
+        "doc": "Unknown",
+        "params": []
+    }
 
     try:
-        # 🔁 Reload tool module if already cached
-        module_path = f"tools.{action_name}"
-        if module_path in sys.modules:
-            del sys.modules[module_path]
-        module = importlib.import_module(module_path)
+        try:
+            module = importlib.import_module(f"langchain_tools.{tool_name}")
+        except ImportError:
+            module = importlib.import_module(f"langchain_tools.{tool_name}_tool")
 
-        if not hasattr(module, "run_action"):
-            raise Exception("Missing 'run_action' function in tool.")
+        func = getattr(module, tool_name, None)
+        if not callable(func):
+            metadata["doc"] = f"Error: '{tool_name}' exists but is not callable"
+            return metadata
 
-        result = module.run_action(**params)
-
-        # 🧠 Store in memory
-        session_id = params.get("session_id", "user_tool_session")
-        query = params.get("query", f"{action_name} tool triggered")
-
-        router = MemoryRouter()
-        router.memory.store_memory(
-            session_id=session_id,
-            query=query,
-            response=result,
-            memory_type="result",
-            source_type="tool",
-            metadata={"tool": action_name}
-        )
-
-        return { "status": "success", "output": result }
+        metadata["doc"] = inspect.getdoc(func) or "No description provided"
+        sig = inspect.signature(func)
+        metadata["params"] = list(sig.parameters.keys())
 
     except Exception as e:
-        logger.error(f"[ToolExecutor] Execution failed for '{action_name}': {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"[ToolMetadata] Failed to load metadata for tool '{tool_name}': {e}")
+        metadata["doc"] = f"Error: {str(e)}"
 
-@tool_router.get("/tool/list")
-def list_available_tools():
+    return metadata
+
+# Tool List Endpoint with improved error handling
+@tool_router.get("/tool/list", status_code=status.HTTP_200_OK)
+def list_all_tools():
     try:
-        tools = discover_tools()
-        return { "status": "success", "tools": tools }
+        discovery = ToolDiscovery(tools_dir="langchain_tools")
+        tool_names = discovery.list_tools()
+        
+        if not tool_names:
+            logger.warning("[ToolRouter] No tools found in primary directory, trying alternatives")
+            
+            alt_dirs = [
+                os.path.join(base_dir, "langchain_tools"),
+                "tools",
+                os.path.join(base_dir, "tools")
+            ]
+            
+            for alt_dir in alt_dirs:
+                if os.path.isdir(alt_dir):
+                    discovery = ToolDiscovery(tools_dir=alt_dir)
+                    tool_names = discovery.list_tools()
+                    if tool_names:
+                        logger.info(f"[ToolRouter] Found tools in alternate directory: {alt_dir}")
+                        break
+
+        if not tool_names:
+            logger.warning("[ToolRouter] No tools found in any directory")
+            return {"tools": [], "message": "No tools found."}
+
+        tools_metadata = []
+        for name in tool_names:
+            try:
+                metadata = get_tool_metadata(name)
+                tools_metadata.append(metadata)
+            except Exception as e:
+                logger.error(f"[ToolRouter] Failed to get metadata for tool '{name}': {e}")
+                tools_metadata.append({
+                    "name": name,
+                    "doc": f"Error getting metadata: {str(e)}",
+                    "params": []
+                })
+
+        return {"tools": tools_metadata}
     except Exception as e:
-        logger.error(f"[ToolList] Failed to list tools: {e}")
-        raise HTTPException(status_code=500, detail="Failed to list tools")
+        logger.error(f"[ToolRouter] Error in list_all_tools: {e}")
+        return {"tools": [], "error": str(e)}
+
+# ✅ NEW: Tool Schema Discovery Endpoint
+@tool_router.get("/tool/discover/{tool_name}", status_code=status.HTTP_200_OK)
+def discover_tool_schema(tool_name: str):
+    """
+    Returns detailed metadata (doc, param schema) for a given tool.
+    """
+    try:
+        metadata = get_tool_metadata(tool_name)
+        if not metadata.get("doc") or metadata["doc"].startswith("Error"):
+            raise HTTPException(status_code=404, detail=f"Tool '{tool_name}' not found or broken.")
+        return {"status": "success", "tool": tool_name, "schema": metadata}
+    except Exception as e:
+        logger.error(f"[ToolRouter] Failed to discover schema for '{tool_name}': {e}")
+        raise HTTPException(status_code=500, detail=f"Discovery error: {e}")
